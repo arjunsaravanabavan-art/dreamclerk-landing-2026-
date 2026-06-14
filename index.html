@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DreamClerk — Real Engineering Jobs in Your Browser | dreamclerk</title>
+<meta name="description" content="DreamClerk is the in-browser IDE and AI-reviewed engineering track for undergraduate students in India. You'll get hired into a fictional company, ship code, hit 5pm deadlines, and earn a verified work record." />
+<meta name="keywords" content="career simulator for engineers, in-browser IDE, AI code reviewer, undergraduate engineering students, engineering internship alternative, LeetCode alternative, Coursera alternative, verified work certificate, monaco editor, jupyter notebooks in browser" />
+<meta name="author" content="Aanya S" />
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="robots" content="index,follow" />
+
+<!-- Canonical -->
+<link rel="canonical" href="https://dreamclerk.io/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="DreamClerk" />
+<meta property="og:title" content="DreamClerk — you'll work a real job. from your browser." />
+<meta property="og:description" content="Real engineering jobs in your browser. Full IDE, AI code reviewer, real tasks, real deadlines. Earn a verified work record recruiters can check." />
+<meta property="og:url" content="https://dreamclerk.io/" />
+<meta property="og:image" content="https://dreamclerk.io/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="DreamClerk — a terminal showing a real engineering job, in your browser." />
+<meta property="og:locale" content="en_IN" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="DreamClerk — work a real job. from your browser." />
+<meta name="twitter:description" content="Real engineering jobs in your browser. Verified work record, not a completion badge." />
+<meta name="twitter:image" content="https://dreamclerk.io/og.png" />
+<meta name="twitter:image:alt" content="DreamClerk — a terminal showing a real engineering job, in your browser." />
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+
+<!-- Fonts (preconnect + preload critical) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" />
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&family=Geist:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://dreamclerk.io/#organization",
+      "name": "DreamClerk",
+      "url": "https://dreamclerk.io/",
+      "logo": "https://dreamclerk.io/og.png",
+      "description": "Real engineering jobs in your browser. Undergraduate engineers ship code in an in-browser IDE, get reviewed by an AI senior engineer, and earn a verified work record.",
+      "founder": {
+        "@type": "Person",
+        "@id": "https://dreamclerk.io/#founder",
+        "name": "Aanya S",
+        "jobTitle": "Founder",
+        "worksFor": { "@id": "https://dreamclerk.io/#organization" }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bangalore",
+        "addressRegion": "KA",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "aanya@dreamclerk.io",
+        "contactType": "founder"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://dreamclerk.io/#website",
+      "url": "https://dreamclerk.io/",
+      "name": "DreamClerk",
+      "publisher": { "@id": "https://dreamclerk.io/#organization" },
+      "inLanguage": "en-IN"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "DreamClerk",
+      "applicationCategory": "EducationalApplication",
+      "applicationSubCategory": "Career Development Platform",
+      "operatingSystem": "Web Browser",
+      "description": "In-browser IDE with AI code reviewer. Real engineering tasks, real deadlines, real PR reviews. Earn a verified work certificate.",
+      "url": "https://dreamclerk.io/",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/PreOrder",
+        "url": "https://dreamclerk.io/#final"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is DreamClerk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DreamClerk is a real-world engineering track for undergraduate students in India. You'll get hired into a fictional company, ship code in an in-browser IDE (Monaco + Docker + Jupyter), get reviewed by an AI senior engineer, and earn a verified work record — not a completion badge, but a recruiter-checkable work record backed by your actual code submissions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is DreamClerk different from LeetCode?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LeetCode tests algorithm recall in isolated problems. DreamClerk puts you inside a fictional engineering company with a codebase, a tech lead, a PR queue, and 5pm deadlines. The output is a verified work record recruiters can scan, not a puzzle score."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a DreamClerk certificate look like?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each certificate contains your name, role title, seniority level, and the fictional company you worked at. It also contains your actual code submissions, AI review scores, sprint velocity, and a capstone summary. It is blockchain-anchored and QR-verifiable by any recruiter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a DreamClerk sprint take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each sprint is 8 weeks. You'll work as an Intern or Junior engineer inside a fictional company, ship real code, get reviewed, and complete a capstone. After three sprints at a level, plus a technical interview and capstone, you earn your certificate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is DreamClerk hiring right now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DreamClerk is invite-only and will let in its first cohort soon. Drop your email below to get the next letter — one email only, when applications open."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does DreamClerk cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pricing is still being finalized. The first cohort will get lifetime access at founder rates. No payment is taken at sign-up — only when seats open."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<style>
+  /* ============================================================
+     DREAMCLERK — invite-only · Terminal Monochrome
+     Pure black on warm off-white. No color, no gradients.
+     The only visual language is type, weight, whitespace, motion,
+     and a single hairline rule system.
+     ============================================================ */
+
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f4f1ea;
+    --paper-2: #ebe7df;
+    --rule: #0a0a0a;
+    --rule-soft: rgba(10, 10, 10, 0.18);
+    --rule-faint: rgba(10, 10, 10, 0.08);
+    --muted: rgba(10, 10, 10, 0.55);
+    --mute-2: rgba(10, 10, 10, 0.38);
+    --max: 1440px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+  img { display: block; max-width: 100%; }
+
+  .mono { font-family: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+  .serif { font-family: "Instrument Serif", "Times New Roman", serif; font-weight: 400; }
+  .italic { font-style: italic; }
+
+  .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+  .rule { height: 1px; background: var(--ink); width: 100%; }
+  .rule-soft { height: 1px; background: var(--rule-soft); width: 100%; }
+  .rule-faint { height: 1px; background: var(--rule-faint); width: 100%; }
+
+  /* ============================================================
+     NAV
+     ============================================================ */
+  .meta {
+    border-bottom: 1px solid var(--ink);
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .meta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+  }
+  .meta-l, .meta-r { display: flex; gap: 24px; align-items: center; }
+  .meta-dot { display: inline-flex; align-items: center; gap: 6px; }
+  .meta-dot::before {
+    content: "";
+    width: 6px; height: 6px;
+    background: var(--ink);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .meta-dot.live::before { background: var(--ink); animation: ping 1.6s ease-in-out infinite; }
+
+  @keyframes ping {
+    0% { box-shadow: 0 0 0 0 rgba(10,10,10,0.5); }
+    100% { box-shadow: 0 0 0 8px rgba(10,10,10,0); }
+  }
+
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(244, 241, 234, 0.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--ink);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+  .logo-mark {
+    width: 18px; height: 18px; border: 1.5px solid var(--ink); border-radius: 50%;
+    position: relative;
+  }
+  .logo-mark::after {
+    content: "";
+    position: absolute; inset: 4px; border-radius: 50%; background: var(--ink);
+  }
+  .logo-text { font-size: 18px; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 28px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-family: "Geist Mono", monospace; }
+  .nav-links a { color: var(--muted); transition: color 200ms cubic-bezier(0.16,1,0.3,1); position: relative; padding: 4px 0; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 1px; background: var(--ink);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 300ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+    border: 1.5px solid var(--ink);
+    background: var(--ink); color: var(--paper);
+    transition: background 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1);
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--paper); color: var(--ink); }
+  .btn .arr { display: inline-block; transition: transform 220ms cubic-bezier(0.16,1,0.3,1); }
+  .btn:hover .arr { transform: translateX(3px); }
+  .btn-ghost { background: transparent; color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--paper); }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+  }
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  section.hero {
+    border-bottom: 1px solid var(--ink);
+    padding: 80px 0 96px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .hero-eyebrow {
+    grid-column: 1 / -1;
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-bottom: 24px;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 56px;
+  }
+  .hero-title {
+    grid-column: 1 / -1;
+    font-family: "Geist", sans-serif;
+    font-weight: 600;
+    font-size: clamp(44px, 8.4vw, 132px);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    margin: 0;
+  }
+  .hero-title .row {
+    display: block;
+    white-space: nowrap;
+  }
+  .hero-title .row.big {
+    font-size: clamp(56px, 10.2vw, 172px);
+    line-height: 0.9;
+    letter-spacing: -0.055em;
+    font-weight: 600;
+  }
+  .hero-title .row.sub {
+    font-size: clamp(22px, 2.6vw, 38px);
+    line-height: 1.05;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    color: var(--muted);
+    margin-top: 22px;
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    text-transform: none;
+  }
+  .hero-title em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+  }
+  .hero-title .strike {
+    position: relative; display: inline-block;
+  }
+  .hero-title .strike::after {
+    content: ""; position: absolute;
+    left: -4px; right: -4px; top: 50%;
+    height: 8px; background: var(--ink);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 800ms cubic-bezier(0.16,1,0.3,1) 200ms;
+  }
+  .hero.in .hero-title .strike::after { transform: scaleX(1); }
+
+  /* verbs — the experience words laid out in type */
+  .hero-verbs {
+    grid-column: 1 / -1;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .hero-verb {
+    padding: 22px 18px 24px;
+    border-right: 1px solid var(--rule-soft);
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative;
+    transition: background 200ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .hero-verb:last-child { border-right: none; }
+  .hero-verb:hover { background: var(--ink); color: var(--paper); }
+  .hero-verb:hover .hv-tag { color: var(--paper-2); }
+  .hero-verb:hover .hv-num { color: var(--paper-2); }
+  .hero-verb .hv-num {
+    font-family: "Geist Mono", monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+  }
+  .hero-verb .hv-word {
+    font-family: "Geist", sans-serif;
+    font-weight: 500;
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  .hero-verb .hv-word em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; font-weight: 400;
+  }
+  .hero-verb .hv-tag {
+    font-family: "Geist Mono", monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  @media (max-width: 1100px) { .hero-verbs { grid-template-columns: repeat(3, 1fr); } .hero-verb:nth-child(3) { border-right: none; } .hero-verb:nth-child(n+4) { border-top: 1px solid var(--rule-soft); } }
+  @media (max-width: 620px)  { .hero-verbs { grid-template-columns: repeat(2, 1fr); } .hero-verb:nth-child(2n) { border-right: none; } .hero-verb:nth-child(n+3) { border-top: 1px solid var(--rule-soft); } }
+
+  /* experience strip — keywords that frame the pitch */
+  .hero-words {
+    grid-column: 1 / 10;
+    display: flex; flex-wrap: wrap; gap: 10px 14px;
+    margin-top: 36px;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .hero-words span {
+    border: 1px solid var(--ink);
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--paper-2);
+  }
+
+  .hero-side {
+    grid-column: 10 / -1;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding-bottom: 24px;
+  }
+  .hero-side p {
+    font-size: 18px; line-height: 1.5;
+    max-width: 36ch;
+    margin-bottom: 24px;
+  }
+  .hero-side p .serif { font-size: 24px; font-style: italic; }
+  .hero-side p strong { font-weight: 600; }
+
+  /* Live ticker at hero bottom */
+  .ticker {
+    grid-column: 1 / -1;
+    margin-top: 48px;
+    padding: 16px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    overflow: hidden;
+    display: flex;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: flex;
+    animation: scroll 60s linear infinite;
+    flex-shrink: 0;
+  }
+  .ticker-track > span {
+    padding: 0 32px;
+    display: inline-flex; align-items: center; gap: 12px;
+  }
+  .ticker-track > span::after {
+    content: ""; width: 4px; height: 4px; background: var(--ink);
+    border-radius: 50%; display: inline-block;
+  }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Terminal panel below hero */
+  .terminal {
+    grid-column: 1 / -1;
+    margin-top: 48px;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    overflow: hidden;
+    font-family: "Geist Mono", monospace;
+    font-size: 13px; line-height: 1.6;
+  }
+  .term-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1.5px solid var(--ink);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    background: var(--paper-2);
+  }
+  .term-dots { display: flex; gap: 6px; }
+  .term-dots span {
+    width: 10px; height: 10px; border: 1.5px solid var(--ink); border-radius: 50%; display: inline-block;
+  }
+  .term-body {
+    padding: 24px 28px;
+    min-height: 320px;
+  }
+  .term-line { display: block; }
+  .term-line.cmd { color: var(--ink); }
+  .term-line.out { color: var(--muted); padding-left: 16px; }
+  .term-cursor {
+    display: inline-block; width: 9px; height: 16px; background: var(--ink);
+    vertical-align: text-bottom; margin-left: 4px;
+    animation: blink 1s steps(2) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ============================================================
+     AI CHAT
+     ============================================================ */
+  section.chat {
+    border-bottom: 1px solid var(--ink);
+    padding: 96px 0 112px;
+  }
+  .sec-head {
+    display: flex; flex-direction: column; gap: 16px;
+    margin-bottom: 56px;
+  }
+  .sec-num {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .sec-title {
+    font-family: "Geist", sans-serif;
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    max-width: 20ch;
+  }
+  .sec-title em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; font-weight: 400;
+  }
+
+  .chat-wrap {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  @media (min-width: 980px) {
+    .chat-wrap { grid-template-columns: 7fr 5fr; }
+  }
+
+  .chat-log {
+    border-bottom: 1.5px solid var(--ink);
+    display: flex; flex-direction: column;
+    min-height: 540px;
+  }
+  @media (min-width: 980px) { .chat-log { border-bottom: none; border-right: 1.5px solid var(--ink); } }
+
+  .chat-log-head, .chat-input-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1.5px solid var(--ink);
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .chat-log-body {
+    padding: 28px;
+    overflow-y: auto;
+    flex: 1;
+    max-height: 540px;
+  }
+
+  .msg {
+    margin-bottom: 28px;
+    display: flex; gap: 12px; align-items: flex-start;
+    opacity: 0; transform: translateY(6px) scale(0.98);
+    animation: pop 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  @keyframes pop {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .msg-avatar {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--ink); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; flex-shrink: 0;
+    font-family: "Geist Mono", monospace;
+  }
+  .msg-ai .msg-avatar { background: var(--ink); color: var(--paper); }
+  .msg-user .msg-avatar { background: var(--paper); color: var(--ink); }
+  .msg-user { flex-direction: row-reverse; }
+  .msg-body { max-width: 80%; }
+  .msg-meta {
+    font-family: "Geist Mono", monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+    margin-bottom: 6px;
+  }
+  .msg-bubble {
+    padding: 14px 18px;
+    border: 1.5px solid var(--ink);
+    font-size: 14px; line-height: 1.55;
+    background: var(--paper);
+  }
+  .msg-ai .msg-bubble { background: var(--paper); }
+  .msg-user .msg-bubble { background: var(--ink); color: var(--paper); }
+
+  .msg-refs {
+    margin-top: 12px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .ref {
+    position: relative;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--rule-soft);
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    cursor: help;
+    transition: border-color 200ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .ref:hover { border-color: var(--ink); }
+  .ref::before { content: "/"; color: var(--mute-2); }
+
+  /* The popup */
+  .ref-pop {
+    position: absolute; bottom: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%) translateY(4px) scale(0.96);
+    transform-origin: bottom center;
+    width: 280px;
+    padding: 16px;
+    background: var(--ink); color: var(--paper);
+    font-family: "Geist", sans-serif;
+    font-size: 12px; line-height: 1.5; letter-spacing: 0; text-transform: none;
+    border: 1px solid var(--ink);
+    opacity: 0; pointer-events: none;
+    transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
+    z-index: 20;
+  }
+  .ref-pop::after {
+    content: ""; position: absolute; bottom: -6px; left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px; height: 10px;
+    background: var(--ink);
+  }
+  .ref:hover .ref-pop, .ref:focus .ref-pop {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .ref-pop strong {
+    font-family: "Geist Mono", monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    display: block; margin-bottom: 6px;
+    color: var(--paper); opacity: 0.7;
+  }
+
+  .chat-input {
+    display: flex; flex-direction: column;
+    min-height: 540px;
+  }
+  .chat-input-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .chat-prompt {
+    flex: 1;
+    width: 100%;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: 16px;
+    font-family: "Geist Mono", monospace;
+    font-size: 14px; line-height: 1.55;
+    resize: none;
+    color: var(--ink);
+  }
+  .chat-prompt:focus { outline: 2px solid var(--ink); outline-offset: -1px; }
+  .chat-prompt::placeholder { color: var(--mute-2); }
+  .chat-hint {
+    font-family: "Geist Mono", monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+  }
+  .chat-submit-row { display: flex; justify-content: space-between; align-items: center; }
+
+  .suggestions {
+    display: flex; flex-direction: column; gap: 6px;
+    margin-top: 8px;
+  }
+  .suggestion {
+    text-align: left;
+    padding: 10px 14px;
+    border: 1px solid var(--rule-soft);
+    background: transparent;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 200ms cubic-bezier(0.16,1,0.3,1);
+    color: var(--ink);
+  }
+  .suggestion:hover {
+    background: var(--ink); color: var(--paper);
+    border-color: var(--ink);
+  }
+  .suggestion::before { content: "> "; opacity: 0.6; }
+
+  /* Typing dots */
+  .typing {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 0 4px;
+  }
+  .typing span {
+    width: 6px; height: 6px; background: var(--ink); border-radius: 50%;
+    animation: bounce 1.2s cubic-bezier(0.16,1,0.3,1) infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-4px); opacity: 1; }
+  }
+
+  /* ============================================================
+     FEATURES GRID (terminal · spec sheet)
+     ============================================================ */
+  section.features {
+    border-bottom: 1px solid var(--ink);
+    padding: 96px 0;
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    border-top: 1px solid var(--ink);
+  }
+  .feature {
+    grid-column: span 12;
+    padding: 32px 24px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid; grid-template-columns: 80px 1fr 1.4fr auto; gap: 24px; align-items: baseline;
+  }
+  @media (min-width: 880px) { .feature { grid-column: span 6; } }
+  .feature .num {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+    position: relative; padding-right: 16px; cursor: help;
+  }
+  .feature .num::after {
+    content: "↗"; margin-left: 4px; opacity: 0; transition: opacity 180ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .feature:hover .num::after { opacity: 1; }
+  .feature .num-pop {
+    position: absolute; top: calc(100% + 8px); left: 0;
+    width: 280px;
+    padding: 14px 16px;
+    background: var(--ink); color: var(--paper);
+    font-family: "Geist", sans-serif;
+    font-size: 12px; line-height: 1.5; letter-spacing: 0; text-transform: none;
+    opacity: 0; pointer-events: none;
+    transform: translateY(4px) scale(0.96);
+    transform-origin: top left;
+    transition: opacity 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1);
+    z-index: 20;
+  }
+  .feature .num:hover .num-pop, .feature .num:focus .num-pop {
+    opacity: 1; pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+  .feature .name {
+    font-family: "Geist", sans-serif;
+    font-size: 22px; line-height: 1.1; font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .feature .name em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; font-weight: 400;
+  }
+  .feature .desc {
+    font-size: 14px; line-height: 1.5; color: var(--muted);
+    max-width: 38ch;
+  }
+  .feature .arrow {
+    font-family: "Geist Mono", monospace;
+    color: var(--mute-2);
+    transition: transform 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .feature:hover .arrow { transform: translateX(4px); color: var(--ink); }
+
+  /* ============================================================
+     CORE LOOP STRIP (between hero and chat)
+     ============================================================ */
+  section.loop {
+    border-bottom: 1px solid var(--ink);
+    padding: 64px 0 72px;
+    background: var(--paper-2);
+  }
+  .loop-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 40px;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .loop-head .h {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .loop-head .h em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; text-transform: none; letter-spacing: 0;
+    font-size: 18px; color: var(--ink); margin-left: 8px;
+  }
+  .loop-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+  }
+  @media (min-width: 880px) {
+    .loop-row { grid-template-columns: repeat(4, 1fr); }
+  }
+  .loop-step {
+    position: relative;
+    padding: 28px 24px 32px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  @media (min-width: 880px) {
+    .loop-step {
+      border-bottom: none;
+      border-right: 1px solid var(--rule-soft);
+    }
+    .loop-step:last-child { border-right: none; }
+  }
+  .loop-step:last-child { border-bottom: none; }
+  .loop-step .num {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .loop-step .verb {
+    font-family: "Geist", sans-serif;
+    font-size: 36px; font-weight: 500; line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .loop-step .verb em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; font-weight: 400;
+  }
+  .loop-step .verb .pr {
+    font-family: "Geist Mono", monospace;
+    font-size: 14px; font-weight: 400;
+    color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+    margin-right: 8px; vertical-align: 14px;
+  }
+  .loop-step .desc {
+    font-size: 13px; line-height: 1.55; color: var(--muted);
+    max-width: 32ch;
+  }
+  .loop-step .arrow {
+    position: absolute; top: 50%; right: -10px;
+    transform: translateY(-50%);
+    width: 20px; height: 20px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Geist Mono", monospace; font-size: 10px;
+    z-index: 2;
+  }
+  @media (max-width: 879px) { .loop-step .arrow { display: none; } }
+  .loop-step:last-child .arrow { display: none; }
+
+  /* ============================================================
+     WALK AWAY WITH (below features)
+     ============================================================ */
+  section.walkaway {
+    border-bottom: 1px solid var(--ink);
+    padding: 96px 0 112px;
+  }
+  .walkaway-head {
+    display: flex; flex-direction: column; gap: 16px;
+    margin-bottom: 56px;
+  }
+  .walkaway-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  @media (min-width: 880px) {
+    .walkaway-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .walk-card {
+    padding: 32px 24px;
+    border-bottom: 1px solid var(--rule-soft);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  @media (min-width: 880px) {
+    .walk-card { border-bottom: none; border-right: 1px solid var(--rule-soft); }
+    .walk-card:last-child { border-right: none; }
+  }
+  .walk-card:last-child { border-bottom: none; }
+  .walk-card .tag {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+  }
+  .walk-card .name {
+    font-family: "Geist", sans-serif;
+    font-size: 32px; line-height: 1; font-weight: 500;
+    letter-spacing: -0.03em;
+  }
+  .walk-card .name em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; font-weight: 400;
+  }
+  .walk-card .body {
+    font-size: 14px; line-height: 1.55; color: var(--muted);
+  }
+  .walk-card .list {
+    list-style: none;
+    margin-top: 8px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .walk-card .list li {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px; line-height: 1.5;
+    color: var(--ink);
+    display: flex; gap: 10px; align-items: baseline;
+  }
+  .walk-card .list li::before {
+    content: "/"; color: var(--mute-2);
+  }
+
+  /* ============================================================
+     COMPARE TABLE (LeetCode / Coursera / DreamClerk)
+     ============================================================ */
+  section.compare {
+    border-bottom: 1px solid var(--ink);
+    padding: 96px 0;
+  }
+  .compare-table {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.5fr 1.5fr 1.5fr;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-row.head {
+    background: var(--ink); color: var(--paper);
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .compare-row > div {
+    padding: 18px 20px;
+    border-right: 1px solid var(--rule-soft);
+    font-size: 14px; line-height: 1.5;
+    display: flex; align-items: center;
+  }
+  .compare-row > div:last-child { border-right: none; }
+  .compare-row.head > div { border-right: 1px solid var(--paper); }
+  .compare-row > div:first-child {
+    font-family: "Geist Mono", monospace;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .compare-row.us > div:not(:first-child) {
+    background: var(--paper-2);
+  }
+  .compare-row.us > div:last-child {
+    background: var(--ink); color: var(--paper);
+    font-weight: 500;
+  }
+  @media (max-width: 720px) {
+    .compare-row { grid-template-columns: 1fr; }
+    .compare-row > div { border-right: none; border-bottom: 1px dashed var(--rule-soft); }
+    .compare-row.head { display: none; }
+    .compare-row > div:first-child { background: var(--paper-2); }
+    .faq-h { font-size: 36px; }
+    .faq-item summary { font-size: 18px; gap: 12px; }
+    .faq-item p { margin-left: 0; font-size: 16px; }
+  }
+
+  /* ============================================================
+     03.7 — FAQ
+     ============================================================ */
+  section.faq {
+    border-bottom: 1px solid var(--ink);
+    padding: 96px 0 96px;
+  }
+  .faq-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .faq-h {
+    font-size: 48px;
+    line-height: 0.95;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    margin: 0 0 48px;
+    max-width: 18ch;
+  }
+  .faq-h em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--ink);
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--ink);
+    padding: 24px 0;
+    transition: background 200ms ease;
+  }
+  .faq-item[open] { padding-bottom: 28px; }
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    font-family: 'Geist', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    padding-right: 32px;
+    position: relative;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 24px;
+    font-weight: 300;
+    transition: transform 240ms ease;
+  }
+  .faq-item[open] summary::after { content: '−'; }
+  .q-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    min-width: 40px;
+  }
+  .faq-item p {
+    margin: 16px 0 0 60px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 70ch;
+  }
+  .faq-item[open] summary { color: var(--ink); }
+
+  /* ============================================================
+     FINAL / APPLY
+     ============================================================ */
+  section.final {
+    border-bottom: 1px solid var(--ink);
+    padding: 120px 0 96px;
+    background: var(--paper-2);
+  }
+  .final-eyebrow {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .final-eyebrow::before { content: "§ 04"; font-weight: 700; }
+  .final-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  @media (min-width: 900px) {
+    .final-grid { grid-template-columns: 7fr 5fr; gap: 80px; }
+  }
+  .final-h {
+    font-family: "Geist", sans-serif;
+    font-weight: 500;
+    font-size: clamp(48px, 7vw, 104px);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+  }
+  .final-h em {
+    font-family: "Instrument Serif", serif;
+    font-style: italic; font-weight: 400;
+  }
+  .final-h .strike {
+    position: relative; display: inline-block;
+  }
+  .final-h .strike::after {
+    content: ""; position: absolute;
+    left: -4px; right: -4px; top: 50%;
+    height: 6px; background: var(--ink);
+  }
+  .final-side {
+    display: flex; flex-direction: column; justify-content: space-between;
+    gap: 32px;
+  }
+  .final-side p {
+    font-size: 16px; line-height: 1.5; color: var(--muted);
+    max-width: 36ch;
+  }
+  .final-side p .serif { font-size: 18px; font-style: italic; color: var(--ink); }
+
+  .email-form {
+    display: flex; align-items: stretch;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    margin-top: 32px;
+  }
+  .email-form .prompt {
+    padding: 0 16px;
+    display: flex; align-items: center;
+    font-family: "Geist Mono", monospace;
+    font-size: 14px;
+    color: var(--mute-2);
+  }
+  .email-form input {
+    flex: 1;
+    border: none; background: transparent;
+    padding: 18px 8px;
+    font-family: "Geist Mono", monospace;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+  .email-form input::placeholder { color: var(--mute-2); }
+  .email-form button {
+    margin: 6px;
+    padding: 0 24px;
+    background: var(--ink); color: var(--paper);
+    border: 1.5px solid var(--ink);
+    font-family: "Geist Mono", monospace;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 200ms cubic-bezier(0.16,1,0.3,1), color 200ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .email-form button:hover { background: var(--paper); color: var(--ink); }
+  .email-form button.sent { background: var(--paper); color: var(--ink); }
+  .email-foot {
+    margin-top: 16px;
+    font-family: "Geist Mono", monospace;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--mute-2);
+    display: flex; gap: 24px; flex-wrap: wrap;
+  }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  footer.foot {
+    padding: 48px 0 64px;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .foot-grid {
+    display: grid; grid-template-columns: 1fr; gap: 32px;
+    border-top: 1px solid var(--ink);
+    padding-top: 24px;
+  }
+  @media (min-width: 700px) { .foot-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+  .foot-mark { font-family: "Geist", sans-serif; font-size: 36px; letter-spacing: -0.03em; font-weight: 500; }
+  .foot-tag { color: var(--muted); margin-top: 8px; max-width: 30ch; }
+  .foot-h { color: var(--mute-2); margin-bottom: 16px; }
+  .foot ul { list-style: none; }
+  .foot li { padding: 4px 0; color: var(--ink); }
+  .foot a:hover { text-decoration: underline; }
+  .foot-bottom {
+    margin-top: 48px;
+    border-top: 1px solid var(--ink);
+    padding-top: 16px;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    color: var(--muted);
+  }
+
+  /* ============================================================
+     ON-LOAD REVEAL
+     ============================================================ */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 700ms cubic-bezier(0.16,1,0.3,1), transform 700ms cubic-bezier(0.16,1,0.3,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal.d1 { transition-delay: 80ms; }
+  .reveal.d2 { transition-delay: 160ms; }
+  .reveal.d3 { transition-delay: 240ms; }
+  .reveal.d4 { transition-delay: 320ms; }
+  .reveal.d5 { transition-delay: 400ms; }
+  .reveal.d6 { transition-delay: 480ms; }
+  /* reveal-once: animate in on load with delay, no observer needed */
+  .reveal-once { opacity: 0; transform: translateY(12px); animation: revealUp 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+  .reveal-once.d1 { animation-delay: 200ms; }
+  .reveal-once.d2 { animation-delay: 320ms; }
+  .reveal-once.d3 { animation-delay: 440ms; }
+  .reveal-once.d4 { animation-delay: 560ms; }
+  .reveal-once.d5 { animation-delay: 680ms; }
+  .reveal-once.d6 { animation-delay: 800ms; }
+  @keyframes revealUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ============================================================
+     REDUCED MOTION
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 880px) {
+    .hero-title { grid-column: 1 / -1; }
+    .hero-title .row.big { font-size: clamp(46px, 12vw, 88px); }
+    .hero-title .row.sub { font-size: 18px; margin-top: 14px; }
+    .hero-side { grid-column: 1 / -1; padding-bottom: 0; }
+    .hero-words { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     META BAR
+     ============================================================ -->
+<div class="meta">
+  <div class="container meta-inner">
+    <div class="meta-l">
+      <span class="meta-dot live">invite-only · get on the list</span>
+    </div>
+    <div class="meta-r">
+      <span>en / in</span>
+      <span>est. 2026</span>
+      <span>v 0.4.2</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark"></span>
+      <span class="logo-text">dreamclerk</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#chat">chat</a>
+      <a href="#features">features</a>
+      <a href="#faq">faq</a>
+      <a href="#final">notify</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#final" class="btn">Get notified <span class="arr">→</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     01 — HERO
+     ============================================================ -->
+<section class="hero in" id="top">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-eyebrow">
+        <span>001 / A real engineering job · in your browser · for undergraduates</span>
+        <span>For Undergraduate Engineers, India</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="row">A real <em>engineering</em> job,</span>
+        <span class="row big"><span class="strike">a course</span> &mdash;</span>
+        <span class="row big">in your browser.</span>
+        <span class="row sub">Apply. Get hired. Ship. Get reviewed. Get promoted. Earn a verified work record.</span>
+      </h1>
+
+      <!-- experience verbs in giant type — the actual job -->
+      <div class="hero-verbs" aria-label="what you'll actually do on the job">
+        <div class="hero-verb reveal-once d1">
+          <span class="hv-num">/ 01</span>
+          <div class="hv-word">ship<em>.</em></div>
+          <span class="hv-tag">PR merged to prod</span>
+        </div>
+        <div class="hero-verb reveal-once d2">
+          <span class="hv-num">/ 02</span>
+          <div class="hv-word">review<em>.</em></div>
+          <span class="hv-tag">AI tech lead signs off</span>
+        </div>
+        <div class="hero-verb reveal-once d3">
+          <span class="hv-num">/ 03</span>
+          <div class="hv-word">debug<em>.</em></div>
+          <span class="hv-tag">survive the incident</span>
+        </div>
+        <div class="hero-verb reveal-once d4">
+          <span class="hv-num">/ 04</span>
+          <div class="hv-word">stand<em>up</em></div>
+          <span class="hv-tag">9:30 am, every day</span>
+        </div>
+        <div class="hero-verb reveal-once d5">
+          <span class="hv-num">/ 05</span>
+          <div class="hv-word">promote<em>d</em></div>
+          <span class="hv-tag">intern &rarr; lead</span>
+        </div>
+        <div class="hero-verb reveal-once d6">
+          <span class="hv-num">/ 06</span>
+          <div class="hv-word">certif<em>ied</em>.</div>
+          <span class="hv-tag">recruiter-verifiable</span>
+        </div>
+      </div>
+
+      <div class="hero-words">
+        <span>apply</span>
+        <span>interview</span>
+        <span>onboard</span>
+        <span>code review</span>
+        <span>ship to prod</span>
+        <span>incident</span>
+        <span>sprint review</span>
+        <span>promotion</span>
+        <span>work record</span>
+        <span>recruiter-verified</span>
+      </div>
+
+      <aside class="hero-side">
+        <p>
+          <span class="serif">Not a course.</span> Not a tutorial. Not a mooc.
+          You'll <strong>apply</strong>, get <strong>hired</strong>, spend eight weeks
+          shipping <strong>real code</strong> in a real IDE, get reviewed by an AI
+          <strong>tech lead</strong>, survive a <strong>production incident</strong>,
+          finish your <strong>sprint</strong>, sit a <strong>technical interview</strong>,
+          and walk away with a <strong>verified work record</strong> —
+          the kind a recruiter can actually <strong>verify</strong>.
+        </p>
+        <p style="font-family:'Geist Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-top:8px;">
+          monaco · docker · jupyter · postgres · 14 tracks · 5 levels · 70+ roles
+        </p>
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+          <a href="#final" class="btn">Get the next letter <span class="arr">→</span></a>
+          <a href="#chat" class="btn btn-ghost">Ask the AI first</a>
+        </div>
+      </aside>
+
+      <!-- Live ticker -->
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>you'll apply like it's real</span>
+          <span>you'll get hired by an AI recruiter</span>
+          <span>you'll ship code in a real IDE</span>
+          <span>you'll be reviewed by an AI tech lead</span>
+          <span>you'll earn a verified work certificate</span>
+          <span>recruiter-verifiable · blockchain-anchored</span>
+          <span>monaco · docker · jupyter · postgres</span>
+          <span>14 tracks · 5 levels · 70+ role states</span>
+          <span>you'll apply like it's real</span>
+          <span>you'll get hired by an AI recruiter</span>
+          <span>you'll ship code in a real IDE</span>
+          <span>you'll be reviewed by an AI tech lead</span>
+          <span>you'll earn a verified work certificate</span>
+          <span>recruiter-verifiable · blockchain-anchored</span>
+          <span>monaco · docker · jupyter · postgres</span>
+          <span>14 tracks · 5 levels · 70+ role states</span>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <div class="terminal reveal d3" id="term">
+        <div class="term-bar">
+          <div class="term-dots"><span></span><span></span><span></span></div>
+          <div>~/dreamclerk — preview build · v0.4.2</div>
+          <div>● live</div>
+        </div>
+        <div class="term-body" id="termBody">
+          <span class="term-line cmd" id="line-0">$ dreamclerk apply --track=backend</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     01.5 — CORE LOOP STRIP
+     ============================================================ -->
+<section class="loop" id="loop">
+  <div class="container">
+    <div class="loop-head">
+      <div class="h">$ cat ~/dreamclerk/loop.md <em>the cycle, end to end.</em></div>
+      <div class="h">↳ 4 phases · 8 weeks · 1 work record</div>
+    </div>
+    <div class="loop-row">
+      <div class="loop-step reveal d1">
+        <span class="num">/ 01 — apply</span>
+        <div class="verb"><span class="pr">you'll</span>apply<em>.</em></div>
+        <p class="desc">An AI recruiter screens your profile, runs a 5-minute conversational interview, and matches you to a fictional company and role.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="loop-step reveal d2">
+        <span class="num">/ 02 — work</span>
+        <div class="verb"><span class="pr">you'll</span>ship<em>.</em></div>
+        <p class="desc">8-week sprints. Real tickets. A codebase, a tech lead, a Slack channel. You'll code in a browser-side IDE — Monaco, Docker, Jupyter, PostgreSQL.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="loop-step reveal d3">
+        <span class="num">/ 03 — review</span>
+        <div class="verb"><span class="pr">you'll be</span>reviewed<em>.</em></div>
+        <p class="desc">An AI senior engineer will review every PR on 5 axes — correctness, security, performance, readability, edge cases. You'll get a 0–100 score and line-level comments.</p>
+        <span class="arrow">→</span>
+      </div>
+      <div class="loop-step reveal d4">
+        <span class="num">/ 04 — certify</span>
+        <div class="verb"><span class="pr">you'll</span>earn<em>.</em></div>
+        <p class="desc">Pass / Merit / Distinction. A verified certificate backed by your actual code, AI review scores, sprint velocity. QR-verifiable by recruiters. Blockchain-anchored.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 — AI CHAT
+     ============================================================ -->
+<section class="chat" id="chat">
+  <div class="container">
+    <div class="sec-head reveal d1">
+      <span class="sec-num">§ 02 — Ask first, apply later</span>
+      <h2 class="sec-title">Ask the <em>platform</em> anything.</h2>
+    </div>
+
+    <div class="chat-wrap reveal d2">
+      <!-- Log -->
+      <div class="chat-log">
+        <div class="chat-log-head">
+          <span>log.md</span>
+          <span>● streaming</span>
+        </div>
+        <div class="chat-log-body" id="chatLog">
+          <div class="msg msg-ai" style="animation-delay: 0.05s;">
+            <div class="msg-avatar">DC</div>
+            <div class="msg-body">
+              <div class="msg-meta">dreamclerk · ai · online</div>
+              <div class="msg-bubble">
+                you're early — we're letting in the first cohort soon. ask me anything while you wait. i'm scripted, not an LLM, so my answers don't hallucinate. same voice aanya would give you on a call.
+              </div>
+              <div class="msg-refs">
+                <span class="ref" tabindex="0">01
+                  <span class="ref-pop"><strong>↳ what dreamclerk is</strong>You'll get hired into a fictional company, ship real code in an in-browser IDE, get reviewed by an AI senior engineer, and earn a blockchain-verified certificate backed by your actual submissions.</span>
+                </span>
+                <span class="ref" tabindex="0">02
+                  <span class="ref-pop"><strong>↳ who it's for</strong>Undergraduate CS students in India (IIT, NIT, Anna University, IIIT tier) who can't easily land internships. Also working engineers who want a portfolio.</span>
+                </span>
+                <span class="ref" tabindex="0">03
+                  <span class="ref-pop"><strong>↳ why scripted, not LLM</strong>Because the answers shouldn't hallucinate. Every response is what aanya actually said. If you ask something we don't have a script for, we route it to aanya@dreamclerk.io — she replies within 48h.</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="chat-input">
+        <div class="chat-input-head">
+          <span>input ›</span>
+          <span>● ready</span>
+        </div>
+        <div class="chat-input-body">
+          <textarea
+            class="chat-prompt"
+            id="chatPrompt"
+            placeholder="ask dreamclerk anything — ⌘⏎ to send"
+            rows="4"></textarea>
+          <div class="chat-submit-row">
+            <span class="chat-hint">⏎ send · ⇧⏎ newline</span>
+            <button class="btn" id="chatSend">Send <span class="arr">→</span></button>
+          </div>
+
+          <div style="margin-top: 8px; font-family: 'Geist Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mute-2);">
+            ↳ try asking
+          </div>
+          <div class="suggestions">
+            <button class="suggestion" data-q="what is dreamclerk?">what is dreamclerk?</button>
+            <button class="suggestion" data-q="when does it open?">when does it open?</button>
+            <button class="suggestion" data-q="how is this different from a course?">how is this different from a course?</button>
+            <button class="suggestion" data-q="what does the workspace look like?">what does the workspace look like?</button>
+            <button class="suggestion" data-q="how much does it cost?">how much does it cost?</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 — WHAT YOU'LL ACTUALLY DO
+     ============================================================ -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="sec-head reveal d1">
+      <span class="sec-num">§ 03 — What you'll actually do</span>
+      <h2 class="sec-title">You'll <em>work,</em> not study.</h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature reveal d1">
+        <span class="num">/ 01
+          <span class="num-pop"><strong>↳ the work</strong>You'll get hired into a fictional company and given a codebase, a tech lead, a Slack channel, and your first ticket — just like a real first day. Real tasks. Real deadlines. Real PR reviews.</span>
+        </span>
+        <div class="name">The <em>work</em></div>
+        <div class="desc">Real tickets. Real deadlines. Real PR reviews. Inside a fictional company with a manager, a tech lead, a Slack channel, and an engineering culture you read on Day 1.</div>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="feature reveal d2">
+        <span class="num">/ 02
+          <span class="num-pop"><strong>↳ the workspace</strong>The workspace is a full professional development environment inside the browser. Zero setup. Zero downloads. Open the platform and you're already inside a codebase.</span>
+        </span>
+        <div class="name">The <em>workspace</em></div>
+        <div class="desc">Monaco IDE. Sandboxed bash. Docker microVM. Jupyter. PostgreSQL. AI code reviewer. Test runner. API tester. Live logs. All in your browser.</div>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="feature reveal d1">
+        <span class="num">/ 03
+          <span class="num-pop"><strong>↳ the people</strong>You'll have an AI manager, AI tech lead, AI colleagues, an AI client, an AI junior (when you reach senior), and an AI HR. Each with a personality, a memory, and a role to play.</span>
+        </span>
+        <div class="name">The <em>people</em></div>
+        <div class="desc">Your manager. Your tech lead. Your colleagues. Your client. Your junior (when you reach senior). Your HR. All AI, all with personalities, all reviewing your work like a real team would.</div>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="feature reveal d2">
+        <span class="num">/ 04
+          <span class="num-pop"><strong>↳ the level-up</strong>Every level — Intern → Junior → Mid → Senior → Lead — will require a technical interview and a capstone project. You'll earn the next role the same way you would at a real company.</span>
+        </span>
+        <div class="name">The <em>level-up</em></div>
+        <div class="desc">Intern → Junior → Mid → Senior → Lead. Each level-up requires a 3-round technical interview (DSA, deep dive, behavioral) and a capstone project. 14 tracks. 70+ unlockable role states.</div>
+        <div class="arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03.5 — WHAT YOU'LL WALK AWAY WITH
+     ============================================================ -->
+<section class="walkaway" id="walkaway">
+  <div class="container">
+    <div class="walkaway-head reveal d1">
+      <div class="sec-num" style="font-family: 'Geist Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);">§ 03.5 — what you'll walk away with</div>
+      <h2 class="sec-title" style="font-size: 56px; line-height: 0.95; font-weight: 500; letter-spacing: -0.04em; max-width: 18ch;">You'll leave with a <em>work record</em>, not a completion badge.</h2>
+    </div>
+
+    <div class="walkaway-grid">
+      <div class="walk-card reveal d1">
+        <span class="tag">/ 01 — the portfolio</span>
+        <div class="name">A <em>portfolio</em> that compiles itself.</div>
+        <p class="body">Every PR, notebook, bug fix, and capstone will auto-compile into a public technical portfolio — with your tech stack, your context, and your AI review scores, side by side.</p>
+        <ul class="list">
+          <li>github-style contribution graph</li>
+          <li>original code vs. AI-suggested improvements</li>
+          <li>shareable link for recruiters</li>
+          <li>one-click PDF / LinkedIn / resume export</li>
+        </ul>
+      </div>
+
+      <div class="walk-card reveal d2">
+        <span class="tag">/ 02 — the certificate</span>
+        <div class="name">A <em>certificate</em> recruiters can verify.</div>
+        <p class="body">Each role cycle ends with a certificate — Pass / Merit / Distinction. It contains your real code submissions, AI review scores, sprint velocity, and capstone summary. Not attendance. Work.</p>
+        <ul class="list">
+          <li>pass · merit · distinction</li>
+          <li>blockchain-anchored · tamper-proof</li>
+          <li>QR-verifiable by any recruiter</li>
+          <li>your name, your role, your company, your dates</li>
+        </ul>
+      </div>
+
+      <div class="walk-card reveal d3">
+        <span class="tag">/ 03 — the reference</span>
+        <div class="name">A <em>reference</em> with code behind it.</div>
+        <p class="body">When a recruiter scans your QR code, they'll see the real work — your sprint velocity, your AI review scores, your capstone. Side-by-side with your cohort's benchmarks. No "good employee" handwave.</p>
+        <ul class="list">
+          <li>per-sprint AI review scores</li>
+          <li>capstone project with source code</li>
+          <li>cohort comparison (top 10%, median, etc.)</li>
+          <li>recruiter verification page</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03.6 — HOW THIS IS DIFFERENT
+     ============================================================ -->
+<section class="compare" id="compare">
+  <div class="container">
+    <div class="sec-head reveal d1" style="margin-bottom: 40px;">
+      <span class="sec-num">§ 03.6 — how this is different</span>
+      <h2 class="sec-title" style="font-size: 48px; line-height: 0.95; font-weight: 500; letter-spacing: -0.04em;">The <em>other</em> paths, side by side.</h2>
+    </div>
+
+    <div class="compare-table reveal d2">
+      <div class="compare-row head">
+        <div></div>
+        <div>LeetCode</div>
+        <div>Coursera / YouTube</div>
+        <div>DreamClerk</div>
+      </div>
+      <div class="compare-row">
+        <div>what you do</div>
+        <div>isolated algorithm puzzles</div>
+        <div>watch videos, complete quizzes</div>
+        <div>ship features inside a real codebase, with PR review</div>
+      </div>
+      <div class="compare-row">
+        <div>how you're evaluated</div>
+        <div>pass / fail hidden test cases</div>
+        <div>auto-graded MCQ + completion %</div>
+        <div>5-axis AI PR review, 0–100 score, line-level comments</div>
+      </div>
+      <div class="compare-row">
+        <div>what you walk away with</div>
+        <div>an algorithms score</div>
+        <div>a completion certificate</div>
+        <div>a work record, blockchain-anchored, recruiter-verifiable</div>
+      </div>
+      <div class="compare-row">
+        <div>can a recruiter verify?</div>
+        <div>no</div>
+        <div>no</div>
+        <div>yes — QR + cohort benchmarks + the code</div>
+      </div>
+      <div class="compare-row us">
+        <div>→ outcome</div>
+        <div>interview prep</div>
+        <div>concept familiarity</div>
+        <div>a working engineer, with a work record</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03.7 — FAQ  (PAA / featured-snippet bait)
+     ============================================================ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="faq-eyebrow reveal d1">§ 03.7 — Frequently asked</div>
+    <h2 class="faq-h reveal d2">The <em>questions</em> you'll ask first.</h2>
+    <div class="faq-grid">
+      <details class="faq-item reveal d3">
+        <summary><span class="q-num">001</span> What is DreamClerk?</summary>
+        <p>DreamClerk is a real-world engineering track for undergraduate students in India. You'll get hired into a fictional company, ship code in an in-browser IDE (Monaco + Docker + Jupyter), get reviewed by an AI senior engineer, and earn a verified work record — not a completion badge, but a recruiter-checkable work record backed by your actual code submissions.</p>
+      </details>
+      <details class="faq-item reveal d4">
+        <summary><span class="q-num">002</span> How is DreamClerk different from LeetCode?</summary>
+        <p>LeetCode tests algorithm recall in isolated problems. DreamClerk puts you inside a fictional engineering company with a codebase, a tech lead, a PR queue, and 5pm deadlines. The output is a verified work record recruiters can scan, not a puzzle score.</p>
+      </details>
+      <details class="faq-item reveal d5">
+        <summary><span class="q-num">003</span> What does a DreamClerk certificate look like?</summary>
+        <p>Each certificate contains your name, role title, seniority level, and the fictional company you worked at. It also contains your actual code submissions, AI review scores, sprint velocity, and a capstone summary. It is blockchain-anchored and QR-verifiable by any recruiter.</p>
+      </details>
+      <details class="faq-item reveal d6">
+        <summary><span class="q-num">004</span> How long does a DreamClerk sprint take?</summary>
+        <p>Each sprint is 8 weeks. You'll work as an Intern or Junior engineer inside a fictional company, ship real code, get reviewed, and complete a capstone. After three sprints at a level, plus a technical interview and capstone, you earn your certificate.</p>
+      </details>
+      <details class="faq-item reveal d7">
+        <summary><span class="q-num">005</span> Is DreamClerk hiring right now?</summary>
+        <p>DreamClerk is invite-only and will let in its first cohort soon. Drop your email below to get the next letter — one email only, when applications open.</p>
+      </details>
+      <details class="faq-item reveal d8">
+        <summary><span class="q-num">006</span> How much does DreamClerk cost?</summary>
+        <p>Pricing is still being finalized. The first cohort will get lifetime access at founder rates. No payment is taken at sign-up — only when seats open.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 — FINAL · NOTIFY ME
+     ============================================================ -->
+<section class="final" id="final">
+  <div class="container">
+    <div class="final-eyebrow reveal d1">§ 04 — Get the next letter</div>
+    <div class="final-grid">
+      <h2 class="final-h reveal d2">
+        Get the <em>next letter.</em><br>
+        <span class="strike">No</span> spam. No drip.
+      </h2>
+      <div class="final-side reveal d3">
+        <p>
+          <span class="serif">One email, when applications open.</span>
+          No drip campaigns, no marketing middleware, no retargeting pixels.
+          Unsubscribe by replying — aanya reads every reply personally.
+        </p>
+        <form class="email-form" id="emailForm" onsubmit="return false;">
+          <span class="prompt">$</span>
+          <input type="email" id="emailInput" placeholder="you@email.com" required />
+          <button type="submit" id="emailSubmit">Put me on the list →</button>
+        </form>
+        <div class="email-foot">
+          <span>↳ one email, ever</span>
+          <span>↳ read by aanya, not a CRM</span>
+          <span>↳ your address goes nowhere else</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-mark">dreamclerk</div>
+        <div class="foot-tag">You'll work a real job. From your browser. A real work record — not a completion badge.</div>
+      </div>
+      <div>
+        <div class="foot-h">platform</div>
+        <ul>
+          <li><a href="#chat">chat</a></li>
+          <li><a href="#features">features</a></li>
+          <li><a href="#faq">faq</a></li>
+          <li><a href="#final">notify</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">company</div>
+        <ul>
+          <li><a href="mailto:aanya@dreamclerk.io?subject=about%20dreamclerk">about</a></li>
+          <li><a href="mailto:aanya@dreamclerk.io?subject=manifesto">manifesto</a></li>
+          <li><a href="mailto:aanya@dreamclerk.io?subject=contact">contact</a></li>
+          <li><a href="#faq">faq</a></li>
+          <li><a href="https://owasp.org/www-project-top-ten/" target="_blank" rel="noopener noreferrer">owasp top 10</a></li>
+          <li><a href="mailto:aanya@dreamclerk.io?subject=privacy">privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-h">follow</div>
+        <ul>
+          <li><a href="https://twitter.com/dreamclerk" rel="me noopener noreferrer" target="_blank">twitter</a></li>
+          <li><a href="https://linkedin.com/company/dreamclerk" rel="me noopener noreferrer" target="_blank">linkedin</a></li>
+          <li><a href="https://github.com/dreamclerk" rel="me noopener noreferrer" target="_blank">github</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 dreamclerk · invite-only</span>
+      <span>built by aanya.s · bangalore, in</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+  /* ----- Intersection observer for reveal on scroll ----- */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+
+  /* ----- Hero terminal — runs on load ----- */
+  const termBody = document.getElementById('termBody');
+  const heroTerm = [
+    { kind: 'cmd', text: '$ dreamclerk apply --track=backend' },
+    { kind: 'out', text: '→ you\'ll meet your AI recruiter · 5-minute conversational interview' },
+    { kind: 'out', text: '→ matched: Nexara · Junior Backend Engineer' },
+    { kind: 'cmd', text: '$ cd ~/sprint-01 && cat task.md' },
+    { kind: 'out', text: 'Task #341 · auth bug · P1 · due 5 PM' },
+    { kind: 'out', text: '→ opening your workspace: monaco · docker · jupyter' },
+  ];
+  function runHero() {
+    let i = 0;
+    function next() {
+      if (i >= heroTerm.length) {
+        const rest = document.createElement('span');
+        rest.className = 'term-line cmd';
+        rest.innerHTML = '$ <span class="term-cursor"></span>';
+        termBody.appendChild(document.createElement('br'));
+        termBody.appendChild(rest);
+        return;
+      }
+      const item = heroTerm[i++];
+      if (item.kind === 'cmd') {
+        typeCmd(item.text, () => {
+          const line = document.createElement('span');
+          line.className = 'term-line cmd';
+          line.textContent = item.text;
+          termBody.appendChild(line);
+          termBody.appendChild(document.createElement('br'));
+          setTimeout(next, 320);
+        });
+      } else {
+        const line = document.createElement('span');
+        line.className = 'term-line out';
+        line.textContent = item.text;
+        termBody.appendChild(line);
+        termBody.appendChild(document.createElement('br'));
+        setTimeout(next, 220);
+      }
+    }
+    function typeCmd(text, done) {
+      const line = document.createElement('span');
+      line.className = 'term-line cmd';
+      const cursor = document.createElement('span');
+      cursor.className = 'term-cursor';
+      line.appendChild(document.createTextNode(''));
+      line.appendChild(cursor);
+      termBody.appendChild(line);
+      let j = 0;
+      const tick = () => {
+        if (j <= text.length) {
+          line.firstChild.textContent = text.slice(0, j);
+          j++;
+          setTimeout(tick, 22);
+        } else {
+          line.removeChild(cursor);
+          done();
+        }
+      };
+      tick();
+    }
+    setTimeout(next, 400);
+  }
+  runHero();
+
+  /* ----- AI Chat (scripted) ----- */
+  const intents = [
+    {
+      keys: ['what is', 'dreamclerk', 'platform', 'tell me about', 'what does', 'what do you', 'explain'],
+      reply: `you'll get hired into a fictional company, ship real code in an in-browser IDE, get reviewed by an AI senior engineer, and earn a blockchain-verified certificate backed by your actual submissions. not a course. not a tutorial. a job — simulated end to end.`,
+      refs: [
+        ['01', 'every sprint you\'ll submit code that goes through the same review a real engineer would get: security, performance, readability, edge cases.'],
+        ['02', 'intern → junior → mid → senior → lead. 14 tracks. 70+ unlockable role states.'],
+        ['03', 'certificates are earned, not given. pass / merit / distinction. recruiter-verifiable via QR.'],
+      ],
+    },
+    {
+      keys: ['when', 'open', 'date', 'cohort', 'launch', 'start', 'spring', 'soon'],
+      reply: `we\'re letting in the first cohort soon. drop your email below and you\'ll get the next letter — one email, when applications go live. no spam, no marketing middleware.`,
+      refs: [
+        ['01', 'no fixed date yet — we\'ll email the list the moment we have one.'],
+        ['02', 'first cohort is small. founding-member rates will lock in.'],
+        ['03', 'email list is the only way to find out — we don\'t run ads.'],
+      ],
+    },
+    {
+      keys: ['different', 'course', 'leetcode', 'hackerrank', 'compared', 'comparison', 'vs', 'bootcamp', 'mooc'],
+      reply: `good question. courses teach you concepts. hackerrank tests algorithm recall. here you\'ll be inside a fictional company where you have a codebase, a tech lead, a PR queue, and 5pm deadlines. the certificate is backed by your actual code, not by attendance.`,
+      refs: [
+        ['01', 'in hackerrank you solve puzzles. here you\'ll ship features, fix bugs, survive incident response.'],
+        ['02', 'every submission will get line-level AI review — security, perf, edge cases.'],
+        ['03', 'your certificate will be your portfolio. recruiters will verify the code behind it.'],
+      ],
+    },
+    {
+      keys: ['cost', 'price', 'free', 'money', 'pay', 'fee', 'pricing', 'subscription'],
+      reply: `pricing hasn\'t been finalized. early-cohort members will get lifetime access at founder rates. the waitlist gets the email first — no payment is taken at sign-up, only when seats open.`,
+      refs: [
+        ['01', 'pricing is still being finalized. waitlist gets notified first.'],
+        ['02', 'early cohort members will receive founder rates — locked in.'],
+        ['03', 'no payment is taken at sign-up. only when seats open.'],
+      ],
+    },
+    {
+      keys: ['workspace', 'ide', 'code', 'editor', 'tools', 'stack', 'monaco', 'docker'],
+      reply: `the workspace is a full in-browser IDE — monaco (the vscode engine), sandboxed bash terminal, docker-based runtime, postman-style api tester, jupyter notebooks for ml, and an ai code reviewer that scores every submission 0–100.`,
+      refs: [
+        ['01', 'monaco is the same code editor that powers vs code. runs in your browser.'],
+        ['02', 'your terminal is a real bash shell, sandboxed per-task via microvms.'],
+        ['03', 'the ai reviewer gives line-level feedback — not just lint.'],
+      ],
+    },
+    {
+      keys: ['track', 'role', 'frontend', 'backend', 'ml', 'data', 'devops', 'security', 'product'],
+      reply: `14 tracks. eight technical: frontend, backend, full-stack, ai/ml, data science, devops, cybersecurity. six non-technical: product, marketing, finance, business analyst, consulting, hr. each has 5 seniority levels: intern → junior → mid → senior → lead.`,
+      refs: [
+        ['01', '70+ unlockable role states (14 tracks × 5 levels).'],
+        ['02', 'you can switch tracks after clearing junior.'],
+        ['03', 'non-tech tracks use the same shell but different workspaces.'],
+      ],
+    },
+    {
+      keys: ['review', 'scored', 'score', 'graded', 'feedback'],
+      reply: `every code submission gets reviewed by an AI senior engineer on five axes: correctness, security, performance, readability, edge cases. you\'ll get a 0–100 score and line-level comments — same as a real PR review.`,
+      refs: [
+        ['01', 'correctness: does it do what the spec says?'],
+        ['02', 'security: SQL injection, auth issues, OWASP top 10.'],
+        ['03', 'readability: naming, structure, comments — code review hygiene.'],
+      ],
+    },
+    {
+      keys: ['apply', 'join', 'sign up', 'how do i', "i'm in", 'waitlist', 'notify'],
+      reply: `drop your email in the form below. when applications open, you\'ll be the first to know. no spam — one email, only.`,
+      refs: [
+        ['01', 'one email. when applications open. that\'s it.'],
+        ['02', 'email goes to aanya@dreamclerk.io directly. no marketing middleware.'],
+        ['03', 'we never sell or share. unsubscribe by replying.'],
+      ],
+    },
+  ];
+  const fallback = {
+    reply: `hmm, that's not in my script. aanya@dreamclerk.io will reply within 48h. meanwhile, try one of these:`,
+    refs: [
+      ['01', 'direct email to the founder. replies within 48h.'],
+      ['02', 'try one of the suggested questions.'],
+      ['03', 'or scroll to the email capture and join the waitlist.'],
+    ],
+  };
+
+  function matchIntent(text) {
+    const t = text.toLowerCase();
+    let best = null, score = 0;
+    for (const intent of intents) {
+      let s = 0;
+      for (const k of intent.keys) if (t.includes(k)) s++;
+      if (s > score) { score = s; best = intent; }
+    }
+    return best || fallback;
+  }
+
+  const chatLog = document.getElementById('chatLog');
+  const chatPrompt = document.getElementById('chatPrompt');
+  const chatSend = document.getElementById('chatSend');
+
+  function scrollChat() {
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  function appendUser(text) {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg msg-user';
+    wrap.style.animationDelay = '0s';
+    wrap.innerHTML = `
+      <div class="msg-avatar">YOU</div>
+      <div class="msg-body">
+        <div class="msg-meta">you</div>
+        <div class="msg-bubble"></div>
+      </div>`;
+    wrap.querySelector('.msg-bubble').textContent = text;
+    chatLog.appendChild(wrap);
+    scrollChat();
+  }
+
+  function appendTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg msg-ai';
+    wrap.id = 'typingMsg';
+    wrap.style.animationDelay = '0s';
+    wrap.innerHTML = `
+      <div class="msg-avatar">DC</div>
+      <div class="msg-body">
+        <div class="msg-meta">dreamclerk · ai · typing</div>
+        <div class="msg-bubble"><span class="typing"><span></span><span></span><span></span></span></div>
+      </div>`;
+    chatLog.appendChild(wrap);
+    scrollChat();
+  }
+
+  function appendAI(text, refs) {
+    const wrap = document.createElement('div');
+    wrap.className = 'msg msg-ai';
+    wrap.style.animationDelay = '0s';
+    const refHtml = refs
+      .map(
+        ([id, body]) =>
+          `<span class="ref" tabindex="0">${id}<span class="ref-pop"><strong>↳ ref</strong>${body}</span></span>`
+      )
+      .join('');
+    wrap.innerHTML = `
+      <div class="msg-avatar">DC</div>
+      <div class="msg-body">
+        <div class="msg-meta">dreamclerk · ai · online</div>
+        <div class="msg-bubble"></div>
+        <div class="msg-refs">${refHtml}</div>
+      </div>`;
+    wrap.querySelector('.msg-bubble').textContent = text;
+    chatLog.appendChild(wrap);
+    scrollChat();
+  }
+
+  function streamText(text, target, done) {
+    let i = 0;
+    const tick = () => {
+      if (i <= text.length) {
+        target.textContent = text.slice(0, i);
+        i++;
+        scrollChat();
+        const last = text[i - 1];
+        let d = 16;
+        if (last === '.' || last === '?' || last === '!') d = 220;
+        else if (last === ',' || last === ';') d = 110;
+        setTimeout(tick, d);
+      } else {
+        done && done();
+      }
+    };
+    tick();
+  }
+
+  function handleSend(text) {
+    if (!text.trim()) return;
+    appendUser(text);
+    chatPrompt.value = '';
+    setTimeout(() => {
+      const t = document.getElementById('typingMsg');
+      if (t) t.remove();
+      appendTyping();
+      setTimeout(() => {
+        const tt = document.getElementById('typingMsg');
+        if (tt) tt.remove();
+        const intent = matchIntent(text);
+        const wrap = document.createElement('div');
+        wrap.className = 'msg msg-ai';
+        wrap.style.animationDelay = '0s';
+        const refHtml = intent.refs
+          .map(
+            ([id, body]) =>
+              `<span class="ref" tabindex="0">${id}<span class="ref-pop"><strong>↳ ref</strong>${body}</span></span>`
+          )
+          .join('');
+        wrap.innerHTML = `
+          <div class="msg-avatar">DC</div>
+          <div class="msg-body">
+            <div class="msg-meta">dreamclerk · ai · online</div>
+            <div class="msg-bubble"></div>
+            <div class="msg-refs">${refHtml}</div>
+          </div>`;
+        chatLog.appendChild(wrap);
+        const bubble = wrap.querySelector('.msg-bubble');
+        scrollChat();
+        streamText(intent.reply, bubble, () => scrollChat());
+      }, 700);
+    }, 350);
+  }
+
+  chatSend.addEventListener('click', () => handleSend(chatPrompt.value));
+  chatPrompt.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend(chatPrompt.value);
+    }
+  });
+  document.querySelectorAll('.suggestion').forEach((b) => {
+    b.addEventListener('click', () => handleSend(b.dataset.q));
+  });
+
+  /* ----- Email form ----- */
+  const emailForm = document.getElementById('emailForm');
+  const emailInput = document.getElementById('emailInput');
+  const emailSubmit = document.getElementById('emailSubmit');
+  emailForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const v = emailInput.value.trim();
+    if (!v) return;
+    emailSubmit.textContent = 'Sent ✓';
+    emailSubmit.classList.add('sent');
+    // Drop a confirmation into the chat
+    setTimeout(() => {
+      appendUser(`[notify] ${v}`);
+      setTimeout(() => {
+        appendTyping();
+        setTimeout(() => {
+          const tt = document.getElementById('typingMsg');
+          if (tt) tt.remove();
+          const wrap = document.createElement('div');
+          wrap.className = 'msg msg-ai';
+          wrap.style.animationDelay = '0s';
+          wrap.innerHTML = `
+            <div class="msg-avatar">DC</div>
+            <div class="msg-body">
+              <div class="msg-meta">dreamclerk · ai · online</div>
+              <div class="msg-bubble"></div>
+              <div class="msg-refs">
+                <span class="ref" tabindex="0">01<span class="ref-pop"><strong>↳ confirmed</strong>${v} is on the list. one email goes out when applications open. that's it.</span></span>
+                <span class="ref" tabindex="0">02<span class="ref-pop"><strong>↳ reply to unsubscribe</strong>we never sell or share. reply to that email and aanya removes you within hours.</span></span>
+              </div>
+            </div>`;
+          chatLog.appendChild(wrap);
+          scrollChat();
+          const bubble = wrap.querySelector('.msg-bubble');
+          streamText(`noted. ${v} is on the list. one email goes out when applications open. that's the whole list — no drip campaign, no upsell.`, bubble);
+        }, 500);
+      }, 300);
+    }, 200);
+  });
+
+  /* ----- Mark hero as in to trigger the strike animation ----- */
+  document.querySelector('.hero').classList.add('in');
+</script>
+
+<!-- Plausible analytics (privacy-friendly, no cookies, drop when domain is live) -->
+<script defer data-domain="dreamclerk.io" src="https://plausible.io/js/script.tagged-events.js"></script>
+<script>window.plausible = window.plausible || function(){}; document.querySelectorAll('a[href*="dreamclerk.io/verify"], a[href="#final"]').forEach(a => a.addEventListener('click', () => plausible('cta_click')));</script>
+</body>
+</html>
