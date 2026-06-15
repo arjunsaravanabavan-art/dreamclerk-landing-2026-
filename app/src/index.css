@@ -1579,6 +1579,9 @@ footer .bottom .socials a:hover { color: #d6ff5b; }
   gap: 8px;
   align-items: stretch;
 }
+.modal-input-row--split { gap: 12px; }
+.modal-field { display: flex; flex-direction: column; gap: 6px; flex: 1 1 0; min-width: 0; }
+.modal-field .modal-label { margin: 0; }
 .modal-input {
   flex: 1;
   min-width: 0;
