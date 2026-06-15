@@ -1,124 +1,83 @@
+import { useEffect, useRef, useState } from "react";
+
 const tracks = [
-  {
-    n: "F1", name: "frontend engineering", lvl: "intern → lead",
-    bar: "▰▰▰▰▱", prog: 4,
-    bullets: [
-      "static html/css & ui bug fixes",
-      "react components & state mgmt",
-      "feature ownership & a11y audits",
-      "design system architecture",
-      "tech roadmap & hiring bar",
-    ],
-    stack: ["react", "next.js", "typescript", "tailwind", "jest", "lighthouse", "figma"],
-  },
-  {
-    n: "B2", name: "backend engineering", lvl: "intern → lead",
-    bar: "▰▰▰▰▱", prog: 4,
-    bullets: [
-      "rest endpoints & failing tests",
-      "crud apis & jwt auth",
-      "services, caching, rate limit",
-      "distributed architecture",
-      "api contracts & slas",
-    ],
-    stack: ["node", "python", "java", "postgresql", "redis", "docker", "graphql"],
-  },
-  {
-    n: "A3", name: "ai / ml engineering", lvl: "intern → lead",
-    bar: "▰▰▰▱▱", prog: 3,
-    bullets: [
-      "notebooks, eda, viz",
-      "train & evaluate classifiers",
-      "feature eng + mlflow pipelines",
-      "deploy + monitor + a/b test",
-      "ml strategy & governance",
-    ],
-    stack: ["pytorch", "tensorflow", "huggingface", "pandas", "mlflow", "fastapi"],
-  },
-  {
-    n: "D4", name: "data science & analytics", lvl: "intern → lead",
-    bar: "▰▰▰▱▱", prog: 3,
-    bullets: [
-      "sql queries & basic charts",
-      "stats + kpi dashboards",
-      "predictive models & a/b",
-      "experimentation frameworks",
-      "analytics org & bi ownership",
-    ],
-    stack: ["sql", "python", "pandas", "tableau", "airflow", "dbt", "looker"],
-  },
-  {
-    n: "P5", name: "devops & platform", lvl: "intern → lead",
-    bar: "▰▰▰▰▱", prog: 4,
-    bullets: [
-      "ci/cd pipelines & logs",
-      "docker & k8s basics",
-      "infra-as-code, observability",
-      "multi-region architecture",
-      "platform strategy & slas",
-    ],
-    stack: ["docker", "kubernetes", "terraform", "aws", "github actions", "prometheus"],
-  },
-  {
-    n: "S6", name: "security & compliance", lvl: "intern → lead",
-    bar: "▰▰▱▱▱", prog: 2,
-    bullets: [
-      "owasp top 10 walkthrough",
-      "sast/dast, dependency audit",
-      "threat models & sso/saml",
-      "compliance pipelines (soc2)",
-      "security org & risk register",
-    ],
-    stack: ["burp", "snyk", "oauth2", "saml", "vault", "gcp-iam", "policies-as-code"],
-  },
+  { code: "F1", name: "frontend",            pct: 78, s: ["react", "tailwind", "vite", "accessibility"] },
+  { code: "B2", name: "backend",             pct: 62, s: ["node", "postgresql", "redis", "auth"] },
+  { code: "A3", name: "ai / ml",             pct: 41, s: ["python", "pytorch", "embeddings", "rag"] },
+  { code: "D4", name: "data engineering",    pct: 55, s: ["sql", "spark", "dbt", "airflow"] },
+  { code: "P5", name: "platform / devops",   pct: 67, s: ["docker", "k8s", "terraform", "observability"] },
+  { code: "S6", name: "security",            pct: 38, s: ["appsec", "threat modeling", "owasp", "sast"] },
 ];
 
-function Bar({ prog, total = 5 }) {
-  const filled = "▰".repeat(prog);
-  const empty = "▱".repeat(total - prog);
-  return (
-    <span className="track__bar" aria-label={`progress ${prog} of ${total}`}>
-      <span className="ok">{filled}</span><span className="empty">{empty}</span>
-    </span>
-  );
-}
-
 export default function Tracks() {
+  const ref = useRef(null);
+  const [progress, setProgress] = useState(Array(tracks.length).fill(0));
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            // ease each card up to its target pct
+            tracks.forEach((t, i) => {
+              const start = performance.now();
+              const dur = 1100 + i * 100;
+              const tick = (now) => {
+                const k = Math.min(1, (now - start) / dur);
+                const eased = 1 - Math.pow(1 - k, 3);
+                const cur = Math.round(t.pct * eased);
+                setProgress((arr) => { const c = arr.slice(); c[i] = cur; return c; });
+                if (k < 1) requestAnimationFrame(tick);
+              };
+              requestAnimationFrame(tick);
+            });
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="tracks" className="section">
       <div className="wrap">
         <header className="section-head reveal">
           <div className="section-head__label">
             <span className="cmd">$ tracks --list</span>
-            <span>the role tracks</span>
+            <span>choose a track</span>
           </div>
           <div className="section-head__body">
-            <h2 className="section-head__title">six tracks. six paths. one workspace.</h2>
+            <h2 className="section-head__title">
+              six tracks. one job, <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>deeply</em>.
+            </h2>
             <p className="section-head__lede">
-              pick the path that matches the job you want. each track takes you from intern to lead, with a promotion interview and capstone at every level.
+              every track is a 2-sprint build of a real company. you don't just "learn" frontend — you build the real frontend of a working startup, and a real recruiter from that startup reviews your work.
             </p>
           </div>
         </header>
 
-        <div className="tracks reveal">
-          {tracks.map((t) => (
-            <article className="track" key={t.n}>
-              <div className="track__head">
-                <span className="idx">[{t.n}]</span>
-                <span>5 levels</span>
+        <ol className="tracks reveal" ref={ref}>
+          {tracks.map((t, i) => (
+            <li className="track" key={t.code} style={{ "--i": i }}>
+              <div className="meta">
+                <span className="idx">[{t.code}]</span>
+                <span className="name">{t.name}</span>
+                <span className="lvl">L1 → L4</span>
               </div>
-              <h3 className="track__title">{t.name}</h3>
-              <div className="track__lvl">track: <b>{t.lvl}</b></div>
-              <Bar prog={t.prog} />
-              <ul className="track__list">
-                {t.bullets.map((b) => <li key={b}>{b}</li>)}
-              </ul>
-              <div className="track__stack">
-                {t.stack.map((s) => <span key={s}>{s}</span>)}
+              <div className="bar" aria-label={`${t.name} progress ${t.pct} percent`}>
+                <span style={{ width: `${progress[i]}%` }} />
+                <span className="n">{progress[i]}%</span>
               </div>
-            </article>
+              <div className="stack">
+                {t.s.map((k) => <span className="chip" key={k}>{k}</span>)}
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

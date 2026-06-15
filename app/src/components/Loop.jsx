@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Section from "./Section.jsx";
 
 const steps = [
@@ -12,6 +13,25 @@ const steps = [
 ];
 
 export default function Loop() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            const cells = ref.current.querySelectorAll(".loop__step");
+            cells.forEach((c, i) => setTimeout(() => c.classList.add("in"), i * 70));
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <Section
       id="how"
@@ -20,9 +40,9 @@ export default function Loop() {
       title="eight steps. one loop. real work."
       lede="apply → onboard → ship → review → xp → promote → certify → apply out. the same loop a real company runs, compressed into 8-week sprints."
     >
-      <ol className="loop reveal">
-        {steps.map((s) => (
-          <li className="loop__step" key={s.n}>
+      <ol className="loop" ref={ref}>
+        {steps.map((s, i) => (
+          <li className="loop__step" key={s.n} style={{ "--i": i }}>
             <div className="n">[{s.n}]</div>
             <div className="ic" aria-hidden="true">{s.n}</div>
             <h3>{s.t}</h3>

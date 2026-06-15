@@ -1,11 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+/**
+ * Hero — stacked, no overlap.
+ * Interactions:
+ *  - headline first line is static, second line ("ship code. get reviewed.") is
+ *    typed out char-by-char the first time the hero scrolls into view.
+ *  - the pill in "unemployment" lights up after a 1.2s delay (strike-in effect).
+ *  - the ticker at the bottom is fed live by App.jsx.
+ */
 export default function Hero() {
+  const [typed, setTyped] = useState("");
+  const [done, setDone] = useState(false);
   const [strike, setStrike] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setStrike(true), 1500); return () => clearTimeout(t); }, []);
+  const target = "ship code. get reviewed.";
+  const wrapRef = useRef(null);
+  const ranOnce = useRef(false);
+
+  useEffect(() => { const t = setTimeout(() => setStrike(true), 1200); return () => clearTimeout(t); }, []);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !ranOnce.current) {
+            ranOnce.current = true;
+            let i = 0;
+            const tick = () => {
+              i += 1;
+              setTyped(target.slice(0, i));
+              if (i < target.length) setTimeout(tick, 38);
+              else setDone(true);
+            };
+            tick();
+          }
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(wrapRef.current);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section className="section hero" id="top">
+    <section className="section hero" id="top" ref={wrapRef}>
       <div className="wrap">
         <div className="hero__meta">
           <span className="chip"><span className="dot" /> build /public · v0.9.2</span>
@@ -17,9 +55,10 @@ export default function Hero() {
         </div>
 
         <h1 className="hero__title">
-          no more <span className="pill">unemployment</span>.
+          no more <span className={"pill" + (strike ? " in" : "")}>unemployment</span>.
           <br />
-          ship code. <span className="serif">get reviewed.</span>
+          {typed}
+          {!done && <span className="hero__caret" aria-hidden="true" />}
         </h1>
 
         <p className="hero__sub">

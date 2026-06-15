@@ -1,46 +1,80 @@
-import Section from "./Section.jsx";
+import { useEffect, useState } from "react";
 
-const companies = [
-  { name: "nexara",          industry: "B2B SaaS",     stack: "Node · React",     sprint: "6w",  hl: true,  desc: "backend infra for logistics." },
-  { name: "strato labs",     industry: "Fintech",      stack: "Python · Go",      sprint: "8w",  hl: false, desc: "payments orchestration." },
-  { name: "kibo ai",         industry: "ML platform",  stack: "PyTorch · K8s",    sprint: "10w", hl: false, desc: "model serving at scale." },
-  { name: "patchwork",       industry: "DevTools",     stack: "TS · Rust",        sprint: "6w",  hl: true,  desc: "code review for monorepos." },
-  { name: "lumen health",    industry: "HealthTech",   stack: "FHIR · Python",    sprint: "8w",  hl: false, desc: "clinical data pipelines." },
-  { name: "vela commerce",   industry: "E-commerce",   stack: "Next · Postgres",  sprint: "6w",  hl: false, desc: "headless storefront APIs." },
-  { name: "northwind energy", industry: "CleanTech",   stack: "Go · Timescale",   sprint: "10w", hl: true,  desc: "grid telemetry platform." },
-  { name: "greybox",         industry: "Cybersecurity", stack: "Rust · eBPF",     sprint: "8w",  hl: false, desc: "runtime threat detection." },
+const data = [
+  { code: "V01", name: "vivacity",     type: "b2b saas",       seats: 12, lead: "karthik",  live: true,  focus: "react · typescript" },
+  { code: "N02", name: "nexara",       type: "fintech",        seats: 8,  lead: "priya",    live: true,  focus: "node · postgres · k8s" },
+  { code: "O03", name: "oxygon",       type: "ai infra",       seats: 6,  lead: "aman",     live: true,  focus: "pytorch · embeddings" },
+  { code: "L04", name: "levanto",      type: "data platform",  seats: 5,  lead: "divya",    live: true,  focus: "spark · dbt · airflow" },
+  { code: "K05", name: "kaligo",       type: "edtech",         seats: 4,  lead: "rohan",    live: false, focus: "next · prisma" },
+  { code: "F06", name: "figment",      type: "consumer ai",    seats: 4,  lead: "mira",     live: false, focus: "react · python" },
 ];
 
 export default function Companies() {
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setActive((i) => (i + 1) % data.length), 2200);
+    return () => clearInterval(t);
+  }, []);
+
   return (
-    <Section
-      id="companies"
-      command="companies --list"
-      label="the simulated company"
-      title={<>you don't freelance. <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>you join a company.</em></>}
-      lede="every sprint, you're a named engineer inside a fictional but realistic company — with a product, a tech stack, a manager, and a backlog. each one is different. the work is the work."
-    >
-      <div className="cos reveal">
-        <div className="cos__head">
-          <div>$ cd</div>
-          <div>industry</div>
-          <div>stack</div>
-          <div>sprint</div>
-          <div>ls · what you ship</div>
-        </div>
-        {companies.map((c) => (
-          <div className={"cos__row" + (c.hl ? " hl" : "")} key={c.name}>
-            <div className="cos__name">
-              <span className="cos__dot" />
-              <span>{c.name}</span>
-            </div>
-            <div className="cos__ind">{c.industry}</div>
-            <div className="cos__stack">{c.stack}</div>
-            <div className="cos__sprint">{c.sprint}</div>
-            <div className="cos__desc">{c.desc}</div>
+    <section id="companies" className="section">
+      <div className="wrap">
+        <header className="section-head reveal">
+          <div className="section-head__label">
+            <span className="cmd">$ cd partners/ && ls -la</span>
+            <span>where you'll work</span>
           </div>
-        ))}
+          <div className="section-head__body">
+            <h2 className="section-head__title">
+              six companies. <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>real</em> recruiters. real reviews.
+            </h2>
+            <p className="section-head__lede">
+              we run this with real indian startups who care about hiring junior engineers the right way. every task is one of their actual problems. every reviewer is one of their actual engineers.
+            </p>
+          </div>
+        </header>
+
+        <div className="cmdline reveal">
+          <span className="ps1">$</span> cd <span className="arg">{data[active].name}</span> <span className="op">&amp;&amp;</span> ls
+          <span className="cursor" aria-hidden="true" />
+        </div>
+
+        <table className="table reveal">
+          <thead>
+            <tr>
+              <th>code</th>
+              <th>company</th>
+              <th>type</th>
+              <th>live seats</th>
+              <th>tech lead</th>
+              <th>stack</th>
+              <th>status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((c, i) => (
+              <tr
+                key={c.code}
+                className={i === active ? "active" : ""}
+                onMouseEnter={() => setActive(i)}
+              >
+                <td className="mono">{c.code}</td>
+                <td className="name">{c.name}</td>
+                <td>{c.type}</td>
+                <td className="num">{c.seats}</td>
+                <td>{c.lead}</td>
+                <td className="muted">{c.focus}</td>
+                <td>
+                  <span className={"status-pill " + (c.live ? "on" : "off")}>
+                    <span className="dot" />
+                    {c.live ? "open" : "soon"}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </Section>
+    </section>
   );
 }
