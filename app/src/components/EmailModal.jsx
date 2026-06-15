@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { subscribe, getSubscriberCount } from "../lib/supabase";
 
 export default function EmailModal({ open, onClose, source = "modal" }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [error, setError] = useState("");
-  const [count, setCount] = useState(1847);
+  const [count, setCount] = useState(null);
   const inputRef = useRef(null);
   const cardRef = useRef(null);
 
@@ -29,7 +30,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
     };
   }, [open]);
 
-  // focus input on open
+  // focus first input on open
   useEffect(() => {
     if (open) {
       const t = setTimeout(() => inputRef.current?.focus(), 80);
@@ -43,6 +44,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
       const t = setTimeout(() => {
         setStatus("idle");
         setError("");
+        setName("");
         setEmail("");
       }, 220);
       return () => clearTimeout(t);
@@ -62,9 +64,21 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
   async function handleSubmit(e) {
     e.preventDefault();
     if (status === "loading") return;
+    const cleanName = name.trim();
+    const cleanEmail = email.trim();
+    if (!cleanName || !cleanEmail) {
+      setStatus("error");
+      setError("Please enter your name and email.");
+      return;
+    }
+    if (!cleanEmail.includes("@")) {
+      setStatus("error");
+      setError("That email looks off — make sure it has an @.");
+      return;
+    }
     setStatus("loading");
     setError("");
-    const result = await subscribe(email.trim(), source);
+    const result = await subscribe(cleanName, cleanEmail, source);
     if (result.ok) {
       setStatus("success");
       setTimeout(() => onClose(), 2200);
@@ -101,9 +115,9 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
             <div className="modal-eyebrow">/ confirmed</div>
             <h2 id="modal-title">you are on the list.</h2>
             <p>
-              we are rolling out dreamclerk in small cohorts. check{" "}
-              <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">@dreamclrk</a> for
-              the announcement. the next email hits your inbox the moment a seat opens.
+              we will email you the moment a new cohort opens. check{" "}
+              <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">@dreamclrk</a>{" "}
+              for the announcement in the meantime.
             </p>
             <button className="btn solid" onClick={onClose}>
               close <span className="arr">→</span>
@@ -112,9 +126,9 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
         ) : (
           <>
             <div className="modal-eyebrow">/ get notified · coming soon</div>
-            <h2 id="modal-title">let me tell you everything about dreamclerk.</h2>
+            <h2 id="modal-title">get notified when dreamclerk opens.</h2>
             <p className="modal-lede">
-              dreamclerk is a real-world career simulation platform for indian undergraduates. you apply, an ai recruiter runs a live interview, you get matched to a simulated company, and you ship real code in a full in-browser ide — monaco editor, sandboxed terminal, docker microvm, jupyter, and a real pr flow with an ai tech lead reviewing every line.
+              drop your details. we will email you the moment a new cohort opens.
             </p>
 
             {count != null && (
@@ -124,68 +138,66 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
               </div>
             )}
 
-            <ul className="modal-points">
-              <li>
-                <span className="mp-n">/01</span>
-                <span><b>apply like it is real.</b> the ai recruiter screens you, runs a conversational interview, and either hires you or hands you a rubric-scored debrief. no gatekeeping. no alumni network.</span>
-              </li>
-              <li>
-                <span className="mp-n">/02</span>
-                <span><b>work like it is real.</b> 8-week sprints inside a fictional company — nexara, vivacity, oxygon, levanto. real codebases. real tickets. real slack channels. real deadlines.</span>
-              </li>
-              <li>
-                <span className="mp-n">/03</span>
-                <span><b>get reviewed like it is real.</b> the ai tech lead scores every pr on correctness, security, performance, readability, edge cases. 0–100. line-level feedback. no fluff.</span>
-              </li>
-              <li>
-                <span className="mp-n">/04</span>
-                <span><b>earn a verified work record.</b> not a completion badge. a recruiter-checkable certificate that links to your actual code, prs, ai review scores, and sprint velocity. blockchain-anchored. qr-verified.</span>
-              </li>
-            </ul>
-
-            <p className="modal-stack">
-              <b>in the workspace:</b> monaco · bash · docker · jupyter · postgresql · figma handoff · postman · git · live logs.
-            </p>
-
             <form className="modal-form" onSubmit={handleSubmit} noValidate>
-              <label htmlFor="modal-email" className="modal-label">your email</label>
-              <div className="modal-input-row">
-                <input
-                  ref={inputRef}
-                  id="modal-email"
-                  type="email"
-                  className="modal-input"
-                  placeholder="you@college.edu"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (status === "error") setStatus("idle");
-                  }}
-                  disabled={status === "loading"}
-                  required
-                  autoComplete="email"
-                />
-                <button
-                  type="submit"
-                  className="btn solid modal-submit"
-                  disabled={status === "loading" || !email}
-                >
-                  {status === "loading" ? "joining…" : <>get notified <span className="arr">→</span></>}
-                </button>
+              <div className="modal-input-row modal-input-row--split">
+                <div className="modal-field">
+                  <label htmlFor="modal-name" className="modal-label">your name</label>
+                  <input
+                    ref={inputRef}
+                    id="modal-name"
+                    type="text"
+                    className="modal-input"
+                    placeholder="aanya iyer"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (status === "error") setStatus("idle");
+                    }}
+                    disabled={status === "loading"}
+                    required
+                    autoComplete="name"
+                  />
+                </div>
+                <div className="modal-field">
+                  <label htmlFor="modal-email" className="modal-label">your email</label>
+                  <input
+                    id="modal-email"
+                    type="email"
+                    className="modal-input"
+                    placeholder="you@college.edu"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (status === "error") setStatus("idle");
+                    }}
+                    disabled={status === "loading"}
+                    required
+                    autoComplete="email"
+                  />
+                </div>
               </div>
+
+              <button
+                type="submit"
+                className="btn solid modal-submit"
+                disabled={status === "loading" || !name.trim() || !email.trim()}
+              >
+                {status === "loading" ? "joining…" : <>get notified <span className="arr">→</span></>}
+              </button>
+
               {status === "error" && (
                 <div className="modal-error">{error}</div>
               )}
               <div className="modal-fine">
-                no spam · unsubscribe anytime · we never share your email
+                no spam · unsubscribe anytime · we never share your details
               </div>
             </form>
 
             <div className="modal-foot">
               <span>follow along →</span>
               <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram ↗</a>
-              <a href="https://twitter.com/dreamclerk" target="_blank" rel="noreferrer">twitter / 𝕏 ↗</a>
               <a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin ↗</a>
+              <a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github ↗</a>
             </div>
           </>
         )}
