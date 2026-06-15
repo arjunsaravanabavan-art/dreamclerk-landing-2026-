@@ -58,11 +58,6 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/dreamclerk" target="_blank" rel="noreferrer">
-                  twitter / 𝕏 ↗
-                </a>
-              </li>
-              <li>
                 <a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">
                   linkedin ↗
                 </a>
@@ -70,11 +65,6 @@ export default function Footer() {
               <li>
                 <a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">
                   github ↗
-                </a>
-              </li>
-              <li>
-                <a href="https://www.youtube.com/@dreamclerk" target="_blank" rel="noreferrer">
-                  youtube ↗
                 </a>
               </li>
             </ul>
