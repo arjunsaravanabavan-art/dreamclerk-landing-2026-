@@ -4,7 +4,8 @@
 //   VITE_SUPABASE_ANON_KEY=eyJ...
 //
 // tables / functions expected:
-//   subscribers(id uuid pk, email text unique, source text, created_at timestamptz)
+//   subscribers(id uuid pk, name text null, email text unique, source text, created_at timestamptz)
+//     NOTE: `name` column must be added with: ALTER TABLE subscribers ADD COLUMN name text;
 //   waitlist_count row: { value: int }   (seed = 1847)
 //   rpc get_waitlist_count() returns int
 //   rpc bump_waitlist_count() returns int  (one-per-visitor-per-day, see COUNT_TTL_MS)
@@ -19,9 +20,14 @@ const isConfigured = () => Boolean(URL && KEY);
 // shows a believable number in dev mode.
 const SEED_COUNT = 1847;
 
-export async function subscribe(email, source = "modal") {
-  // basic shape check
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+export async function subscribe(name, email, source = "modal") {
+  // trim and basic shape check — accept any string containing an `@`
+  const cleanName = (name || "").trim();
+  const cleanEmail = (email || "").trim();
+  if (!cleanName) {
+    return { ok: false, error: "Please enter your name." };
+  }
+  if (!cleanEmail || !cleanEmail.includes("@")) {
     return { ok: false, error: "Please enter a valid email address." };
   }
 
@@ -43,7 +49,7 @@ export async function subscribe(email, source = "modal") {
         "Content-Type": "application/json",
         Prefer: "return=minimal",
       },
-      body: JSON.stringify({ email, source }),
+      body: JSON.stringify({ name: cleanName, email: cleanEmail, source }),
     });
 
     if (res.ok) return { ok: true };
