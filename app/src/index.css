@@ -262,6 +262,11 @@ section.merge-dark { padding-top: 0 !important; }
 section.merge-dark + section.merge-dark,
 section.merge-dark { border-top: 0; }
 
+/* when a non-dark section flows into a .merge-dark dark slab, collapse
+   the white gutter so the dark slab starts flush against the previous
+   section's content. applies to every merge-dark transition on the page. */
+section:has(+ section.merge-dark) { padding-bottom: 0; }
+
 /* experience: stat cards + waitlist counter */
 .exp-grid {
   display: grid;
