@@ -5,37 +5,41 @@ const faqs = [
   { q: "what if i have never shipped code?", a: "that is literally who this is built for. start as an intern. the tasks are scoped to your level. you can be a non-cs grad and complete the frontend intern track in one sprint." },
   { q: "how is the ai recruiter different from a chatbot?", a: "it runs a structured, conversational interview scored against role-specific rubrics. it asks follow-ups, tests reasoning, and pushes back on weak answers. most candidates say it is harder than a real hr screen." },
   { q: "what if i fail the interview?", a: "you get a rubric-scored debrief and a 7-day cool-down. most candidates pass on attempt 2 or 3. nobody is locked out permanently." },
-  { q: "can i switch tracks mid-sprint?", a: "yes on pro and cohort. on sprint, you finish your track first. switching is free for pro and cohort within the first 14 days." },
   { q: "do you offer scholarships?", a: "yes. we reserve 20% of every cohort for students with household income below ₹6 lakh/yr. apply through the same form — select the income-based track." },
 ];
 
 export default function FAQ() {
   return (
-    <section id="faq">
+    <section id="faq" className="section">
       <div className="wrap">
-        <div className="section-head reveal">
-          <div>
-            <div className="label">09 · the disclaimers</div>
+        <header className="section-head reveal">
+          <div className="section-head__label">
+            <span className="cmd">$ man dreamclerk --help</span>
+            <span>man page</span>
           </div>
-          <div>
-            <h2>questions, answered honestly.</h2>
-            <p className="lede">
-              if something here sounds too good, it probably is. here is what we are honest about.
+          <div className="section-head__body">
+            <h2 className="section-head__title">questions, answered honestly.</h2>
+            <p className="section-head__lede">
+              if something here sounds too good, it probably is. here's what we are honest about.
             </p>
           </div>
-        </div>
+        </header>
 
         <div className="faq reveal">
-          {faqs.map((f, i) => (
-            <details key={f.q} open={i === 0}>
-              <summary>
-                <span className="n">/{String(i + 1).padStart(2, "0")}</span>
-                <span className="q">{f.q}</span>
-                <span className="ic">+</span>
-              </summary>
-              <p>{f.a}</p>
-            </details>
-          ))}
+          <h3>questions, answered honestly.</h3>
+          <div className="faq__list">
+            {faqs.map((f, i) => (
+              <details className="faq__item" key={f.q} open={i === 0}>
+                <summary>
+                  <span style={{ display: "flex", gap: 16, alignItems: "baseline" }}>
+                    <span style={{ fontFamily: "var(--mono)", color: "var(--muted)", fontSize: 12 }}>/{String(i + 1).padStart(2, "0")}</span>
+                    <span>{f.q}</span>
+                  </span>
+                </summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </div>
     </section>

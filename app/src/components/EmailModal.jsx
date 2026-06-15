@@ -8,7 +8,6 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
   const [error, setError] = useState("");
   const [count, setCount] = useState(null);
   const inputRef = useRef(null);
-  const cardRef = useRef(null);
 
   // load live waitlist count on open
   useEffect(() => {
@@ -71,9 +70,9 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
       setError("Please enter your name and email.");
       return;
     }
-    if (!cleanEmail.includes("@")) {
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cleanEmail)) {
       setStatus("error");
-      setError("That email looks off — make sure it has an @.");
+      setError("That email looks off — please double-check it.");
       return;
     }
     setStatus("loading");
@@ -88,118 +87,96 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
     }
   }
 
-  if (!open) return null;
-
   return (
     <div
-      className="modal-overlay"
+      className={"modal-back" + (open ? " open" : "")}
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      aria-hidden={!open}
     >
-      <div className="modal-card" ref={cardRef}>
-        <button
-          type="button"
-          className="modal-close"
-          aria-label="Close"
-          onClick={onClose}
-        >
-          ×
-        </button>
+      <div className="modal" role="document">
+        <div className="modal__head">
+          <span className="dot" />
+          <span>● live · waitlist · {count != null ? count.toLocaleString("en-IN") + " in queue" : "joining…"}</span>
+          <button
+            type="button"
+            className="btn"
+            onClick={onClose}
+            style={{ marginLeft: "auto", padding: "4px 10px", fontSize: 12 }}
+            aria-label="Close"
+          >
+            esc ✕
+          </button>
+        </div>
 
         {status === "success" ? (
-          <div className="modal-success">
-            <div className="modal-eyebrow">/ confirmed</div>
-            <h2 id="modal-title">you are on the list.</h2>
+          <div className="modal__success">
+            <div className="modal__head" style={{ borderBottom: 0, padding: 0, marginBottom: 14 }}>
+              <span className="dot" />
+              <span style={{ color: "var(--ok)" }}>● confirmed</span>
+            </div>
+            <h4>you are on the list.</h4>
             <p>
               we will email you the moment a new cohort opens. check{" "}
               <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">@dreamclrk</a>{" "}
               for the announcement in the meantime.
             </p>
-            <button className="btn solid" onClick={onClose}>
+            <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
               close <span className="arr">→</span>
             </button>
           </div>
         ) : (
-          <>
-            <div className="modal-eyebrow">/ get notified · coming soon</div>
-            <h2 id="modal-title">get notified when dreamclerk opens.</h2>
-            <p className="modal-lede">
-              drop your details. we will email you the moment a new cohort opens.
-            </p>
+          <div className="modal__body">
+            <h4 id="modal-title">get notified when dreamclerk opens.</h4>
+            <p>drop your details. we will email you the moment a new cohort opens.</p>
 
-            {count != null && (
-              <div className="modal-waitlist-count">
-                <span className="pulse" />
-                <span>{count.toLocaleString("en-IN")} undergrads already on the waitlist</span>
+            <form className="modal__form" onSubmit={handleSubmit} noValidate>
+              <input
+                ref={inputRef}
+                id="modal-name"
+                type="text"
+                placeholder="your name · aanya iyer"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                disabled={status === "loading"}
+                required
+                autoComplete="name"
+              />
+              <input
+                id="modal-email"
+                type="email"
+                placeholder="your email · you@college.edu"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                disabled={status === "loading"}
+                required
+                autoComplete="email"
+              />
+              {status === "error" && <div className="err">{error}</div>}
+              <div className="row">
+                <button
+                  type="submit"
+                  className="btn btn--solid"
+                  disabled={status === "loading"}
+                >
+                  {status === "loading" ? "joining…" : <>get notified <span className="arr">→</span></>}
+                </button>
               </div>
-            )}
-
-            <form className="modal-form" onSubmit={handleSubmit} noValidate>
-              <div className="modal-input-row modal-input-row--split">
-                <div className="modal-field">
-                  <label htmlFor="modal-name" className="modal-label">your name</label>
-                  <input
-                    ref={inputRef}
-                    id="modal-name"
-                    type="text"
-                    className="modal-input"
-                    placeholder="aanya iyer"
-                    value={name}
-                    onChange={(e) => {
-                      setName(e.target.value);
-                      if (status === "error") setStatus("idle");
-                    }}
-                    disabled={status === "loading"}
-                    required
-                    autoComplete="name"
-                  />
-                </div>
-                <div className="modal-field">
-                  <label htmlFor="modal-email" className="modal-label">your email</label>
-                  <input
-                    id="modal-email"
-                    type="email"
-                    className="modal-input"
-                    placeholder="you@college.edu"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      if (status === "error") setStatus("idle");
-                    }}
-                    disabled={status === "loading"}
-                    required
-                    autoComplete="email"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="btn solid modal-submit"
-                disabled={status === "loading" || !name.trim() || !email.trim()}
-              >
-                {status === "loading" ? "joining…" : <>get notified <span className="arr">→</span></>}
-              </button>
-
-              {status === "error" && (
-                <div className="modal-error">{error}</div>
-              )}
-              <div className="modal-fine">
+              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                 no spam · unsubscribe anytime · we never share your details
               </div>
             </form>
-
-            <div className="modal-foot">
-              <span>follow along →</span>
-              <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram ↗</a>
-              <a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin ↗</a>
-              <a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github ↗</a>
-            </div>
-          </>
+          </div>
         )}
       </div>
     </div>

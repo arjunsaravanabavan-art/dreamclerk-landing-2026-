@@ -1,25 +1,23 @@
 export default function Final() {
   return (
-    <section id="final">
+    <section id="final" className="section--dark">
       <div className="wrap">
         <div className="final reveal">
-          <div className="final-num">/ end · transmission complete</div>
-          <h2>the rest of the internet teaches you to code.</h2>
-          <h2><em>we hand you the job.</em></h2>
-          <p>
-            the next cohort opens july 14. applications close july 7. 60 seats. 1 track. 1 sprint. 1 verified work record at the end.
-          </p>
-          <div className="cta">
-            <button className="btn solid" onClick={() => document.dispatchEvent(new CustomEvent('open-modal'))}>
-              get notified <span className="arr">→</span>
-            </button>
-          </div>
-          <div className="seats">
-            <div className="meter"><span style={{ width: "74%" }} /></div>
-            <div className="info">
-              <span><b>60</b> seats</span>
-              <span><b>44</b> applied</span>
-              <span><b>16</b> left</span>
+          <h2>
+            the rest of the internet teaches you to code.<br />
+            <span className="serif">we hand you the job.</span>
+          </h2>
+          <div className="final__right">
+            <p>
+              the next cohort opens july 14. applications close july 7. 60 seats. 1 track. 1 sprint. 1 verified work record at the end. free during beta.
+            </p>
+            <div className="final__ctas">
+              <a className="btn btn--on-dark btn--solid" href="#" data-open-modal data-open-source="final-cta">
+                apply for the cohort <span className="arr" aria-hidden="true">→</span>
+              </a>
+              <a className="btn btn--on-dark" href="#faq">
+                read the man page <span className="arr" aria-hidden="true">↓</span>
+              </a>
             </div>
           </div>
         </div>

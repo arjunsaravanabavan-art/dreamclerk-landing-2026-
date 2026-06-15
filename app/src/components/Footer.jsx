@@ -1,17 +1,15 @@
 export default function Footer() {
   return (
-    <footer>
+    <footer className="footer">
       <div className="wrap">
-        <div className="foot-top">
-          <div className="foot-brand">
-            <div className="foot-mark">
-              <span className="dot" /> dreamclerk
-            </div>
+        <div className="footer__top">
+          <div className="footer__brand">
+            <div className="word">dreamclerk</div>
             <p>
               a real-world career simulation platform. no more unemployment. built in india for indian undergraduates. free during beta.
             </p>
-            <div className="foot-status">
-              <span className="dot live" /> all systems operational · v0.9.2 · 1,847 students in queue
+            <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 10, fontFamily: "var(--mono)", fontSize: 12, color: "var(--muted-on-dark-2)" }}>
+              <span className="chip chip--on-dark"><span className="dot" /> all systems operational</span>
             </div>
           </div>
 
@@ -32,9 +30,7 @@ export default function Footer() {
               <li><a href="#proof">student stories</a></li>
               <li><a href="https://dreamclerk.com" rel="noreferrer">dreamclerk.com ↗</a></li>
               <li>
-                <button type="button" data-open-modal className="foot-mail">
-                  get notified →
-                </button>
+                <a href="#" data-open-modal data-open-source="footer-cta">get notified →</a>
               </li>
             </ul>
           </div>
@@ -52,28 +48,20 @@ export default function Footer() {
           <div>
             <h5>follow</h5>
             <ul>
-              <li>
-                <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">
-                  instagram ↗
-                </a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">
-                  linkedin ↗
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">
-                  github ↗
-                </a>
-              </li>
+              <li><a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram ↗</a></li>
+              <li><a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin ↗</a></li>
+              <li><a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github ↗</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="foot-bottom">
+        <div className="footer__bottom">
           <span>© 2026 dreamclerk.com · no more unemployment</span>
-          <span>made in india · for the 1.5 million</span>
+          <div className="socials">
+            <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram</a>
+            <a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin</a>
+            <a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github</a>
+          </div>
         </div>
       </div>
     </footer>
