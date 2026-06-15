@@ -1,0 +1,11 @@
+{
+  "name": "dreamclerk-landing-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DreamClerk landing page monorepo. Build runs in the app/ subdirectory.",
+  "scripts": {
+    "build": "cd app && npm install --no-audit --no-fund --loglevel=error && npm run build",
+    "dev": "cd app && npm run dev",
+    "install:app": "cd app && npm install"
+  }
+}
