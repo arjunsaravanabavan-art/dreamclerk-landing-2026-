@@ -116,6 +116,9 @@ export default function BlogPostPage({ slug }) {
               <h1 className="bp3__title">{post.title}</h1>
               <div className="bp3__meta">
                 <span>{new Date(post.published_at || post.created_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "2-digit" })}</span>
+                {post.updated_at && post.updated_at !== (post.published_at || post.created_at) ? (
+                  <><span className="dot" /><span title={`last updated ${new Date(post.updated_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "2-digit" })}`} className="bp3__updated">updated</span></>
+                ) : null}
                 {post.reading_time ? (<><span className="dot" /><span>{post.reading_time} min read</span></>) : null}
                 {post.author_name ? (<><span className="dot" /><span>{post.author_name}</span></>) : null}
                 {post.tags && post.tags.length > 0 ? (
@@ -128,6 +131,52 @@ export default function BlogPostPage({ slug }) {
             </header>
 
             <div className="bp3__body">{renderMarkdown(post.body)}</div>
+
+            {post.faq && post.faq.length ? (
+              <section className="bp3__faq" aria-labelledby="bp3-faq-h">
+                <span className="bp3__kicker" id="bp3-faq-h">frequently asked, briefly</span>
+                <ol className="bp3__faq-list">
+                  {post.faq.map((f, i) => (
+                    <li key={i} className="bp3__faq-item">
+                      <details>
+                        <summary>{f.q}</summary>
+                        <p>{f.a}</p>
+                      </details>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ) : null}
+
+            {post.outbound_links && post.outbound_links.length ? (
+              <section className="bp3__sources" aria-labelledby="bp3-sources-h">
+                <span className="bp3__kicker" id="bp3-sources-h">sources &amp; further reading</span>
+                <ul className="bp3__sources-list">
+                  {post.outbound_links.map((l, i) => (
+                    <li key={i}>
+                      <a href={l.href} rel="noopener noreferrer" target="_blank">{l.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {post.author_person ? (
+              <aside className="bp3__byline" aria-label="about the author">
+                <div className="bp3__byline-name">
+                  <strong>{post.author_person.name}</strong>
+                  {post.author_person.role ? <span> · {post.author_person.role}</span> : null}
+                </div>
+                {post.author_person.bio ? <p className="bp3__byline-bio">{post.author_person.bio}</p> : null}
+                {post.author_person.sameAs && post.author_person.sameAs.length ? (
+                  <ul className="bp3__byline-sameas">
+                    {post.author_person.sameAs.map((u, i) => (
+                      <li key={i}><a href={u} rel="noopener noreferrer me" target="_blank">{u.replace(/^https?:\/\//, "").replace(/\/$/, "")}</a></li>
+                    ))}
+                  </ul>
+                ) : null}
+              </aside>
+            ) : null}
 
             <footer className="bp3__foot">
               <a href="/blog" className="bp3__back">← all posts</a>

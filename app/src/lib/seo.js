@@ -134,22 +134,31 @@ export const SEO = {
     path: "/blog",
     keywords: "dreamclerk blog, hiring data, cohort outcomes, bias audit, internship certificate",
   },
-  blogPost: (post) => ({
-    title: post.title,
-    description: post.excerpt || post.title,
-    path: `/blog/${post.slug}`,
-    type: "article",
-    jsonLd: [
+  blogPost: (post) => {
+    // Person vs Organization author schema — picked by presence of post.author_person.
+    // Older launch posts use Organization (the "dreamclerk team" voice);
+    // fresher-series posts use a named Person with sameAs links.
+    const authorSchema = post.author_person
+      ? {
+          "@type": "Person",
+          name: post.author_person.name,
+          url: post.author_person.sameAs && post.author_person.sameAs[0],
+          sameAs: post.author_person.sameAs,
+          jobTitle: post.author_person.role,
+          description: post.author_person.bio,
+        }
+      : { "@type": "Organization", name: post.author_name || "dreamclerk team" };
+    const jsonLd = [
       {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": post.title,
         "description": post.excerpt,
-        "author": { "@type": "Organization", "name": post.author_name || "dreamclerk team" },
+        "author": authorSchema,
         "publisher": {
           "@type": "Organization",
           "name": "dreamclerk",
-          "logo": { "@type": "ImageObject", "url": `${SITE}/logo.svg` },
+          "logo": { "@type": "ImageObject", "url": `${SITE}/publisher-logo.png` },
         },
         "datePublished": post.published_at || post.created_at,
         "dateModified": post.updated_at || post.published_at || post.created_at,
@@ -158,6 +167,12 @@ export const SEO = {
         "keywords": (post.tags || []).join(", "),
         "articleSection": "engineering hiring",
         "inLanguage": "en-IN",
+        "isAccessibleForFree": true,
+        // Per-post outbound links → "isBasedOn" for citation trail.
+        // (Schema.org: Article.isBasedOn accepts a CreativeWork array.)
+        ...(post.outbound_links && post.outbound_links.length
+          ? { isBasedOn: post.outbound_links.map((l) => ({ "@type": "WebPage", url: l.href, name: l.label })) }
+          : {}),
       },
       {
         "@context": "https://schema.org",
@@ -168,22 +183,47 @@ export const SEO = {
           { "@type": "ListItem", "position": 3, "name": post.title, "item": `${SITE}/blog/${post.slug}` },
         ],
       },
-    ],
-  }),
-  blogList: {
+    ];
+    // Optional FAQPage schema for posts that ship a faq[] array.
+    // Renders into a <script type="application/ld+json"> via the existing
+    // useSEO() jsonLd injection pipeline.
+    if (post.faq && post.faq.length) {
+      jsonLd.push({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": post.faq.map((f) => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a },
+        })),
+      });
+    }
+    return {
+      title: post.title,
+      description: post.excerpt || post.title,
+      path: `/blog/${post.slug}`,
+      type: "article",
+      jsonLd,
+    };
+  },
+  blogList: (posts) => ({
     title: "blog",
     description: "field notes from building dreamclerk. the data, the rejects, the rubric changes. nothing polished after the fact.",
     path: "/blog",
     keywords: "dreamclerk blog, hiring data, cohort outcomes, bias audit, internship certificate, coding interview, in-browser ide",
     jsonLd: {
       "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "home", "item": `${SITE}/` },
-        { "@type": "ListItem", "position": 2, "name": "blog", "item": `${SITE}/blog` },
-      ],
+      "@type": "ItemList",
+      "name": "DreamClerk blog",
+      "itemListOrder": "https://schema.org/ItemListOrderDescending",
+      "itemListElement": (posts || []).map((p, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "url": `${SITE}/blog/${p.slug}`,
+        "name": p.title,
+      })),
     },
-  },
+  }),
   faqPage: {
     title: "faq",
     description: "19 questions about dreamclerk — basics, hiring, the ai recruiter, logistics. visible on load. no click-to-open. rubric + bias audit + cohort data all linked.",

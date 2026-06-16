@@ -13,7 +13,10 @@ export default function BlogListPage() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => { document.title = "blog — dreamclerk"; }, []);
-  useSEO(SEO.blogList || SEO.blog);
+  // blogList now takes posts and emits an ItemList schema; fall back to
+  // the static SEO.blog block if no posts have loaded yet so we never
+  // inject an empty ItemList into the head.
+  useSEO(posts.length ? SEO.blogList(posts) : SEO.blog);
 
   useEffect(() => {
     let cancelled = false;
