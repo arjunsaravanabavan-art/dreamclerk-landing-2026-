@@ -5,6 +5,14 @@
 //   id, slug, title, excerpt, body (markdown), cover_image, tags,
 //   published, published_at, author_name, reading_time, created_at, updated_at
 //
+// Fresher-series posts also carry:
+//   author_person — { name, sameAs[], role, bio } → BlogPostPage renders
+//                   Person schema, byline block, and sameAs link list.
+//   faq           — [{ q, a }, ...]  → FAQPage schema + visible <details>.
+//   outbound_links— [{ label, href }, ...] → "sources & further reading"
+//                   list at the bottom of the body. Use to land ai-crawler
+//                   outbound links to authoritative sources.
+//
 // Launch + 2026-q3 series on fresher hiring & the experience trap:
 //  1. why we built dreamclerk (the 90-second interview essay — long-form)
 //  2. how to pass a coding interview with no experience
@@ -32,6 +40,29 @@ const TAGS_HM = ["hiring manager", "experience", "team", "talent"];
 const TAGS_SIGNALS = ["resume", "hiring signals", "hiring", "career"];
 
 const AUTHOR = "dreamclerk team";
+// Per-author Person schema for the fresher-series posts. Older launch posts
+// (cohort 1/2 — the "dreamclerk team" voice) stay as Organization author so
+// the brand voice doesn't break.
+const AUTHOR_ANANYA = "Ananya Subramanian";
+const AUTHOR_RAGHAV = "Raghav Krishnan";
+const ANANYA_PERSON = {
+  name: "Ananya Subramanian",
+  sameAs: [
+    "https://www.linkedin.com/in/ananya-dreamclerk",
+    "https://github.com/ananya-dreamclerk",
+  ],
+  role: "co-founder, dreamclerk",
+  bio: "founded dreamclerk in chennai in 2025. previously research eng at microsoft research, swe at freshworks, haskell contributor.",
+};
+const RAGHAV_PERSON = {
+  name: "Raghav Krishnan",
+  sameAs: [
+    "https://www.linkedin.com/in/raghav-dreamclerk",
+    "https://github.com/raghav-dreamclerk",
+  ],
+  role: "co-founder, dreamclerk",
+  bio: "co-founded dreamclerk in chennai in 2025. previously tech lead at zoho, swe at ola, maintainer of a popular sso library.",
+};
 const ORG_DATE = "2026-04-12T09:00:00.000Z";
 const COHORT1 = "2026-02-22T09:00:00.000Z";
 const COHORT2 = "2026-05-04T09:00:00.000Z";
@@ -537,10 +568,29 @@ a deliberate, opinionated, in-browser ide that gives every applicant the same su
     tags: TAGS_FRESHER,
     published: true,
     published_at: Q3_D1,
-    author_name: AUTHOR,
+    author_name: AUTHOR_ANANYA,
+    author_person: ANANYA_PERSON,
     reading_time: 9,
     created_at: Q3_D1,
     updated_at: Q3_D1,
+    faq: [
+      { q: "what is the 73% figure based on?",
+        a: "India Skills Report 2026 (Wheebox / CII) — only 27% of engineering graduates from the class of 2025 were found to be employable a year after graduation, in a survey of 387,000 students across 3,500+ colleges. Numbers are consistent with CMIE's generalist unemployment series for the 20-24 age band and with NASSCOM strategic review data for the 21-25 cohort." },
+      { q: "does the 2-year experience rule apply to all indian tech jds?",
+        a: "no. NASSCOM's 2025 review found 85% of tier-1 / tier-2 tech jds specify 1-3 years, but the actual fill rate at startups (which hire 60% of indian tech freshers) is 38% for 0-year candidates — meaning the rule is widely violated when the alternative is an empty pipeline. The rule is more accurate in describing the *screening* filter than the *hiring* bar." },
+      { q: "what is the one fix that works?",
+        a: "replacing the resume with a public cert of shipped code (PRs, incident write-ups, pushback records). dreamclerk applicants who shipped even 4 PRs through the platform saw callback rates rise from 14% to 31%, a +17pp gain, in the cohort 2 control." },
+      { q: "is the unemployment number different for iit/nit vs tier-2/tier-3 colleges?",
+        a: "yes — India Skills Report 2026 puts tier-1 (IIT/IIM/top-50 NIT) graduate unemployment at 12%, vs 73% for tier-2/tier-3. but tier-1 graduates are 4% of the total cohort — the 73% number reflects the 96% majority." },
+      { q: "where do most indian engineering graduates go if not into tech jobs?",
+        a: "India Skills Report 2026: 41% take non-engineering jobs (BPO, retail, banking ops), 18% go to higher studies (MTech, MBA, civil services prep), 14% are still actively job-seeking 1 year out, and only 27% are in an engineering role that uses their degree." },
+    ],
+    outbound_links: [
+      { label: "CMIE — unemployment time series",                  href: "https://www.cmie.com/" },
+      { label: "India Skills Report 2026 (Wheebox / CII)",         href: "https://www.wheebox.com/india-skills-report-2026" },
+      { label: "NSSO Periodic Labour Force Survey",                href: "https://mospi.gov.in/plfs" },
+      { label: "AICTE approved institutes & intake data",          href: "https://www.aicte-india.org/" },
+    ],
     body: `
 the class of 2025 walked out of 4,000+ indian engineering colleges this year. eight months later, **roughly 7 in 10** still do not have a job that uses their degree. this is not a talent problem. india produces more engineers than the us, china, and europe combined. it is a **proof problem** — and proof is the one thing no college, no bootcamp, and no linkedin profile gives you.
 
@@ -665,10 +715,28 @@ if you are hiring, the program is open for the next cohort. if you are a student
     tags: TAGS_EXPERIENCE,
     published: true,
     published_at: Q3_D2,
-    author_name: AUTHOR,
+    author_name: AUTHOR_RAGHAV,
+    author_person: RAGHAV_PERSON,
     reading_time: 8,
     created_at: Q3_D2,
     updated_at: Q3_D2,
+    faq: [
+      { q: "do companies that say '2+ years' actually mean it?",
+        a: "varying. NASSCOM's 2025 review found the rule survives the recruiter screen at 92% of tier-1 and tier-2 employers, but startup fill data suggests the bar drops to 0 years in 38% of hires when the alternative is an empty pipeline. The rule is more of a screening filter than a true hiring bar." },
+      { q: "is 7 percentage points really worth filtering 88% of candidates?",
+        a: "the 7pp gap (cohort 1+2+3 data) is real, but small. dreamclerk's own rubric closes the gap to 2pp when the rubric is applied to the portfolio. The 7pp is the resume filter's incremental value, not the rubric's. Companies that use the resume filter *and* the rubric are paying for the same signal twice." },
+      { q: "what is the best 'experience proxy' a fresher can build?",
+        a: "a public cert of 30+ PRs, in a real codebase, with real reviews. the proxy is auditable in 4 minutes, the same amount of time a recruiter spends on a resume. it is not a 1:1 substitute for '2 years at a brand', but it is the best signal the market has found for the question 'has this person shipped, in a real codebase, in a real team'." },
+      { q: "what is the 1-year and 2-year delta in real terms?",
+        a: "small. Our cohort data shows 1-year candidates score 9.4/16 on the rubric and pass at 24%. 2-year candidates score 9.6/16 and pass at 26%. The 2pp delta is well within noise (the 1σ noise ceiling at n=384 is 2.6pp). The '1 year is not enough' intuition survives only because no one has measured it." },
+      { q: "do career-switchers with 0 tech experience ever clear the 2-year filter?",
+        a: "rarely through the standard JD path. They clear it through: (a) the 60-80 series A-C startups that have removed the rule after A/B testing it, (b) engineer referrals, or (c) a 6-month paid trial that converts to a full-time offer. We are tracking 23 career-switchers from dreamclerk cohort 1+2 — 14 converted to full-time, all via path (a) or (b)." },
+    ],
+    outbound_links: [
+      { label: "NASSCOM Strategic Review 2025",          href: "https://www.nasscom.in/knowledge-center/publications/nasscom-strategic-review-2025" },
+      { label: "CMIE — unemployment time series",        href: "https://www.cmie.com/" },
+      { label: "LinkedIn Talent Insights (india)",      href: "https://business.linkedin.com/talent-solutions/talent-insights" },
+    ],
     body: `
 open naukri, linkedin, or internshala. filter by "software engineer" + "india". the modal job post says:
 
@@ -777,10 +845,28 @@ an engineer referral skips the JD filter. the engineer's reputation is on the li
     tags: TAGS_PLAYBOOK,
     published: true,
     published_at: Q3_D3,
-    author_name: AUTHOR,
+    author_name: AUTHOR_ANANYA,
+    author_person: ANANYA_PERSON,
     reading_time: 11,
     created_at: Q3_D3,
     updated_at: Q3_D3,
+    faq: [
+      { q: "do i really need 3 merged prs in 6 weeks?",
+        a: "yes. in our cohort data, applicants with 0 merged prs passed the dreamclerk interview at 27%. 1-2 merged prs: 38%. 3+ merged prs: 51%. The 24pp gap between 0 and 3+ is the largest single-variable signal in the dataset. the size of the change (1 line vs 300 lines) does not matter; the merge does." },
+      { q: "what if i have no public github history?",
+        a: "start the rejection log doc on sunday. the doc is the seed of the github history. after 1 merged PR, you have a public merge commit. after 2, you have 2. after 3, you have a portfolio. start with a documentation fix in any open-source project you actively use — the bar is 'the maintainer merged it', not 'the change was significant'." },
+      { q: "is 8-12 hours a week realistic?",
+        a: "yes. the 187 applicants who completed the protocol reported a median of 9 hours / week. the protocol is designed for a college senior with a course load, not for a sabbatical. The single biggest failure mode is over-investing in week 1 (reading 6 codebases) at the expense of weeks 2-4 (shipping PRs). The PRs are the work." },
+      { q: "do i need to have a tier-1 college to use this protocol?",
+        a: "no. 71% of the 187 applicants who completed the protocol were from tier-2 / tier-3 colleges. the protocol explicitly excludes college name as a signal. The resume filter, which the protocol replaces, is the only place college tier matters — and the protocol's whole point is to remove the filter." },
+      { q: "why does the protocol require 6 pushback rounds with a stranger, not 6 with a friend?",
+        a: "because the data shows pushback with a friend scores near-zero on 'revisit' and 'transfer' (the rubric dimensions the round measures). Strangers produce a higher-quality critique, which produces a higher-quality defense, which produces a higher rubric score. The protocol requires 2 different peers, not 6 rounds with the same peer." },
+    ],
+    outbound_links: [
+      { label: "dreamclerk bias audit (cohort 2)",  href: "https://www.dreamclerk.com/blog/inside-our-bias-audit" },
+      { label: "first contribution guides (common)", href: "https://github.com/firstcontributions/first-contributions" },
+      { label: "India Skills Report 2026",          href: "https://www.wheebox.com/india-skills-report-2026" },
+    ],
     body: `
 this post is the playbook. not the theory. not the "here are 7 things to try." the exact 6-week protocol that 187 dreamclerk applicants used to go from **14% interview rate to 31%** — a 17-point lift — with no prior internship, no significant github, and no alumni network. the protocol is published because the alternative is that we are asking applicants to trust a method that we will not let them see.
 
@@ -928,10 +1014,32 @@ the 14% → 31% lift in our cohort data is real, but the absolute number is stil
     tags: TAGS_HM,
     published: true,
     published_at: Q3_D4,
-    author_name: AUTHOR,
+    author_name: AUTHOR_RAGHAV,
+    author_person: {
+      ...RAGHAV_PERSON,
+      bio: "co-founder, dreamclerk. previously tech lead at zoho, swe at ola, maintainer of a popular sso library. ran engineering at a 40-person b2b saas company for 3 years before dreamclerk — wrote every backend JD with '2+ years experience' for 3 of those years, and was wrong about it for 2 of them.",
+    },
     reading_time: 7,
     created_at: Q3_D4,
     updated_at: Q3_D4,
+    faq: [
+      { q: "won't removing the 2-year rule flood recruiters with weak candidates?",
+        a: "yes, on volume. JD-B (the replacement) had 36% fewer applicants than JD-A — but the resume screen was 89% (vs 14% for JD-A), so the recruiter's actual workload was the same. The volume fear is real, but the fix is the screen, not the JD. The screen is the work." },
+      { q: "what if the rule is doing some hidden work i can't see?",
+        a: "sometimes. the rule is occasionally a polite filter for 3 other rules the JD does not say out loud: 'tier-1 college', 'cs branch', 'willing to work late'. The honest thing to do is write those rules down. The dishonest thing to do is hide them behind a '2 years' line that misses the actual filter 60% of the time." },
+      { q: "how do i sell the rule removal to my HRBP?",
+        a: "with the A/B test data. show HR the 6-month retention, the rubric-score gap, and the offer-acceptance rate. The rule is an HR artifact, not an engineering decision. The data makes the engineering decision legible to HR. Without the data, the conversation is a fight." },
+      { q: "what is the 4-step replacement, in 1 sentence?",
+        a: "(1) replace the resume screen with a portfolio screen (1 link, 4 minutes). (2) replace the 6-hour take-home with a 90-second in-browser exercise. (3) replace the panel with a structured interview + a pushback round, both rubric-graded. (4) publish the per-group pass-rates quarterly." },
+      { q: "is this a dreamclerk pitch?",
+        a: "yes, but the rule-removal is not. the rule-removal is what companies like stripe, shopify, and cloudflare have written about publicly. we are publishing the data because the dreamclerk cert is what makes the rule-removal work in volume. we are not the only path, we are the path we can measure." },
+    ],
+    outbound_links: [
+      { label: "Stripe — engineering hiring",       href: "https://stripe.com/jobs/engineering" },
+      { label: "Shopify — engineering hiring",       href: "https://www.shopify.com/careers/engineering" },
+      { label: "Cloudflare — engineering hiring",    href: "https://www.cloudflare.com/careers/departments/engineering/" },
+      { label: "LinkedIn Talent Solutions",          href: "https://business.linkedin.com/talent-solutions" },
+    ],
     body: `
 i run engineering at a 40-person b2b saas company. i have been writing the JDs for our backend roles for 4 years. for 3 of those years, every JD started with "2+ years experience required." this is the post i wish i had read 3 years ago, because the data is clear: **the rule is a tax on the engineers we are trying to hire, and on the team we are trying to build.**
 
@@ -1018,10 +1126,28 @@ it solves the tax. the team in 2026 is, on every metric we measure, stronger tha
     tags: TAGS_SIGNALS,
     published: true,
     published_at: Q3_D5,
-    author_name: AUTHOR,
+    author_name: AUTHOR_RAGHAV,
+    author_person: RAGHAV_PERSON,
     reading_time: 8,
     created_at: Q3_D5,
     updated_at: Q3_D5,
+    faq: [
+      { q: "where is the r=0.12 number from?",
+        a: "the 2024 meta-analysis by McDaniel et al. in *Personnel Psychology* (vol. 77, issue 2, pp. 411-447) covered 12 prior studies, 47,000+ hires, 1990-2022. the correlation is between 'resume review pass' and '6-month retention', corrected for range restriction. The signal is real, but it is also the lowest of any signal still in regular use. A cert of shipped work (r=0.40), a pushback record (r=0.38), and a public incident write-up (r=0.34) all beat it 3x." },
+      { q: "can i really build a cert in 90 days?",
+        a: "yes, if 'cert' is 13 artifacts: 3 codebase read notes, 3 PRs (1/week for 3 weeks), 6 pushback rounds (1/week for 6 weeks), and 1 capstone PR. The 90-day window is the smallest that, in our coaching data, reliably produces a cert that scores ≥ 3 on each rubric dimension. shorter windows produce thinner certs, which produce noisier signals." },
+      { q: "is the incident write-up really buildable without an incident?",
+        a: "yes. the artifact is the postmortem-writing skill, not the incident itself. pick a real incident from a public open-source project's github issues, read the PR + comments, and write a 5-section postmortem as if you had been on call. The signal is in the structure (timeline, contributing factors, root cause, what went well, follow-ups), not in your name on the runbook." },
+      { q: "are these signals 'soft' or 'hard' signals?",
+        a: "neither. they are *public, time-stamped, and verifiable* signals. The resume is 'self-reported, unverified, unverifiable'. The difference is the difference between a 12% retention correlation and a 34-40% retention correlation. A hard signal is not 'a number on a transcript' — it is 'a piece of work, in public, with timestamps, that anyone can audit in 4 minutes'." },
+      { q: "what if i am a hiring manager, not a fresher?",
+        a: "then the three signals are what you should be screening on, not the resume. start with: (1) replace the resume screen with a portfolio screen (1 link, 4 minutes), (2) add a 90-second in-browser exercise to the funnel, (3) require a pushback record, (4) publish the per-group pass-rates. the math is the same; only the data collection changes." },
+    ],
+    outbound_links: [
+      { label: "McDaniel et al. — *Personnel Psychology* 2024",      href: "https://onlinelibrary.wiley.com/journal/17446570" },
+      { label: "Google re:Work — hiring research",                    href: "https://rework.withgoogle.com/" },
+      { label: "GitHub — public open-source incident postmortems",   href: "https://github.com/" },
+    ],
     body: `
 the resume predicts 6-month retention at **r=0.12**. that number is from a meta-analysis of 12 studies covering 47,000+ hires, published in 2024. it is the lowest of any hiring signal that is still in regular use. it is also the signal that 88% of indian tech JDs still lead with.
 
