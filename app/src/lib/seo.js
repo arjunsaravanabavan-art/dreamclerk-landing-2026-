@@ -6,8 +6,8 @@
 import { useEffect } from "react";
 
 const SITE = "https://www.dreamclerk.com";
-const DEFAULT_TITLE = "dreamclerk — career simulation platform for indian undergraduates";
-const DEFAULT_DESC = "career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.";
+const DEFAULT_TITLE = "dreamclerk — a real job in your browser";
+const DEFAULT_DESC = "a real job in your browser. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.";
 
 const TAG = (sel) => document.head.querySelector(sel);
 

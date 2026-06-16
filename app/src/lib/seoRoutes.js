@@ -13,8 +13,8 @@
 // <title>, <meta>, and JSON-LD as soon as the document parses.
 
 export const SITE = "https://www.dreamclerk.com";
-export const DEFAULT_TITLE = "dreamclerk — career simulation platform for indian undergraduates";
-export const DEFAULT_DESC = "career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.";
+export const DEFAULT_TITLE = "dreamclerk — a real job in your browser";
+export const DEFAULT_DESC = "a real job in your browser. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.";
 
 // Each route has:
 //   { title, description, keywords, path, jsonLd? }
@@ -25,7 +25,7 @@ export const STATIC_ROUTES = {
   "/": {
     path: "/",
     title: DEFAULT_TITLE,
-    description: DEFAULT_DESC,
+    description: "a real job in your browser. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.",
     keywords: "career simulation platform, in-browser ide, online code editor, monaco editor, ai code reviewer, verified work certificate, ai recruiter, virtual internship, undergraduate internship, software engineering internship, frontend engineering track, backend engineering track, ai ml engineering, data science track, full stack engineering, ship code get hired, no more unemployment, hireable after college, fresher hiring, coding interview prep, sprint based learning, ai mentor, pr review simulation, capstone project, tech internship without degree, work record certificate, dreamclerk",
   },
   "/how": {
