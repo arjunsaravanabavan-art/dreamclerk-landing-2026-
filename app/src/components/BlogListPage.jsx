@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { listPublishedPosts, isConfigured } from "../lib/supabase.js";
 import { useSEO, SEO } from "../lib/seo.js";
+import { SEED_POSTS } from "../lib/seedPosts.js";
 
 /**
  * BlogListPage — public blog index. /blog
- * Fetches published posts from supabase; falls back to an empty list
- * (with a clear "no posts yet" message) when supabase is unreachable.
+ * Fetches published posts from supabase; falls back to SEED_POSTS
+ * (always shows posts) even when Supabase is unreachable or empty.
  */
 export default function BlogListPage() {
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,13 @@ export default function BlogListPage() {
     (async () => {
       try {
         const data = await listPublishedPosts();
-        if (!cancelled) setPosts(data || []);
+        if (!cancelled) {
+          // Always fall back to seed posts when Supabase returns nothing,
+          // so the blog never appears empty to a visitor.
+          setPosts((data && data.length > 0) ? data : SEED_POSTS);
+        }
+      } catch {
+        if (!cancelled) setPosts(SEED_POSTS);
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -37,13 +44,6 @@ export default function BlogListPage() {
           <h1 className="blog3__h1">blog.</h1>
           <p className="blog3__sub">field notes from building dreamclerk. the data, the rejects, the rubric changes. nothing polished after the fact.</p>
         </header>
-
-        {!isConfigured && (
-          <div className="blog3__notice">
-            <span className="blog3__notice-h">$ supabase not configured</span>
-            <p>add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>app/.env</code> and run <code>supabase/schema.sql</code> in your project to enable the blog.</p>
-          </div>
-        )}
 
         {loading ? (
           <p className="blog3__loading">$ loading posts…</p>
