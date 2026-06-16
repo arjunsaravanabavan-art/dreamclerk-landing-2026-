@@ -1,0 +1,46 @@
+# DreamClerk
+
+> Career simulation platform for Indian undergraduates. Apply, get reviewed by an AI recruiter, ship code in a real in-browser IDE, get reviewed, and leave with a verified work record. Free during beta.
+
+For LLM and AI-crawler use. Human-readable site at https://www.dreamclerk.com.
+
+## Pages
+
+- [Home](https://www.dreamclerk.com/): what dreamclerk is, who it is for, the 90-second screening experiment that started it.
+- [How it works](https://www.dreamclerk.com/how): the 8-step protocol — apply, AI screening, code review, ship, certify.
+- [Workspace](https://www.dreamclerk.com/workspace): the in-browser IDE — Monaco + WebContainer, 200ms cold start, 12 MB WASM.
+- [Tracks](https://www.dreamclerk.com/tracks): 6 engineering tracks — backend, frontend, infra, ml, data, devtools.
+- [Companies](https://www.dreamclerk.com/companies): 6 simulated employers with realistic JDs and rubrics.
+- [FAQ](https://www.dreamclerk.com/faq): 19 questions on pricing, certs, the AI recruiter, and what the data shows.
+- [About](https://www.dreamclerk.com/about): founded in Chennai in 2025 by Ananya, Raghav, and Priya. Bootstrapped.
+
+## Blog (most recent first)
+
+- [Fresher unemployment in India 2026](https://www.dreamclerk.com/blog/fresher-unemployment-india-2026-the-numbers-and-the-fix): 73% of Indian engineering graduates are unemployed a year after college. The numbers, the four reasons, the one fix that is actually moving the needle.
+- [The 2-year experience trap](https://www.dreamclerk.com/blog/the-2-year-experience-trap): where the rule came from, what it actually filters in 2026, and 3 ways to get past it without lying on the resume.
+- [How to get hired as a fresher with no internship and no network](https://www.dreamclerk.com/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network): the 6-week protocol that lifted 187 dreamclerk applicants from a 14% to a 31% callback rate.
+- [Why "2 years experience required" is a tax on your future engineering team](https://www.dreamclerk.com/blog/why-2-years-experience-required-is-a-tax): a hiring manager's A/B test. The 2-year rule filters out 88% of applicants and is anti-correlated with the outcome you actually care about.
+- [The resume is dead: 3 signals that actually predict a good hire in 2026](https://www.dreamclerk.com/blog/the-resume-is-dead-three-signals): public cert of shipped work (r=0.40), written pushback record (r=0.38), public incident write-up (r=0.34). How to build all three in 90 days.
+- [The 90-second internship interview that changed 14% of outcomes](https://www.dreamclerk.com/blog/why-we-built-dreamclerk): our founding experiment, and what we got wrong.
+- [Inside our bias audit — the rubric, the data, the changes](https://www.dreamclerk.com/blog/inside-our-bias-audit): every quarter we run a bias audit on the dreamclerk interview. Here is the rubric, the per-group pass-rates, and the three rubric changes we made after cohort 1.
+- [How to pass a coding interview with no experience](https://www.dreamclerk.com/blog/coding-interview-with-no-experience): 4-step protocol, what the data says, and the rubric companies actually use.
+- [The in-browser IDE explained](https://www.dreamclerk.com/blog/in-browser-ide-explained): Monaco + WebContainer architecture, why 200ms cold start, and what 12 MB of WASM buys.
+- [Shipping code vs knowing code — 14 terms every applicant should be able to use in a sentence](https://www.dreamclerk.com/blog/shipping-code-vs-knowing-code): the gap between college vocabulary and hiring vocabulary.
+
+## Markdown exports (model-readable)
+
+Each blog post is also available as plain markdown at `https://www.dreamclerk.com/blog/{slug}.md`, served with `Content-Type: text/markdown`. A consolidated manifest of all posts is at `/llms-full.txt`.
+
+## Primary sources (for citation)
+
+- CMIE unemployment time series — https://www.cmie.com/
+- India Skills Report 2026 (Wheebox / CII) — https://www.wheebox.com/india-skills-report-2026
+- NSSO Periodic Labour Force Survey — http://mospi.nic.in/plfs
+- NASSCOM strategic review — https://nasscom.in/knowledge-center/publications
+- AICTE approved institutes and intake data — https://www.aicte-india.org/
+
+## Conventions used in this site
+
+- Monochrome: black `#0a0a0a` on paper `#f4f1ea`. No color except status semantics.
+- Voice: short, declarative, lowercase. No "boost", "supercharge", "next-generation", "AI-powered".
+- Tagline: career simulation, not interview prep. Ship code, fix the bug, get reviewed, earn a certificate.
