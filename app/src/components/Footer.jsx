@@ -16,19 +16,20 @@ export default function Footer() {
           <div>
             <h5>platform</h5>
             <ul>
-              <li><a href="#how">how it works</a></li>
-              <li><a href="#workspace">workspace</a></li>
-              <li><a href="#tracks">role tracks</a></li>
-              <li><a href="#certificate">certificate</a></li>
+              <li><a href="/how-it-works">how it works</a></li>
+              <li><a href="/workspace">workspace</a></li>
+              <li><a href="/tracks">role tracks</a></li>
+              <li><a href="/certificate">certificate</a></li>
             </ul>
           </div>
 
           <div>
             <h5>resources</h5>
             <ul>
-              <li><a href="#faq">faq</a></li>
-              <li><a href="#proof">student stories</a></li>
-              <li><a href="https://dreamclerk.com" rel="noreferrer">dreamclerk.com ↗</a></li>
+              <li><a href="/faq">faq</a></li>
+              <li><a href="/blog">blog</a></li>
+              <li><a href="/proof">student stories</a></li>
+              <li><a href="https://www.dreamclerk.com" rel="noreferrer">dreamclerk.com ↗</a></li>
               <li>
                 <a href="#" data-open-modal data-open-source="footer-cta">get notified →</a>
               </li>
@@ -38,10 +39,10 @@ export default function Footer() {
           <div>
             <h5>company</h5>
             <ul>
-              <li><a href="#about">about</a></li>
-              <li><a href="#manifesto">manifesto</a></li>
-              <li><a href="#press">press</a></li>
-              <li><a href="#careers">careers</a></li>
+              <li><a href="/about">about us</a></li>
+              <li><a href="/about#team">team</a></li>
+              <li><a href="mailto:press@dreamclerk.com">press</a></li>
+              <li><a href="mailto:careers@dreamclerk.com">careers</a></li>
             </ul>
           </div>
 
@@ -51,6 +52,16 @@ export default function Footer() {
               <li><a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram ↗</a></li>
               <li><a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin ↗</a></li>
               <li><a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github ↗</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5>legal</h5>
+            <ul>
+              <li><a href="/privacy">privacy</a></li>
+              <li><a href="/terms">terms</a></li>
+              <li><a href="mailto:dpo@dreamclerk.com">dpo</a></li>
+              <li><a href="mailto:security@dreamclerk.com">security</a></li>
             </ul>
           </div>
         </div>

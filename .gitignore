@@ -58,3 +58,5 @@ temp/
 
 # Generated logo script artifacts
 # (Keep generator scripts and PNG outputs, ignore nothing in this case)
+
+.vercel

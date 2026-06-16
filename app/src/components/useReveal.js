@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
-export function useReveal() {
+export function useReveal(dep) {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
+    // Only attach to elements that haven't already been revealed.
+    const els = document.querySelectorAll(".reveal:not(.in)");
     if (!("IntersectionObserver" in window) || !els.length) {
       els.forEach((el) => el.classList.add("in"));
       return;
@@ -20,7 +21,7 @@ export function useReveal() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [dep]);
 }
 
 export function useCounter(target, duration = 1600) {

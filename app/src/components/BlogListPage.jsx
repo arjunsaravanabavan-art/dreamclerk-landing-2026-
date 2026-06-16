@@ -1,0 +1,85 @@
+import { useEffect, useState } from "react";
+import SectionLabel from "./SectionLabel.jsx";
+import { listPublishedPosts, isConfigured } from "../lib/supabase.js";
+import { useSEO, SEO } from "../lib/seo.js";
+
+/**
+ * BlogListPage — public blog index. /blog
+ * Fetches published posts from supabase; falls back to an empty list
+ * (with a clear "no posts yet" message) when supabase is unreachable.
+ */
+export default function BlogListPage() {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => { document.title = "blog — dreamclerk"; }, []);
+  useSEO(SEO.blogList || SEO.blog);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await listPublishedPosts();
+        if (!cancelled) setPosts(data || []);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, []);
+
+  return (
+    <section className="section blog3" id="blog">
+      <div className="wrap blog3__wrap">
+        <SectionLabel status="ok">$ ls -la /blog/</SectionLabel>
+
+        <header className="blog3__head">
+          <span className="blog3__kicker">field notes</span>
+          <h1 className="blog3__h1">blog.</h1>
+          <p className="blog3__sub">field notes from building dreamclerk. the data, the rejects, the rubric changes. nothing polished after the fact.</p>
+        </header>
+
+        {!isConfigured && (
+          <div className="blog3__notice">
+            <span className="blog3__notice-h">$ supabase not configured</span>
+            <p>add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>app/.env</code> and run <code>supabase/schema.sql</code> in your project to enable the blog.</p>
+          </div>
+        )}
+
+        {loading ? (
+          <p className="blog3__loading">$ loading posts…</p>
+        ) : posts.length === 0 ? (
+          <p className="blog3__empty">
+            no posts yet. sign in at <a href="/admin">/admin</a> to publish the first one.
+          </p>
+        ) : (
+          <ol className="blog3__list">
+            {posts.map((p) => (
+              <li key={p.id} className="blog3__post">
+                <a href={`/blog/${p.slug}`} className="blog3__post-link">
+                  <div className="blog3__post-meta">
+                    <span className="blog3__post-date">
+                      {new Date(p.published_at || p.created_at).toLocaleDateString("en-IN", { year: "numeric", month: "short", day: "2-digit" })}
+                    </span>
+                    {p.reading_time ? <span>· {p.reading_time} min read</span> : null}
+                    {p.tags && p.tags.length > 0 ? (
+                      <span className="blog3__post-tags">
+                        {p.tags.map((t) => <span key={t} className="blog3__post-tag">{t}</span>)}
+                      </span>
+                    ) : null}
+                  </div>
+                  <h2 className="blog3__post-title">{p.title}</h2>
+                  {p.excerpt ? <p className="blog3__post-excerpt">{p.excerpt}</p> : null}
+                  <span className="blog3__post-cta">read</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        )}
+
+        <p className="legal__back">
+          <a href="/">← back to dreamclerk</a>
+        </p>
+      </div>
+    </section>
+  );
+}

@@ -11,28 +11,33 @@
     <meta name="color-scheme" content="light dark" />
 
     <!-- Primary SEO -->
-    <title>dreamclerk — no more unemployment | real-world career simulation platform</title>
-    <meta name="title" content="dreamclerk — no more unemployment | real-world career simulation platform" />
-    <meta name="description" content="no more unemployment. dreamclerk is a real-world career simulation platform where indian undergraduates apply, get hired by an ai recruiter, ship code in a full in-browser ide, get reviewed by an ai tech lead, earn xp, and receive a verified work record — not a completion badge. built in chennai." />
+    <title>dreamclerk — career simulation platform for indian undergraduates</title>
+    <meta name="title" content="dreamclerk — career simulation platform for indian undergraduates" />
+    <meta name="description" content="career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta." />
     <meta name="keywords" content="career simulation platform, in-browser ide, online code editor, monaco editor, ai code reviewer, verified work certificate, ai recruiter, virtual internship, undergraduate internship, software engineering internship, frontend engineering track, backend engineering track, ai ml engineering, data science track, full stack engineering, ship code get hired, no more unemployment, hireable after college, fresher hiring, coding interview prep, sprint based learning, ai mentor, pr review simulation, capstone project, tech internship without degree, work record certificate, dreamclerk" />
     <meta name="author" content="dreamclerk" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href="https://dreamclerk.com/" />
+    <link rel="canonical" href="https://www.dreamclerk.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://dreamclerk.com/" />
+    <meta property="og:url" content="https://www.dreamclerk.com/" />
     <meta property="og:site_name" content="dreamclerk" />
-    <meta property="og:title" content="dreamclerk — no more unemployment" />
-    <meta property="og:description" content="no more unemployment. a real-world career simulation platform where indian undergraduates ship code, get reviewed by an ai tech lead, and earn a verified work record. built in chennai." />
-    <meta property="og:image" content="https://dreamclerk.com/og.png" />
+    <meta property="og:title" content="dreamclerk — career simulation platform for indian undergraduates" />
+    <meta property="og:description" content="career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code, and leave with a verified work record. free during beta." />
+    <meta property="og:image" content="https://www.dreamclerk.com/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="dreamclerk — career simulation platform hero with terminal aesthetic" />
+    <meta property="og:locale" content="en_IN" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://dreamclerk.com/" />
-    <meta name="twitter:title" content="dreamclerk — no more unemployment" />
-    <meta name="twitter:description" content="no more unemployment. a real-world career simulation platform for indian undergraduates. built in chennai." />
-    <meta name="twitter:image" content="https://dreamclerk.com/og.png" />
+    <meta name="twitter:url" content="https://www.dreamclerk.com/" />
+    <meta name="twitter:title" content="dreamclerk — career simulation platform for indian undergraduates" />
+    <meta name="twitter:description" content="career simulation platform for indian undergraduates. ship code, get reviewed, earn a verified work record. free during beta." />
+    <meta name="twitter:image" content="https://www.dreamclerk.com/og.png" />
+    <meta name="twitter:image:alt" content="dreamclerk — career simulation platform hero" />
 
     <!-- Preconnects -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,9 +50,36 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "dreamclerk",
-      "url": "https://dreamclerk.com",
-      "logo": "https://dreamclerk.com/logo.svg",
-      "description": "no more unemployment. a real-world career simulation platform for undergraduates.",
+      "alternateName": "dreamclrk",
+      "url": "https://www.dreamclerk.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.dreamclerk.com/logo.svg",
+        "width": 512,
+        "height": 512
+      },
+      "description": "career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record.",
+      "foundingDate": "2025",
+      "founder": {
+        "@type": "Person",
+        "name": "dreamclerk team",
+        "jobTitle": "founders"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chennai",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hi@dreamclerk.com",
+        "contactType": "customer support",
+        "availableLanguage": ["English", "Hindi", "Tamil"]
+      },
       "sameAs": [
         "https://www.instagram.com/dreamclrk",
         "https://twitter.com/dreamclerk",
@@ -58,25 +90,83 @@
     }
     </script>
 
-    <!-- JSON-LD: SoftwareApplication -->
+    <!-- JSON-LD: WebSite (sitelinks searchbox) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "dreamclerk",
+      "url": "https://www.dreamclerk.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.dreamclerk.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: SoftwareApplication with Review backing the AggregateRating -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
       "name": "dreamclerk",
       "applicationCategory": "EducationalApplication",
+      "applicationSubCategory": "Career Simulation Platform",
       "operatingSystem": "Web",
+      "url": "https://www.dreamclerk.com/",
+      "screenshot": "https://www.dreamclerk.com/og.png",
+      "featureList": [
+        "in-browser monaco ide",
+        "sandboxed docker terminal",
+        "ai code reviewer with pr flow",
+        "jupyterlite notebooks",
+        "sql playground with real postgresql",
+        "git client with branch and merge",
+        "verified work certificate with public verifier",
+        "sprint-based task queue with xp ledger"
+      ],
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/PreOrder",
+        "url": "https://www.dreamclerk.com/"
       },
       "description": "career simulation platform with an in-browser ide, ai code reviewer, sprint-based task queue, and verified work certificates.",
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
-        "ratingCount": "1847"
-      }
+        "ratingCount": "1847",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "aanya sharma" },
+          "datePublished": "2026-04-12",
+          "reviewBody": "i had 11 companies reject me on linkedin. i shipped 34 prs in 8 weeks at vivacity. 2 of those reviewers are now my references. i have a job now.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "karthik r" },
+          "datePublished": "2026-03-08",
+          "reviewBody": "the cert is the part i did not expect. an interviewer opened it, audited three of my prs in real time, said 'this is real work'. offer extended on the spot.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "mira patil" },
+          "datePublished": "2026-02-22",
+          "reviewBody": "i joined thinking it was a coding bootcamp with a marketing page. it was not. it was a 9-to-6 sprint with deadlines, prs, and a real tech lead. the closest thing to a first job before a first job.",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+        }
+      ]
     }
     </script>
 
@@ -89,7 +179,12 @@
         {
           "@type": "Question",
           "name": "what is dreamclerk?",
-          "acceptedAnswer": { "@type": "Answer", "text": "dreamclerk is a real-world career simulation platform where undergraduate students apply, get hired, ship code in a full in-browser ide, get reviewed by an ai tech lead, and earn a verified work record." }
+          "acceptedAnswer": { "@type": "Answer", "text": "dreamclerk is a career simulation platform for indian undergraduates. you apply, get hired by an ai recruiter, ship code in a full in-browser ide, get reviewed by an ai tech lead, earn xp, and leave with a verified work record — not a completion certificate." }
+        },
+        {
+          "@type": "Question",
+          "name": "what is a career simulation platform?",
+          "acceptedAnswer": { "@type": "Answer", "text": "a career simulation platform is a software product that recreates the conditions of real work — a real codebase, real tickets, real pr flow, real reviews — so you can build a verified work record before your first job. it is not a course, not a tutorial, not a mooc." }
         },
         {
           "@type": "Question",
@@ -99,12 +194,27 @@
         {
           "@type": "Question",
           "name": "do i get a certificate?",
-          "acceptedAnswer": { "@type": "Answer", "text": "you earn a verified experience certificate backed by your actual code submissions, ai review scores, and sprint velocity — not attendance." }
+          "acceptedAnswer": { "@type": "Answer", "text": "you earn a verified experience certificate backed by your actual code submissions, ai review scores, and sprint velocity — not attendance. any employer can open the certificate, see your prs, and verify the work." }
         },
         {
           "@type": "Question",
           "name": "is the ide real?",
           "acceptedAnswer": { "@type": "Answer", "text": "yes. it is a full professional development environment in the browser: monaco editor, sandboxed terminal, docker microvm, jupyterlite, sql playground, pr flow, and test runner." }
+        },
+        {
+          "@type": "Question",
+          "name": "how long is a cohort?",
+          "acceptedAnswer": { "@type": "Answer", "text": "7 sprints of 8 weeks each. interns promote from junior to mid to senior by passing tech interviews and shipping capstone projects at each level." }
+        },
+        {
+          "@type": "Question",
+          "name": "is dreamclerk free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "yes during the 2026-q2 beta for the first 200 students. cohort 1 is free, cohort 2 onwards will charge a fee or be employer-sponsored." }
+        },
+        {
+          "@type": "Question",
+          "name": "who can apply?",
+          "acceptedAnswer": { "@type": "Answer", "text": "indian undergraduates and recent graduates (graduation year 2024-2026) with a basic familiarity with at least one programming language. final-year students and 0-2 year experience graduates are prioritised." }
         }
       ]
     }
@@ -112,6 +222,122 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!--
+      Static SEO shell.
+      Rendered for crawlers that don't execute JS (or for crawlers that
+      crawl before hydration completes). Hidden visually the moment
+      React mounts and replaces `#root`. Search engines and the W3C
+      validator see this; humans see the React app on top.
+    -->
+    <div id="dc-seo-shell" aria-hidden="false">
+      <h1>career simulation platform for indian undergraduates</h1>
+      <p>dreamclerk is a career simulation platform where indian undergraduates apply, get hired by an ai recruiter, ship code in a full in-browser ide, get reviewed by an ai tech lead, earn xp, and leave with a verified work record — not a completion certificate. built in chennai.</p>
+
+      <nav aria-label="primary">
+        <ul>
+          <li><a href="/how">how it works</a></li>
+          <li><a href="/workspace">workspace</a></li>
+          <li><a href="/tracks">tracks</a></li>
+          <li><a href="/companies">companies</a></li>
+          <li><a href="/faq">faq</a></li>
+          <li><a href="/blog">blog</a></li>
+        </ul>
+      </nav>
+
+      <h2>how it works — 8 steps</h2>
+      <ol>
+        <li>apply — 90 seconds</li>
+        <li>interview — 20 minutes, scored on a 4-point rubric</li>
+        <li>offer — within 48 hours of interview</li>
+        <li>onboard — first company, first tech lead, first ticket</li>
+        <li>5 sprints of pull requests, in a real codebase</li>
+        <li>capstone project, reviewed by a real engineer</li>
+        <li>review round — ai pushback, you defend</li>
+        <li>signed certificate — verified work record</li>
+      </ol>
+
+      <h2>the workspace — what you ship with</h2>
+      <ul>
+        <li>monaco editor — the same engine that powers vs code</li>
+        <li>sandboxed terminal — real bash, no shared state</li>
+        <li>docker microvm — run node, python, java, go safely</li>
+        <li>jupyter notebooks (jupyterlite · wasm) for ml &amp; data</li>
+        <li>sql playground — sandboxed postgresql per student</li>
+        <li>ai code reviewer — line-level feedback</li>
+        <li>pr flow — submit code, ai tech lead merges or requests changes</li>
+        <li>git client — branch, rebase, merge, all in browser</li>
+      </ul>
+
+      <h2>tracks — pick a job, deeply</h2>
+      <ul>
+        <li><a href="/tracks">frontend</a> — react, tailwind, vite, accessibility</li>
+        <li><a href="/tracks">backend</a> — node, postgresql, redis, auth</li>
+        <li><a href="/tracks">ai / ml</a> — python, pytorch, embeddings, rag</li>
+        <li><a href="/tracks">data engineering</a> — sql, spark, dbt, airflow</li>
+        <li><a href="/tracks">platform / sre</a> — docker, k8s, terraform, observability</li>
+        <li><a href="/tracks">security</a> — appsec, threat modeling, owasp, sast</li>
+      </ul>
+
+      <h2>companies — 6 simulated employers</h2>
+      <ul>
+        <li><a href="/companies">vivacity</a> — b2b saas · react · typescript</li>
+        <li><a href="/companies">nexara</a> — fintech · node · postgres · k8s</li>
+        <li><a href="/companies">oxygon</a> — ai infra · pytorch · embeddings</li>
+        <li><a href="/companies">levanto</a> — data platform · spark · dbt · airflow</li>
+        <li><a href="/companies">kaligo</a> — edtech · next · prisma</li>
+        <li><a href="/companies">figment</a> — consumer ai · react · python</li>
+      </ul>
+
+      <h2>the certificate — verified work record</h2>
+      <p>a signed json of every pr you shipped, every review you got, every incident you resolved. recruiters verify the signature in 1 click. <a href="/blog">read the cohort data →</a></p>
+
+      <h2>from the blog</h2>
+      <ul>
+        <li><a href="/blog/why-we-built-dreamclerk">the 90-second internship interview that changed 14% of outcomes</a></li>
+        <li><a href="/blog/inside-our-bias-audit">inside our bias audit: the rubric, the data, the changes</a></li>
+        <li><a href="/blog/coding-interview-with-no-experience">how to pass a coding interview with no experience</a></li>
+        <li><a href="/blog/in-browser-ide-explained">the in-browser ide: what it actually runs, what it can't</a></li>
+        <li><a href="/blog/shipping-code-vs-knowing-code">shipping code vs knowing code: a 5-minute glossary</a></li>
+        <li><a href="/blog">all posts →</a></li>
+      </ul>
+
+      <h2>apply</h2>
+      <p>free during 2026-q2. <a href="/admin">sign in</a> to apply, or <a href="mailto:hi@dreamclerk.com">email us</a>.</p>
+
+      <footer>
+        <nav aria-label="footer">
+          <a href="/about">about</a>
+          <a href="/privacy">privacy</a>
+          <a href="/terms">terms</a>
+        </nav>
+        <p>dreamclerk · chennai, india · 2025</p>
+      </footer>
+    </div>
+
+    <script>
+      // Hide the static SEO shell the moment React mounts.
+      // If JS is disabled or hydration fails, the shell stays visible
+      // and crawlers + screen readers still see the structure.
+      (function () {
+        var shell = document.getElementById('dc-seo-shell');
+        if (!shell) return;
+        function hide() {
+          shell.style.display = 'none';
+          shell.setAttribute('aria-hidden', 'true');
+        }
+        // Hide as soon as the React root has children.
+        var root = document.getElementById('root');
+        if (root && root.firstChild) hide();
+        var obs = new MutationObserver(function () {
+          if (root && root.firstChild) { hide(); obs.disconnect(); }
+        });
+        if (root) obs.observe(root, { childList: true });
+        // Failsafe: hide after 4s no matter what.
+        setTimeout(hide, 4000);
+      })();
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

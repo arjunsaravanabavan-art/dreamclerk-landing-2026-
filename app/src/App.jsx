@@ -1,165 +1,127 @@
 import { useEffect, useState } from "react";
-import Nav from "./components/Nav";
-import Hero from "./components/Hero";
-import Marquee from "./components/Marquee";
-import Loop from "./components/Loop";
-import Workspace from "./components/Workspace";
-import Tracks from "./components/Tracks";
-import Companies from "./components/Companies";
-import Stats from "./components/Stats";
-import Certificate from "./components/Certificate";
-import Testimonials from "./components/Testimonials";
-import FAQ from "./components/FAQ";
-import Final from "./components/Final";
-import Footer from "./components/Footer";
-import EmailModal from "./components/EmailModal";
+
+import { useReveal } from "./components/useReveal.js";
+import { usePathRoute, redirectLegacyHashes } from "./lib/router.jsx";
+
+import Nav from "./components/Nav.jsx";
+import Hero from "./components/Hero.jsx";
+import Mentions from "./components/Mentions.jsx";
+import Marquee from "./components/Marquee.jsx";
+import Loop from "./components/Loop.jsx";
+import Workspace from "./components/Workspace.jsx";
+import Tracks from "./components/Tracks.jsx";
+import Companies from "./components/Companies.jsx";
+import Certificate from "./components/Certificate.jsx";
+import Stats from "./components/Stats.jsx";
+import Testimonials from "./components/Testimonials.jsx";
+import FAQ from "./components/FAQ.jsx";
+import Final from "./components/Final.jsx";
+import Footer from "./components/Footer.jsx";
+import EmailModal from "./components/EmailModal.jsx";
+import About from "./components/About.jsx";
+import Privacy from "./components/Privacy.jsx";
+import Terms from "./components/Terms.jsx";
+import HowItWorksPage from "./components/HowItWorksPage.jsx";
+import WorkspacePage from "./components/WorkspacePage.jsx";
+import TracksPage from "./components/TracksPage.jsx";
+import CompaniesPage from "./components/CompaniesPage.jsx";
+import FAQPage from "./components/FAQPage.jsx";
+import BlogListPage from "./components/BlogListPage.jsx";
+import BlogPostPage from "./components/BlogPostPage.jsx";
+import AdminPage from "./components/AdminPage.jsx";
+import { useSEO, SEO } from "./lib/seo.js";
+
+/**
+ * Path router (no react-router). 12 routes:
+ *  /                  → landing (the full 13 sections)
+ *  /how               → How it works (long-form, from nav)
+ *  /workspace         → Workspace (long-form, from nav)
+ *  /tracks            → Tracks (long-form, from nav)
+ *  /companies         → Companies (long-form, from nav)
+ *  /faq               → FAQ (long-form, from nav)
+ *  /blog              → Blog list
+ *  /blog/:slug        → Blog post
+ *  /about             → About page
+ *  /privacy           → Privacy policy
+ *  /terms             → Terms of service
+ *  /admin             → Admin dashboard (blocked in robots.txt)
+ */
+
+function LandingPage() {
+  useSEO(SEO.landing);
+  return (
+    <main>
+      <Hero />
+      <Mentions />
+      <Marquee />
+      <Loop />
+      <Workspace />
+      <Tracks />
+      <Companies />
+      <Certificate />
+      <Stats />
+      <Testimonials />
+      <FAQ />
+      <Final />
+    </main>
+  );
+}
 
 export default function App() {
+  const { path, navigate } = usePathRoute();
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalSource, setModalSource] = useState("modal");
 
-  // open modal: any element with [data-open-modal] OR custom event
+  // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
+  useEffect(() => { redirectLegacyHashes(); }, []);
+
+  // Make .reveal sections visible on scroll. Re-runs on every route change
+  // so the legal pages (which also use .reveal) animate on entry.
+  useReveal(path);
+
+  // Modal open/close wiring: any element with [data-open-modal] opens it.
   useEffect(() => {
-    const openFromEl = (el) => {
-      setModalSource(el.getAttribute("data-open-source") || "modal");
-      setModalOpen(true);
-    };
     const onClick = (e) => {
       const t = e.target.closest("[data-open-modal]");
-      if (t) { e.preventDefault(); openFromEl(t); }
-    };
-    const onEvent = (e) => {
-      setModalSource(e.detail?.source || "modal");
-      setModalOpen(true);
-    };
-    document.addEventListener("click", onClick);
-    document.addEventListener("open-modal", onEvent);
-    return () => {
-      document.removeEventListener("click", onClick);
-      document.removeEventListener("open-modal", onEvent);
-    };
-  }, []);
-
-  // scroll-triggered popup at 50% — sessionStorage guard so it fires once per visit
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (sessionStorage.getItem("dc_scroll_popup_shown") === "1") return;
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const pct = (window.scrollY || doc.scrollTop) / ((doc.scrollHeight - window.innerHeight) || 1);
-      if (pct >= 0.5) {
-        sessionStorage.setItem("dc_scroll_popup_shown", "1");
-        setModalSource("scroll-50");
+      if (t) {
+        e.preventDefault();
         setModalOpen(true);
-        window.removeEventListener("scroll", onScroll);
+      }
+      const c = e.target.closest("[data-close-modal]");
+      if (c) {
+        e.preventDefault();
+        setModalOpen(false);
       }
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
   }, []);
 
-  // dev-only: ?open=modal opens the modal automatically for screenshotting
+  // Scroll to top on real route change (skip on initial /).
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("open") === "modal") {
-      setModalSource(params.get("source") || "screenshot");
-      setModalOpen(true);
+    if (path && path !== "/") {
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
-  }, []);
-
-  // scroll reveal + counter + ticker feed
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) e.target.classList.add("in");
-        }
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    const tick = setInterval(() => {
-      document.querySelectorAll(".reveal:not(.in)").forEach((el) => io.observe(el));
-    }, 200);
-
-    const ioNum = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (!e.isIntersecting) continue;
-          const el = e.target;
-          const end = parseInt(el.getAttribute("data-counter") || "0", 10);
-          const dur = 1400;
-          const t0 = performance.now();
-          const step = (t) => {
-            const p = Math.min(1, (t - t0) / dur);
-            const v = Math.floor(p * end);
-            el.firstChild ? (el.firstChild.nodeValue = v.toLocaleString("en-IN")) : null;
-            if (p < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-          ioNum.unobserve(el);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    document.querySelectorAll("[data-counter]").forEach((el) => ioNum.observe(el));
-
-    // live pr feed
-    const users = ["aanya", "karthik", "rohan", "mira", "dev", "isha", "amir", "noor", "jaya", "tarun"];
-    const cos = ["nexara", "vivacity", "levanto", "kaalm", "oxygon", "siftly", "morko"];
-    const tasks = [
-      "fix auth middleware · jwt expiry bug",
-      "build cart checkout · react + ts",
-      "rate limiter · 100 req/min",
-      "fine-tune bert · f1 > 0.85",
-      "perf audit · lighthouse > 85",
-      "sql query · top 3 slow",
-      "react component · design system",
-      "k8s hpa · production",
-      "figma handoff · nav redline",
-      "ab test framework · 3 cohorts",
-    ];
-    const t = setInterval(() => {
-      const el = document.querySelector(".ticker__list");
-      if (!el) return;
-      const u = users[Math.floor(Math.random() * users.length)];
-      const c = cos[Math.floor(Math.random() * cos.length)];
-      const tsk = tasks[Math.floor(Math.random() * tasks.length)];
-      const score = 60 + Math.floor(Math.random() * 38);
-      const li = document.createElement("li");
-      li.innerHTML = '<span class="user">' + u + '</span> @ <b>' + c + '</b> · <span>' + tsk + '</span><span class="score">' + score + '/100</span>';
-      el.prepend(li);
-      while (el.children.length > 6) el.removeChild(el.lastChild);
-    }, 2400);
-
-    return () => {
-      clearInterval(tick);
-      clearInterval(t);
-    };
-  }, []);
+  }, [path]);
 
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <Marquee />
-        <Loop />
-        <Workspace />
-        <Tracks />
-        <Companies />
-        <Certificate />
-        <Stats />
-        <Testimonials />
-        <FAQ />
-        <Final />
-      </main>
+    <div className="app">
+      <Nav activePath={path} />
+      {path === "/about" && <About />}
+      {path === "/privacy" && <Privacy />}
+      {path === "/terms" && <Terms />}
+      {path === "/how" && <HowItWorksPage />}
+      {path === "/workspace" && <WorkspacePage />}
+      {path === "/tracks" && <TracksPage />}
+      {path === "/companies" && <CompaniesPage />}
+      {path === "/faq" && <FAQPage />}
+      {path === "/blog" && <BlogListPage />}
+      {path.startsWith("/blog/") && (
+        <BlogPostPage slug={path.replace("/blog/", "").replace(/\/$/, "")} />
+      )}
+      {(path === "/admin" || path.startsWith("/admin/")) && <AdminPage />}
+      {(!path || path === "/") && <LandingPage />}
       <Footer />
-      <EmailModal
-        open={modalOpen}
-        source={modalSource}
-        onClose={() => setModalOpen(false)}
-      />
-    </>
+      {modalOpen && <EmailModal onClose={() => setModalOpen(false)} />}
+    </div>
   );
 }

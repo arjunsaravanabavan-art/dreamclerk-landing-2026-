@@ -3,44 +3,18 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Hero — stacked, no overlap.
  * Interactions:
- *  - headline first line is static, second line ("ship code. get reviewed.") is
- *    typed out char-by-char the first time the hero scrolls into view.
- *  - the pill in "unemployment" lights up after a 1.2s delay (strike-in effect).
- *  - the ticker at the bottom is fed live by App.jsx.
+ *  - H1 leads with the primary SEO keyword "career simulation platform".
+ *  - The pill in "unemployment" lights up after a 1.2s delay (strike-in effect).
+ *  - The ticker at the bottom is fed live by App.jsx.
+ *  - Two CTAs: primary "get notified" + secondary "see how it works" (no email ask).
  */
 export default function Hero() {
   const [typed, setTyped] = useState("");
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(true);
   const [strike, setStrike] = useState(false);
-  const target = "ship code. get reviewed.";
   const wrapRef = useRef(null);
-  const ranOnce = useRef(false);
 
   useEffect(() => { const t = setTimeout(() => setStrike(true), 1200); return () => clearTimeout(t); }, []);
-
-  useEffect(() => {
-    if (!wrapRef.current) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting && !ranOnce.current) {
-            ranOnce.current = true;
-            let i = 0;
-            const tick = () => {
-              i += 1;
-              setTyped(target.slice(0, i));
-              if (i < target.length) setTimeout(tick, 38);
-              else setDone(true);
-            };
-            tick();
-          }
-        }
-      },
-      { threshold: 0.4 }
-    );
-    io.observe(wrapRef.current);
-    return () => io.disconnect();
-  }, []);
 
   return (
     <section className="section hero" id="top" ref={wrapRef}>
@@ -55,10 +29,10 @@ export default function Hero() {
         </div>
 
         <h1 className="hero__title">
+          career simulation platform.<br />
           no more <span className={"pill" + (strike ? " in" : "")}>unemployment</span>.
           <br />
-          {typed}
-          {!done && <span className="hero__caret" aria-hidden="true" />}
+          ship code. get reviewed. get hired.
         </h1>
 
         <p className="hero__sub">
@@ -69,8 +43,8 @@ export default function Hero() {
           <a className="btn btn--solid" href="#" data-open-modal data-open-source="hero-cta">
             get notified <span className="arr" aria-hidden="true">→</span>
           </a>
-          <a className="btn btn--ghost" href="#workspace">
-            see the workspace <span className="arr" aria-hidden="true">↓</span>
+          <a className="btn btn--ghost" href="#how">
+            see how it works <span className="arr" aria-hidden="true">↓</span>
           </a>
           <span className="tag">for indian undergraduates · free during beta · built in chennai</span>
         </div>

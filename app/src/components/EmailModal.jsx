@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { subscribe, getSubscriberCount } from "../lib/supabase";
+import { subscribeNotify, getSubscriberCount, bumpSubscriberCount } from "../lib/supabase";
 
 export default function EmailModal({ open, onClose, source = "modal" }) {
   const [name, setName] = useState("");
@@ -77,7 +77,11 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
     }
     setStatus("loading");
     setError("");
-    const result = await subscribe(cleanName, cleanEmail, source);
+    const result = await subscribeNotify({ name: cleanName, email: cleanEmail, source });
+    if (result.ok) {
+      // bump the live counter for the next visitor
+      try { await bumpSubscriberCount(); } catch {}
+    }
     if (result.ok) {
       setStatus("success");
       setTimeout(() => onClose(), 2200);

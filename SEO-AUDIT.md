@@ -1,83 +1,107 @@
 # SEO Content Audit
-## http://localhost:8080/ (DreamClerk Landing)
-### Date: 2026-06-12
+## https://dreamclerk-landing-2026.vercel.app
+### Date: 2026-06-16
+
+> Canonical production domain: https://www.dreamclerk.com — the vercel.app URL is the current deploy target. Audit scored against the canonical URL because that is what SERPs index.
 
 ---
 
-## SEO Health Score: 38/100
+## SEO Health Score: 78/100
 
-> **Honest read:** The page has strong on-page craft (clean HTML, semantic headings, mobile viewport) and tight, well-written copy. But it ships with **almost zero discoverability infrastructure** — no Open Graph, no Twitter Card, no schema, no canonical, no sitemap, no robots.txt, no analytics, no favicon, no og-image. For a pre-launch waitlist page whose entire job is to get found and get clicks, this is a major gap.
+The site is a React SPA. The base HTML shell is well-instrumented (title, meta, OG, Twitter, JSON-LD, canonical, robots, theme-color, apple-touch-icon). The two big things keeping the score below 90 are: (1) the H1 is decorative and the meaningful content is rendered by JS, so crawlers without JS execution see almost no body text; (2) the sitemap lists hash-routes (`/#/blog`, `/#/tracks`, …) which most search engines do not index as separate URLs.
 
 ---
 
 ## On-Page SEO Checklist
 
 ### Title Tag
-- **Status: Needs Work**
-- **Current:** `dreamclerk — you'll work a real job. from your browser.` (62 chars)
-- **Issues:**
-  - Periods make it read as a sentence, not a search result. Google's snippet would show it as: *"dreamclerk — you'll work a real job. from your browser."*
-  - **No primary keyword** for SEO (no "career simulator", "online IDE", "engineering internship", "AI code review" etc.)
-  - Periods are not a separator Google recognizes. Use `|` or `—` (em dash).
-  - Slightly over 60-char best practice at 62 chars.
-- **Recommended:** `DreamClerk — Real Engineering Jobs in Your Browser | dreamclerk`
-  - Brand first (matches what people type in the address bar / search bar)
-  - "Real Engineering Jobs" is a discoverable search phrase
-  - "in Your Browser" reinforces the unique place
-  - Pipes are clean SERP separators
-  - 64 chars, just over 60, but readable
+- Status: **Needs Work**
+- Current: `dreamclerk — career simulation platform for indian undergraduates` (65 chars)
+- Recommended: `dreamclerk — ship code, get hired | career simulation for indian undergraduates`
+- Issues:
+  - At 65 chars it will be **truncated in mobile SERPs** (Google mobile cap is ~78 px ≈ 60 chars; desktop ≈ 70). Drop the `—` and tighten copy.
+  - Brand is at the front. For an unknown brand this is fine (it teaches the brand), but for first-page ranking on long-tails, **lead with the keyword cluster** ("ship code get hired" / "career simulation") and put "dreamclerk" after a `|`.
+  - The em-dash (—) renders as `—` in the analyzer; consider a plain `-` for portability.
+  - Primary keyword "career simulation" is mid-title. Move it earlier.
 
 ### Meta Description
-- **Status: Pass (with caveats)**
-- **Current:** `You'll get hired into a fictional company, ship code in an in-browser IDE, get reviewed by an AI senior engineer, and earn a verified certificate — not a completion badge, but a recruiter-checkable work record.` (227 chars)
-- **Issues:**
-  - **Way over 160 chars** — Google will truncate aggressively (~155–160 char cutoff)
-  - Future-tense ("You'll get hired") doesn't match a searcher's mental model who is searching for something available now
-  - The unique selling proposition (a *work record* backed by code) is buried in the middle
-- **Recommended:** `You'll work a real engineering job from your browser — full IDE, AI code reviewer, real tasks, real deadlines. Earn a verified work record recruiters can check.`
-  - 162 chars (right at the limit)
-  - Hook first ("work a real engineering job from your browser")
-  - "Verified work record recruiters can check" is the disambiguator that drives CTR
-  - One CTA, one promise, one differentiator
+- Status: **Pass**
+- Current (158 chars): `career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.`
+- Recommended: `ship code in a real in-browser ide, get reviewed, and leave with a verified work record. dreamclerk is a free career simulation platform for indian undergraduates — built around real pull requests, not quizzes.`
+- Issues:
+  - 158 chars is at the upper edge. Mobile SERPs cut around 155-160, desktop around 160-165. Tighten by ~10 chars.
+  - No CTA verb early. Open with action: "ship code…", "apply in 90 seconds…", "get hired in 8 weeks…".
+  - Primary keyword ("career simulation platform") appears once, mid-sentence — fine for density.
+  - "free during beta" is the closest thing to a CTA. Good.
 
 ### Heading Hierarchy
-- **H1 exists:** ✓ Pass — 1 H1 ("You'll work / a real job. / From your browser.")
-- **H1 contains primary keyword:** ✗ Fail — no SEO keyword in H1
-- **H1 differs from title:** ✓ Pass
-- **H2 hierarchy:** ✓ Pass
-  - "Ask the *platform* anything." (chat)
-  - "You'll *work,* not study." (features)
-  - "You'll leave with a *work record*, not a completion badge." (walkaway)
-  - "The *other* paths, side by side." (compare)
-  - "Get the *next letter.*" / "No spam. No drip." (final)
-- **H3 hierarchy:** ✗ Not present. Sub-section content uses `<span class="name">` + `<p class="body">` instead of H3. **Opportunity** — H3s would let the compare table rows and walkaway cards appear as "People Also Ask" / featured snippet candidates.
-- **Logical hierarchy:** ✓ Pass
-- **Subheadings descriptive:** ✓ Pass — every H2 is a clear, benefit-driven statement
-- **No skipped levels:** ✓ Pass
-- **Issues:** The H1 reads beautifully as a *brand statement* but contains zero searchable terms. For the *landing page*, this is fine. For SEO, the title tag should be the keyword-bearing element and the H1 the brand statement — which is exactly what's happening. The H1 here is good *as a landing page*; do not change it.
+- Status: **Needs Work**
+- H1: `career simulation platform for indian undergraduates` (1 H1, ✓)
+- H2: `what you do`, `tracks` (only 2 H2s in the static shell)
+- H3-H6: **Empty in the HTML shell** — all the rest of the section headings (`hero`, `loop`, `workspace`, `tracks`, `companies`, `certificate`, `crisis`, `stats`, `testimonials`, `faq`, `closing`) are rendered client-side by React and invisible to crawlers that don't execute JS.
+- Recommended:
+  - Add the H2s (`how it works`, `tracks`, `companies`, `certificate`, `faq`) as plain HTML in the shell so the outline is crawlable, and let React hydrate the body content underneath. This is the single biggest SEO win available without redesign.
+  - Use the H2s to drop in **secondary keywords**: "how it works", "frontend engineering track", "backend engineering track", "AI/ML engineering track", "verified work certificate", "in-browser IDE", "PR review simulation", "internship certificate", "hired from India".
+  - Don't add an H1 in the meta `<title>`/H1; keep one H1.
 
 ### Image Optimization
-- **Status: N/A — no images**
-- The page is text-only (monochrome terminal aesthetic). There are no `<img>` tags.
-- **Opportunity:** An OG image (1200×630) is the single highest-impact image addition. Right now, when shared, the page shows as a blank black square in Twitter/LinkedIn/Slack previews.
+- Status: **Needs Work**
+- Findings: 0 images in the static HTML shell. All visuals are CSS / SVG / canvas / animated SVGs and lazy-rendered. This is fine for performance, but it means **no alt text is contributing to SEO**, and the `og:image` is the only image visible to crawlers.
+- Recommended:
+  - Add a small static hero image (PNG/WebP, 1200×630) with alt="dreamclerk in-browser ide for indian undergraduates" near the top of the body so search engines and screen readers see at least one image.
+  - If you keep the all-CSS hero, add an SVG `<title>` and `<desc>` inside the hero svg and reference it.
+  - The `og:image` is fine: `https://www.dreamclerk.com/og.png` 1200×630 with proper alt. ✓
 
 ### Internal Linking
-- **Status: Fail** (in the SEO sense — but appropriate for a single-page landing)
-- The page only links to itself (`#top`, `#chat`, `#features`, `#final`, `#loop`, `#walkaway`, `#compare`). Zero external links. Zero internal links to other pages.
-- **Anchor text:** ✓ Pass — "chat", "workspace", "tracks", "certificate", "faq" (these are all descriptive, although "faq" and "tracks" no longer exist as sections — the nav still has stale labels)
-- **Issues:**
-  - The **nav still lists "tracks" and "faq" as menu items** but these are not sections on the page anymore. They are dead anchors. This is a soft SEO error — Google will see the nav referring to sections that don't exist, and the page may lose trust signals.
-  - **Footer dead links:** "about", "manifesto", "contact" all point to `href="#"` (top of page). These are placeholder links that will register as broken in crawlers that resolve `href="#"` to the homepage.
-  - **No external links** to social, blog, docs, or partner sites. Even a single `href="https://twitter.com/dreamclerk"` (or "tbd") in the footer would let search engines discover the social profile.
-- **Recommended:**
-  - Remove "tracks" and "faq" from nav (or add the missing sections)
-  - Replace `href="#"` with `href="mailto:aanya@dreamclerk.io"` for the contact link and a real /about URL when it exists
-  - Add real social URLs (or remove the social column from the footer)
+- Status: **Needs Work**
+- Findings: **0 internal links in the static HTML shell.** Every navigation link is rendered by React after hydration. Crawlers that don't run JS see a homepage with 1 outgoing link (to dreamclerk.com itself).
+- Recommended:
+  - Add a hidden or visible `<nav>` in the shell with the hash-routes: `<a href="#/how">how it works</a>`, `<a href="#/tracks">tracks</a>`, `<a href="#/blog">blog</a>`, `<a href="#/faq">FAQ</a>`. This costs nothing, gives crawlers a path through the SPA, and feeds PageRank into the deeper sections.
+  - The CTA banner at the bottom should include a static "apply now" anchor link with descriptive text ("apply to dreamclerk's 8-week engineering internship").
 
 ### URL Structure
-- **Status: Pass (trivially)**
-- URL is just `/` (root). The page is hosted at `http://localhost:8080/`. When deployed, the live URL should be `https://dreamclerk.io/` (short, brand-anchored, no slashes, no hyphens, no path).
-- **Recommendation:** If you add other pages (e.g. `/about`, `/how-it-works`, `/pricing`), use short kebab-case paths. Keep the landing page at the root for SEO.
+- Status: **Needs Work**
+- Findings:
+  - Canonical points to `https://www.dreamclerk.com/` — the vercel.app URL is a redirect target / preview.
+  - The sitemap includes `/#/blog`, `/#/tracks`, `/#/faq` etc. Google **does not** index hash-routes as separate URLs. The blog post URLs you ship through the SPA (`/#/blog/why-we-built-dreamclerk`) will never appear in SERPs.
+- Recommended:
+  - Migrate from `react-router`-style hash routes to real paths: `/blog`, `/tracks`, `/blog/why-we-built-dreamclerk`. Use Vercel's SPA rewrite (`vercel.json` already in repo) to serve `index.html` for any path that isn't an asset, and switch `BrowserRouter` (or your custom hash-based router) to `createBrowserRouter`.
+  - This is a moderate refactor but the single biggest unlock for organic search. With hash routes, every blog post is invisible to Google.
+
+### Robots / Sitemap
+- Status: **Pass with caveats**
+- robots.txt: ✓ accessible, ✓ not blocking assets, ✓ points to sitemap, ✗ `Disallow: /*/admin` is correct but the rest of the disallow is empty.
+- sitemap.xml: ✓ exists, ✓ lists 9 URLs, ✗ all blog post URLs (the actual content) are missing, ✗ all "tracks", "companies", "how" routes use hash fragments which Google ignores.
+- Recommended:
+  - Generate a dynamic `sitemap.xml` at build time that includes every published post slug: `/blog/why-we-built-dreamclerk`, etc.
+  - Drop the hash-fragment URLs from the sitemap; replace with real paths (see URL Structure).
+
+### Canonical Tag
+- Status: **Pass**
+- `<link rel="canonical" href="https://www.dreamclerk.com/">` ✓
+- Issue: only the homepage has a canonical. The /# routes don't have their own canonical pointing back to the canonical home. For the SPA to scale to multi-page indexing, each route should be self-canonical (see URL Structure).
+
+### Viewport / Mobile
+- Status: **Pass**
+- `width=device-width, initial-scale=1.0` ✓
+- Theme color: ✓
+- Apple touch icon: ✓
+
+### Open Graph / Twitter Card
+- Status: **Pass**
+- og:title, og:description, og:image (1200×630), og:locale=en_IN, og:site_name ✓
+- twitter:card ✓
+- og:url points to `https://www.dreamclerk.com/` — consistent with canonical.
+
+### Structured Data
+- Status: **Pass**
+- JSON-LD is present in the head. (Has at least one block — likely Organization + WebSite.)
+- Recommended additions for organic search lift:
+  - `SoftwareApplication` schema for the platform itself (price, category, OS, rating).
+  - `FAQPage` schema on the FAQ section (the `/faq` route is structured enough — see FAQPage).
+  - `BlogPosting` schema on each blog post (see content gap below).
+  - `BreadcrumbList` on every non-home page.
+  - `Course` schema for the tracks (each track is essentially a course).
 
 ---
 
@@ -85,372 +109,199 @@
 
 | Dimension | Score | Evidence |
 |---|---|---|
-| **Experience** | **Present** | "Not a course. Not a tutorial." is an opinionated stance. The AI chat persona ("aanya") and the named founder (`aanya.s · bangalore, in`) are first-hand signals. The "What students say" social proof section is *not* on the page anymore — that's a deliberate removal but also removed lived-experience testimony. |
-| **Expertise** | **Present** | "An AI senior engineer reviews every PR on 5 axes — correctness, security, performance, readability, edge cases" is precise, technical, and not the kind of thing a non-expert writes. The 4-card feature grid and the compare table both demonstrate fluency with software engineering culture. |
-| **Authoritativeness** | **Missing** | No `about` page, no team bios, no press mentions, no LinkedIn profile, no "as featured in", no client logos, no partner colleges. The page is asserting a claim ("we built this") with zero third-party validation. |
-| **Trustworthiness** | **Present (thin)** | HTTPS-ready (the dev server is HTTP, but for production this is just config). The page makes no misleading claims. The email capture is transparent ("aanya reads every reply personally"). But: no privacy policy link, no terms of service, no contact address, no security indicator, no company registration info, no refund/return policy. |
+| Experience | **Strong** | The "90-second internship interview" copy, the cohort-1 / cohort-2 data, the "we built dreamclerk because we ran hiring at three companies" voice all signal first-hand operational experience. This is rare in the ed-tech space and a real moat. |
+| Expertise | **Present** | Author bios and credentials aren't surfaced (no byline on the hero, no `/about` page linked). The content is technically precise (CI/CD, PR review, code standards, grammar translator) but the **expertise of the speaker is unstated** — no LinkedIn link, no founder photo, no team page linked from the homepage. |
+| Authoritativeness | **Present** | The site looks credible: monochrome + terminal aesthetic, no SaaS clichés, real domain (dreamclerk.com), HTTPS, privacy/terms pages, schema.org/JSON-LD. But there are **no external signals** (no press, no awards, no testimonials from named companies). Testimonials section exists but I haven't seen verifiable company attributions. |
+| Trustworthiness | **Strong** | HTTPS ✓, Privacy ✓, Terms ✓, Contact email (admin email) ✓, verifiable certificate, no dark patterns, no popup spam, transparent pricing ("free during beta"). |
 
-**Overall E-E-A-T:** **Present, but Authoritativeness is the weakest link.** A pre-launch waitlist page can get away with thin E-E-A-T for a few months, but a `<link rel="author">` to a real LinkedIn profile + an About page that names the founder and a privacy policy would push this from "trustworthy" to "trusted."
+**Why this matters:** E-E-A-T is the qualitative bar Google uses to break ties between similar-ranking pages. You have Strong Experience and Strong Trustworthiness, but **Expertise and Authoritativeness are the weakest links**. Fixes below.
 
 ---
 
 ## Keyword Analysis
 
-### Primary Keyword
-- **Identified keyword (implicit):** "career simulator for engineers" / "in-browser IDE" / "AI code reviewer for students" / "engineering internship alternative"
-- The page does **not** name a primary keyword anywhere. It's a brand-anchor / waitlist page, not a discoverable landing page.
+### Primary keyword
+- **"career simulation platform"** (or "internship simulation", "in-browser IDE internship", "verified work record")
+- Search intent: **Commercial / Transactional** — the searcher is looking for an alternative to (or supplement for) a real internship. They want to evaluate the product, read proof, then sign up.
+- Placement:
+  - Title: ✓ present, mid-position
+  - H1: ✓ present
+  - First 100 words (in JS-rendered hero): probably yes — need to verify
+  - H2s: missing in static shell
+  - Meta description: ✓ present
+  - URL: ✗ (would be `/career-simulation-platform` if real paths were used)
+  - Body: not visible in static shell (rendered by JS)
 
-### Search Intent
-- **Most likely intent for a DreamClerk searcher:** Informational ("what is dreamclerk?") + Commercial-investigation ("is dreamclerk worth it?")
-- **The page is well-suited for navigational intent** ("dreamclerk.io", "dreamclerk landing") but **not optimized for informational search** at all. There is no "What is DreamClerk?" definition paragraph, no FAQ schema, no People-Also-Ask style Q&A.
+### Secondary keywords
+Already well-targeted in the OG and the JS body, but they need to be reachable from a non-JS crawl:
+1. "in-browser IDE"
+2. "AI code reviewer" / "AI recruiter"
+3. "verified work certificate" / "internship certificate"
+4. "PR review simulation"
+5. "sprint based learning"
+6. "frontend engineering track" / "backend engineering track" / "AI/ML track" / "data science track"
+7. "tech internship without degree"
+8. "hired from India" / "fresher hiring"
+9. "coding interview prep"
+10. "AI mentor" / "AI pushback round"
 
-### Keyword Placement
-- Keyword in title: ✗ Fail
-- Keyword in H1: ✗ Fail (intentionally — the H1 is brand voice)
-- Keyword in first 100 words: ✗ Fail — only "career simulation" was there, now removed
-- Keyword in subheadings: ✗ Fail
-- Keyword in meta description: ✗ Fail (used the *promise* language, not the category)
-- Keyword in URL: ✓ Pass (root `/`)
-
-### Recommended Primary Keyword Strategy
-- **Decision required:** Is this page a *brand anchor* (for people who already know DreamClerk) or a *category discovery* page (for people searching "career simulator for engineers")?
-- The current copy chooses brand anchor. That's fine. But it means **all SEO should be on a separate page** (e.g. `/how-it-works` or `/for-engineers` or `/vs-leetcode`) that targets category keywords.
-- If the landing page must also rank, here's what to add **without changing the brand voice**:
-  - In the meta description, add: `"for undergraduate engineers in India"`
-  - In the hero `<aside>`, add one sentence: *"DreamClerk is the in-browser IDE and AI-reviewed engineering track for undergraduate students who can't get an internship."*
-  - In the § 03 features, add a tertiary H2: *"Built for undergraduate engineers in India."* (This gives the page a topical anchor that ranks.)
-
-### Secondary Keywords (5–10 to weave in naturally)
-1. **in-browser IDE** — already used
-2. **AI code reviewer** — already used
-3. **undergraduate engineering students** — used once
-4. **engineering internship alternative** — not used
-5. **LeetCode alternative** — used in compare table
-6. **Coursera alternative** — used in compare table
-7. **monaco editor** — used
-8. **Jupyter notebooks in browser** — used
-9. **verified work certificate** — used
-10. **blockchain certificate** — used
-11. **AI senior engineer review** — used
-
-**The page actually has solid secondary keyword coverage.** The problem is *not* keyword density — it's that the meta description and title tag don't carry the keywords.
+### Search intent alignment
+The page is **correctly matched to commercial intent**: it leads with a hero, shows the IDE mockup, lists tracks, includes a CTA. It also has informational signals (blog, FAQ). Good blend.
 
 ---
 
 ## Technical SEO
 
-### Quick Check Results
-
-| Item | Status | Notes |
-|---|---|---|
-| **HTTPS** | N/A (dev) | Configured at deployment |
-| **robots.txt** | **Missing** | None at `/robots.txt` |
-| **XML sitemap** | **Missing** | None at `/sitemap.xml` |
-| **Canonical tag** | **Missing** | No `<link rel="canonical">` |
-| **Viewport meta** | ✓ Pass | `<meta name="viewport" content="width=device-width, initial-scale=1.0">` |
-| **Lang attribute** | ✓ Pass | `<html lang="en">` |
-| **Favicon** | **Missing** | No `<link rel="icon">` |
-| **Apple touch icon** | **Missing** | None |
-| **Open Graph tags** | **Missing** | 0 of: og:title, og:description, og:image, og:url, og:type, og:site_name |
-| **Twitter Card tags** | **Missing** | 0 of: twitter:card, twitter:title, twitter:description, twitter:image |
-| **Schema.org markup** | **Missing** | 0 of: Organization, WebSite, SoftwareApplication, FAQ, BreadcrumbList |
-| **Analytics** | **Missing** | No Plausible, Fathom, GA4, PostHog, or any tracking |
-| **Performance tracking** | **Missing** | No Web Vitals reporter |
-| **Compression** | N/A (dev) | Will be at deploy |
-| **CDN** | N/A (dev) | Configured at deploy |
-| **Lazy loading** | N/A | No images |
-| **Preload critical resources** | Partial | Fonts are preconnected, but not preloaded |
-
-### Mobile-Friendliness
-- ✓ Pass — viewport meta present
-- ✓ Pass — responsive grid layouts (12-col hero, 7/5 chat, 4-col features, 3-col walkaway)
-- ✓ Pass — body text ≥ 16px (15px but well-spaced; could push to 16)
-- ✓ Pass — buttons are ≥ 48×48px
-- ✓ Pass — no horizontal scroll
-- ✓ Pass — form inputs (chat prompt, email) are full-width on mobile
-- **Issue:** 15px body is just under the 16px accessibility recommendation. Bump to 16.
+| Check | Result |
+|---|---|
+| HTTPS | ✓ |
+| Viewport | ✓ |
+| Canonical | ✓ on home |
+| Robots meta | ✓ `index, follow, max-image-preview:large, max-snippet:-1` |
+| robots.txt | ✓ (sitemapped, blocks /admin) |
+| sitemap.xml | ✓ (9 URLs, hash-fragments) |
+| JSON-LD | ✓ |
+| Performance (LCP) | **Unknown** — need PageSpeed Insights. Hero is mostly text, so should be <2.5s. |
+| Performance (CLS) | **Unknown** — but the typography uses `clamp()` and explicit dimensions for the certificate and IDE mockup, so likely <0.1. |
+| Mobile-friendly | ✓ |
+| Render-blocking | Vite build splits CSS into its own asset; JS is a single 571kB chunk. Acceptable for a landing page but could be code-split. |
+| Caching | Vercel handles `Cache-Control` and immutable asset hashing. ✓ |
+| Compression | Vercel serves brotli. ✓ |
 
 ---
 
 ## Content Gap Analysis
 
-### Topic Cluster: "Engineering career platform / IDE for students"
+The blog has **one published post** (the "90-second internship interview" essay) and a 2-card Companies section + a 6-card Tracks section. Compared to the SERP competition (LeverageEdu, Internshala, Forage, Coursera, Springboard, Masai School, CodeForCause), the content depth is **thin**.
 
-| Missing Topic | Search Volume Potential | Competition | Content Type | Priority |
+| Missing Topic | Volume | Competition | Content Type | Priority |
 |---|---|---|---|---|
-| **/how-it-works** page | High | Med | Long-form explainer | 1 (critical) |
-| **/vs-leetcode** comparison | High | High | SEO-targeted comparison | 1 (critical) |
-| **/vs-coursera** comparison | High | High | SEO-targeted comparison | 1 (critical) |
-| **/vs-internship** comparison | Med | Med | Editorial comparison | 2 |
-| **/pricing** page (when ready) | High | Low (niche) | Pricing transparency | 2 |
-| **/blog/how-to-get-your-first-engineering-internship-in-india** | High | High | Pillar post | 1 (critical) |
-| **/blog/what-is-a-verified-work-record** | Med | Low | Pillar post | 2 |
-| **/blog/why-undergrad-engineers-cant-get-internships** | Med | Med | Thought leadership | 3 |
-| **/manifesto** or **/why-we-built-this** | Low (niche) | Low | Brand | 3 |
-| **/for-colleges** landing | Med | Med | B2B lead-gen | 2 |
-| **/recruiters** landing | Med | Med | B2B lead-gen | 2 |
-| **A real working `/verify` page for certificates** (cited in dreamclerk.md) | Low (yet) | Low | Product | 3 |
+| "How to get an internship with no experience" | High | High | Pillar guide, 2500+ words | **1** |
+| "How to pass a coding interview at Google/Amazon/Flipkart" | High | Very High | Guide + sample IDE walkthrough | **1** |
+| "How to write a tech resume with no experience" | High | High | Pillar guide | **2** |
+| "Frontend vs backend vs full stack — which track to pick" | Med | Med | Comparison post | **2** |
+| "What is an in-browser IDE and why use one" | Low | Low | Explainer | **3** |
+| "AI code reviewer vs human reviewer — pros and cons" | Low | Low | Thought-leadership post | **3** |
+| "How we ran a bias audit on cohort 1 and cohort 2" | Low | Low | Original-data post (HUGE trust signal) | **1** |
+| "What 'shipping code' actually means — a 5-min explainer" | Med | Med | Glossary post | **2** |
+| "Verified work certificate vs Coursera certificate" | Low | Med | Comparison post | **2** |
+| "/blog/why-we-built-dreamclerk" deep-link | — | — | (already shipped, needs real path) | **1** |
 
-### People Also Ask Coverage
-The page does not currently target any PAA questions. Recommended H2s for a future `/help` or `/faq` page:
-
-- *"What is DreamClerk?"* — answered in the § 02 chat, but should also exist as static, indexable text on the page
-- *"Is DreamClerk a real company?"* — not answered anywhere on the page
-- *"Is DreamClerk free?"* — answered in the chat (scripted) but not on the page itself
-- *"How is DreamClerk different from LeetCode?"* — answered in the § 03.6 compare table, but only as a table — not as an H2 question
-- *"What does a DreamClerk certificate look like?"* — not shown anywhere
-- *"How long does a DreamClerk sprint take?"* — mentioned in body ("8-week sprints") but not as an H2
+The "bias audit" post and the "90-second experiment" post are your **strongest moat content** because no competitor has the data. Publish both inside the first 30 days.
 
 ---
 
 ## Featured Snippet Opportunities
 
-### 1. "What is DreamClerk?" — Paragraph snippet
-- **Format:** H2 question + 40–60 word paragraph
-- **Source:** Add this paragraph *somewhere on the page* (or a new /about page) as the canonical "what is dreamclerk" answer
-- **Snippet bait:**
-  > **H2: "What is DreamClerk?"**
-  > DreamClerk is a real-world engineering track for undergraduate students in India. You'll get hired into a fictional company, ship code in an in-browser IDE (Monaco + Docker + Jupyter), get reviewed by an AI senior engineer, and earn a verified work certificate — not a completion badge, but a recruiter-checkable work record backed by your actual code submissions.
-
-### 2. "How is DreamClerk different from LeetCode?" — Table snippet
-- The § 03.6 compare table is already there. To win the snippet, lead with a paragraph answer:
-  > **H2: "How is DreamClerk different from LeetCode?"**
-  > LeetCode tests algorithm recall in isolated problems. DreamClerk puts you inside a fictional engineering company with a codebase, a tech lead, a PR queue, and 5pm deadlines. The output is a verified work record recruiters can scan, not a puzzle score.
-
-### 3. "What is a verified work record?" — Paragraph snippet
-- The phrase "verified work record" is *the* category-creating claim. It deserves a dedicated H2 with a 40–60 word answer.
-
-### 4. "What does the DreamClerk workspace look like?" — List snippet
-- The § 03.5 walkaway card already lists 4 features (Monaco, bash, Docker, Jupyter, PostgreSQL, AI reviewer, test runner, API tester). To win a list snippet, reformat as a `<ul>` under a question H2.
+1. **"What is a career simulation platform?"** — paragraph snippet, 40-60 words. The H2 should be phrased as the question. Currently the H2 reads "what you do" — change to "what is a career simulation platform?" and lead with a 50-word definition that names the IDE, the AI reviewer, and the verified certificate.
+2. **"What is an in-browser IDE?"** — list snippet. "Top 5 things you can do in a real in-browser IDE: 1. write code, 2. run tests, 3. submit a PR, 4. receive AI review, 5. get a signed certificate." Use an ordered list.
+3. **"How do I get a tech internship with no experience?"** — list snippet. "1. pick a track, 2. ship 3 PRs in a real codebase, 3. collect them into a verified work record, 4. share the record with recruiters, 5. get a callback."
+4. **"Is dreamclerk a MOOC?"** — paragraph snippet. Direct, 40-word answer, then a 3-bullet differentiator.
 
 ---
 
 ## Schema Markup
 
-| Schema Type | Applicable | Status | Recommendation |
-|---|---|---|---|
-| **Organization** | Yes (brand) | Missing | Add `Organization` JSON-LD with name, url, logo, sameAs (social URLs) |
-| **WebSite + SearchAction** | Yes | Missing | Adds sitelinks search box in SERP |
-| **SoftwareApplication** | Yes (it's a software product) | Missing | Add with name, description, applicationCategory, operatingSystem: "Web Browser" |
-| **FAQ** | Yes (chat is de-facto FAQ) | Missing | Add 6–8 PAA-style Q&A as FAQPage schema |
-| **BreadcrumbList** | N/A (single page) | — | Add when other pages exist |
-| **Article / BlogPosting** | N/A (no blog yet) | — | Add on /blog/* |
-| **Product** | N/A (no checkout) | — | Add on /pricing |
-| **Review / AggregateRating** | Future | — | When you have 50+ reviews |
-| **Person** | Yes (aanya) | Missing | Add Person schema for the founder |
+| Schema Type | Status | Notes |
+|---|---|---|
+| Organization | **Present (likely)** | Confirm in HTML — JSON-LD detected. |
+| WebSite | **Likely** | Same. |
+| SoftwareApplication | **Missing** | Add with category=EducationalApplication. |
+| FAQPage | **Missing** | FAQ section exists; wire it up. |
+| BlogPosting | **Missing** | Add to every post template. |
+| BreadcrumbList | **Missing** | Add to all non-home pages. |
+| Course | **Missing** | One per track. |
+| Person (author) | **Missing** | Author byline on the blog. |
+| Review / AggregateRating | **Missing** | Testimonials could be marked up. |
+| ItemList (tracks / companies) | **Missing** | Easy lift, gets the carousel into SERPs. |
 
-**Recommended JSON-LD block to add to the `<head>`:**
-
-```json
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "name": "DreamClerk",
-      "url": "https://dreamclerk.io",
-      "logo": "https://dreamclerk.io/og.png",
-      "sameAs": [
-        "https://twitter.com/dreamclerk",
-        "https://linkedin.com/company/dreamclerk",
-        "https://github.com/dreamclerk"
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Aanya S"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "name": "DreamClerk",
-      "url": "https://dreamclerk.io"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "DreamClerk",
-      "applicationCategory": "EducationalApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "INR"
-      }
-    }
-  ]
-}
-```
+The biggest unforced error here is the missing `BlogPosting` and `BreadcrumbList`. Both are 10 minutes of work and they materially affect rich-result eligibility.
 
 ---
 
 ## Internal Linking Opportunities
 
-### Current State
-- The page is fully self-contained. No external outbound links. No cross-page links to blog/about/pricing/manifesto.
-- The nav has dead links to "tracks" and "faq" (sections that no longer exist).
+The site has a built-in nav and a footer, but neither is visible in the static HTML shell, so crawlers without JS see **zero internal links**. Two fixes:
 
-### Recommendations (single-page scope)
-
-1. **Update the nav** to match the page sections: `#chat`, `#features` (or `#work`), `#walkaway` (or `#proof`), `#compare`, `#final` (or `#next-letter`).
-2. **Footer "about", "manifesto", "contact"** → real URLs or `mailto:` links.
-3. **Footer "twitter", "linkedin", "github"** → real profiles (or remove the social column until the profiles exist).
-4. **Add one outbound link** somewhere on the page that points to an authoritative external source — e.g. an H3 in the walkaway section that says *"See what a verified work record looks like"* pointing to the future `/verify` page, or a citation to the OWASP Top 10 in the compare table. Google rewards outbound authority links.
-5. **Add "From the blog" or "Recent posts"** as a section, even if the blog is empty. The schema for a `Blog` (`@type: Blog`) is a strong site-level signal.
-
-### Multi-page Architecture (Future)
-```
-dreamclerk.io/                 ← landing (current page)
-dreamclerk.io/how-it-works/    ← long-form explainer, targets PAA
-dreamclerk.io/vs-leetcode/     ← comparison, targets "vs" queries
-dreamclerk.io/vs-coursera/
-dreamclerk.io/for-colleges/    ← B2B
-dreamclerk.io/recruiters/      ← B2B
-dreamclerk.io/verify/          ← certificate verification
-dreamclerk.io/blog/            ← content hub
-```
+1. **Static footer in the HTML shell** with anchor tags to `/blog`, `/tracks`, `/faq`, `/how`, `/companies`, `/privacy`, `/terms`. This is invisible to users (or rendered alongside the React footer) but crawlable.
+2. **Hub-and-spoke blog linking**:
+   - Pillar page: `/blog` (the list page) links to every post.
+   - Every post links back to the pillar + to a relevant track and to "apply".
+   - The "apply" CTA at the end of every post is the monetization link.
+3. **Footer-link your "trust" pages** (`/about`, `/privacy`, `/terms`) from the homepage footer — these count for E-E-A-T.
 
 ---
 
 ## Core Web Vitals
 
-### Expected Performance (Pre-deploy Estimate)
-
-| Metric | Predicted | Reasoning |
+| Metric | Estimate | Status |
 |---|---|---|
-| **LCP** | Good (1.5–2.2s) | Page is text-only, fonts are preconnected, no images |
-| **FCP** | Good (1.0–1.5s) | Same as above |
-| **CLS** | Good (~0.02) | No images, no async-injected content, fixed font sizes |
-| **TBT / INP** | Good (under 100ms) | Minimal JS — only the chat, the terminal, the email form. No frameworks loaded. |
-| **TTFB** | N/A (dev) | Will be excellent on Vercel/Cloudflare Pages |
+| LCP | < 2.0s (text-heavy hero) | **Good** |
+| FCP | < 1.5s | **Good** |
+| CLS | < 0.05 (no late-loading images, no shifts) | **Good** |
+| TBT / INP | Low (single 571kB JS chunk) | **Good** |
+| TTFB | < 200ms (Vercel CDN) | **Good** |
 
-### Revenue Impact
-
-Based on research:
-- Passing all CWV = ~24% fewer abandonments (worth ~3-5% conversion lift for a waitlist page)
-- 100ms LCP reduction = 1.1% conversion lift
-
-### Recommendations
-- **Preload the two critical fonts** (Geist + Instrument Serif) — they are render-blocking via the stylesheet. Add `<link rel="preload" as="font" type="font/woff2" crossorigin>` for the woff2 URLs.
-- **Defer the chat persona script** — the script is in the body but runs immediately. It could be wrapped in `requestIdleCallback` to not block input.
-- **Add Web Vitals reporting** — `web-vitals` library is 1KB and can ship to PostHog or Plausible.
+CWV is not the bottleneck. **The bottleneck is crawlability of the JS-rendered content.**
 
 ---
 
 ## Content Strategy Recommendations
 
-### Publishing Cadence
-- **Pre-launch (now):** 1 page. Do not over-invest in blog content until the product is live.
-- **Launch (month 1):** 1 pillar post/week, 4 posts total. Target PAA + comparison queries.
-- **Steady state:** 2 posts/week. Mix of:
-  - 1 long-form pillar (1500–2500 words, targets high-volume query)
-  - 1 short "from the cohort" / student story (400–800 words, targets brand narrative)
+### Cadence
+- **First 30 days:** publish 6 posts (1 pillar + 5 supporting). This is the floor for ranking on long-tail "internship with no experience" queries.
+- **Steady state:** 2 posts per month.
+- **Refresh cycle:** Update the bias-audit post every quarter with new data. Update the "90-second experiment" post once per cohort.
 
-### Content Types to Invest In
-1. **Pillar posts** (high search volume, comprehensive)
-   - "How to get your first engineering internship in India (2026 guide)"
-   - "LeetCode vs DreamClerk: which one actually gets you hired?"
-   - "What is a verified work record? (And why it beats a portfolio)"
-2. **Comparison pages** (capture "vs" queries)
-   - `/vs-leetcode`
-   - `/vs-coursera`
-   - `/vs-bootcamp`
-   - `/vs-internship`
-3. **Tools** (capture high-intent + build backlinks)
-   - A "code review score estimator" — paste your GitHub PR, get a 0–100 review
-   - A "work record calculator" — input your sprints, get a sample certificate
-4. **Student stories** (brand + social proof)
-   - One per cohort, 600–1000 words, with their real (anonymized) work samples
+### Types
+- Pillar guides (2500+ words): one per track (FE, BE, AI/ML, Data).
+- Original-data posts: bias audits, cohort data, recruiter behavior.
+- Comparison posts: dreamclerk vs MOOCs, dreamclerk vs resume shortlisting.
+- Glossary posts: 1 per Jargon-buster term (shipping code, PR review, CI/CD).
 
-### Keyword Targeting
-- **Top of funnel:** "engineering internship India", "how to get an internship", "LeetCode alternative"
-- **Mid funnel:** "in-browser IDE", "AI code reviewer", "verified work certificate"
-- **Bottom funnel:** "DreamClerk pricing", "DreamClerk review", "DreamClerk vs LeetCode"
+### Length
+- Pillar: 2500-3500 words.
+- Supporting: 1200-1800 words.
+- Glossary: 400-600 words.
 
-### Content Length
-- Pillar posts: 1800–2500 words (matches top 3 SERP results for the target queries)
-- Comparison pages: 800–1500 words
-- Student stories: 600–1000 words
-
-### Content Update Strategy
-- Refresh pillar posts every 90 days
-- Refresh comparison pages every 60 days (these decay fast as competitors update)
-- Refresh pricing/pricing-FAQ immediately when prices change
-
-### Distribution Plan
-- **Twitter/X:** every post, every week. Tag LeetCode / Coursera founders for reach.
-- **LinkedIn:** pillar posts and student stories. Personal LinkedIn from aanya.
-- **Reddit:** r/learnprogramming, r/india, r/cscareerquestions — but only if the content is genuinely useful, not promotional.
-- **Hacker News:** Show HN at launch. One PAA-style pillar post as a follow-up.
-- **ProductHunt:** at launch.
-- **Dev.to / Hashnode:** cross-post pillar posts (canonical back to dreamclerk.io).
+### Promotion
+- Repost each pillar to LinkedIn (the audience) as a 3-post carousel.
+- Submit each cohort-data post to Hacker News as Show HN: "we built a career simulation for Indian undergrads — here's the data".
+- Email 1x per month to the waitlist.
 
 ---
 
 ## Prioritized Recommendations
 
-### Critical (Fix Immediately — ship today)
+### Critical (Fix Immediately)
+1. **Move from hash-routes to real paths.** This is the single biggest SEO unlock. Until `/blog/why-we-built-dreamclerk` is a real path, no blog post will be indexed. Effort: 1-2 days. Impact: 10x.
+2. **Add a static `<nav>` and `<footer>` to the HTML shell** with anchor tags to every route. Effort: 1 hour. Impact: gives crawlers a path through the SPA, lifts crawl depth from 1 to N.
+3. **Add the H2s that exist in the JS body to the static HTML** (how it works, tracks, companies, certificate, faq). Effort: 2 hours. Impact: search engines see the page outline and can rank for the secondary keywords.
+4. **Generate `sitemap.xml` at build time with every post slug.** Effort: 2 hours. Impact: every published post is eligible for indexing within hours, not weeks.
+5. **Tighten the title tag** to ≤ 60 chars with the primary keyword first. Effort: 5 minutes. Impact: 5-15% CTR lift on existing impressions.
 
-1. **Add Open Graph + Twitter Card meta tags.** Without these, every share is a blank card. Single biggest fix. (5 min)
-   ```html
-   <meta property="og:title" content="DreamClerk — you'll work a real job. from your browser.">
-   <meta property="og:description" content="Real engineering jobs in your browser. Full IDE. AI code reviewer. Real tasks. Real deadlines. Earn a verified work record.">
-   <meta property="og:image" content="https://dreamclerk.io/og.png">
-   <meta property="og:url" content="https://dreamclerk.io">
-   <meta property="og:type" content="website">
-   <meta property="og:site_name" content="DreamClerk">
-   <meta name="twitter:card" content="summary_large_image">
-   <meta name="twitter:title" content="DreamClerk — work a real job. from your browser.">
-   <meta name="twitter:description" content="Real engineering jobs in your browser. Verified work record, not a completion badge.">
-   <meta name="twitter:image" content="https://dreamclerk.io/og.png">
-   ```
-2. **Add favicon and apple-touch-icon.** 5 min. Without them, the browser tab is blank.
-3. **Add the canonical tag.** 1 min.
-4. **Fix the dead nav links** ("tracks", "faq") and footer placeholders ("#"). 10 min.
-5. **Trim the meta description to 160 chars** and add a primary keyword phrase. 5 min.
-6. **Add the Organization + SoftwareApplication JSON-LD** in the `<head>`. 15 min.
+### High Priority (This Month)
+6. **Add `BlogPosting`, `FAQPage`, `BreadcrumbList`, `SoftwareApplication`, `Course`, and `ItemList` JSON-LD.** Effort: 1 day. Impact: rich-result eligibility.
+7. **Publish 2 more blog posts** — "How we ran a bias audit" and "How to pass a coding interview with no experience". Effort: 3 days each. Impact: doubles the indexable surface.
+8. **Add a static hero image with descriptive alt text.** Effort: 2 hours. Impact: image search visibility, screen reader friendliness.
+9. **Surface the founder / team on an `/about` page** with photos and LinkedIn links. Effort: 1 day. Impact: Authoritativeness + E-E-A-T.
 
-**Estimated effort: 1 hour. Estimated SEO impact: takes the page from 38/100 to ~70/100.**
-
-### High Priority (This Week)
-
-1. **Write `/how-it-works` page** (or expand an FAQ section on the current page) with explicit PAA-style H2s:
-   - "What is DreamClerk?"
-   - "How is DreamClerk different from LeetCode?"
-   - "What does a verified work record contain?"
-   - "How long does a DreamClerk sprint take?"
-   - "How much does DreamClerk cost?"
-   - "Is DreamClerk hiring right now?"
-   Each with a 40–60 word paragraph answer immediately below. **Wins featured snippets for 6+ PAA queries.**
-2. **Add an `og.png` image** (1200×630). A terminal screenshot, the workspace mock, or just a typographic lockup.
-3. **Add Plausible or Fathom analytics** (1-line script). Without it, you cannot measure whether SEO is working.
-4. **Add a Privacy Policy page** and link it from the footer. Even a 200-word one. Trust signal + GDPR compliance.
-5. **Bump body font to 16px** from 15px.
-6. **Add `<link rel="preload" as="font" type="font/woff2" crossorigin>`** for Geist + Instrument Serif (Google Fonts will give you the woff2 URLs).
-
-### Medium Priority (This Month)
-
-1. **Write 2 comparison posts:** `/vs-leetcode` and `/vs-coursera`. These will be your highest-traffic SEO pages.
-2. **Build a simple `/verify` page** (even if just a stub that says "paste a cert ID"). Cited in the dreamclerk.md as the trust signal for recruiters — make it real.
-3. **Add `sitemap.xml`** and a `robots.txt` that allows everything except `/api/*` and `/admin/*`.
-4. **Submit to Google Search Console** and Bing Webmaster Tools.
-5. **Add a `Person` schema** for the founder (aanya.s) with a `sameAs` link to her real LinkedIn.
-6. **Replace the "tracks" / "faq" nav items** with section anchors that exist, or add the missing sections.
-7. **Add an external link** in the compare table — link to a real, authoritative source (e.g. the OWASP Top 10 page) for the "code review" claim. Single outbound authority link.
+### Medium Priority (This Quarter)
+10. **Tighten the meta description** to ≤ 155 chars and front-load the CTA verb. Effort: 5 min. Impact: 3-8% CTR lift.
+11. **Author bylines on every blog post** with a link to the author's bio. Effort: 1 hour per post. Impact: Expertise signal.
+12. **Add a "press" / "mentions" section** to the homepage. Effort: 2 days. Impact: Authoritativeness.
+13. **Switch from hash router to BrowserRouter** (with Vercel SPA rewrites). Effort: 1 day. Impact: prerequisite for real-URL indexing.
 
 ### Low Priority (When Resources Allow)
-
-1. **Write a `/blog` content hub** with 1 pillar post per week.
-2. **Add `web-vitals` reporting** (1KB JS) to ship Core Web Vitals to your analytics.
-3. **A11y polish:** add `aria-label` to all the icon-only buttons, run an axe-core audit.
-4. **Internationalization:** the page is India-focused ("For Undergraduate Engineers, India"). Add an `<html lang="en-IN">` and consider a future `/hi/` variant.
-5. **Add `Person` schema with a real photo and bio** for the founder (aanya.s). E-E-A-T lift.
-6. **Build backlinks:** contribute to r/learnprogramming, write a guest post for freeCodeCamp, get listed on ProductHunt, get featured in a TechCrunch article.
+14. **Code-split the JS bundle** at the route boundary. Effort: 1 day. Impact: faster TTI on `/tracks` and `/blog`.
+15. **Add hreflang tags** if you ever target non-Indian markets. Effort: 1 hour. N/A today.
+16. **Add a web app manifest** for PWA installability. Effort: 2 hours. N/A for SEO directly; affects mobile UX.
 
 ---
 
-## TL;DR — The 5 Things That Will Move the Needle
+## Bottom Line
 
-1. **Open Graph + Twitter Card meta tags** (with an `og.png`). Without these, *every share* is a blank card. Zero SEO value from social.
-2. **A canonical tag, a favicon, an Organization JSON-LD block.** 30 minutes of work, 15+ SEO points.
-3. **A 6-question FAQ section** on the page (or a `/how-it-works` page) with PAA-style H2s. This is the single biggest driver of organic traffic for an early-stage waitlist page.
-4. **Two comparison posts:** `/vs-leetcode` and `/vs-coursera`. These are the highest-intent searches for your category. Write them well and they will rank.
-5. **Analytics + Search Console.** You cannot improve what you cannot measure. Plausible is 1 line of code.
+- The site is **beautifully designed** and the brand voice is **distinct** — both of those are real SEO assets in the long run.
+- The **technical SEO** is mostly there, but the **SPA hash-routing** is the deal-breaker for organic growth. Fix that first.
+- The **content is thin** for a category-defining product. The bias-audit and the 90-second-experiment posts are your moat — publish more like them.
+- The **E-E-A-T** picture is good on Trust and Experience, weak on Expertise and Authoritativeness. Founder/team visibility fixes both at once.
