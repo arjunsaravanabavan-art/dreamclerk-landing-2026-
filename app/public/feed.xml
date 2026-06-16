@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>dreamclerk blog</title>
+    <link>https://www.dreamclerk.com/blog</link>
+    <description>field notes from building dreamclerk. the data, the rejects, the rubric changes. nothing polished after the fact.</description>
+    <language>en-IN</language>
+    <atom:link href="https://www.dreamclerk.com/feed.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>2026-06-16T10:00:00.000Z</lastBuildDate>
+
+    <item>
+      <title>the 90-second internship interview that changed 14% of outcomes</title>
+      <link>https://www.dreamclerk.com/blog/why-we-built-dreamclerk</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/why-we-built-dreamclerk</guid>
+      <pubDate>2026-04-12T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>we ran a 90-second phone screen on 1,200 internship applicants. 14% got a callback. here is what we changed, and what we got wrong.</description>
+      <content:encoded><![CDATA[we ran a 90-second phone screen on 1,200 internship applicants. 14% got a callback. here is what we changed, and what we got wrong.]]></content:encoded>
+      <category>founder notes</category>
+      <category>internship</category>
+    </item>
+
+    <item>
+      <title>inside our bias audit — the rubric, the data, the changes</title>
+      <link>https://www.dreamclerk.com/blog/inside-our-bias-audit</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/inside-our-bias-audit</guid>
+      <pubDate>2026-05-04T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>every quarter we run a bias audit on the dreamclerk interview. here is the rubric, the per-group pass-rates, and the three rubric changes we made after cohort 1.</description>
+      <content:encoded><![CDATA[every quarter we run a bias audit on the dreamclerk interview. here is the rubric, the per-group pass-rates, and the three rubric changes we made after cohort 1.]]></content:encoded>
+      <category>bias audit</category>
+      <category>hiring</category>
+    </item>
+
+    <item>
+      <title>how to pass a coding interview with no experience</title>
+      <link>https://www.dreamclerk.com/blog/coding-interview-with-no-experience</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/coding-interview-with-no-experience</guid>
+      <pubDate>2026-05-04T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>no internships. no github. no leetcode streak. here is the 4-step protocol we built to prep dreamclerk applicants in 6 weeks — and what the data says about it.</description>
+      <content:encoded><![CDATA[no internships. no github. no leetcode streak. here is the 4-step protocol we built to prep dreamclerk applicants in 6 weeks — and what the data says about it.]]></content:encoded>
+      <category>interview</category>
+      <category>career</category>
+    </item>
+
+    <item>
+      <title>the in-browser ide — what it actually runs, what it can't</title>
+      <link>https://www.dreamclerk.com/blog/in-browser-ide-explained</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/in-browser-ide-explained</guid>
+      <pubDate>2026-06-10T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>monaco on top of a webcontainer. 200ms cold start. 12mb of wasm. here is the architecture, the security model, and the 3 things it cannot do.</description>
+      <content:encoded><![CDATA[monaco on top of a webcontainer. 200ms cold start. 12mb of wasm. here is the architecture, the security model, and the 3 things it cannot do.]]></content:encoded>
+      <category>engineering</category>
+      <category>explainer</category>
+    </item>
+
+    <item>
+      <title>shipping code vs knowing code — a 5-minute glossary</title>
+      <link>https://www.dreamclerk.com/blog/shipping-code-vs-knowing-code</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/shipping-code-vs-knowing-code</guid>
+      <pubDate>2026-06-10T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>the 14 terms every dreamclerk applicant should be able to use in a sentence, with a worked example for each. bookmark this. re-read it before the interview.</description>
+      <content:encoded><![CDATA[the 14 terms every dreamclerk applicant should be able to use in a sentence, with a worked example for each. bookmark this. re-read it before the interview.]]></content:encoded>
+      <category>glossary</category>
+      <category>engineering culture</category>
+    </item>
+
+  </channel>
+</rss>
