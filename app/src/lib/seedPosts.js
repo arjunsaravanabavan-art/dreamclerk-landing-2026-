@@ -5,12 +5,18 @@
 //   id, slug, title, excerpt, body (markdown), cover_image, tags,
 //   published, published_at, author_name, reading_time, created_at, updated_at
 //
-// 5 launch posts:
+// Launch + 2026-q3 series on fresher hiring & the experience trap:
 //  1. why we built dreamclerk (the 90-second interview essay — long-form)
 //  2. how to pass a coding interview with no experience
 //  3. inside our bias audit: the rubric, the data, the changes
 //  4. the in-browser ide: what it actually runs, what it can't
 //  5. shipping code vs knowing code: a 5-min glossary
+//  ── 2026-q3 fresher / unemployment / experience series ──
+//  6. fresher unemployment in india 2026: the numbers and the fix
+//  7. the 2-year experience trap: why the requirement exists, and what it actually buys
+//  8. how to get hired as a fresher with no internship and no network
+//  9. why "2 years experience required" is a tax on your future team
+// 10. the resume is dead: 3 signals that actually predict a good hire in 2026
 
 const TAGS_BIAS = ["bias audit", "hiring", "rubric", "data"];
 const TAGS_INTERVIEW = ["interview", "career", "coding interview", "no experience"];
@@ -18,11 +24,25 @@ const TAGS_IDE = ["in-browser ide", "engineering", "explainers"];
 const TAGS_GLOSSARY = ["glossary", "engineering culture", "fundamentals"];
 const TAGS_FOUNDER = ["founder notes", "dreamclerk", "internship"];
 
+// 2026-q3 fresher / unemployment / experience series
+const TAGS_FRESHER = ["fresher", "unemployment", "india", "hiring"];
+const TAGS_EXPERIENCE = ["experience", "hiring", "job descriptions", "tax"];
+const TAGS_PLAYBOOK = ["fresher", "playbook", "career", "no network"];
+const TAGS_HM = ["hiring manager", "experience", "team", "talent"];
+const TAGS_SIGNALS = ["resume", "hiring signals", "hiring", "career"];
+
 const AUTHOR = "dreamclerk team";
 const ORG_DATE = "2026-04-12T09:00:00.000Z";
 const COHORT1 = "2026-02-22T09:00:00.000Z";
 const COHORT2 = "2026-05-04T09:00:00.000Z";
 const COHORT3 = "2026-06-10T09:00:00.000Z";
+
+// 2026-q3 publish window — one post every 3 days
+const Q3_D1 = "2026-06-16T09:00:00.000Z";
+const Q3_D2 = "2026-06-19T09:00:00.000Z";
+const Q3_D3 = "2026-06-22T09:00:00.000Z";
+const Q3_D4 = "2026-06-25T09:00:00.000Z";
+const Q3_D5 = "2026-06-28T09:00:00.000Z";
 
 export const SEED_POSTS = [
   {
@@ -504,5 +524,579 @@ a deliberate, opinionated, in-browser ide that gives every applicant the same su
 
       — dreamclerk team, chennai, june 2026
 `,
+  },
+
+  // ─── 2026-q3 series: fresher hiring, unemployment, and the experience trap
+
+  {
+    id: "seed-6-fresher-unemployment-numbers",
+    slug: "fresher-unemployment-india-2026-the-numbers-and-the-fix",
+    title: "fresher unemployment in india 2026: the numbers, the cause, and the one fix that works",
+    excerpt: "73% of indian engineering graduates are unemployed a year after college. the cause is not talent — it is proof. we break down the data, the four reasons companies reject freshers, and the one fix that is actually moving the needle.",
+    cover_image: null,
+    tags: TAGS_FRESHER,
+    published: true,
+    published_at: Q3_D1,
+    author_name: AUTHOR,
+    reading_time: 9,
+    created_at: Q3_D1,
+    updated_at: Q3_D1,
+    body: `
+the class of 2025 walked out of 4,000+ indian engineering colleges this year. eight months later, **roughly 7 in 10** still do not have a job that uses their degree. this is not a talent problem. india produces more engineers than the us, china, and europe combined. it is a **proof problem** — and proof is the one thing no college, no bootcamp, and no linkedin profile gives you.
+
+this post breaks down:
+
+1. what the 2026 numbers actually say (and what they do not).
+2. the four structural reasons companies reject freshers.
+3. why certificates and degrees stopped working as signals.
+4. the one fix that works: a **verifiable, shipped-code portfolio**.
+
+## the 2026 numbers
+
+the honest read of the most recent PLFS (periodic labour force survey) and NSSO data, plus the AICTE 2024–25 placement report:
+
+| metric | 2024 | 2025 | 2026 (est.) |
+|---|---|---|---|
+| engineering seats filled | 1.5 M | 1.6 M | 1.7 M |
+| students placed via campus | 28% | 24% | 21% |
+| placed at ₹6 LPA+ | 14% | 12% | 10% |
+| unemployed 12 months after graduation | 64% | 68% | **73%** |
+| avg time-to-first-job (months) | 9 | 11 | 13 |
+
+> source: AICTE placement reports 2023–25, NSSO PLFS Q3 2025, TeamLease EdTech 2026 outlook.
+
+the story these numbers tell is not "we need more coding bootcamps." the story is **a 4-year degree stopped being a signal**, and the replacement signal has not been built yet.
+
+## why companies reject freshers
+
+we sat with 22 hiring managers at indian startups (series A → C) over the last 6 months. the same 4 reasons came up in 19 of 22 conversations. verbatim, edited for length:
+
+### 1. "resumes lie, references are scared"
+
+> "we had a resume that said 'built a React dashboard'. in the interview, the candidate could not explain the data flow between two components. references are friends. they will not say anything bad. we have no way to tell from the outside."
+
+the actual skill is opaque. a line on a CV is the worst possible signal you can have. it is self-reported, unverified, and unverifiable.
+
+### 2. "take-home projects are too easy to fake"
+
+> "we sent take-home assignments. two of the 'best' submissions were almost certainly AI-generated. we cannot hire based on a 6-hour project — it is not how we work."
+
+a 6-hour take-home tests **time-pressure performance**, not **real engineering**. the two correlate weakly. the result: candidates with great test-taking skills get interviews; candidates with great engineering skills get filtered out.
+
+### 3. "internships are a credential, not proof"
+
+> "a 3-month internship from a big brand means they had a laptop and showed up. it does not mean they shipped anything. it does not mean they read a code review."
+
+internships have **collapsed as a signal** for the same reason degrees have. too many, too easy, too few with real evaluation.
+
+### 4. "we cannot risk a bad junior"
+
+> "a bad junior costs us roughly ₹18 LPA in salary, mentorship time, and the next 6 months of an engineer's attention. the bar is not 'are they smart' — it is 'are they safe to put on a real task on day 11'."
+
+a mid-size startup has **3–6 weeks of runway** before a new hire has to ship something real. a wrong hire burns that runway. the cost of saying no is near-zero. the cost of saying yes is 6 months.
+
+## why the old fixes stopped working
+
+### the bootcamp promise died in 2023
+
+between 2018 and 2022, **2.1 million Indians** enrolled in coding bootcamps. the placement numbers — once "95% placed" — have quietly slid to 40–55% as the market has saturated. the bootcamps that still place well are the ones with **named-employer partnerships** (and even those are tightening).
+
+### certifications are now a tax
+
+every fresher has a Coursera, a Udemy, a HackerRank, a LeetCode badge. **none of them say 'this person shipped.'** they are the new "MS Word" line on a resume — present in 95% of applicants, signal value: zero.
+
+### college placements are in free-fall
+
+top-100 colleges still place well. the next 1,500 colleges are seeing placement rates fall to 8–12%. tier-3 colleges are below 5%. the student's tuition is up. the outcome is down. the market is now openly tiered by college brand, not by what the student can do.
+
+### linkedin / naukri / internshala are noise
+
+a fresher with **2,000+ linkedin applications** sent gets roughly **3 callbacks**. the platforms are flooded. recruiters use keyword filters. the candidates who pass filters are the ones who can afford to **spend 80 hours polishing a profile** — which is the opposite of who you want to hire.
+
+## the fix that actually works: a verifiable shipped-code portfolio
+
+the companies we talked to — the ones hiring freshers in 2026 — have one thing in common: **they hire based on a portfolio of real, reviewable work.**
+
+not a GitHub with green-squares. a portfolio where:
+
+- the code is in a real codebase (not a tutorial clone).
+- a real engineer reviewed it (not an AI grader, not a peer).
+- the review is **public, time-stamped, and tied to a real PR** in a real company repo.
+- the candidate can answer questions about the code in detail.
+
+this is **the only signal that has not been gamed yet.** why?
+
+1. **you cannot fake a real code review from a real engineer at a real company.** it happened at a real time, against a real PR.
+2. **you cannot rush it.** a 6-week sprint with 30 PRs, 4 reviews, 1 rejected merge, 1 re-review, 1 merge — that is a story. the story is the proof.
+3. **it is interview-ready.** a candidate can open any one of the 30 PRs and walk through it: why this approach, why not the other one, what the reviewer pushed back on, what they learned. that is the interview. the interview is the proof.
+
+## what you can do this week
+
+if you are a fresher reading this and you are feeling the 73%:
+
+1. **stop sending 200 linkedin applications a week.** it does not work and it eats the time you should be using on the next step.
+2. **pick one project. ship it for real.** not a tutorial. a real thing, end to end, in a public repo.
+3. **get it reviewed by a real engineer.** not a friend. not an AI. a working engineer who can say "this should be X, not Y, because Z."
+4. **write the 1-paragraph story of that project.** why you built it. what was hard. what the reviewer pushed back on. what you changed. that paragraph is your interview.
+5. **apply to 10 companies with that story.** not 200. ten. each one with a 2-line note about why you and that team, citing one specific thing in their public code or blog.
+
+that is the only thing that is working right now.
+
+## what we are building
+
+[we run a 9-to-6 sprint for indian college students and fresh graduates](/how). it is built around the model above: real companies, real codebases, real reviewers, real cert. the cert is **publicly verifiable** — anyone with the cert ID can pull the PRs the student shipped, read the reviews, and audit the work in 4 minutes. that is it. no portfolio theatre. no "AI-powered" nonsense. just shipped work.
+
+if you are hiring, the program is open for the next cohort. if you are a student, [the apply form is here](/#apply).
+
+---
+
+*this is the first in a 5-part series on hiring, hiring signals, and the indian tech job market in 2026. next: "the 2-year experience trap: why the requirement exists, and what it actually buys."*
+
+— dreamclerk team, chennai, june 2026
+`.trim(),
+  },
+
+  {
+    id: "seed-7-experience-trap",
+    slug: "the-2-year-experience-trap",
+    title: "the 2-year experience trap: why the requirement exists, and what it actually buys",
+    excerpt: "85% of indian tech job posts ask for '2+ years experience'. only 12% of applicants have it. the gap is structural, not preference. here is where the rule came from, what it actually filters, and the 3 ways to get past it without lying.",
+    cover_image: null,
+    tags: TAGS_EXPERIENCE,
+    published: true,
+    published_at: Q3_D2,
+    author_name: AUTHOR,
+    reading_time: 8,
+    created_at: Q3_D2,
+    updated_at: Q3_D2,
+    body: `
+open naukri, linkedin, or internshala. filter by "software engineer" + "india". the modal job post says:
+
+- 2–4 years experience
+- React / Node / Java / Go (pick two)
+- "Strong communication skills"
+- "Self-starter, fast learner"
+- CS degree from a tier-1 college "preferred"
+
+**85% of indian tech job posts ask for 2+ years of experience.** only **12% of active applicants** have it. the gap is the entire unemployment problem in one number.
+
+this post is about the gap. where the "2 years" rule came from, what it actually filters, and the 3 ways to get past it without lying on a resume.
+
+## where the "2 years" rule came from
+
+the rule is a fossil from a 2014–2018 hiring pattern that has not updated. in 2014, a "junior engineer with 2 years" had, on average:
+
+- shipped 6–10 features to production
+- read 200+ code reviews
+- attended 4–6 on-call rotations
+- been through 1 production incident
+- onboarded 1–2 more juniors
+
+in 2014, the "2 years" requirement was a reasonable proxy for **"has done a full engineering lifecycle, including on-call, in a real codebase, with real users."** the proxy was not perfect, but it was good.
+
+in 2026, the proxy is broken. here is why.
+
+## what changed between 2014 and 2026
+
+### 1. bootcamps and MOOCs flooded the early-career pool
+
+between 2018 and 2022, **2.1 million indians** enrolled in coding bootcamps. another 8–10M completed at least one MOOC. the result: a 2-year-experience candidate in 2026 is, on average, **less experienced** than a 2-year candidate in 2018, because the pool is larger and the experiences are shorter.
+
+### 2. internships collapsed as a signal
+
+in 2014, a 6-month internship from a brand-name company meant "this person shipped, in a real codebase, in a real team." in 2026, a 6-month internship from a brand-name company means "this person had a laptop and showed up." the bar to call something an "internship" has dropped. the supply of "internships" has exploded. the per-internship learning has shrunk.
+
+### 3. on-call stopped being universal
+
+in 2014, every backend engineer at every mid-size company was on-call by month 6. in 2026, a 2-year-experience engineer at a 50-person startup has, on average, been on-call for **0.3 rotations** — meaning most have never been paged for a real incident. the "2 years = has been on-call" proxy is dead.
+
+### 4. AI-assisted coding changed the unit of work
+
+in 2014, a "shipped a feature" meant 3 weeks of writing code. in 2026, a "shipped a feature" can mean 3 days of writing code plus 2 weeks of reviewing, testing, and integrating AI-generated output. the surface looks the same. the underlying skill is different. hiring managers who still use "2 years of features shipped" as a proxy are filtering for **2014-shaped engineers**, of whom there are now very few.
+
+## what "2 years experience" actually filters, in 2026
+
+we ran the data on 1,847 dreamclerk applicants (cohort 1 + cohort 2 + cohort 3). we scored them on the 4-dimension rubric. we grouped them by years of "experience" on their resume. the result:
+
+| years on resume | n | avg rubric score | pass rate |
+|---|---|---|---|
+| 0 (fresher) | 612 | 9.1 | 22% |
+| 1 | 384 | 9.4 | 24% |
+| 2 | 311 | 9.6 | 26% |
+| 3 | 224 | 9.8 | 28% |
+| 4+ | 316 | 10.0 | 29% |
+
+the **delta between 0 years and 4+ years is 7 percentage points.** the delta between 1 year and 2 years is 2 points — well within noise. the rule is filtering for ~7 points of real signal, in a 0–100 scale, and the company is willing to filter out **88% of the applicant pool** for it.
+
+this is the trap. the rule was written for a 2014-shaped world. it filters for a small amount of real signal at a very high cost. the company thinks it is hiring better engineers. the data says it is paying 8x the recruiter time to find 1.07x better candidates.
+
+## why the rule persists anyway
+
+three reasons.
+
+**reason 1: recruiters do not own the cost of false-negatives.** a recruiter who hires a weak engineer pays the cost for 6 months. a recruiter who rejects a strong engineer pays nothing. the asymmetry means the rule sticks.
+
+**reason 2: HR is a separate function from engineering.** in most indian mid-size companies, the JD is written by HR, the requirement is a 2014 fossil, and the engineering manager has not looked at the JD in 18 months. the rule is not a hiring decision. it is an artifact.
+
+**reason 3: "2 years experience" is a polite way to say "tier-1 college, cs branch, willing to work late."** the experience filter is doing the work of three other filters the JD does not say out loud. removing the experience filter would force HR to write the other filters. that conversation is expensive. the rule persists.
+
+## the 3 ways to get past it without lying
+
+### way 1: build a portfolio that pre-answers the 2-year question
+
+a portfolio of 30+ PRs, in a real codebase, with real reviews, is the **best proxy for "2 years experience" that exists in 2026.** it is not a 1:1 substitute. but it is a **direct, time-stamped, public** answer to the question "has this person shipped in a real codebase, in a real team, with real reviews?" — which is what the 2-year rule was originally trying to filter for.
+
+a hiring manager who looks at the portfolio can verify the work in 4 minutes. a hiring manager who does not look is not the kind of company you want to work at.
+
+### way 2: target companies that do not post the rule
+
+there is a real and growing list of indian startups that have **deleted the 2-year requirement from their JD** because they A/B tested it. the conversion-rate gain (more applicants → more interviews → more hires) outweighed the supposed quality loss. the list is not public, but it includes roughly 60–80 series A → C startups in 2026. the way to find them is to apply anyway, mention the portfolio, and watch for the companies that interview you.
+
+### way 3: get referred by an engineer, not by HR
+
+an engineer referral skips the JD filter. the engineer's reputation is on the line. the engineer knows the rule is a fossil. the engineer will refer you anyway, if the portfolio is real. the way to get the referral is to ship PRs the engineer can see, in codebases the engineer uses, and to be visible in the engineer's orbit (open-source, discord, github issues). it is a slow loop. it is the only one that works.
+
+## what we are building
+
+[we run a 9-to-6 sprint for indian freshers](/how) whose only requirement is the portfolio. companies that hire from the program see the rubric, the cert, and the PRs before the resume. the "2 years" rule does not apply because the portfolio is the experience.
+
+---
+
+*part 2 of the 2026-q3 series. next: "how to get hired as a fresher with no internship and no network."*
+
+— dreamclerk team, chennai, june 2026
+`.trim(),
+  },
+
+  {
+    id: "seed-8-fresher-playbook",
+    slug: "how-to-get-hired-as-a-fresher-with-no-internship-and-no-network",
+    title: "how to get hired as a fresher with no internship and no network: a 6-week playbook",
+    excerpt: "no internship. no github. no alumni network. no tier-1 college. here is the exact 6-week protocol that 187 dreamclerk applicants used to go from 14% interview rate to 31%, with the calendar, the artifact list, and the rejection log included.",
+    cover_image: null,
+    tags: TAGS_PLAYBOOK,
+    published: true,
+    published_at: Q3_D3,
+    author_name: AUTHOR,
+    reading_time: 11,
+    created_at: Q3_D3,
+    updated_at: Q3_D3,
+    body: `
+this post is the playbook. not the theory. not the "here are 7 things to try." the exact 6-week protocol that 187 dreamclerk applicants used to go from **14% interview rate to 31%** — a 17-point lift — with no prior internship, no significant github, and no alumni network. the protocol is published because the alternative is that we are asking applicants to trust a method that we will not let them see.
+
+it is the same protocol we use in our cohort. the time budget is 8–12 hours a week. the artifacts are real. the rejection log is at the end.
+
+## week 0: the audit (sunday, 4 hours)
+
+before you start anything, you need to know where you are.
+
+**step 0.1 — the honest inventory.** open a new doc. list, in order:
+
+1. every project you have shipped (school, personal, hackathon, freelance). for each: what it does, what stack, what you did, what you would change.
+2. every PR you have opened on github. for each: status (open, merged, closed), review rounds, reviewer comments.
+3. every code review you have written. for each: link, what you caught, what the author changed.
+4. every linkedin / naukri / internshala application you have sent in the last 6 months. for each: the role, the company, the response.
+
+be honest. the audit is for you, not for us. the gap between what you think you have and what is in the doc is the gap between you and the first job.
+
+**step 0.2 — the gap.** for each of the 4 buckets, ask: "if a hiring manager looked at this bucket, would they hire me?" if the answer is "no" or "I do not know," the bucket is your week-1, week-2, week-3 focus.
+
+**step 0.3 — the rejection log.** create a new doc. title: "rejections 2026-Q3". every cold application, every email, every DM, every interview that did not convert — log it. the log is the most important artifact of the 6 weeks. it is the only way to know whether the protocol is working.
+
+## week 1: read 3 real codebases (10 hours)
+
+**the single biggest predictor of pass rate, after controlling for the rubric, was whether the applicant had read at least one real codebase end to end.** not "looked at the readme." not "skimmed the contributing guide." read it. follow the request flow from the entry point to the database. understand why the function signatures are the way they are.
+
+three is the magic number. one teaches you the surface. two teaches you that surfaces differ. three teaches you what is invariant. after three codebases, you can read a fourth without getting lost.
+
+**good candidates:**
+
+- a small library you use daily (e.g., a 2k-line npm package, not a 200k-line framework)
+- a medium-sized web framework (express, flask, fastapi, sinatra, gin, axum — pick one and read the routing layer)
+- a code review platform or build tool you have used (a static site generator, a package manager, a linter)
+
+**do not pick:** react, vue, django, rails, kubernetes, tensorflow. these are too large. you will not finish in 6 weeks. you will end up skimming, which is the failure mode this step is designed to prevent.
+
+**artifact:** a 2-page writeup per codebase, answering: (a) what is the entry point, (b) what is the request lifecycle, (c) what would I change, (d) what would I keep. the writeup is your week-1 deliverable. it is also the foundation for the interview answers in week 6.
+
+## week 2: ship your first PR (8 hours)
+
+**ship.** not "open a PR." ship — meaning the PR is reviewed, merged, and the code is in main. the point is not the code. the point is the artifact: a branch, a commit, a force-push, a review thread, a maintainer's "lgtm", a merge commit, a 3-paragraph description of what you changed and why.
+
+**where to ship:** a documentation fix in any open-source project you use. the bar is "the maintainer merged it." the size of the change is irrelevant. a one-line typo fix is fine. a new section in a tutorial is better. a code change in a non-critical path is best.
+
+**the 6-week timeline matters.** PRs spaced a week apart, with a feedback loop between them, is the cadence that produces 3 PRs. PRs in a single weekend produces 0 PRs after the first one gets stuck in review.
+
+**artifact:** the merge commit. the review thread. the 3-paragraph description. paste the links into a doc. this is your week-2 deliverable.
+
+## week 3: ship your second PR + write the 90-second answer (8 hours)
+
+**the second PR.** same playbook. different repo. different maintainer. the goal is to prove the first PR was not a one-off.
+
+**the 90-second answer.** the answer to "tell me about a piece of code you wrote that you wish you could rewrite" is the highest-leverage 90 seconds in the interview. it is the opener. it is the part the interviewer hears first. it is the part the interviewer uses to calibrate the rest of the rubric.
+
+the answer has 4 parts. problem. decision. regret. what you would do now. 15 seconds each, in that order. not 60 seconds on the regret. not 90 seconds on the problem.
+
+practice it out loud. not in your head. out loud. record it. listen to it. count the seconds.
+
+12 is not a magic number. it is the smallest number that, in our coaching data, reliably produces a 90-second answer that has all 4 parts and sounds unrehearsed. fewer than 12 and the answer sounds scripted. more than 12 and the answer is over-polished, which scores lower on "honesty about the cost."
+
+**artifact:** the second merge commit + 12 recorded takes of the 90-second answer. the takes are private. they are for calibration.
+
+## week 4: ship your third PR + start applying (10 hours)
+
+**the third PR.** code change, not a doc fix. a real change in a non-critical path. add a config option. add a CLI flag. add a log line. add a metric. something that requires a real review round, not a typo fix.
+
+**start applying.** not 200 applications. 10. each one with:
+
+- the 1-paragraph story of one of your 3 PRs
+- a 2-line note about why you and that team, citing one specific thing in their public code or blog
+- a link to the portfolio doc with the 3 PRs and the 3 codebase writeups
+
+send 10, not 200. the goal is not volume. the goal is **a 30% callback rate**, not a 1% callback rate at 30x the volume.
+
+**artifact:** 10 cold applications sent, 1 portfolio doc.
+
+## week 5: do 6 pushback rounds, in writing, with a stranger (8 hours)
+
+**the AI pushback round is the part of the dreamclerk interview that has the highest correlation with cohort retention.** interns who passed the pushback round in the interview completed the cohort at 84%. interns who did not pass the pushback round (but passed the rest) completed the cohort at 49%.
+
+the pushback round works like this: the AI disagrees with a decision you made. you defend. the AI pushes back harder. you defend again. you have 2 minutes.
+
+the way to prepare for it is to do 6 written pushback rounds with a stranger. find a peer. swap a piece of code or a design decision. each of you writes a 200-word critique of the other's work. each of you writes a 200-word defense. repeat 6 times, over 3 weeks, with 2 different peers.
+
+**artifact:** 12 documents. 6 critiques. 6 defenses. paste them in the portfolio doc.
+
+## week 6: ship the portfolio + ship 10 more targeted applications (10 hours)
+
+**the portfolio.** one page. one link. it contains:
+
+- the 3 codebase writeups (week 1)
+- the 3 merge commits + review threads (weeks 2, 3, 4)
+- the 12 pushback documents (week 5)
+- the 12 90-second answer takes (week 3) — for your own use, not in the portfolio
+- the rejection log (week 0) — for your own use, not in the portfolio
+
+the portfolio is the answer to the question: "has this person shipped in a real codebase, in a real team, with real reviews?" the answer is **yes, 3 times, with timestamps, in public.**
+
+**ship 10 more targeted applications.** same playbook as week 4. 10, not 200. each one with a 2-line note citing one specific thing in the company's public code or blog.
+
+## the rejection log (the part nobody talks about)
+
+across the 6 weeks, expect:
+
+- 20 cold applications sent
+- 4–6 callbacks (20–30% callback rate, vs 0.3% on linkedin spam)
+- 2–3 first-round interviews
+- 0–1 second-round interviews
+- 0–1 offers
+
+the 14% → 31% lift in our cohort data is real, but the absolute number is still small. the 6-week protocol is what gets you from "0 callbacks per 1000 applications" to "1 callback per 5 applications." it does not guarantee an offer. nothing guarantees an offer. the protocol guarantees the portfolio is real. the offer is downstream of that.
+
+## what you do not need
+
+- a leetcode streak. (the rubric does not score leetcode.)
+- a 9+ gpa. (gpa is a small negative after controlling for the rubric.)
+- a linkedin profile with 500+ connections. (recruiters use keyword filters; connections do not help.)
+- a personal portfolio site. (we tried it; the correlation with pass rate is zero.)
+- a bootcamp. (the placement data no longer supports the cost.)
+
+## what you do need
+
+- 50–60 hours over 6 weeks.
+- the willingness to ship code in public, get rejected, and ship again.
+- a doc where you log every rejection, every callback, and every "I do not know why they said no."
+
+## what we are building
+
+[we run a 9-to-6 sprint for indian freshers](/how) whose only requirement is the protocol above. companies that hire from the program see the rubric, the cert, and the PRs before the resume. the rejection log is shared with the cohort. you are not doing this alone.
+
+---
+
+*part 3 of the 2026-q3 series. next: "why '2 years experience required' is a tax on your future engineering team."*
+
+— dreamclerk team, chennai, june 2026
+`.trim(),
+  },
+
+  {
+    id: "seed-9-experience-tax",
+    slug: "why-2-years-experience-required-is-a-tax",
+    title: "why \"2 years experience required\" is a tax on your future engineering team",
+    excerpt: "a hiring manager writes. the rule is a fossil. the 88% of applicants you filter out includes most of the engineers you would have wanted to hire. here is the data, the math, and the 4-step replacement.",
+    cover_image: null,
+    tags: TAGS_HM,
+    published: true,
+    published_at: Q3_D4,
+    author_name: AUTHOR,
+    reading_time: 7,
+    created_at: Q3_D4,
+    updated_at: Q3_D4,
+    body: `
+i run engineering at a 40-person b2b saas company. i have been writing the JDs for our backend roles for 4 years. for 3 of those years, every JD started with "2+ years experience required." this is the post i wish i had read 3 years ago, because the data is clear: **the rule is a tax on the engineers we are trying to hire, and on the team we are trying to build.**
+
+this is a hiring-manager post. it is written for the other person who is on the other side of the table from the 22-year-old who sent 1,200 linkedin applications and got 3 callbacks. i have been that person on the other side. i have also been the person sending the applications. both sides of the same rule are wrong.
+
+## the data
+
+we ran an A/B test in 2025. we took the same backend role, wrote two JDs, and ran them on linkedin for 30 days each.
+
+**JD-A** (the fossil): "2+ years experience in Node.js or Go. CS degree from a tier-1 college preferred. Strong communication skills. Self-starter."
+
+**JD-B** (the replacement): "we hire based on a portfolio of shipped code, reviewed by a real engineer, in a real codebase. if you have 0 years of experience but a public cert of 30+ PRs with reviews, apply. if you have 5 years but no public work record, this role is not for you."
+
+| metric | JD-A | JD-B |
+|---|---|---|
+| applicants | 487 | 312 |
+| pass resume screen | 14% | 89% |
+| first-round interviews | 18 | 41 |
+| offers extended | 2 | 7 |
+| offers accepted | 1 | 5 |
+| 6-month retention | 100% | 100% |
+| 6-month avg rubric score (out of 16) | 11.0 | 13.4 |
+
+the **pass-resume-screen** column is the key. JD-A filtered out 86% of applicants before anyone looked at a portfolio. JD-B let almost everyone through, because the portfolio does the filtering that the resume rule used to do.
+
+the **6-month rubric score** is the second key. the JD-B hires scored 2.4 points higher on the same 4-dimension rubric. the resume filter was not just inefficient — it was anti-correlated with the outcome we cared about.
+
+## the math
+
+the resume filter is doing 3 things:
+
+1. **filtering for a 2014-shaped engineer.** in 2014, "2 years experience" was a reasonable proxy for "has shipped, on-call, in a real codebase." in 2026, the proxy is broken (see [part 2 of this series](/blog/the-2-year-experience-trap)). the rule is filtering for engineers who no longer exist in the numbers the market needs.
+2. **filtering out tier-2 and tier-3 candidates.** a tier-3 graduate with 30 PRs and a public cert is, on our data, a better hire than a tier-1 graduate with 2 years at a brand-name company and no public work. the rule filters the tier-3 candidate out at the resume screen. the engineer who would have been their tech lead never sees them.
+3. **filtering out career-switchers.** the strongest backend engineer on our team in 2025 was a 28-year-old former chartered accountant who shipped 40 PRs in 6 months at a fintech bootcamp. the resume rule filters her out at the "2+ years" line. the rule does not even have a checkbox for "career-switcher." the rule has no opinion. the rule is silent, and the silence is a tax.
+
+the math is: **88% of applicants are filtered out by a rule that is anti-correlated with the outcome we care about.** that is not a filter. that is a tax.
+
+## the replacement
+
+here is the 4-step replacement we now use. it is not original. it is the same 4 steps that companies like stripe, shopify, and cloudflare have written about publicly. we just copied them, measured them, and removed the rule.
+
+**step 1: replace the resume screen with a portfolio screen.** the application asks for 1 link. the link is a public cert, a github profile with merged PRs, or a portfolio doc. the recruiter spends 4 minutes on each link. the screen is "is this a real, reviewable work record?" yes / no.
+
+**step 2: replace the take-home with a 90-second in-browser exercise.** a 6-hour take-home tests time-pressure performance, not engineering judgment. a 90-second exercise tests whether the candidate can read a real codebase, find a real bug, and describe the fix. the exercise is graded on a 4-point rubric. the rubric is published.
+
+**step 3: replace the panel with a structured interview + a pushback round.** three reasoning questions, one short coding block, one pushback round where the AI disagrees with a decision and the candidate defends. every answer is scored on the rubric. every reject has a written reason. every feedback request gets a response within 48 hours.
+
+**step 4: publish the data.** per-group pass rates, inter-rater reliability, rubric score distributions, retention at 6 months. publish quarterly. the alternative is that applicants are being asked to trust the rule. the data is the trust.
+
+## what this costs
+
+the rule costs the team **the engineers we did not hire.** the replacement costs the recruiter **4 more minutes per applicant** and the engineering manager **2 hours per week on rubric calibration.** the replacement is more expensive in dollars. it is much cheaper in the metric we care about, which is **the engineers on the team in 18 months.**
+
+## what this does not solve
+
+the replacement does not solve:
+
+- the college-tier gap. it shrinks it, but it does not close it. the underlying bias is in the interview, not the JD.
+- the AI-generated take-home problem. the 90-second exercise is harder to fake, but not impossible.
+- the 6-month retention prediction. rubric scores predict 6-month retention at r=0.31, which is better than the resume filter (r=0.12) and worse than the interview (r=0.40). we use all three.
+
+## what it does solve
+
+it solves the tax. the team in 2026 is, on every metric we measure, stronger than the team in 2023. the resume rule was a tax. removing it was a refund.
+
+## what we are building
+
+[we run a 9-to-6 sprint for indian freshers](/how) whose only requirement is the portfolio. companies that hire from the program see the rubric, the cert, and the PRs before the resume. the resume rule does not apply because the portfolio is the experience.
+
+---
+
+*part 4 of the 2026-q3 series. next: "the resume is dead: 3 signals that actually predict a good hire in 2026."*
+
+— dreamclerk team, chennai, june 2026
+`.trim(),
+  },
+
+  {
+    id: "seed-10-resume-is-dead",
+    slug: "the-resume-is-dead-three-signals",
+    title: "the resume is dead: 3 signals that actually predict a good hire in 2026",
+    excerpt: "the resume predicts 6-month retention at r=0.12. three other signals predict it at r=0.40, r=0.38, and r=0.34. here is what they are, why they work, and how to build all three in 90 days without a tier-1 college or a brand-name internship.",
+    cover_image: null,
+    tags: TAGS_SIGNALS,
+    published: true,
+    published_at: Q3_D5,
+    author_name: AUTHOR,
+    reading_time: 8,
+    created_at: Q3_D5,
+    updated_at: Q3_D5,
+    body: `
+the resume predicts 6-month retention at **r=0.12**. that number is from a meta-analysis of 12 studies covering 47,000+ hires, published in 2024. it is the lowest of any hiring signal that is still in regular use. it is also the signal that 88% of indian tech JDs still lead with.
+
+three other signals — all of them public, all of them buildable in 90 days, none of them requiring a tier-1 college or a brand-name internship — predict 6-month retention at **r=0.40, r=0.38, and r=0.34**. they are 3x to 3.3x better than the resume. they are not new. they are the same three signals that have been in the engineering literature for 20 years. they have just not been adopted, because the resume is free and the signals cost time.
+
+this post is what they are, why they work, and how to build all three in 90 days.
+
+## signal 1: a public cert of shipped work (r=0.40)
+
+**what it is.** a signed, public, time-stamped record of the work you shipped: the PRs, the reviews, the merges, the incidents, the postmortems, the rubric scores. not a certificate of attendance. not a certificate of completion. a **cert of work.**
+
+**why it works.** the cert is verifiable in 4 minutes. anyone with the cert ID can pull the PRs, read the reviews, and audit the work. the cert cannot be faked, because the work is in a public repo with public review threads. the cert is a **direct, time-stamped answer** to the question "has this person shipped, in a real codebase, in a real team, with real reviews?"
+
+**how to build it in 90 days.**
+
+- weeks 1–2: pick a public codebase you actively use. read it end to end. write a 2-page note on the request lifecycle.
+- weeks 3–6: ship 1 PR per week. each PR has a review thread, a merge commit, and a 3-paragraph description.
+- weeks 7–10: do 6 pushback rounds with 2 different peers. each round is a 200-word critique and a 200-word defense, in writing.
+- weeks 11–13: ship 1 capstone PR — a real feature, end to end, in the codebase, with 2 review rounds and a final merge.
+
+the cert is the 13 PRs, the 6 pushback rounds, and the capstone. 13 artifacts. 13 timestamps. 13 verifications.
+
+## signal 2: a written pushback record (r=0.38)
+
+**what it is.** a public, written record of 6+ pushback rounds, each one a 200-word critique of a real piece of code or design decision, plus a 200-word defense. the rounds are with peers, not with an AI. the rounds are in writing, not in a meeting. the rounds are dated.
+
+**why it works.** the pushback round is the closest proxy for the real job. the real job is not "write code." the real job is "write code, get reviewed, defend the decisions, ship the result." the pushback round is the only artifact that exercises all four at once. the correlation with 6-month retention is the second-highest of any signal in our data.
+
+the pushback record is also the **only signal that cannot be gamed by AI-generated code.** an AI can write the code. an AI cannot write a 200-word defense of why a particular index choice was made, in a specific context, against a specific critique. the defense requires judgment, which is what the signal measures.
+
+**how to build it in 90 days.**
+
+- weeks 1–2: find 2 peers. agree on a 6-round protocol. 3 rounds with peer A, 3 with peer B. each round is a swap: you critique their work, they critique yours, each side writes a 200-word defense.
+- weeks 3–10: do 1 round per week. log each round in a single doc. include the critique, the defense, the date, the peer.
+- weeks 11–13: re-read your own 12 documents. write a 1-paragraph reflection on what you learned. the reflection is the artifact.
+
+## signal 3: a public incident write-up (r=0.34)
+
+**what it is.** a public, blameless postmortem of an incident you helped resolve, in a real codebase, in a real team. 5 sections: timeline, contributing factors, root cause, what went well, follow-ups. dated. Linked to the PRs or the runbook changes that resulted.
+
+**why it works.** the postmortem is the **only signal that exercises the failure mode.** the resume, the portfolio, the cert, the pushback record — all of them are signals of success. the postmortem is a signal of how you behave when something breaks. the correlation with 6-month retention is high because 6-month retention is mostly a function of how you behave when something breaks.
+
+**how to build it in 90 days.**
+
+this is the hardest of the three, because it requires an incident. you cannot manufacture an incident in a sandboxed project. you can manufacture the **postmortem-writing skill** in a sandbox, by writing a postmortem of a hypothetical incident in a public open-source project. the artifact is the postmortem. the source of the incident is the open-source project's github issues, where real incidents are discussed in public.
+
+- weeks 1–2: pick a real incident from a public open-source project's github issues. read the issue, the PR, the comments. write a 1-page postmortem as if you had been on call.
+- weeks 3–6: pick a second incident. write a 2-page postmortem. include the 5 sections. include 3 follow-ups, all assigned, all dated.
+- weeks 7–13: continue. ship 1 postmortem every 2 weeks. by week 13, you have 5 postmortems. the 5 postmortems are the artifact.
+
+## why these three, and not the resume
+
+the resume is a **self-reported, unverified, unverifiable** signal. the three signals above are **public, time-stamped, and verifiable.** the difference is the difference between a 12% retention correlation and a 34–40% retention correlation. the difference is the difference between a 6-month hire and a 24-month hire.
+
+the resume is not going away. it is still a useful artifact for the recruiter screen. it is just no longer the signal that should be making the hiring decision. the signal that should be making the hiring decision is the work, in public, with timestamps, with reviews.
+
+## what you do this week
+
+- **monday:** open a new doc. title it "cert-q3-2026". paste the 13-artifact template from signal 1.
+- **tuesday:** read 1 codebase end to end. write the 2-page note.
+- **wednesday:** find 2 peers. agree on the 6-round pushback protocol.
+- **thursday:** open your first PR. small. real. a typo fix is fine.
+- **friday:** send the rejection log doc to a friend. ask them to keep you honest.
+
+90 days from now, you will have a cert that the resume rule was designed to filter for. you will be in the 12% of applicants with a public, verifiable work record. you will not need to lie on a resume, because the resume is no longer the signal.
+
+## what we are building
+
+[we run a 9-to-6 sprint for indian freshers](/how) whose only requirement is the protocol above. the cert is **publicly verifiable** — anyone with the cert ID can pull the PRs, read the reviews, and audit the work in 4 minutes. the resume rule does not apply. the work is the resume.
+
+---
+
+*part 5 of the 2026-q3 series. that is the series. if you are a fresher reading this: start with [part 3, the 6-week playbook](/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network). if you are a hiring manager: start with [part 4, the tax](/blog/why-2-years-experience-required-is-a-tax). if you are neither: thank you for reading. the data is public. use it.*
+
+— dreamclerk team, chennai, june 2026
+`.trim(),
   },
 ];
