@@ -1,7 +1,51 @@
 # DreamClerk — Full content manifest (llms-full)
 
-> Auto-generated manifest of every published blog post, in full.
+> Auto-generated manifest of every public page and every published blog post, in full.
 > For LLM and AI-crawler ingestion. The shorter index is at `/llms.txt`.
+
+---
+
+# Site pages — summaries
+
+## / (home)
+
+DreamClerk is a career simulation platform for Indian undergraduates. You apply, get hired by an AI recruiter, ship code in a real in-browser IDE, get reviewed, and leave with a verified work record — not a completion certificate. Free during beta. Source: https://www.dreamclerk.com/
+
+## /how (how it works)
+
+The 8-step protocol: apply, interview, offer, onboard, 5 sprints of PRs, capstone, review round, signed certificate. Each step is described in plain English with no click-to-open. Real PRs, real reviews, real incidents. Source: https://www.dreamclerk.com/how
+
+## /workspace (the in-browser work surface)
+
+8 tracks · 24 gigs · Monaco editor, sandboxed terminal, Kubernetes, Figma, Tally ledger, TDS challans, Jupyter. The full in-browser work surface. Source: https://www.dreamclerk.com/workspace
+
+## /tracks (6 engineering tracks)
+
+Frontend, AI/ML, backend, data, platform/SRE, security. Each track has an 8-sprint plan, capstone, and hiring partner. One sprint = 5–8 tickets. Ship to production. Source: https://www.dreamclerk.com/tracks
+
+## /companies (6 simulated employers)
+
+6 simulated companies: fintech, B2B SaaS, AI infra, consumer AI, data warehouse, appsec. Real bugs, real tech leads, real ticket queues. Source: https://www.dreamclerk.com/companies
+
+## /faq (19 questions, no click-to-open)
+
+The most common questions about DreamClerk — basics, hiring, the AI recruiter, logistics. Visible on load. Rubric + bias audit linked. Source: https://www.dreamclerk.com/faq
+
+## /about (the team)
+
+Founded in Chennai in 2025 by Ananya, Raghav, and Priya. Bootstrapped. The team page, the advisors, the press, the funding story. Source: https://www.dreamclerk.com/about
+
+## /privacy
+
+We collect email + sprint data. We don't sell, we don't share without permission, we don't keep a payment record after cohort. Plain English. Source: https://www.dreamclerk.com/privacy
+
+## /terms
+
+Terms of use for DreamClerk. Written in plain English, governed by the laws of India, reviewed every quarter. If we change them, we email you. Source: https://www.dreamclerk.com/terms
+
+---
+
+# Blog posts (in chronological order)
 
 ---
 
