@@ -1,20 +1,17 @@
 // ─── Vite plugin: hardcode SEO routes into the static shell ────────────────
 //
-// Runs once at build time. Reads src/lib/seoRoutes.js, serializes the
-// per-route SEO data + JSON-LD, and injects into index.html as a
-// single <script id="__SEO__" type="application/json"> block in <head>.
-// A tiny inline IIFE in the same block reads it on parse and swaps
-// <title>, <meta>, <link rel="canonical">, and <script type="application/ld+json">
-// to match the current path — before React hydrates, before the
-// SPA rewrites resolve, and crucially, before Googlebot sees the page.
+// Runs once at build time. Serializes 14 routes' SEO data + per-post
+// BlogPosting JSON-LD into a <script id="__SEO_DATA__" type="application/json">
+// block in <head>, plus a tiny inline IIFE that swaps <title>, <meta>,
+// <link rel="canonical">, and <script type="application/ld+json"> on
+// first paint based on location.pathname — before React hydrates.
 //
-// The result: every blog post has its own title, description, canonical,
-// og:url, and BlogPosting JSON-LD rendered in static HTML, even if the
-// crawler never executes the JS bundle.
+// IMPORTANT: Vite's transformIndexHtml hook, when it returns a string,
+// REPLACES the whole HTML. To inject, we must receive the html
+// parameter and return html with our snippet spliced in. (Returning
+// a bare string was the bug that made the previous build render blank.)
 
-// (no esbuild import — keep the plugin hermetic and free of deps)
-
-const HEAD_INJECT = `
+const HEAD_INJECT_TEMPLATE = `
 <!-- /__SEO_DATA__ -->
 <script id="__SEO_DATA__" type="application/json">__SEO_JSON__</script>
 <script>
@@ -36,7 +33,6 @@ const HEAD_INJECT = `
     setMeta('twitter:title', r.title, false);
     setMeta('twitter:description', r.description, false);
     if (r.jsonLd) {
-      // Mark any pre-existing BlogPosting JSON-LD to skip — we replace with our own.
       var scripts = document.querySelectorAll('script[type="application/ld+json"]');
       scripts.forEach(function(s){
         try {
@@ -44,15 +40,12 @@ const HEAD_INJECT = `
           if (j && (j['@type'] === 'BlogPosting' || j['@type'] === 'BreadcrumbList' || j['@type'] === 'FAQPage')) s.setAttribute('data-seo-replace', '1');
         } catch(e){}
       });
-      // Inject our own BlogPosting + BreadcrumbList JSON-LD for posts.
       r.jsonLd.forEach(function(payload){
         var s = document.createElement('script');
         s.type = 'application/ld+json';
         s.textContent = JSON.stringify(payload);
         document.head.appendChild(s);
       });
-    } else if (r.path === '/faq') {
-      // Already emitted FAQPage in the static shell — leave it.
     }
   } catch (e) { /* silent */ }
   function setMeta(name, value, byName){
@@ -82,13 +75,19 @@ export default function seoInjectPlugin() {
   return {
     name: "dreamclerk-seo-inject",
     enforce: "pre",
-    async transformIndexHtml() {
-      // Inline the route data — keep this plugin hermetic and
-      // fail-safe. To edit routes, edit the inline JSON below OR edit
-      // src/lib/seoRoutes.js and run the post-build sync script.
+    // Receive the original html and return the modified html — never
+    // return a bare string (that replaces the whole file).
+    transformIndexHtml(html) {
       const data = buildData();
       const json = JSON.stringify(data).replace(/</g, "\\u003c");
-      return HEAD_INJECT.replace("__SEO_JSON__", json);
+      const inject = HEAD_INJECT_TEMPLATE.replace("__SEO_JSON__", json);
+      // Insert right before </head> so the IIFE runs after the parser
+      // builds <head> but before the body paints. If </head> isn't
+      // there for some reason, fall back to prepending.
+      if (html.includes("</head>")) {
+        return html.replace("</head>", inject + "</head>");
+      }
+      return inject + html;
     },
   };
 }
@@ -98,8 +97,6 @@ function buildData() {
   // if that module is broken. Keep in sync with seedPosts.js.
   const SITE = "https://www.dreamclerk.com";
   const blogPosting = (p) => ({
-    // Flatten: the IIFE reads `r.path`, `r.title`, etc. directly. The
-    // JSON-LD payload is nested under `jsonLd` so the IIFE can inject it.
     path: p.path,
     title: p.title,
     description: p.description,
