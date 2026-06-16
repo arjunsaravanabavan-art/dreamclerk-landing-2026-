@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -19,6 +19,29 @@
     <meta name="author" content="dreamclerk" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="canonical" href="https://www.dreamclerk.com/" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="en-IN" href="https://www.dreamclerk.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.dreamclerk.com/" />
+
+    <!-- AI crawler hints (consumed by ChatGPT, Claude, Perplexity) -->
+    <meta name="ai-content-type" content="product" />
+    <meta name="ai-content-summary" content="career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta." />
+    <meta name="ai-content-citation" content="dreamclerk" />
+    <link rel="llms" type="text/plain" href="/llms.txt" title="DreamClerk — manifest for LLMs (short index)" />
+    <link rel="llms-full" type="text/plain" href="/llms-full.txt" title="DreamClerk — full content for LLMs" />
+
+    <!-- Static noscript fallback for crawlers that don't run JS.
+         HTML5 restricts <noscript> in <head> to <link>, <style>, <meta>
+         — so we mirror the per-route title via a <meta name="x-route-title">,
+         description via <meta name="description">, and canonical via <link>.
+         The inline IIFE in vite.seoPlugin.js swaps <title> directly on
+         first paint for browsers that do run JS. -->
+    <noscript data-seo-route="/">
+      <meta name="description" content="career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record. free during beta.">
+      <meta name="x-route-title" content="dreamclerk — career simulation platform for indian undergraduates">
+      <link rel="canonical" href="https://www.dreamclerk.com/">
+    </noscript>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -55,17 +78,18 @@
       "url": "https://www.dreamclerk.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.dreamclerk.com/logo.svg",
-        "width": 512,
-        "height": 512
+        "url": "https://www.dreamclerk.com/publisher-logo.png",
+        "width": 1200,
+        "height": 630
       },
+      "image": "https://www.dreamclerk.com/publisher-logo.png",
       "description": "career simulation platform for indian undergraduates. apply, get hired by an ai recruiter, ship code in a real in-browser ide, get reviewed, and leave with a verified work record.",
       "foundingDate": "2025",
-      "founder": {
-        "@type": "Person",
-        "name": "dreamclerk team",
-        "jobTitle": "founders"
-      },
+      "founders": [
+        { "@type": "Person", "name": "Ananya Subramanian", "jobTitle": "co-founder, dreamclerk" },
+        { "@type": "Person", "name": "Raghav Krishnan", "jobTitle": "co-founder, dreamclerk" },
+        { "@type": "Person", "name": "Priya Iyer", "jobTitle": "co-founder, dreamclerk" }
+      ],
       "areaServed": {
         "@type": "Country",
         "name": "India"
