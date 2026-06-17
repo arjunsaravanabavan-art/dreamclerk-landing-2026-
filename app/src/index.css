@@ -5767,3 +5767,167 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
 .adm0__del:hover { background: var(--err); color: var(--paper); border-color: var(--err); }
 .adm0__del-confirm { background: var(--err); color: var(--paper); border-color: var(--err); }
 .adm0__del-confirm:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* =========================================================
+   MOBILE PASS — overrides to fix narrow-viewport issues
+   ========================================================= */
+
+/* Burger button — only visible on mobile, hidden on desktop. */
+.nav__burger {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color var(--d-fast) var(--ease), background var(--d-fast) var(--ease);
+}
+.nav__burger:hover { background: var(--paper-2); border-color: var(--ink); }
+.nav__burger:active { transform: scale(0.97); }
+.nav__burger span {
+  display: block;
+  width: 18px;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 1px;
+  transition: transform 220ms var(--ease), opacity 180ms var(--ease);
+  transform-origin: center;
+}
+.nav__burger.is-open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav__burger.is-open span:nth-child(2) { opacity: 0; }
+.nav__burger.is-open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+/* Nav on mobile (≤880px) */
+@media (max-width: 880px) {
+  .nav__inner { grid-template-columns: 1fr auto; gap: 12px; height: 60px; }
+  .nav__links {
+    /* off-canvas drop sheet */
+    display: block;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    padding: 24px clamp(20px, 4vw, 32px) 32px;
+    z-index: 49;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 280ms var(--ease), opacity 220ms var(--ease);
+    justify-content: flex-start;
+    gap: 0;
+  }
+  .nav__links.is-open {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav__links a {
+    display: block;
+    padding: 18px 0;
+    font-size: 18px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-2);
+    text-transform: lowercase;
+  }
+  .nav__links a:last-child { border-bottom: 0; }
+  .nav__links a[aria-current="page"]::after { display: none; }
+  .nav__burger { display: flex; }
+  .nav__status { display: none; } /* save horizontal space — hamburger replaces it */
+}
+
+/* Hero meta strip — 4 chips + 2 dots don't wrap nicely on narrow screens.
+   Stack: chips on their own rows, hide the separator dots on mobile. */
+@media (max-width: 640px) {
+  .hero__meta { gap: 8px; font-size: 11px; }
+  .hero__meta > span:not(.chip) { display: none; } /* hide "·" separators */
+  .hero__meta .chip[style*="margin-left"] { margin-left: 0 !important; } /* stop the queue chip from being pushed right */
+  .hero__ctas .tag { width: 100%; } /* the "for indian undergraduates…" caption goes to its own line */
+  .hero__ctas { gap: 10px; }
+}
+
+/* Ticker — on narrow screens, the right-aligned score is squeezed off.
+   Force score onto its own row, full width, with a slight color shift
+   so the user still reads the "91/100" beat. */
+@media (max-width: 540px) {
+  .ticker__list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .ticker__list li .score {
+    margin-left: 0;
+    align-self: flex-end;
+    font-size: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+}
+
+/* Blog post page — long code blocks overflow the article column on
+   narrow viewports. Force pre/code to scroll horizontally inside the
+   block instead of breaking the layout, and make inline code
+   word-break gracefully. */
+.bp3__body p,
+.bp3__body li,
+.bp3__body h2,
+.bp3__body h3 { overflow-wrap: anywhere; word-break: break-word; }
+.bp3__body pre,
+.bp3__pre,
+.md__pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+.bp3__body code { word-break: break-word; }
+
+/* Blog post header: meta strip wraps but the dot separators cause ugly
+   orphan punctuation on small screens. Hide the dots on mobile. */
+@media (max-width: 540px) {
+  .bp3__meta { gap: 6px; }
+  .bp3__meta .dot { display: none; }
+  .bp3__head::before { display: none; } /* the left orange rule hugs the screen edge on mobile */
+  .bp3__title { font-size: clamp(28px, 8vw, 40px); }
+  .bp3__404 { font-size: 28px; }
+}
+
+/* Final / CTA band — quick-apply input + button stack on mobile so
+   the button doesn't get crushed under a 16-char-wide input. */
+@media (max-width: 540px) {
+  .quick-apply { flex-direction: column; }
+  .quick-apply input { width: 100%; }
+  .pulse-row { flex-wrap: wrap; gap: 4px 10px; }
+}
+
+/* Companies + Tracks + Stats + Testimonials — these are already
+   responsive at the existing breakpoints, but add an extra safety
+   pass for very narrow viewports (<380px, e.g. iPhone SE 1st gen). */
+@media (max-width: 380px) {
+  .hero__title { font-size: 42px; }
+  .section-head h2 { font-size: 24px; }
+  .ticker__head { font-size: 10px; }
+  .nav__inner { gap: 8px; }
+  .nav__brand span { font-size: 18px; }
+}
+
+/* Honor reduced motion for the mobile-menu transform. */
+@media (prefers-reduced-motion: reduce) {
+  .nav__links { transition: none; }
+  .nav__burger span { transition: none; }
+}
+
