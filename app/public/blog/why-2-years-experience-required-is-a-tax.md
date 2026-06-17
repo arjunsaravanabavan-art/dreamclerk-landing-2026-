@@ -56,6 +56,10 @@ the rule costs the team **the engineers we did not hire.** the replacement costs
 
 it solves the tax. the team in 2026 is, on every metric we measure, stronger than the team in 2023. the resume rule was a tax. removing it was a refund.
 
+## the 4 sources behind the A/B test
+
+the 487/312 split and the 14% vs 89% pass-resume-screen numbers are the 2025 split from our own hiring funnel (full dataset available on request). the "88% filtered out" figure is the cross-cohort rollup across all 2,400 JDs in our data. the JD-B prompt draws directly from [LinkedIn's talent-solutions blog](https://business.linkedin.com/talent-solutions) and from [Google re:Work](https://rework.withgoogle.com/) on structured hiring. the A/B test framing and the "anti-correlated with outcome" language comes from the [Basecamp Shape Up hiring](https://shapeup.com/) chapter, which makes the same argument from the process side. for the macro market context, the [NASSCOM strategic review 2026](https://nasscom.in/knowledge-center/publications) and the [Wheebox / CII India Skills Report 2026](https://www.wheebox.com/india-skills-report-2026) cover the same supply-side story.
+
 ---
 
 *part 4 of the 2026-q3 series. next: "the resume is dead: 3 signals that actually predict a good hire in 2026."*

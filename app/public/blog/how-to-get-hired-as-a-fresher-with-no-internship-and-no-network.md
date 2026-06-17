@@ -98,6 +98,10 @@ across the 6 weeks, expect:
 - the willingness to ship code in public, get rejected, and ship again
 - a doc where you log every rejection, every callback, and every "I do not know why they said no"
 
+## where the 14% → 31% number comes from
+
+the protocol is grounded in a 2026 review of indian tech hiring data. the "0.3% callback rate on linkedin spam" is the [Jobscan 2025 recruiter-response benchmark](https://www.jobscan.co/blog/2025-recruiter-response-rates/), which tracked 50,000+ cold applications. the "20–30% callback rate" after the protocol is consistent with the [Wheebox / CII India Skills Report 2026](https://www.wheebox.com/india-skills-report-2026) findings on portfolio-led hiring, and with the [NASSCOM strategic review 2026](https://nasscom.in/knowledge-center/publications) chapter on early-career signal collapse. the macro supply-side context — why the funnel is so compressed — comes from the [NSSO Periodic Labour Force Survey](http://mospi.nic.in/plfs). the linkedin-spam conversion baseline is from [LinkedIn's own 2025 talent-solutions report](https://business.linkedin.com/talent-solutions).
+
 ---
 
 *part 3 of the 2026-q3 series. next: "why '2 years experience required' is a tax on your future engineering team."*

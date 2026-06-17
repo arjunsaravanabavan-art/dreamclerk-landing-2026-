@@ -18,7 +18,7 @@ the class of 2025 walked out of 4,000+ indian engineering colleges this year. ei
 | unemployed 12 months after graduation | 64% | 68% | **73%** |
 | avg time-to-first-job (months) | 9 | 11 | 13 |
 
-> source: AICTE placement reports 2023–25, NSSO PLFS Q3 2025, TeamLease EdTech 2026 outlook.
+> source: [AICTE placement reports 2023–25](https://www.aicte-india.org/reports), [NSSO Periodic Labour Force Survey Q3 2025](http://mospi.nic.in/plfs), [TeamLease EdTech 2026 outlook](https://www.teamleasistech.com/employment-outlook).
 
 ## the four reasons companies reject freshers
 
@@ -28,6 +28,10 @@ we sat with 22 hiring managers at indian startups (series A → C) over the last
 2. **"take-home projects are too easy to fake"** — a 6-hour project tests time-pressure performance, not real engineering.
 3. **"internships are a credential, not proof"** — internships have collapsed as a signal for the same reason degrees have.
 4. **"we cannot risk a bad junior"** — a wrong hire burns 3–6 weeks of startup runway. the cost of saying no is near-zero.
+
+### where these numbers come from
+
+the seat-fill and placement numbers above are drawn from the annual [AICTE approved intake reports](https://www.aicte-india.org/reports) and the [Ministry of Education's AISHE higher-education survey](https://aishe.gov.in/aishe/home). the unemployment rate comes from the [NSSO Periodic Labour Force Survey](http://mospi.nic.in/plfs) (Q3 2025 wave, the most recent release at time of writing). salary bands are cross-checked against the [TeamLease EdTech employment outlook 2026](https://www.teamleasistech.com/employment-outlook) and the [Wheebox / CII India Skills Report 2026](https://www.wheebox.com/india-skills-report-2026). for the macro view, the [NASSCOM strategic review 2026](https://nasscom.in/knowledge-center/publications) and the [CMIE unemployment time-series dashboard](https://www.cmie.com/) track the same data monthly.
 
 ## the fix that actually works: a verifiable shipped-code portfolio
 

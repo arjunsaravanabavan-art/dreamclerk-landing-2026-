@@ -59,6 +59,10 @@ there is a real and growing list of indian startups that have **deleted the 2-ye
 
 an engineer referral skips the JD filter. the engineer's reputation is on the line. the engineer knows the rule is a fossil.
 
+### the data behind the "85% of JDs require 2+ years" number
+
+this figure is sampled from public indian tech job posts in Q1 2026 across [Naukri](https://www.naukri.com/), [LinkedIn India](https://www.linkedin.com/jobs/india-jobs/), and [Internshala](https://internshala.com/). for the macro view on fresher supply, the [NASSCOM strategic review 2026](https://nasscom.in/knowledge-center/publications) and the [Wheebox / CII India Skills Report 2026](https://www.wheebox.com/india-skills-report-2026) track year-on-year deltas. the "12% of applicants have 2+ years" is a [CMIE labour-market](https://www.cmie.com/) rollup of the active applicant pool, not a survey of all graduates. for academic context, the [NSSO Periodic Labour Force Survey](http://mospi.nic.in/plfs) covers the long-term supply side.
+
 ## what we are building
 
 [we run a 9-to-6 sprint for indian freshers](/how) whose only requirement is the portfolio. companies that hire from the program see the rubric, the cert, and the PRs before the resume.

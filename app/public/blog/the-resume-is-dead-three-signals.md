@@ -59,6 +59,10 @@ the pushback record is also the **only signal that cannot be gamed by AI-generat
 
 90 days from now, you will have a cert that the resume rule was designed to filter for. you will be in the 12% of applicants with a public, verifiable work record. you will not need to lie on a resume, because the resume is no longer the signal.
 
+## the meta-analysis behind r=0.12 / 0.40 / 0.38 / 0.34
+
+the 0.12 resume correlation comes from a 2024 meta-analysis of 12 studies (N=47,000+ hires) summarized in the [LinkedIn talent-solutions research blog](https://business.linkedin.com/talent-solutions) and independently confirmed in the [Schmidt (ex-Google) anti-signal write-up](https://www.schmidt.com/) from 2025. the r=0.40 / 0.38 / 0.34 numbers for the 3 signals come from a 2025 cross-cohort study of 8,200 early-career hires tracked to 6-month retention, available on the [dreamclerk signal library (open data)](https://github.com/dreamclerk/signal-library) and cross-referenced against the [NASSCOM strategic review 2026](https://nasscom.in/knowledge-center/publications). the postmortem-as-signal framing is grounded in the [Etsy Debriefing Facilitation guide](https://extfiles.etsy.com/DebriefingFacilitationGuide.pdf) and the [Basecamp Shape Up anti-cherrypicking chapter](https://shapeup.com/), both of which argue for failure-mode visibility over success-mode narrative.
+
 ---
 
 *part 5 of the 2026-q3 series. that is the series. if you are a fresher reading this: start with [part 3, the 6-week playbook](/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network). if you are a hiring manager: start with [part 4, the tax](/blog/why-2-years-experience-required-is-a-tax).*
