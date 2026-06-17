@@ -5346,8 +5346,8 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
    placed right after the hero on the landing page.
    6 quote cards, alternating filled / ghost, scrolling L→R.
    ========================================================= */
-.mentions { padding: 64px 0 40px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-2); }
-.mentions__wrap { max-width: 1100px; }
+.mentions { padding: 64px 0 40px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--paper-2); overflow: hidden; }
+.mentions__wrap { max-width: 1100px; overflow: hidden; }
 .mentions__head {
   display: flex;
   align-items: center;
@@ -5481,26 +5481,28 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
 .blog3__post-link:hover { padding-left: 12px; }
 .blog3__post-link:hover .blog3__post-cta { color: var(--ok); gap: 14px; }
 .blog3__post-meta {
-  display: flex; gap: 8px; align-items: center;
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
   font-family: var(--mono); font-size: 11px;
   text-transform: uppercase; letter-spacing: 0.1em;
   color: var(--muted);
 }
 .blog3__post-date { color: var(--ink); font-weight: 600; }
 .blog3__post-rt, .blog3__post-tags { color: var(--muted); }
-.blog3__post-tags { display: inline-flex; gap: 6px; }
+.blog3__post-tags { display: inline-flex; gap: 6px; flex-wrap: wrap; }
 .blog3__post-tag {
   padding: 1px 8px; border: 1px solid var(--line);
   border-radius: 3px; background: var(--paper-2);
+  white-space: nowrap;
 }
 .blog3__post-title {
   font-family: var(--display);
-  font-size: clamp(26px, 3.4vw, 36px);
+  font-size: clamp(22px, 3.4vw, 36px);
   line-height: 1.1;
   letter-spacing: -0.025em;
   margin: 0;
   color: var(--ink);
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 .blog3__post-excerpt {
   font-family: var(--serif); font-style: italic;
