@@ -67,3 +67,28 @@ test-responsive.mjs
 local-audit.mjs
 test-shots/
 local-shots/
+audit-shots/
+shots/
+
+# Audit/debug one-off scripts and outputs
+audit.mjs
+dump.mjs
+shot.py
+audit-findings.json
+audit-out.json
+taste-dial-settings.json
+generate_*.py
+
+# Stray debug PNGs (verify-*, hero-after, snap-chat, etc.)
+verify-*.png
+hero-verbs-*.png
+hero-after.png
+snap-chat*.png
+debug.png
+full.png
+_full*.png
+_hero.png
+_modal*.png
+_screen-*.png
+_v1.png
+0[0-9]-*.png
