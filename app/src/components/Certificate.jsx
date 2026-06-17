@@ -147,6 +147,7 @@ export default function Certificate() {
                       className="cert__url-btn"
                       onClick={copyUrl}
                       aria-label="Copy verify URL"
+                      style={{ minHeight: 44 }}
                     >
                       <span className="k">{l.val}</span>
                       <span className="cert__url-copied" aria-hidden="true">{copied ? "  ✓ copied" : ""}</span>

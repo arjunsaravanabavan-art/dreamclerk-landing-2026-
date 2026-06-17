@@ -108,9 +108,8 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
           <span>● live · waitlist · {count != null ? count.toLocaleString("en-IN") + " in queue" : "joining…"}</span>
           <button
             type="button"
-            className="btn"
+            className="btn modal__close"
             onClick={onClose}
-            style={{ marginLeft: "auto", padding: "4px 10px", fontSize: 12 }}
             aria-label="Close"
           >
             esc ✕

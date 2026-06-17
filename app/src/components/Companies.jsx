@@ -57,14 +57,20 @@ export default function Companies() {
                 key={c.code}
                 className={i === active ? "active" : ""}
                 onMouseEnter={() => setActive(i)}
+                onClick={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                tabIndex={0}
+                role="button"
+                aria-pressed={i === active}
+                aria-label={`Select ${c.name} (${c.type}, ${c.seats} seats)`}
               >
-                <td className="mono">{c.code}</td>
-                <td className="name">{c.name}</td>
-                <td>{c.type}</td>
-                <td className="num">{c.seats}</td>
-                <td>{c.lead}</td>
-                <td className="muted">{c.focus}</td>
-                <td>
+                <td className="mono" data-th="code">{c.code}</td>
+                <td className="name" data-th="company">{c.name}</td>
+                <td data-th="type">{c.type}</td>
+                <td className="num" data-th="live seats">{c.seats}</td>
+                <td data-th="tech lead">{c.lead}</td>
+                <td className="muted" data-th="stack">{c.focus}</td>
+                <td data-th="status">
                   <span className={"status-pill " + (c.live ? "on" : "off")}>
                     <span className="dot" />
                     {c.live ? "open" : "soon"}

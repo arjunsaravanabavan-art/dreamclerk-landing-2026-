@@ -74,6 +74,31 @@ export default function App() {
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
 
+  // Custom cursor: hide native cursor on desktop with a fine pointer.
+  // Per CLAUDE.md hard rule: cursor: none on >1024px only.
+  useEffect(() => {
+    let hide = false;
+    const onMove = (e) => {
+      if (e.pointerType !== "mouse" || window.innerWidth <= 1024) {
+        if (hide) { document.body.classList.remove("has-cursor-hidden"); hide = false; }
+        return;
+      }
+      if (!hide) { document.body.classList.add("has-cursor-hidden"); hide = true; }
+    };
+    const onLeave = () => {
+      if (hide) { document.body.classList.remove("has-cursor-hidden"); hide = false; }
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerleave", onLeave);
+    window.addEventListener("blur", onLeave);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("blur", onLeave);
+      document.body.classList.remove("has-cursor-hidden");
+    };
+  }, []);
+
   // Make .reveal sections visible on scroll. Re-runs on every route change
   // so the legal pages (which also use .reveal) animate on entry.
   useReveal(path);

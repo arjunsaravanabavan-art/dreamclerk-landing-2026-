@@ -95,8 +95,8 @@ export default function Workspace() {
               <span className="dot" />
               <span className="dot" />
               <span className="dot live" />
-              <span style={{ marginLeft: 8 }}>nexara/&lt;your-name&gt; — sprint-04 · fix-auth-middleware</span>
-              <span style={{ marginLeft: "auto" }}>● {ci}</span>
+              <span className="ws__ide-path">nexara/&lt;your-name&gt; — sprint-04 · fix-auth-middleware</span>
+              <span className="ws__ide-status-pill">● {ci}</span>
             </div>
             <div className="ws__ide-tabs">
               {["auth.ts", "auth.test.ts", "package.json", "README.md"].map((t, i) => (

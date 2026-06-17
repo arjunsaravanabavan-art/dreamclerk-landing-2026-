@@ -54,7 +54,7 @@
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --serif: "Instrument Serif", ui-serif, Georgia, serif;
 
-  --t-xxl: clamp(48px, 7.5vw, 108px);
+  --t-xxl: clamp(48px, 7.5vw, 96px); /* 6rem ceiling per CLAUDE.md (hard rule) */
   --t-xl:  clamp(36px, 5.2vw, 72px);
   --t-l:   clamp(26px, 3.4vw, 44px);
   --t-m:   clamp(18px, 1.6vw, 22px);
