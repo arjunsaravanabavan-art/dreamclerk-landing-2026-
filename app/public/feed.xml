@@ -9,7 +9,7 @@
     <description>field notes from building dreamclerk. the data, the rejects, the rubric changes. nothing polished after the fact.</description>
     <language>en-IN</language>
     <atom:link href="https://www.dreamclerk.com/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>2026-06-16T10:00:00.000Z</lastBuildDate>
+    <lastBuildDate>2026-07-15T09:00:00.000Z</lastBuildDate>
 
     <item>
       <title>the 90-second internship interview that changed 14% of outcomes</title>
@@ -129,6 +129,102 @@
       <content:encoded><![CDATA[the resume predicts 6-month retention at r=0.12. three other signals predict it at r=0.40, r=0.38, and r=0.34. here is what they are, why they work, and how to build all three in 90 days without a tier-1 college or a brand-name internship.]]></content:encoded>
       <category>signals</category>
       <category>hiring</category>
+    </item>
+
+    <item>
+      <title>what a good postmortem looks like — a worked example, with the 5 sections, in 30 minutes</title>
+      <link>https://www.dreamclerk.com/blog/what-a-good-postmortem-looks-like</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/what-a-good-postmortem-looks-like</guid>
+      <pubDate>2026-07-15T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>a good postmortem takes 30 minutes to write. it has 5 sections. it is blameless. it is dated. it has follow-ups that are assigned and dated. here is the worked example, the template, and the 3 sentences you should never write in one.</description>
+      <content:encoded><![CDATA[a good postmortem takes 30 minutes to write. it has 5 sections. it is blameless. it is dated. it has follow-ups that are assigned and dated. here is the worked example, the template, and the 3 sentences you should never write in one.]]></content:encoded>
+      <category>postmortem</category>
+      <category>engineering culture</category>
+    </item>
+
+    <item>
+      <title>india it services — the fresher pipeline is broken, and it's not the colleges' fault</title>
+      <link>https://www.dreamclerk.com/blog/india-it-services-the-fresher-pipeline-is-broken-and-it-is-not-the-colleges-fault</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/india-it-services-the-fresher-pipeline-is-broken-and-it-is-not-the-colleges-fault</guid>
+      <pubDate>2026-07-13T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>tcs, infosys, wipro, and hcl hired 1.4 L freshers in fy24, then 87,000 in fy25. the 84% drop is not a market correction. it is a structural break. here is the data, the three causes, and what the colleges cannot fix because the cause is in the buyer.</description>
+      <content:encoded><![CDATA[tcs, infosys, wipro, and hcl hired 1.4 L freshers in fy24, then 87,000 in fy25. the 84% drop is not a market correction. it is a structural break. here is the data, the three causes, and what the colleges cannot fix because the cause is in the buyer.]]></content:encoded>
+      <category>india</category>
+      <category>it services</category>
+    </item>
+
+    <item>
+      <title>building the in-browser ide — a postmortem of the 4.2s cold-start regression</title>
+      <link>https://www.dreamclerk.com/blog/building-the-in-browser-ide-a-postmortem</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/building-the-in-browser-ide-a-postmortem</guid>
+      <pubDate>2026-07-10T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>we shipped a regression in june 2026 that made the in-browser ide cold-start 4.2s instead of 200ms. here is the postmortem: timeline, contributing factors, root cause, what went well, follow-ups. dated, blameless, public.</description>
+      <content:encoded><![CDATA[we shipped a regression in june 2026 that made the in-browser ide cold-start 4.2s instead of 200ms. here is the postmortem: timeline, contributing factors, root cause, what went well, follow-ups. dated, blameless, public.]]></content:encoded>
+      <category>postmortem</category>
+      <category>engineering</category>
+    </item>
+
+    <item>
+      <title>the cost of a bad junior hire is not the onboarding — it's the 6 months of attention after</title>
+      <link>https://www.dreamclerk.com/blog/the-cost-of-a-bad-junior-hire-is-not-the-onboarding</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/the-cost-of-a-bad-junior-hire-is-not-the-onboarding</guid>
+      <pubDate>2026-07-08T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>we ran the numbers on 47 bad junior hires across 12 indian mid-size startups in 2024–25. the onboarding is 18 LPA. the 6 months after is 38 LPA. here is the breakdown, the math, and the 4 questions that would have caught 41 of the 47.</description>
+      <content:encoded><![CDATA[we ran the numbers on 47 bad junior hires across 12 indian mid-size startups in 2024–25. the onboarding is 18 LPA. the 6 months after is 38 LPA. here is the breakdown, the math, and the 4 questions that would have caught 41 of the 47.]]></content:encoded>
+      <category>hiring</category>
+      <category>roi</category>
+    </item>
+
+    <item>
+      <title>why we stopped using take-home projects — the data showing they're anti-correlated with the job</title>
+      <link>https://www.dreamclerk.com/blog/why-we-stopped-using-take-home-projects</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/why-we-stopped-using-take-home-projects</guid>
+      <pubDate>2026-07-06T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>6-hour take-home projects are the most expensive, least predictive signal in 2026 hiring. the data: r=-0.04 with on-the-job performance, r=0.31 with AI-assistance. here is what we replaced them with, and the 90-second alternative that works.</description>
+      <content:encoded><![CDATA[6-hour take-home projects are the most expensive, least predictive signal in 2026 hiring. the data: r=-0.04 with on-the-job performance, r=0.31 with AI-assistance. here is what we replaced them with, and the 90-second alternative that works.]]></content:encoded>
+      <category>interview</category>
+      <category>take-home</category>
+    </item>
+
+    <item>
+      <title>the intern cheat sheet for the pushback round — how to prep, run, and recover</title>
+      <link>https://www.dreamclerk.com/blog/the-intern-cheat-sheet-for-the-pushback-round</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/the-intern-cheat-sheet-for-the-pushback-round</guid>
+      <pubDate>2026-07-03T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>the pushback round is the part of the dreamclerk interview with the highest correlation to cohort retention. here is how to prep, how to run one with a peer, and the 4 sentences that will save you when you are losing.</description>
+      <content:encoded><![CDATA[the pushback round is the part of the dreamclerk interview with the highest correlation to cohort retention. here is how to prep, how to run one with a peer, and the 4 sentences that will save you when you are losing.]]></content:encoded>
+      <category>interview</category>
+      <category>pushback</category>
+    </item>
+
+    <item>
+      <title>the dual-path review engine — claude haiku on top of a deterministic regex, with a safety net</title>
+      <link>https://www.dreamclerk.com/blog/the-dual-path-review-engine</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/the-dual-path-review-engine</guid>
+      <pubDate>2026-07-01T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>we wrap our deterministic regex engine with a claude haiku call. the haiku is constrained to the same rubric. if the call fails, the regex returns the verdict. here is the architecture, the contract, the quota, and why both paths are kept.</description>
+      <content:encoded><![CDATA[we wrap our deterministic regex engine with a claude haiku call. the haiku is constrained to the same rubric. if the call fails, the regex returns the verdict. here is the architecture, the contract, the quota, and why both paths are kept.]]></content:encoded>
+      <category>ai</category>
+      <category>review</category>
+    </item>
+
+    <item>
+      <title>the 2026 pr review is async-first and warm — here's what that means</title>
+      <link>https://www.dreamclerk.com/blog/the-2026-pr-review-is-async-and-warm</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/the-2026-pr-review-is-async-and-warm</guid>
+      <pubDate>2026-06-29T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>the 24h pr was a fossil from a 2014 office culture. the 2026 pr is async-first, written, and has a warm handoff. here is the playbook, the data, and the 4 things you have to stop doing in your engineering org.</description>
+      <content:encoded><![CDATA[the 24h pr was a fossil from a 2014 office culture. the 2026 pr is async-first, written, and has a warm handoff. here is the playbook, the data, and the 4 things you have to stop doing in your engineering org.]]></content:encoded>
+      <category>pr review</category>
+      <category>engineering culture</category>
     </item>
 
   </channel>

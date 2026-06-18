@@ -16,6 +16,14 @@ For LLM and AI-crawler use. Human-readable site at https://www.dreamclerk.com.
 
 ## Blog (most recent first)
 
+- [What a good postmortem looks like — a worked example, with the 5 sections, in 30 minutes](https://www.dreamclerk.com/blog/what-a-good-postmortem-looks-like): the 5 sections, the 3 sentences to never write, the 30-minute template.
+- [India IT services — the fresher pipeline is broken, and it's not the colleges' fault](https://www.dreamclerk.com/blog/india-it-services-the-fresher-pipeline-is-broken-and-it-is-not-the-colleges-fault): TCS, Infosys, Wipro, HCL — 1.4 L freshers in FY24, 87,000 in FY25. The 84% drop is structural, not cyclical.
+- [Building the in-browser IDE — a postmortem of the 4.2s cold-start regression](https://www.dreamclerk.com/blog/building-the-in-browser-ide-a-postmortem): a real regression, a real timeline, a real blameless write-up.
+- [The cost of a bad junior hire is not the onboarding — it's the 6 months of attention after](https://www.dreamclerk.com/blog/the-cost-of-a-bad-junior-hire-is-not-the-onboarding): 47 bad junior hires across 12 startups, 18 LPA onboarding, 38 LPA tail.
+- [Why we stopped using take-home projects — the data showing they're anti-correlated with the job](https://www.dreamclerk.com/blog/why-we-stopped-using-take-home-projects): r=-0.04 with on-the-job performance, r=0.31 with AI-assistance. The 90-second alternative.
+- [The intern cheat sheet for the pushback round — how to prep, run, and recover](https://www.dreamclerk.com/blog/the-intern-cheat-sheet-for-the-pushback-round): the part of the interview with the highest correlation to cohort retention.
+- [The dual-path review engine — Claude Haiku on top of a deterministic regex, with a safety net](https://www.dreamclerk.com/blog/the-dual-path-review-engine): the architecture, the contract, the quota, and why both paths are kept.
+- [The 2026 PR review is async-first and warm — here's what that means](https://www.dreamclerk.com/blog/the-2026-pr-review-is-async-and-warm): the 24h PR is a 2014 fossil. The 2026 PR is async, written, and warm.
 - [Fresher unemployment in India 2026](https://www.dreamclerk.com/blog/fresher-unemployment-india-2026-the-numbers-and-the-fix): 73% of Indian engineering graduates are unemployed a year after college. The numbers, the four reasons, the one fix that is actually moving the needle.
 - [The 2-year experience trap](https://www.dreamclerk.com/blog/the-2-year-experience-trap): where the rule came from, what it actually filters in 2026, and 3 ways to get past it without lying on the resume.
 - [How to get hired as a fresher with no internship and no network](https://www.dreamclerk.com/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network): the 6-week protocol that lifted 187 dreamclerk applicants from a 14% to a 31% callback rate.
