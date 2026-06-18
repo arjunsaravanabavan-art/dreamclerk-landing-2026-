@@ -25,9 +25,22 @@ import { BETA } from "../../lib/betaData.js";
 import { useSEO, SEO } from "../../lib/seo.js";
 import { RouterLink } from "../../lib/router.jsx";
 import { fetchVerifyRecordByCertId } from "../../lib/supabase.js";
+import { flagRecord, readFlags, isRecordFlagged } from "../../lib/betaState.js";
 
 export default function BetaVerifyPage({ recordId }) {
   const [state, setState] = useState({ loading: true, record: null, notFound: false });
+  // Admin mode: opt-in via the URL query string (?admin=true). This is the
+  // soft-gate used during the v0.1 cohort — anyone with the URL can flip
+  // the flag. v1 will replace this with a real auth check.
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [flaggedNow, setFlaggedNow] = useState(false);
+  const [flagReason, setFlagReason] = useState("");
+  const [showFlagForm, setShowFlagForm] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setIsAdmin(new URLSearchParams(window.location.search).get("admin") === "true");
+  }, []);
 
   useSEO({
     ...SEO.landing,
@@ -130,6 +143,10 @@ export default function BetaVerifyPage({ recordId }) {
         year: r.user_year,
       }
     : (r.user || {});
+  // The email is the key we use to flag/unflag across devices. The remote
+  // view exposes it as `email` (renamed in supabase.js) or `user_email`.
+  // Local sessions have it at the top level.
+  const recordEmail = (r.email || r.user_email || r.user?.email || "").trim();
   const states = r.taskStates || {};
   const taskRows = BETA.tasks.map((t) => ({ task: t, state: states[t.id] || { status: "todo" } }));
   // For remote rows we have a server-stamped verdict; for local we derive
@@ -146,6 +163,75 @@ export default function BetaVerifyPage({ recordId }) {
     <main className="beta-shell">
       <SectionLabel status={overall === "pass" ? "active" : "active"}>$ verify --record {recordId}</SectionLabel>
       <div className="beta-card">
+        {/* Flag banner: visible to every viewer if this record has been flagged
+            for review. The flag is a soft signal — it does NOT change the
+            verdict shown below. A founder review (D6) still decides pass/fail. */}
+        {recordEmail && (flaggedNow || isRecordFlagged({ email: recordEmail })) ? (
+          <div className="beta-verify-flagged" role="status" aria-live="polite">
+            <strong>⚠ flagged for review.</strong>{" "}
+            <span>
+              a reviewer has marked this record for a second look. the verdict
+              above is unchanged — the founder review (next step) is the source
+              of truth. flagged records get reviewed first.
+            </span>
+          </div>
+        ) : null}
+
+        {isAdmin && recordEmail ? (
+          <div className="beta-verify-admin-bar">
+            <span className="mono beta-verify-admin-bar-l">
+              admin mode · {flaggedNow || isRecordFlagged({ email: recordEmail }) ? "record is flagged" : "record is clean"}
+            </span>
+            {showFlagForm ? (
+              <form
+                className="beta-verify-admin-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  flagRecord({ email: recordEmail, reason: flagReason });
+                  setFlaggedNow(true);
+                  setShowFlagForm(false);
+                  setFlagReason("");
+                }}
+              >
+                <input
+                  className="beta-input"
+                  type="text"
+                  value={flagReason}
+                  onChange={(e) => setFlagReason(e.target.value)}
+                  placeholder="reason (optional, ≤ 280 chars)"
+                  maxLength={280}
+                />
+                <button className="beta-btn beta-btn--primary" type="submit">
+                  flag this record
+                </button>
+                <button
+                  className="beta-btn beta-btn--ghost"
+                  type="button"
+                  onClick={() => setShowFlagForm(false)}
+                >
+                  cancel
+                </button>
+              </form>
+            ) : flaggedNow || isRecordFlagged({ email: recordEmail }) ? (
+              <button
+                className="beta-btn beta-btn--ghost"
+                type="button"
+                onClick={() => setShowFlagForm(true)}
+              >
+                re-flag
+              </button>
+            ) : (
+              <button
+                className="beta-btn beta-btn--primary"
+                type="button"
+                onClick={() => setShowFlagForm(true)}
+              >
+                flag this record
+              </button>
+            )}
+          </div>
+        ) : null}
+
         <h1 className="beta-h1">verified work record</h1>
         <p className="beta-p beta-p--small">
           {overall === "pass" ? "verdict issued." : "verdict pending — founder review in progress."}
