@@ -9,7 +9,7 @@
     <description>field notes from building dreamclerk. the data, the rejects, the rubric changes. nothing polished after the fact.</description>
     <language>en-IN</language>
     <atom:link href="https://www.dreamclerk.com/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>2026-07-15T09:00:00.000Z</lastBuildDate>
+    <lastBuildDate>2026-07-28T09:00:00.000Z</lastBuildDate>
 
     <item>
       <title>the 90-second internship interview that changed 14% of outcomes</title>
@@ -225,6 +225,42 @@
       <content:encoded><![CDATA[the 24h pr was a fossil from a 2014 office culture. the 2026 pr is async-first, written, and has a warm handoff. here is the playbook, the data, and the 4 things you have to stop doing in your engineering org.]]></content:encoded>
       <category>pr review</category>
       <category>engineering culture</category>
+    </item>
+
+    <item>
+      <title>the first 90 days at your first tech job — week 1, week 4, week 12</title>
+      <link>https://www.dreamclerk.com/blog/the-first-90-days-at-your-first-tech-job</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/the-first-90-days-at-your-first-tech-job</guid>
+      <pubDate>2026-07-22T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>the first 90 days decide whether you pass probation or get pip'd. here is the one thing to do in week 1, week 4, and week 12 — the protocol that took us 18 months to learn and 12 minutes to read.</description>
+      <content:encoded><![CDATA[the first 90 days decide whether you pass probation or get pip'd. here is the one thing to do in week 1, week 4, and week 12 — the protocol that took us 18 months to learn and 12 minutes to read.]]></content:encoded>
+      <category>fresher</category>
+      <category>first job</category>
+    </item>
+
+    <item>
+      <title>6 signals your manager uses to decide your pip — and how to flip 4 of them in 30 days</title>
+      <link>https://www.dreamclerk.com/blog/6-pip-signals-and-how-to-flip-4-in-30-days</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/6-pip-signals-and-how-to-flip-4-in-30-days</guid>
+      <pubDate>2026-07-25T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>pip decisions are not made in pip meetings. they are made 6–8 weeks earlier, from 6 observable signals. here is the list, which 4 are flip-able in 30 days, which 2 are structural, and the one sentence that gets you a re-rating.</description>
+      <content:encoded><![CDATA[pip decisions are not made in pip meetings. they are made 6–8 weeks earlier, from 6 observable signals. here is the list, which 4 are flip-able in 30 days, which 2 are structural, and the one sentence that gets you a re-rating.]]></content:encoded>
+      <category>fresher</category>
+      <category>pip</category>
+    </item>
+
+    <item>
+      <title>off-campus hiring 2026 — the 7 channels that still work (and the 4 that don't)</title>
+      <link>https://www.dreamclerk.com/blog/off-campus-hiring-2026-the-7-channels-that-still-work</link>
+      <guid isPermaLink="true">https://www.dreamclerk.com/blog/off-campus-hiring-2026-the-7-channels-that-still-work</guid>
+      <pubDate>2026-07-28T09:00:00.000Z</pubDate>
+      <dc:creator>dreamclerk team</dc:creator>
+      <description>78% of indian tech hiring is off-campus in 2026. of the 11 channels freshers use, 7 still work and 4 are dead time. here is the data, the 7 ranked by signal-to-noise, and the one we have never seen anyone fail.</description>
+      <content:encoded><![CDATA[78% of indian tech hiring is off-campus in 2026. of the 11 channels freshers use, 7 still work and 4 are dead time. here is the data, the 7 ranked by signal-to-noise, and the one we have never seen anyone fail.]]></content:encoded>
+      <category>fresher</category>
+      <category>off-campus</category>
     </item>
 
   </channel>
