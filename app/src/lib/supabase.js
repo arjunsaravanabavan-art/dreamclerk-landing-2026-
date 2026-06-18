@@ -305,3 +305,110 @@ export function onAuthChange(cb) {
   const { data } = supabase.auth.onAuthStateChange((_event, session) => cb(session));
   return () => { try { data?.subscription?.unsubscribe(); } catch {} };
 }
+
+// ─── beta_sessions (open beta persistence) ──────────────────────────────────
+//
+// v0.1 of the open beta writes the session to localStorage AND to a
+// Supabase row keyed by the email the user typed. The remote write is
+// best-effort: if it fails, the local copy still works. The verify page
+// reads from the public `beta_verify` VIEW, which exposes only the cert
+// record (no email, no chat, no code).
+//
+// Schema: supabase/schema-beta-sessions.sql — run once in the SQL editor.
+
+const UPSERT_DEBOUNCE_MS = 1500;
+
+function deriveDenorm(s) {
+  // Flat fields the SQL view reads without unpacking the JSONB blob.
+  const u = s.user || {};
+  const r = s.record || null;
+  return {
+    user_name: (u.name || "").trim() || null,
+    user_college: (u.college || "").trim() || null,
+    user_branch: (u.branch || "").trim() || null,
+    user_year: (u.year || "").trim() || null,
+    current_task_id: s.currentTaskId || null,
+    sprint_started_at: s.sprintStartedAt || null,
+    record_id: r?.id || null,
+    record_verdict: r?.verdict || null,
+    record_issued_at: r?.issuedAt || null,
+  };
+}
+
+export async function upsertBetaSession(session) {
+  if (!isConfigured || !supabase) return { ok: false, reason: "unconfigured" };
+  if (!session || !session.email) return { ok: false, reason: "no-email" };
+  const email = session.email.trim().toLowerCase();
+  if (!email.includes("@")) return { ok: false, reason: "no-email" };
+  const den = deriveDenorm(session);
+  try {
+    // We store the full payload as JSONB. The user has only typed their
+    // email and the answers/code they wrote. RLS keeps this public by
+    // design for the open beta; the verify VIEW is what strangers see.
+    const { error } = await supabase
+      .from("beta_sessions")
+      .upsert(
+        { email, payload: session, run: session.run || 1, ...den },
+        { onConflict: "email" }
+      );
+    if (error) return { ok: false, reason: error.message };
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, reason: err?.message || "network" };
+  }
+}
+
+// Read a single session by email — used on first mount to hydrate the
+// hook with the most-recent server state, in case the user is on a
+// different device than where they wrote the code.
+export async function fetchBetaSessionByEmail(email) {
+  if (!isConfigured || !supabase) return null;
+  if (!email || !email.includes("@")) return null;
+  const e = email.trim().toLowerCase();
+  try {
+    const { data, error } = await supabase
+      .from("beta_sessions")
+      .select("payload, run, updated_at")
+      .eq("email", e)
+      .maybeSingle();
+    if (error) return null;
+    if (!data) return null;
+    return { payload: data.payload, run: data.run, updatedAt: data.updated_at };
+  } catch {
+    return null;
+  }
+}
+
+// Public: look up a verify record by cert id. Returns the same shape
+// the page renders, or null if not found.
+export async function fetchVerifyRecordByCertId(certId) {
+  if (!isConfigured || !supabase) return null;
+  if (!certId) return null;
+  try {
+    const { data, error } = await supabase
+      .from("beta_verify")
+      .select("cert_id, display_name, user_college, user_branch, user_year, verdict, issued_at, sprint_started_at, run, summary")
+      .eq("cert_id", certId)
+      .maybeSingle();
+    if (error) return null;
+    return data || null;
+  } catch {
+    return null;
+  }
+}
+
+// Debounce helper — we save on every keystroke so we can't blow through
+// the supabase row-write limit. This wraps a callback and ensures it
+// runs at most once per UPSERT_DEBOUNCE_MS per call site.
+const _pendingUpserts = new Map();
+export function debouncedUpsertBetaSession(session) {
+  if (!isConfigured || !supabase) return;
+  const email = (session?.email || "").trim().toLowerCase();
+  if (!email) return;
+  if (_pendingUpserts.has(email)) clearTimeout(_pendingUpserts.get(email));
+  const t = setTimeout(() => {
+    _pendingUpserts.delete(email);
+    upsertBetaSession(session);
+  }, UPSERT_DEBOUNCE_MS);
+  _pendingUpserts.set(email, t);
+}
