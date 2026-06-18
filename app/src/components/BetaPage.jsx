@@ -95,6 +95,10 @@ function BetaEmailGate({ sessionState }) {
           intern role for 5 days, ship 4 tasks, and get a verified work
           record — public, permanent, signed by an actual human.
         </p>
+        <p className="beta-p beta-p--small">
+          review is a 4-axis deterministic rubric.{" "}
+          <RouterLink to="/how-beta" className="beta-link">read the manual before you start →</RouterLink>
+        </p>
 
         <h2 className="beta-h2">what's tested</h2>
         <ol className="beta-betalist">

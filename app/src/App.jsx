@@ -29,10 +29,13 @@ import FAQPage from "./components/FAQPage.jsx";
 import BlogListPage from "./components/BlogListPage.jsx";
 import BlogPostPage from "./components/BlogPostPage.jsx";
 import AdminPage from "./components/AdminPage.jsx";
+import BetaPage from "./components/BetaPage.jsx";
+import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
+import HowBetaPage from "./components/HowBetaPage.jsx";
 import { useSEO, SEO } from "./lib/seo.js";
 
 /**
- * Path router (no react-router). 12 routes:
+ * Path router (no react-router). 15 routes:
  *  /                  → landing (the full 13 sections)
  *  /how               → How it works (long-form, from nav)
  *  /workspace         → Workspace (long-form, from nav)
@@ -45,6 +48,9 @@ import { useSEO, SEO } from "./lib/seo.js";
  *  /privacy           → Privacy policy
  *  /terms             → Terms of service
  *  /admin             → Admin dashboard (blocked in robots.txt)
+ *  /beta              → Beta landing (intro)
+ *  /beta/:token       → Beta flow (invite gate, onboarding, dashboard, wrap-up)
+ *  /verify/:recordId  → Public work-record page (no auth)
  */
 
 function LandingPage() {
@@ -122,29 +128,69 @@ export default function App() {
   }, []);
 
   // Scroll to top on real route change (skip on initial /).
+  // Instant scroll keeps the page-enter animation clean — smooth scroll at
+  // the same time as the fade+rise would double-animate the viewport.
   useEffect(() => {
     if (path && path !== "/") {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [path]);
 
+  // Clear page-level body classes on every route change. Several child pages
+  // add classes to <body> for their own UI (modal-open, task-active, etc.) and
+  // only remove them on their own close path. If the user navigates away
+  // instead of closing, the class leaks — which causes scroll lock, layout
+  // shift, or stuck cursor states. This is the router-level safety net.
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove(
+        "dc-modal-open",
+        "dc-task-active",
+        "has-cursor-hidden"
+      );
+    };
+  }, [path]);
+
+  // The route content is wrapped in a div keyed by `path` so React re-mounts
+  // it on every navigation. The fresh mount restarts the .page-enter keyframe
+  // animation, giving every route a smooth fade+rise on entry — desktop and
+  // mobile, with `prefers-reduced-motion` honored at the CSS layer.
+  const routeKey = path || "/";
+  let routeNode = null;
+  if (path === "/about") routeNode = <About />;
+  else if (path === "/privacy") routeNode = <Privacy />;
+  else if (path === "/terms") routeNode = <Terms />;
+  else if (path === "/how") routeNode = <HowItWorksPage />;
+  else if (path === "/workspace") routeNode = <WorkspacePage />;
+  else if (path === "/tracks") routeNode = <TracksPage />;
+  else if (path === "/companies") routeNode = <CompaniesPage />;
+  else if (path === "/faq") routeNode = <FAQPage />;
+  else if (path === "/blog") routeNode = <BlogListPage />;
+  else if (path.startsWith("/blog/")) {
+    routeNode = <BlogPostPage slug={path.replace("/blog/", "").replace(/\/$/, "")} />;
+  } else if (path === "/admin" || path.startsWith("/admin/")) {
+    routeNode = <AdminPage />;
+  } else if (path === "/beta" || path.startsWith("/beta/")) {
+    // Open beta: no token, no gate. `BetaPage` shows its own email gate on
+    // first visit and the rest of the flow once an email is on the session.
+    routeNode = <BetaPage />;
+  } else if (path === "/how-beta" || path.startsWith("/how-beta/")) {
+    // Manual for the deterministic review engine. Linked from the beta
+    // page header, the cert verify page, and the FAQ. noindex'd because
+    // it is beta-participant copy, not search traffic.
+    routeNode = <HowBetaPage />;
+  } else if (path.startsWith("/verify/")) {
+    routeNode = <BetaVerifyPage recordId={path.replace("/verify/", "").replace(/\/$/, "")} />;
+  } else {
+    routeNode = <LandingPage />;
+  }
+
   return (
     <div className="app">
       <Nav activePath={path} />
-      {path === "/about" && <About />}
-      {path === "/privacy" && <Privacy />}
-      {path === "/terms" && <Terms />}
-      {path === "/how" && <HowItWorksPage />}
-      {path === "/workspace" && <WorkspacePage />}
-      {path === "/tracks" && <TracksPage />}
-      {path === "/companies" && <CompaniesPage />}
-      {path === "/faq" && <FAQPage />}
-      {path === "/blog" && <BlogListPage />}
-      {path.startsWith("/blog/") && (
-        <BlogPostPage slug={path.replace("/blog/", "").replace(/\/$/, "")} />
-      )}
-      {(path === "/admin" || path.startsWith("/admin/")) && <AdminPage />}
-      {(!path || path === "/") && <LandingPage />}
+      <div key={routeKey} className="page page-enter">
+        {routeNode}
+      </div>
       <Footer />
       {modalOpen && <EmailModal onClose={() => setModalOpen(false)} />}
     </div>

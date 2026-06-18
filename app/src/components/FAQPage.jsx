@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { IconFile, IconStar, IconNode, IconClock } from "./Svg.jsx";
 import { useSEO, SEO } from "../lib/seo.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * FAQPage — VISIBLE ON LOAD. Each question shows full answer inline.
@@ -116,6 +117,12 @@ const groups = [
         a: "submit a feedback form. every reject is reviewed by a human within 48h. if the rubric was misapplied, we overturn and re-offer. cohort 1: 7% of rejects were overturned. cohort 2: 4.1%.",
         cmd: "$ feedback --cohort 2026-q3",
         stat: "cohort 1 · 7% overturn · cohort 2 · 4.1%",
+      },
+      {
+        q: "is the open beta's review engine the same as the main interview?",
+        a: "no. the open beta uses a deterministic 4-axis rubric (comprehension-under-pressure, shipped-and-measured, defensive-thinking, trade-off-articulation) applied to a 5-day sprint. the main interview is a 20-min live screen with an LLM recruiter. the open beta is a free, separate track to get a cert while cohort 1 is running.",
+        cmd: "$ diff beta-rubric interview-rubric",
+        stat: "deterministic vs. live",
       },
     ],
   },
@@ -233,7 +240,7 @@ export default function FAQPage() {
         </div>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>
