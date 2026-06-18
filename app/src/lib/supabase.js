@@ -185,20 +185,26 @@ export async function getPostById(id) {
 }
 
 export async function getPostBySlug(slug) {
-  if (!isConfigured || !supabase) return seedPosts.find((p) => p.slug === slug) || null;
+  // Always check the in-app seed first. This makes the post render
+  // synchronously on first paint even when Supabase is reachable, so
+  // /blog/:slug never flashes a "loading…" state and bots that disable
+  // JS still see the right <title>. If the admin has published a newer
+  // version of the same slug, it overrides the seed (covers edits +
+  // unpublished-now-published flows).
+  const seed = seedPosts.find((p) => p.slug === slug) || null;
+  if (!isConfigured || !supabase) return seed;
   try {
     const { data, error } = await supabase
       .from("posts")
       .select("id, slug, title, excerpt, body, cover_image, tags, published, published_at, author_name, reading_time, created_at, updated_at")
       .eq("slug", slug)
+      .eq("published", true)
       .maybeSingle();
     if (error) throw error;
-    if (data) return data;
-    // Fallback to local seed so the slug works in any environment.
-    return seedPosts.find((p) => p.slug === slug) || null;
+    return data || seed;
   } catch (err) {
     console.warn("[supabase] getPostBySlug:", err?.message || err);
-    return seedPosts.find((p) => p.slug === slug) || null;
+    return seed;
   }
 }
 

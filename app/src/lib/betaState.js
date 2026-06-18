@@ -14,8 +14,9 @@
 // email is stable across re-runs — one email = one active user.
 
 import { useEffect, useState, useCallback, useRef } from "react";
-import { BETA } from "./betaData.js";
+import { getTrack, TRACKS, BETA } from "./betaData.js";
 import { evaluate } from "./evaluator.js";
+import { reviewSubmission } from "./reviewer.js";
 import { isConfigured as supabaseConfigured, fetchBetaSessionByEmail, debouncedUpsertBetaSession } from "./supabase.js";
 
 // Issue a public cert id of the form `dc-2026-q3-8f4a-9c2b`. Two short
@@ -93,10 +94,12 @@ export function listAllSessions() {
 //
 // v0.2 swap: same shape, server-side. The hook below is the only consumer.
 
-export function makeFreshSession(email, userOverrides = {}) {
+export function makeFreshSession(email, userOverrides = {}, trackId = null) {
+  const track = getTrack(trackId);
   return {
     email,
     run: 1,
+    trackId: track.id, // back-compat: stored alongside the email
     user: {
       email: email || "",
       name: "",
@@ -114,8 +117,8 @@ export function makeFreshSession(email, userOverrides = {}) {
     onboardedAt: null,
     sprintStartedAt: null,
     currentTaskId: null,
-    taskStates: BETA.tasks.reduce((acc, t) => {
-      acc[t.id] = { status: "todo", submission: "", rejectionCount: 0, submittedAt: null, reviewerNote: "", lastReview: null, reviews: [] };
+    taskStates: track.tasks.reduce((acc, t) => {
+      acc[t.id] = { status: "todo", submission: "", rejectionCount: 0, submittedAt: null, reviewerNote: "", lastReview: null, reviews: [], flagged: false };
       return acc;
     }, {}),
     chat: [],
@@ -173,18 +176,25 @@ export function localTimeIn(tz, now = new Date()) {
 // For each task, the deterministic review engine inspects the submission text
 // and emits 1 of {APPROVE, REVISE, REJECT} with 4 axis scores + per-task
 // checklist + signals. The engine is a regex+counts pipeline in
-// `evaluator.js` — there is no LLM in the loop. The `note` we return here
-// is the persona-voiced line that the chat bubble shows; the structured
-// `review` payload is what the "what the reviewer ran" UI panel renders.
+// `evaluator.js` — there is no LLM in the loop by default. If
+// VITE_USE_LLM_REVIEW is set, reviewer.js wraps the regex call with a Claude
+// Haiku call (see supabase/functions/evaluate-submission).
 //
 // Map: APPROVE -> "approve", REVISE/REJECT -> "reject" (the user can
 // resubmit). REVISE is treated as "rejected" in the two-state UI machine.
+//
+// Async: callers `await scriptedReview(...)`. The regex path resolves in <1ms
+// but the LLM path is up to 5s; we keep the same shape for both so the UI
+// does not branch on which path ran.
 
-export function scriptedReview(taskId, submission) {
-  const task = BETA.tasks.find((t) => t.id === taskId) || { type: "", title: "this task" };
-  const ev = evaluate(task, submission || "");
-  const personaKey = ev.verdict === "APPROVE" ? `${taskId}-approve` : `${taskId}-reject`;
-  const personaLine = BETA.scriptedMessages?.[personaKey]?.() || ev.chatLine;
+export async function scriptedReview(track, task, submission) {
+  const ev = await reviewSubmission(track, task, submission || "");
+  const personaKey = ev.verdict === "APPROVE" ? `${task.id}-approve` : `${task.id}-reject`;
+  // Namespaced key: track-2 added `aiml-intern::t1-approve`. For back-compat
+  // with the old un-namespaced keys we look up both.
+  const namespaced = track.scriptedMessages?.[`${track.id}::${personaKey}`];
+  const legacy = BETA === track ? BETA.scriptedMessages?.[personaKey] : null;
+  const personaLine = (namespaced || legacy)?.() || ev.chatLine;
   const verdict = ev.verdict === "APPROVE" ? "approve" : "reject";
   return {
     verdict,
@@ -197,8 +207,60 @@ export function scriptedReview(taskId, submission) {
       checklist: ev.checklist,
       language: ev.language,
       signals: ev.signals,
+      source: ev.source || "regex", // "regex" | "llm" | "llm-fallback-to-regex"
     },
   };
+}
+
+// ─── track helpers ──────────────────────────────────────────────────────────
+//
+// The session's `trackId` field selects which track this sprint belongs to.
+// Default = AIML (TRACKS[0]). Used everywhere `BETA.tasks[i]` used to be
+// hard-coded.
+
+export function currentTrack(session) {
+  return getTrack(session?.trackId);
+}
+
+// ─── flag record (admin / verify) ──────────────────────────────────────────
+//
+// Anyone with the URL can flip the flag. Per BETA.md §16 — we don't gate
+// flagging behind a password in v0.1 (only ~50 users). v1 will require auth.
+// The flag is a soft signal — it doesn't change the verdict.
+
+export function flagRecord({ email, taskId, reason }) {
+  if (!email) return null;
+  if (typeof window === "undefined") return null;
+  const flags = readFlags();
+  flags.push({
+    email,
+    taskId: taskId || null,
+    reason: String(reason || "").slice(0, 280),
+    at: new Date().toISOString(),
+  });
+  try {
+    window.localStorage.setItem(k("flags"), JSON.stringify(flags));
+  } catch {
+    // localStorage full — ignore.
+  }
+  return flags;
+}
+
+export function readFlags() {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(k("flags"));
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+
+export function isRecordFlagged({ email, taskId } = {}) {
+  if (!email) return false;
+  return readFlags().some((f) => f.email === email && (!taskId || !f.taskId || f.taskId === taskId));
 }
 
 // Final verdict for the sprint, computed from task states.
@@ -253,6 +315,12 @@ export function useBetaSession() {
   // session is a fresh empty one. Once the user enters an email, we save
   // and reload under that key.
   const [session, setSession] = useState(() => findMostRecentLocalSession() || makeFreshSession(""));
+
+  // Mirror the latest session into a ref so async callbacks (e.g. submitTask)
+  // can read the up-to-date trackId without a stale-closure bug. Updated on
+  // every render. Cheaper than reading localStorage mid-call.
+  const sessionRef = useRef(session);
+  useEffect(() => { sessionRef.current = session; }, [session]);
 
   // Email key changes when the user enters their email for the first time.
   // When that happens, we want to load any prior session for that email —
@@ -326,21 +394,33 @@ export function useBetaSession() {
   }, []);
 
   const startSprint = useCallback(() => {
-    setSession((s) => ({
-      ...s,
-      sprintStartedAt: new Date().toISOString(),
-      currentTaskId: BETA.tasks[0].id,
-      onboardedAt: s.onboardedAt || new Date().toISOString(),
-      chat: [
-        ...s.chat,
-        { speaker: "manager", text: BETA.scriptedMessages["day1-morning"](s.user.name || "intern"), at: new Date().toISOString() },
-      ],
-    }));
+    setSession((s) => {
+      const track = currentTrack(s);
+      const day1Key = `${track.id}::day1-morning`;
+      const day1Line = track.scriptedMessages?.[day1Key]?.(s.user.name || "intern")
+        || BETA.scriptedMessages?.["day1-morning"]?.(s.user.name || "intern")
+        || `morning ${s.user.name?.split(" ")[0] || "intern"}. sprint plan's in your board.`;
+      return {
+        ...s,
+        sprintStartedAt: new Date().toISOString(),
+        currentTaskId: track.tasks[0].id,
+        onboardedAt: s.onboardedAt || new Date().toISOString(),
+        chat: [
+          ...s.chat,
+          { speaker: "manager", text: day1Line, at: new Date().toISOString() },
+        ],
+      };
+    });
   }, []);
 
-  const submitTask = useCallback((taskId, submission) => {
-    const review = scriptedReview(taskId, submission);
+  const submitTask = useCallback(async (taskId, submission) => {
+    // Per-track task lookup (the only place this matters is multi-track mode).
+    // The LLM/regex path is async now.
+    const track = currentTrack(sessionRef.current);
+    const task = track.tasks.find((t) => t.id === taskId) || { id: taskId, type: "", title: "this task" };
+    const review = await scriptedReview(track, task, submission);
     setSession((s) => {
+      const trackInner = currentTrack(s);
       const prev = s.taskStates[taskId];
       const reviews = Array.isArray(prev.reviews) ? prev.reviews.slice() : [];
       reviews.push({
@@ -366,8 +446,8 @@ export function useBetaSession() {
       ];
       let currentTaskId = s.currentTaskId;
       if (review.verdict === "approve") {
-        const idx = BETA.tasks.findIndex((t) => t.id === taskId);
-        const nextTask = BETA.tasks[idx + 1];
+        const idx = trackInner.tasks.findIndex((t) => t.id === taskId);
+        const nextTask = trackInner.tasks[idx + 1];
         currentTaskId = nextTask ? nextTask.id : null;
       }
       // Update the record verdict + issue a public cert id the first time
@@ -377,7 +457,7 @@ export function useBetaSession() {
       if (review.verdict === "approve") {
         const approvedCount = Object.values({ ...s.taskStates, [taskId]: next })
           .filter((t) => t.status === "approved").length;
-        const totalTasks = BETA.tasks.length;
+        const totalTasks = trackInner.tasks.length;
         if (approvedCount >= totalTasks && s.record.verdict !== "pass") {
           nextRecord = {
             ...s.record,
@@ -393,6 +473,7 @@ export function useBetaSession() {
       }
       return { ...s, taskStates, chat, currentTaskId, record: nextRecord };
     });
+    return review;
   }, []);
 
   const startNewRun = useCallback(() => {
@@ -400,7 +481,7 @@ export function useBetaSession() {
     // email is preserved — one email = one user, multiple runs allowed.
     setSession((s) => {
       const nextRun = (s.run || 1) + 1;
-      const fresh = makeFreshSession(s.email);
+      const fresh = makeFreshSession(s.email, {}, s.trackId);
       return {
         ...fresh,
         run: nextRun,
@@ -413,5 +494,34 @@ export function useBetaSession() {
     });
   }, []);
 
-  return { session, patch, patchUser, patchTask, pushChat, startSprint, submitTask, startNewRun };
+  // Mark the mid-sprint 1:1 as complete. The answers live in the session
+  // payload (set by BetaOneOnOneForm). Used by BetaManagerChat to drop the
+  // "manager check-in" banner.
+  const markOneOnOneComplete = useCallback((answers = {}) => {
+    setSession((s) => ({ ...s, oneOnOne: { completed: true, answers } }));
+  }, []);
+
+  // Flag the current record for review. Soft signal only — doesn't change
+  // verdict. Stored in localStorage so the verify page can read it across
+  // devices via Supabase (the `flags` array is part of the session payload
+  // and gets debounced-upsered by the existing persistence effect).
+  const flagCurrentRecord = useCallback((reason) => {
+    setSession((s) => {
+      flagRecord({ email: s.email, taskId: null, reason });
+      return s;
+    });
+  }, []);
+
+  // Re-anchor the session to a different track. Used by the track picker:
+  // if the user picked /beta/aiml-intern but had a /beta/data session
+  // already, we reset to the new track. Resets task states + chat but
+  // keeps the email + user info.
+  const setTrackId = useCallback((trackId) => {
+    setSession((s) => {
+      const fresh = makeFreshSession(s.email, {}, trackId);
+      return { ...fresh, user: s.user, onboardedAt: s.onboardedAt, run: s.run };
+    });
+  }, []);
+
+  return { session, patch, patchUser, patchTask, pushChat, startSprint, submitTask, startNewRun, markOneOnOneComplete, flagCurrentRecord, setTrackId, currentTrack: (s = session) => currentTrack(s) };
 }
