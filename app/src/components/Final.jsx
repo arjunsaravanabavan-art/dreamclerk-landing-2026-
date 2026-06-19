@@ -40,6 +40,29 @@ export default function Final() {
             <span>{verbs[i]}…</span>
             <span className="meta">5 students applied in the last minute</span>
           </div>
+          <p
+            style={{
+              margin: "12px 0 0",
+              fontFamily: "var(--mono)",
+              fontSize: 13,
+              color: "var(--muted-on-dark-2)",
+            }}
+          >
+            ? not ready to apply?{" "}
+            <a
+              href="mailto:info@dreamclerk.com?subject=human%20contact%20%E2%80%94%20dreamclerk%20beta&body=hi%20dreamclerk%20team%2C%0A%0A"
+              style={{
+                color: "var(--paper)",
+                textDecoration: "underline",
+                textDecorationColor: "var(--ok-fill)",
+                textUnderlineOffset: 3,
+                textDecorationThickness: 1,
+                transition: "text-decoration-color 200ms var(--ease), color 200ms var(--ease)",
+              }}
+            >
+              talk to a human →
+            </a>
+          </p>
         </div>
       </div>
     </section>

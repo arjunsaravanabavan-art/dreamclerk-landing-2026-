@@ -1,3 +1,5 @@
+import { RouterLink } from "../lib/router.jsx";
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -16,9 +18,9 @@ export default function Footer() {
           <div>
             <h5>platform</h5>
             <ul>
-              <li><a href="/how-it-works">how it works</a></li>
-              <li><a href="/workspace">workspace</a></li>
-              <li><a href="/tracks">role tracks</a></li>
+              <li><RouterLink to="/how">how it works</RouterLink></li>
+              <li><RouterLink to="/workspace">workspace</RouterLink></li>
+              <li><RouterLink to="/tracks">role tracks</RouterLink></li>
               <li><a href="/certificate">certificate</a></li>
             </ul>
           </div>
@@ -26,8 +28,8 @@ export default function Footer() {
           <div>
             <h5>resources</h5>
             <ul>
-              <li><a href="/faq">faq</a></li>
-              <li><a href="/blog">blog</a></li>
+              <li><RouterLink to="/faq">faq</RouterLink></li>
+              <li><RouterLink to="/blog">blog</RouterLink></li>
               <li><a href="/proof">student stories</a></li>
               <li><a href="https://www.dreamclerk.com" rel="noreferrer">dreamclerk.com ↗</a></li>
               <li>
@@ -39,8 +41,9 @@ export default function Footer() {
           <div>
             <h5>company</h5>
             <ul>
-              <li><a href="/about">about us</a></li>
+              <li><RouterLink to="/about">about us</RouterLink></li>
               <li><a href="/about#team">team</a></li>
+              <li><a href="mailto:info@dreamclerk.com">contact</a></li>
               <li><a href="mailto:press@dreamclerk.com">press</a></li>
               <li><a href="mailto:careers@dreamclerk.com">careers</a></li>
             </ul>
@@ -58,8 +61,8 @@ export default function Footer() {
           <div>
             <h5>legal</h5>
             <ul>
-              <li><a href="/privacy">privacy</a></li>
-              <li><a href="/terms">terms</a></li>
+              <li><RouterLink to="/privacy">privacy</RouterLink></li>
+              <li><RouterLink to="/terms">terms</RouterLink></li>
               <li><a href="mailto:dpo@dreamclerk.com">dpo</a></li>
               <li><a href="mailto:security@dreamclerk.com">security</a></li>
             </ul>

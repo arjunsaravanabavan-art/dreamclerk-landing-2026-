@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import SectionLabel from "./SectionLabel.jsx";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * About — E-E-A-T page.
@@ -89,13 +90,13 @@ export default function About() {
 
         <h2>$ contact</h2>
         <p>
+          general: <a href="mailto:info@dreamclerk.com">info@dreamclerk.com</a><br />
           media inquiries: <a href="mailto:press@dreamclerk.com">press@dreamclerk.com</a><br />
-          general: <a href="mailto:hi@dreamclerk.com">hi@dreamclerk.com</a><br />
           jobs: <a href="mailto:careers@dreamclerk.com">careers@dreamclerk.com</a>
         </p>
 
         <p className="about__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

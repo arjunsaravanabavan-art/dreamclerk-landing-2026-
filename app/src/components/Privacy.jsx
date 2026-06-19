@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import SectionLabel from "./SectionLabel.jsx";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * Privacy — DPDPA + GDPR-ready.
@@ -44,7 +45,7 @@ export default function Privacy() {
 
         <h2>$ your rights (DPDPA, GDPR, IT act)</h2>
         <ul>
-          <li><b>access</b> — email <a href="mailto:hi@dreamclerk.com">hi@dreamclerk.com</a>, we will export everything we have on you within 7 days.</li>
+          <li><b>access</b> — email <a href="mailto:info@dreamclerk.com">info@dreamclerk.com</a> (or the legacy alias <a href="mailto:hi@dreamclerk.com">hi@dreamclerk.com</a>), we will export everything we have on you within 7 days.</li>
           <li><b>correct</b> — log in, edit your profile, hit save. or email us.</li>
           <li><b>delete</b> — log in, settings → delete account. or email us. we delete within 30 days; backups within 90 days.</li>
           <li><b>portability</b> — json export of your work data and certificate available any time.</li>
@@ -68,7 +69,7 @@ export default function Privacy() {
         <p>anand krishnan · <a href="mailto:dpo@dreamclerk.com">dpo@dreamclerk.com</a> · chennai, india. response within 7 days.</p>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>
