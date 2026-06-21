@@ -47,13 +47,6 @@ const LANES = [
   },
 ];
 
-const ROLE_INBOXES = [
-  { label: "press inquiries", email: "press@dreamclerk.com" },
-  { label: "jobs at dreamclerk", email: "careers@dreamclerk.com" },
-  { label: "data protection officer", email: "dpo@dreamclerk.com" },
-  { label: "security disclosures", email: "security@dreamclerk.com" },
-];
-
 export default function ContactPage() {
   useEffect(() => { document.title = "contact — dreamclerk"; }, []);
 
@@ -170,41 +163,6 @@ export default function ContactPage() {
             </article>
           ))}
         </div>
-
-        <h2>$ role-specific inboxes</h2>
-        <p>
-          if your message has a specific lane, use the right inbox — they get triaged faster than the general one.
-        </p>
-        <ul style={{ listStyle: "none", padding: 0, margin: "16px 0 32px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12 }}>
-          {ROLE_INBOXES.map((r) => (
-            <li
-              key={r.email}
-              style={{
-                border: "1px solid var(--line)",
-                padding: "12px 16px",
-                borderRadius: 3,
-                background: "var(--paper-2)",
-              }}
-            >
-              <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 4 }}>
-                {r.label}
-              </div>
-              <a
-                href={`mailto:${r.email}`}
-                style={{
-                  fontFamily: "var(--mono)",
-                  fontSize: 14,
-                  color: "var(--ink)",
-                  textDecoration: "underline",
-                  textDecorationColor: "var(--ok-fill)",
-                  textUnderlineOffset: 3,
-                }}
-              >
-                {r.email}
-              </a>
-            </li>
-          ))}
-        </ul>
 
         <h2>$ talk to a human</h2>
         <p>
