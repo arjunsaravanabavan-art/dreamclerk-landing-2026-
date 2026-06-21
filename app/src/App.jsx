@@ -145,28 +145,21 @@ export default function App() {
     return () => document.removeEventListener("open-modal", onOpen);
   }, []);
 
-  // Auto-open the waitlist modal for first-time landing visitors.
+  // Auto-open the waitlist modal on every landing visit.
   //
   // Two triggers, first one wins:
   //   1. 3-second timer (so the hero animation lands first and the modal
   //      never feels like an interruption)
   //   2. 50% scroll-depth (so engaged readers get it even before the timer)
   //
-  // The lock is in *localStorage* (not sessionStorage) — once a visitor has
-  // either submitted or dismissed the modal, it never shows again on this
-  // browser, ever. Re-marketing has to come from a different surface
-  // (footer, blog, etc.). Per user request: "make sure it doesn't repeat
-  // after the user entering details".
-  //
-  // Gated to the marketing landing route only — /about, /blog, /verify,
-  // /admin, /feedback, /contact, and the beta flow stay quiet.
+  // Fires on EVERY visit to "/", every time the user lands. There is no
+  // localStorage lock — per the latest ask: "show on enter, show on 50%
+  // scroll, and again on next enter." The pop-up is gated only to the
+  // marketing landing route; /about, /blog, /verify, /admin, /feedback,
+  // /contact, and the beta flow stay quiet.
   useEffect(() => {
     if (path !== "/") return;
     if (typeof window === "undefined") return;
-    const POPUP_KEY = "dc.waitlist.popup.lock";
-    try {
-      if (window.localStorage.getItem(POPUP_KEY) === "locked") return;
-    } catch {}
 
     let opened = false;
     const openOnce = (why) => {
@@ -174,7 +167,6 @@ export default function App() {
       opened = true;
       setModalOpen(true);
       setModalSource(why === "scroll" ? "modal-scroll" : "modal-timer");
-      try { window.localStorage.setItem(POPUP_KEY, "locked"); } catch {}
       cleanup();
     };
 
@@ -276,11 +268,9 @@ export default function App() {
           source={modalSource}
           onClose={() => {
             setModalOpen(false);
-            // Lock the popup across all sessions — once a user dismisses
-            // (X, escape, or backdrop click), the dual trigger never fires
-            // again on this browser. The lock is already set when the
-            // trigger itself fires, so this is the dismiss path.
-            try { window.localStorage.setItem("dc.waitlist.popup.lock", "locked"); } catch {}
+            // No localStorage lock here — the dual timer/scroll triggers
+            // re-fire on every visit to "/", so a user who dismisses now
+            // will see the pop-up again next time they land.
           }}
         />
       )}

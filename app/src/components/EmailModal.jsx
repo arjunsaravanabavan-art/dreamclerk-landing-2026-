@@ -13,10 +13,10 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
       ? "you're on the list."
       : "you are on the list.";
   const successBody = isBlogSource
-    ? "we'll email you the moment a new post goes live. check @dreamclrk in the meantime."
+    ? "we'll email you the moment a new post goes live. while you wait, follow @dreamclrk on instagram for the behind-the-scenes."
     : isNotifyCta
-      ? "we'll email you the moment a new cohort opens. check @dreamclrk for the announcement in the meantime."
-      : "we will email you the moment a new cohort opens. check @dreamclrk for the announcement in the meantime.";
+      ? "we'll email you the moment a new cohort opens. while you wait, follow @dreamclrk on instagram for the behind-the-scenes."
+      : "we will email you the moment a new cohort opens. while you wait, follow @dreamclrk on instagram for the behind-the-scenes.";
   const formHeadline = isBlogSource
     ? "get notified when we publish."
     : "get notified when dreamclerk opens.";
@@ -145,10 +145,20 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
             </div>
             <h4>{successHeadline}</h4>
             <p>
-              {successBody}{" "}
-              <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">@dreamclrk</a>{" "}
-              in the meantime.
+              {successBody}
             </p>
+            <a
+              href="https://www.instagram.com/dreamclrk"
+              target="_blank"
+              rel="noreferrer"
+              className="btn"
+              style={{ marginTop: 4, alignSelf: "flex-start" }}
+            >
+              follow @dreamclrk ↗
+            </a>
+            <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
+              close <span className="arr">→</span>
+            </button>
             <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
               close <span className="arr">→</span>
             </button>
@@ -187,6 +197,18 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
                 autoComplete="email"
               />
               {status === "error" && <div className="err">{error}</div>}
+              <p style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", letterSpacing: "0.04em", margin: "0 0 12px" }}>
+                or just follow us —{" "}
+                <a
+                  href="https://www.instagram.com/dreamclrk"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: "var(--ink)", textDecoration: "underline", textDecorationColor: "var(--ok-fill)", textUnderlineOffset: 2 }}
+                >
+                  @dreamclrk ↗
+                </a>{" "}
+                for behind-the-scenes and announcements.
+              </p>
               <div className="row">
                 <button
                   type="submit"

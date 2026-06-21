@@ -164,11 +164,6 @@ export default function ContactPage() {
           ))}
         </div>
 
-        <h2>$ talk to a human</h2>
-        <p>
-          we don't have a chatbot. we don't have a ticket form. if you want to talk to an actual person, send an email or DM us on instagram. replies within 2 business days, monday through friday, ist.
-        </p>
-
         <p className="legal__back">
           <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
