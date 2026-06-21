@@ -66,7 +66,7 @@ export default function Nav({ activePath = "/" } = {}) {
             <span className="dot" /> systems normal
           </span>
           <a className="btn btn--solid" href="#" data-open-modal data-open-source="nav-cta">
-            know more <span className="arr" aria-hidden="true">→</span>
+            notify me <span className="arr" aria-hidden="true">→</span>
           </a>
           <button
             className={"nav__burger" + (open ? " is-open" : "")}

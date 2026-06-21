@@ -215,7 +215,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
                   className="btn btn--solid"
                   disabled={status === "loading"}
                 >
-                  {status === "loading" ? "joining…" : <>get to know <span className="arr">→</span></>}
+                  {status === "loading" ? "joining…" : <>notify me <span className="arr">→</span></>}
                 </button>
               </div>
               <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>

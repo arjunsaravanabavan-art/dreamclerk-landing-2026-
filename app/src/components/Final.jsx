@@ -31,7 +31,7 @@ export default function Final() {
             <label htmlFor="qa" className="visually-hidden">your email</label>
             <input id="qa" type="email" required placeholder="you@example.com" autoComplete="email" />
             <button type="submit" className="btn">
-              know more
+              notify me
               <span className="arr">→</span>
             </button>
           </form>

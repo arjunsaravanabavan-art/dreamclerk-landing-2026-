@@ -41,7 +41,7 @@ export default function Hero() {
 
         <div className="hero__ctas">
           <a className="btn btn--solid" href="#" data-open-modal data-open-source="hero-cta">
-            know more <span className="arr" aria-hidden="true">→</span>
+            notify me <span className="arr" aria-hidden="true">→</span>
           </a>
           <a className="btn btn--ghost" href="#how">
             see how it works <span className="arr" aria-hidden="true">↓</span>

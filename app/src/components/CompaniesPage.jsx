@@ -235,7 +235,7 @@ export default function CompaniesPage() {
 
         <div className="co3__cta">
           <a className="btn btn--solid" href="#" data-open-modal data-open-source="companies-cta">
-            know more <span className="arr" aria-hidden="true">→</span>
+            notify me <span className="arr" aria-hidden="true">→</span>
           </a>
           <p className="co3__cta-note">free during 2026-q2 beta · 1,847 in queue · company chosen after offer</p>
         </div>

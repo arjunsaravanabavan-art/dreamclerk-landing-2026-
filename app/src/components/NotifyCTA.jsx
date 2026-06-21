@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * NotifyCTA — inline "know more" form for blog posts.
+ * NotifyCTA — inline "notify me" form for blog posts.
  *
  * Fires the same open-modal custom event the landing Final band uses,
  * but tags the source as "blog-post-<slug>" so the EmailModal success
@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
  * `open-modal` click — this component just dispatches the event.
  */
 
-export default function NotifyCTA({ source = "notify-cta", cta = "know more" }) {
+export default function NotifyCTA({ source = "notify-cta", cta = "notify me" }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const inputRef = useRef(null);
@@ -73,7 +73,7 @@ export default function NotifyCTA({ source = "notify-cta", cta = "know more" }) 
           letterSpacing: "0.06em",
         }}
       >
-        $ dreamclerk --know-more
+        $ dreamclerk --notify
       </span>
       <p
         style={{

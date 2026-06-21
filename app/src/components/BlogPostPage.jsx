@@ -180,7 +180,7 @@ export default function BlogPostPage({ slug }) {
             ) : null}
 
             <footer className="bp3__foot">
-              <NotifyCTA source={`blog-post-${slug}`} cta="know more" />
+              <NotifyCTA source={`blog-post-${slug}`} cta="notify me" />
               <a href="/blog" className="bp3__back">← all posts</a>
               <p className="legal__back"><a href="/">← back to dreamclerk</a></p>
             </footer>
