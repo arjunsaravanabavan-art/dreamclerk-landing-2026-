@@ -142,6 +142,47 @@ export async function subscribeNotify({ email, name, source = "modal" }) {
   }
 }
 
+// ─── feedback (/feedback page) ──────────────────────────────────────────────
+//
+// Anonymous form on /feedback. Email is optional, message required.
+// Source tags where the submission came from so we can see which surface
+// drives the most signal. Schema lives in supabase/schema-feedback.sql.
+
+export async function submitFeedback({ email, category, message, source = "feedback-page" }) {
+  const cleanMessage = (message || "").trim();
+  const cleanEmail = (email || "").trim();
+  const cleanCategory = (category || "other").trim() || "other";
+  if (!cleanMessage) {
+    return { ok: false, error: "Please write something first." };
+  }
+  if (cleanMessage.length > 4000) {
+    return { ok: false, error: "That message is over 4 KB — please shorten it." };
+  }
+  if (cleanEmail && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cleanEmail)) {
+    return { ok: false, error: "That email looks off — leave it blank or fix it." };
+  }
+  if (!isConfigured || !supabase) {
+    console.warn("[dreamclerk] supabase not configured — feedback dropped locally");
+    return { ok: true, mock: true };
+  }
+  try {
+    const ua = typeof navigator !== "undefined" ? (navigator.userAgent || "").slice(0, 256) : null;
+    const { error } = await supabase
+      .from("feedback")
+      .insert({
+        email: cleanEmail || null,
+        category: cleanCategory,
+        message: cleanMessage,
+        source,
+        user_agent: ua,
+      });
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err?.message || "Network error." };
+  }
+}
+
 // ─── posts (blog) ───────────────────────────────────────────────────────────
 //
 // Public read (RLS: select where published = true).

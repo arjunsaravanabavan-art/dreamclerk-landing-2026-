@@ -28,6 +28,8 @@ import CompaniesPage from "./components/CompaniesPage.jsx";
 import FAQPage from "./components/FAQPage.jsx";
 import BlogListPage from "./components/BlogListPage.jsx";
 import BlogPostPage from "./components/BlogPostPage.jsx";
+import FeedbackPage from "./components/FeedbackPage.jsx";
+import ContactPage from "./components/ContactPage.jsx";
 import AdminPage from "./components/AdminPage.jsx";
 import BetaPage from "./components/BetaPage.jsx";
 import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
@@ -76,6 +78,7 @@ function LandingPage() {
 export default function App() {
   const { path, navigate } = usePathRoute();
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalSource, setModalSource] = useState("modal");
 
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
@@ -127,6 +130,40 @@ export default function App() {
     return () => document.removeEventListener("click", onClick);
   }, []);
 
+  // Custom-event listener — components that fire `open-modal` from their
+  // own JS (the blog-post NotifyCTA, the Final band) get to attach a
+  // source so the EmailModal knows where the signup came from.
+  useEffect(() => {
+    const onOpen = (e) => {
+      const source = e?.detail?.source || "modal";
+      setModalSource(source);
+      setModalOpen(true);
+    };
+    document.addEventListener("open-modal", onOpen);
+    return () => document.removeEventListener("open-modal", onOpen);
+  }, []);
+
+  // Auto-open the waitlist modal once per session for landing visitors.
+  // Gated to the marketing landing route only — /about, /blog, /verify,
+  // /admin, and the beta flow stay quiet. Session storage + a 4.5s delay
+  // so the hero animation lands first and the modal never feels like an
+  // interruption. Closes itself once a user has submitted or dismissed
+  // the modal in this session.
+  useEffect(() => {
+    if (path !== "/") return;
+    if (typeof window === "undefined") return;
+    if (window.sessionStorage.getItem("dc.waitlist.popup") === "seen") return;
+
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const delay = reducedMotion ? 200 : 4500;
+    const t = setTimeout(() => {
+      setModalOpen(true);
+      try { window.sessionStorage.setItem("dc.waitlist.popup", "seen"); } catch {}
+    }, delay);
+
+    return () => clearTimeout(t);
+  }, [path]);
+
   // Scroll to top on real route change (skip on initial /).
   // Instant scroll keeps the page-enter animation clean — smooth scroll at
   // the same time as the fade+rise would double-animate the viewport.
@@ -168,7 +205,9 @@ export default function App() {
   else if (path === "/blog") routeNode = <BlogListPage />;
   else if (path.startsWith("/blog/")) {
     routeNode = <BlogPostPage slug={path.replace("/blog/", "").replace(/\/$/, "")} />;
-  } else if (path === "/admin" || path.startsWith("/admin/")) {
+  } else if (path === "/feedback") routeNode = <FeedbackPage />;
+  else if (path === "/contact") routeNode = <ContactPage />;
+  else if (path === "/admin" || path.startsWith("/admin/")) {
     routeNode = <AdminPage />;
   } else if (path === "/beta" || path.startsWith("/beta/")) {
     // Open beta: no token, no gate. `BetaPage` shows its own email gate on
@@ -192,7 +231,15 @@ export default function App() {
         {routeNode}
       </div>
       <Footer />
-      {modalOpen && <EmailModal onClose={() => setModalOpen(false)} />}
+      {modalOpen && (
+        <EmailModal
+          source={modalSource}
+          onClose={() => {
+            setModalOpen(false);
+            try { window.sessionStorage.setItem("dc.waitlist.popup", "seen"); } catch {}
+          }}
+        />
+      )}
     </div>
   );
 }

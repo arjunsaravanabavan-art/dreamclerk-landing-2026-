@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
+import NotifyCTA from "./NotifyCTA.jsx";
 import { getPostBySlug } from "../lib/supabase.js";
 import { renderMarkdown } from "../lib/markdown.jsx";
 import { useSEO, SEO } from "../lib/seo.js";
@@ -179,6 +180,7 @@ export default function BlogPostPage({ slug }) {
             ) : null}
 
             <footer className="bp3__foot">
+              <NotifyCTA source={`blog-post-${slug}`} cta="know more" />
               <a href="/blog" className="bp3__back">← all posts</a>
               <p className="legal__back"><a href="/">← back to dreamclerk</a></p>
             </footer>

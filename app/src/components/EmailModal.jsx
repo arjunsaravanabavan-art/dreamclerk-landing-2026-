@@ -2,6 +2,27 @@ import { useEffect, useRef, useState } from "react";
 import { subscribeNotify, getSubscriberCount, bumpSubscriberCount } from "../lib/supabase";
 
 export default function EmailModal({ open, onClose, source = "modal" }) {
+  // Source-aware copy. Blog-post signups should say "we'll ping you when
+  // a new post goes live", landing signups say "when a new cohort opens".
+  // Computed once per render — source is stable while the modal is open.
+  const isBlogSource = typeof source === "string" && source.startsWith("blog-post");
+  const isNotifyCta = source === "notify-cta" || source === "final-band";
+  const successHeadline = isBlogSource
+    ? "you're on the list."
+    : isNotifyCta
+      ? "you're on the list."
+      : "you are on the list.";
+  const successBody = isBlogSource
+    ? "we'll email you the moment a new post goes live. check @dreamclrk in the meantime."
+    : isNotifyCta
+      ? "we'll email you the moment a new cohort opens. check @dreamclrk for the announcement in the meantime."
+      : "we will email you the moment a new cohort opens. check @dreamclrk for the announcement in the meantime.";
+  const formHeadline = isBlogSource
+    ? "get notified when we publish."
+    : "get notified when dreamclerk opens.";
+  const formLede = isBlogSource
+    ? "drop your email. we will email you the moment a new post goes live."
+    : "drop your details. we will email you the moment a new cohort opens.";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
@@ -122,11 +143,11 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
               <span className="dot" />
               <span style={{ color: "var(--ok)" }}>● confirmed</span>
             </div>
-            <h4>you are on the list.</h4>
+            <h4>{successHeadline}</h4>
             <p>
-              we will email you the moment a new cohort opens. check{" "}
+              {successBody}{" "}
               <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">@dreamclrk</a>{" "}
-              for the announcement in the meantime.
+              in the meantime.
             </p>
             <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
               close <span className="arr">→</span>
@@ -134,8 +155,8 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
           </div>
         ) : (
           <div className="modal__body">
-            <h4 id="modal-title">get notified when dreamclerk opens.</h4>
-            <p>drop your details. we will email you the moment a new cohort opens.</p>
+            <h4 id="modal-title">{formHeadline}</h4>
+            <p>{formLede}</p>
 
             <form className="modal__form" onSubmit={handleSubmit} noValidate>
               <input
@@ -155,7 +176,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
               <input
                 id="modal-email"
                 type="email"
-                placeholder="your email · you@college.edu"
+                placeholder="your email · you@example.com"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -172,7 +193,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
                   className="btn btn--solid"
                   disabled={status === "loading"}
                 >
-                  {status === "loading" ? "joining…" : <>get notified <span className="arr">→</span></>}
+                  {status === "loading" ? "joining…" : <>get to know <span className="arr">→</span></>}
                 </button>
               </div>
               <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>

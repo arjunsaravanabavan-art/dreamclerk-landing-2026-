@@ -10,10 +10,10 @@ export default function Final() {
   }, []);
 
   return (
-    <section id="apply" className="final-band section">
+    <section id="know" className="final-band section">
       <div className="wrap final reveal">
         <div className="final-l">
-          <span className="ps1">$</span> dreamclerk --apply{" "}
+          <span className="ps1">$</span> dreamclerk --know{" "}
           <span className="caret" />
           <h2>
             coming soon
@@ -28,10 +28,10 @@ export default function Final() {
             className="quick-apply"
             onSubmit={(e) => { e.preventDefault(); document.dispatchEvent(new CustomEvent("open-modal", { detail: { source: "final-band" } })); }}
           >
-            <label htmlFor="qa" className="visually-hidden">your college email</label>
-            <input id="qa" type="email" required placeholder="you@college.edu" autoComplete="email" />
+            <label htmlFor="qa" className="visually-hidden">your email</label>
+            <input id="qa" type="email" required placeholder="you@example.com" autoComplete="email" />
             <button type="submit" className="btn">
-              apply
+              know more
               <span className="arr">→</span>
             </button>
           </form>
@@ -48,7 +48,7 @@ export default function Final() {
               color: "var(--muted-on-dark-2)",
             }}
           >
-            ? not ready to apply?{" "}
+            ? want to know more?{" "}
             <a
               href="mailto:info@dreamclerk.com?subject=human%20contact%20%E2%80%94%20dreamclerk%20beta&body=hi%20dreamclerk%20team%2C%0A%0A"
               style={{
@@ -63,6 +63,76 @@ export default function Final() {
               talk to a human →
             </a>
           </p>
+
+          <ul
+            aria-label="contact"
+            style={{
+              listStyle: "none",
+              padding: 0,
+              margin: "20px 0 0",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 14,
+              fontFamily: "var(--mono)",
+              fontSize: 13,
+              color: "var(--muted-on-dark-2)",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              paddingTop: 14,
+            }}
+          >
+            <li style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span aria-hidden="true">$</span>
+              <a
+                href="mailto:info@dreamclerk.com"
+                style={{
+                  color: "var(--paper)",
+                  textDecoration: "underline",
+                  textDecorationColor: "var(--ok-fill)",
+                  textUnderlineOffset: 3,
+                  textDecorationThickness: 1,
+                  transition: "text-decoration-color 200ms var(--ease), color 200ms var(--ease)",
+                }}
+              >
+                info@dreamclerk.com
+              </a>
+            </li>
+            <li style={{ color: "var(--muted-on-dark-2)" }}>·</li>
+            <li>
+              <a
+                href="https://www.linkedin.com/company/dreamclerk"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  color: "var(--paper)",
+                  textDecoration: "underline",
+                  textDecorationColor: "var(--ok-fill)",
+                  textUnderlineOffset: 3,
+                  textDecorationThickness: 1,
+                  transition: "text-decoration-color 200ms var(--ease), color 200ms var(--ease)",
+                }}
+              >
+                linkedin ↗
+              </a>
+            </li>
+            <li style={{ color: "var(--muted-on-dark-2)" }}>·</li>
+            <li>
+              <a
+                href="https://www.instagram.com/dreamclrk"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  color: "var(--paper)",
+                  textDecoration: "underline",
+                  textDecorationColor: "var(--ok-fill)",
+                  textUnderlineOffset: 3,
+                  textDecorationThickness: 1,
+                  transition: "text-decoration-color 200ms var(--ease), color 200ms var(--ease)",
+                }}
+              >
+                instagram ↗
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

@@ -43,7 +43,8 @@ export default function Footer() {
             <ul>
               <li><RouterLink to="/about">about us</RouterLink></li>
               <li><a href="/about#team">team</a></li>
-              <li><a href="mailto:info@dreamclerk.com">contact</a></li>
+              <li><RouterLink to="/contact">contact</RouterLink></li>
+              <li><RouterLink to="/feedback">feedback</RouterLink></li>
               <li><a href="mailto:press@dreamclerk.com">press</a></li>
               <li><a href="mailto:careers@dreamclerk.com">careers</a></li>
             </ul>
@@ -54,7 +55,6 @@ export default function Footer() {
             <ul>
               <li><a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram ↗</a></li>
               <li><a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin ↗</a></li>
-              <li><a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github ↗</a></li>
             </ul>
           </div>
 
@@ -74,7 +74,6 @@ export default function Footer() {
           <div className="socials">
             <a href="https://www.instagram.com/dreamclrk" target="_blank" rel="noreferrer">instagram</a>
             <a href="https://www.linkedin.com/company/dreamclerk" target="_blank" rel="noreferrer">linkedin</a>
-            <a href="https://github.com/dreamclerk" target="_blank" rel="noreferrer">github</a>
           </div>
         </div>
       </div>
