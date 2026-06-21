@@ -1488,9 +1488,9 @@ body::before {
   line-height: 1.1;
 }
 .kbd--on-dark { background: rgba(244,241,234,0.08); color: var(--paper); border-color: var(--line-on-dark); }
-@media (min-width: 1024px) {
-  body.has-cursor-hidden { cursor: none; }
-}
+/* Old custom-cursor body class — removed when Cursor.jsx took over.
+   Left empty intentionally so future grep for "has-cursor-hidden"
+   doesn't get a false positive in this file. */
 
 /* =========================================================
    SUB-PAGES — long-form pages (HowItWorks, Workspace, Tracks,
@@ -6258,6 +6258,416 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
   transition: background 0.2s ease-out;
 }
 .beta-form-progress span.is-on { background: var(--ink, #0a0a0a); }
+
+/* ─── Onboarding form fields (used in BetaEmailGate + BetaOnboarding) ─── */
+/* These are the className strings used in BetaPage.jsx. .beta-form-row is
+   the legacy alias for these same elements; both work. */
+
+.beta-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.beta-field--half { flex: 1; min-width: 0; }
+
+.beta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+}
+
+.beta-input,
+.beta-textarea {
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 16px;
+  background: transparent;
+  border: 1px solid var(--ink, #0a0a0a);
+  padding: 10px 12px;
+  border-radius: 4px;
+  color: var(--ink, #0a0a0a);
+  cursor: text;
+  width: 100%;
+  box-sizing: border-box;
+}
+.beta-textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+.beta-input:focus,
+.beta-textarea:focus {
+  outline: none;
+  border-width: 2px;
+  padding: 9px 11px;
+}
+.beta-input[aria-invalid="true"] { border-color: var(--err, #b3241d); }
+
+.beta-hint {
+  font-size: 12px;
+  opacity: 0.6;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  margin-top: 2px;
+}
+.beta-hint--err {
+  opacity: 1;
+  color: var(--err, #b3241d);
+}
+
+.beta-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+.beta-row--end { justify-content: flex-end; }
+
+.beta-btn--primary {
+  background: var(--ink, #0a0a0a);
+  color: var(--paper, #f4f1ea);
+}
+.beta-btn--primary:disabled {
+  background: var(--paper-2, #ece8de);
+  color: var(--muted, rgba(10,10,10,0.62));
+  border-color: var(--line, rgba(10,10,10,0.14));
+  cursor: not-allowed;
+}
+
+.beta-link {
+  color: var(--ok, #cc4d0e);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.beta-link:hover { color: var(--ink, #0a0a0a); }
+
+/* ─── Stepper (3-step onboarding progress) ──────────────────────────── */
+.beta-stepper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 20px 0 24px;
+}
+.beta-step {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line, rgba(10,10,10,0.14));
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  transition: background 0.2s ease-out, border-color 0.2s ease-out;
+}
+.beta-step.is-active {
+  border-color: var(--ink, #0a0a0a);
+  background: var(--paper-2, #ece8de);
+}
+.beta-step.is-done { opacity: 0.55; }
+.beta-step-n {
+  font-weight: 600;
+  font-size: 11px;
+  opacity: 0.7;
+}
+.beta-step-t {
+  font-size: 13px;
+  color: var(--ink, #0a0a0a);
+}
+
+/* ─── Skill range (onboarding step 3) ────────────────────────────────── */
+.beta-skill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+}
+.beta-skill-label {
+  flex: 0 0 180px;
+  font-size: 13px;
+}
+.beta-skill-range {
+  flex: 1;
+  accent-color: var(--ink, #0a0a0a);
+  cursor: pointer;
+}
+.beta-skill-v {
+  flex: 0 0 24px;
+  text-align: right;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Work record (post-sprint summary card) ────────────────────────── */
+.beta-record {
+  border: 1px solid var(--ink, #0a0a0a);
+  padding: 22px 24px;
+  margin: 18px 0;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  background: var(--paper-2, #ece8de);
+}
+
+/* ─── Survey (post-sprint CSAT) ──────────────────────────────────────── */
+.beta-survey {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 18px 0;
+}
+.beta-survey-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+}
+.beta-csat {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.beta-csat button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--ink, #0a0a0a);
+  background: transparent;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease-out, color 0.15s ease-out;
+}
+.beta-csat button:hover { background: var(--ink, #0a0a0a); color: var(--paper, #f4f1ea); }
+.beta-csat button.is-on { background: var(--ink, #0a0a0a); color: var(--paper, #f4f1ea); }
+
+/* ─── TrackPicker (after email gate) ────────────────────────────────────── */
+.beta-track-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 18px 0;
+}
+.beta-track-cell {
+  border: 1px solid var(--ink, #0a0a0a);
+  border-radius: 6px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: border-color 0.15s ease-out, background 0.15s ease-out;
+}
+.beta-track-cell:hover { border-color: var(--ok, #cc4d0e); background: var(--paper-2, #ece8de); }
+.beta-track-cell.is-on { border-color: var(--ink, #0a0a0a); background: var(--paper-2, #ece8de); box-shadow: 0 0 0 2px var(--ink, #0a0a0a); }
+
+.beta-track-card-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+.beta-track-card-id { font-weight: 600; }
+.beta-track-card-time { opacity: 0.55; }
+
+.beta-track-card-title {
+  font-family: var(--serif, "Instrument Serif", ui-serif, Georgia, serif);
+  font-size: 20px;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+.beta-track-card-subtitle {
+  font-size: 13px;
+  opacity: 0.7;
+  margin: 0 0 10px;
+}
+
+.beta-track-card-blurb {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 12px;
+}
+.beta-track-card-cue {
+  font-size: 11px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.beta-track-card-f {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0.8;
+}
+
+.beta-track-card-arrow {
+  display: inline-block;
+  margin-left: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+.beta-track-cell:hover .beta-track-card-arrow,
+.beta-track-cell.is-on .beta-track-card-arrow { opacity: 1; }
+
+.beta-track-tasks {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  font-size: 13px;
+}
+.beta-track-task {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+}
+.beta-track-task-i {
+  flex: 0 0 16px;
+  opacity: 0.5;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 11px;
+}
+.beta-track-task-t {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* ─── BetaDashboard (IDE layout) ───────────────────────────────────────── */
+.beta-shell-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+.beta-row--mt { margin-top: 16px; }
+
+.beta-board {
+  border: 1px solid var(--line, rgba(10,10,10,0.14));
+  border-radius: 4px;
+  padding: 14px 16px;
+  margin: 12px 0;
+  background: var(--paper-2, #ece8de);
+}
+
+/* ─── BetaTaskWorkspace (right panel) ──────────────────────────────────── */
+.beta-ws-statusbar-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  opacity: 0.7;
+}
+.beta-ws-submit-error {
+  color: var(--err, #b3241d);
+  font-size: 12px;
+  margin: 8px 0;
+}
+.beta-ws-error-details {
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 11px;
+  opacity: 0.7;
+  margin: 4px 0;
+  white-space: pre-wrap;
+}
+
+.beta-ws-review-axes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.beta-ws-review-axes span {
+  font-size: 11px;
+  padding: 4px 8px;
+  border: 1px solid var(--line, rgba(10,10,10,0.14));
+  border-radius: 4px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  opacity: 0.7;
+}
+.beta-ws-review-axes span.is-pass {
+  border-color: var(--ok, #cc4d0e);
+  color: var(--ok, #cc4d0e);
+  opacity: 1;
+}
+
+/* ─── Chat messages (BetaManagerChat) ──────────────────────────────────── */
+.beta-msg-name {
+  font-weight: 600;
+  font-size: 13px;
+  margin: 0 0 2px;
+}
+.beta-msg-time {
+  font-size: 11px;
+  opacity: 0.5;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+}
+
+/* ─── Sprint countdown (BetaDashboard header) ───────────────────────── */
+.beta-sprint-countdown-day,
+.beta-sprint-countdown-rem,
+.beta-sprint-countdown-sep {
+  font-size: 13px;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+}
+.beta-sprint-countdown-sep { opacity: 0.5; margin: 0 4px; }
+
+/* ─── Verify page (BetaVerifyPage) ─────────────────────────────────────── */
+.beta-verify-admin-bar {
+  background: var(--paper-2, #ece8de);
+  border: 1px solid var(--ink, #0a0a0a);
+  padding: 10px 14px;
+  margin: 14px 0;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 12px;
+}
+.beta-verify-admin-bar-l {
+  font-weight: 600;
+  margin-right: 6px;
+}
+.beta-verify-admin-form {
+  margin: 12px 0;
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 13px;
+}
+.beta-verify-flagged {
+  border-left: 3px solid var(--err, #b3241d);
+  padding-left: 12px;
+  margin: 10px 0;
+}
+.beta-verify-task-t {
+  font-family: var(--font-mono, ui-monospace, "JetBrains Mono", monospace);
+  font-size: 12px;
+  margin: 4px 0;
+}
+
+/* ─── Workspace tree (BetaTaskWorkspace) ──────────────────────────────── */
+.beta-tree-ic {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-right: 6px;
+}
+.beta-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ok, #cc4d0e);
+  margin-right: 6px;
+}
+.beta-dot.is-off { background: var(--line, rgba(10,10,10,0.14)); }
+
+/* ─── h4 heading (beta subsection title) ──────────────────────────────── */
+.beta-h4 {
+  font-family: var(--serif, "Instrument Serif", ui-serif, Georgia, serif);
+  font-size: 16px;
+  margin: 18px 0 8px;
+  letter-spacing: -0.01em;
+}
 
 /* ─── Cutscene (Day 1) ────────────────────────────────────────────────── */
 .beta-cutscene { white-space: pre-wrap; font-size: 16px; line-height: 1.7; }

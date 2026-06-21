@@ -285,7 +285,7 @@ export default function TracksPage() {
 
         <div className="tk3__cta">
           <a className="btn btn--solid" href="#" data-open-modal data-open-source="tracks-cta">
-            apply to a track <span className="arr" aria-hidden="true">→</span>
+            know more <span className="arr" aria-hidden="true">→</span>
           </a>
           <p className="tk3__cta-note">free during 2026-q2 beta · 1,847 in queue · you can switch at sprint end</p>
         </div>

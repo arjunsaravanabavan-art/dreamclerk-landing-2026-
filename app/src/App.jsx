@@ -4,6 +4,7 @@ import { useReveal } from "./components/useReveal.js";
 import { usePathRoute, redirectLegacyHashes } from "./lib/router.jsx";
 
 import Nav from "./components/Nav.jsx";
+import Cursor from "./components/Cursor.jsx";
 import Hero from "./components/Hero.jsx";
 import Mentions from "./components/Mentions.jsx";
 import Marquee from "./components/Marquee.jsx";
@@ -83,28 +84,29 @@ export default function App() {
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
 
-  // Custom cursor: hide native cursor on desktop with a fine pointer.
-  // Per CLAUDE.md hard rule: cursor: none on >1024px only.
+  // Custom inverted-color cursor. The <Cursor /> component manages its
+  // own enable/disable (desktop only, no reduced motion) and toggles a
+  // body class while it is active so the stylesheet can hide the native
+  // cursor globally while keeping the text caret in inputs.
+  const [cursorActive, setCursorActive] = useState(false);
   useEffect(() => {
-    let hide = false;
-    const onMove = (e) => {
-      if (e.pointerType !== "mouse" || window.innerWidth <= 1024) {
-        if (hide) { document.body.classList.remove("has-cursor-hidden"); hide = false; }
-        return;
-      }
-      if (!hide) { document.body.classList.add("has-cursor-hidden"); hide = true; }
+    if (typeof window === "undefined") return;
+    const compute = () => {
+      const fine = window.matchMedia?.("(pointer: fine)").matches !== false;
+      const wide = window.innerWidth > 1024;
+      const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      const next = fine && wide && !reduced;
+      setCursorActive(next);
+      try {
+        if (next) document.body.classList.add("has-dc-cursor");
+        else document.body.classList.remove("has-dc-cursor");
+      } catch {}
     };
-    const onLeave = () => {
-      if (hide) { document.body.classList.remove("has-cursor-hidden"); hide = false; }
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerleave", onLeave);
-    window.addEventListener("blur", onLeave);
+    compute();
+    window.addEventListener("resize", compute);
     return () => {
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerleave", onLeave);
-      window.removeEventListener("blur", onLeave);
-      document.body.classList.remove("has-cursor-hidden");
+      window.removeEventListener("resize", compute);
+      try { document.body.classList.remove("has-dc-cursor"); } catch {}
     };
   }, []);
 
@@ -143,25 +145,62 @@ export default function App() {
     return () => document.removeEventListener("open-modal", onOpen);
   }, []);
 
-  // Auto-open the waitlist modal once per session for landing visitors.
+  // Auto-open the waitlist modal for first-time landing visitors.
+  //
+  // Two triggers, first one wins:
+  //   1. 3-second timer (so the hero animation lands first and the modal
+  //      never feels like an interruption)
+  //   2. 50% scroll-depth (so engaged readers get it even before the timer)
+  //
+  // The lock is in *localStorage* (not sessionStorage) — once a visitor has
+  // either submitted or dismissed the modal, it never shows again on this
+  // browser, ever. Re-marketing has to come from a different surface
+  // (footer, blog, etc.). Per user request: "make sure it doesn't repeat
+  // after the user entering details".
+  //
   // Gated to the marketing landing route only — /about, /blog, /verify,
-  // /admin, and the beta flow stay quiet. Session storage + a 4.5s delay
-  // so the hero animation lands first and the modal never feels like an
-  // interruption. Closes itself once a user has submitted or dismissed
-  // the modal in this session.
+  // /admin, /feedback, /contact, and the beta flow stay quiet.
   useEffect(() => {
     if (path !== "/") return;
     if (typeof window === "undefined") return;
-    if (window.sessionStorage.getItem("dc.waitlist.popup") === "seen") return;
+    const POPUP_KEY = "dc.waitlist.popup.lock";
+    try {
+      if (window.localStorage.getItem(POPUP_KEY) === "locked") return;
+    } catch {}
+
+    let opened = false;
+    const openOnce = (why) => {
+      if (opened) return;
+      opened = true;
+      setModalOpen(true);
+      setModalSource(why === "scroll" ? "modal-scroll" : "modal-timer");
+      try { window.localStorage.setItem(POPUP_KEY, "locked"); } catch {}
+      cleanup();
+    };
 
     const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const delay = reducedMotion ? 200 : 4500;
-    const t = setTimeout(() => {
-      setModalOpen(true);
-      try { window.sessionStorage.setItem("dc.waitlist.popup", "seen"); } catch {}
-    }, delay);
+    const timerDelay = reducedMotion ? 200 : 3000;
 
-    return () => clearTimeout(t);
+    // Trigger 1: timer
+    const t = setTimeout(() => openOnce("timer"), timerDelay);
+
+    // Trigger 2: 50% scroll depth. Listen on window scroll, recompute
+    // scroll percentage each tick, fire exactly once at >= 50%.
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrolled = window.scrollY + window.innerHeight;
+      const total = doc.scrollHeight;
+      if (total > 0 && scrolled / total >= 0.5) {
+        openOnce("scroll");
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const cleanup = () => {
+      clearTimeout(t);
+      window.removeEventListener("scroll", onScroll);
+    };
+    return cleanup;
   }, [path]);
 
   // Scroll to top on real route change (skip on initial /).
@@ -183,7 +222,7 @@ export default function App() {
       document.body.classList.remove(
         "dc-modal-open",
         "dc-task-active",
-        "has-cursor-hidden"
+        "has-dc-cursor"
       );
     };
   }, [path]);
@@ -226,6 +265,7 @@ export default function App() {
 
   return (
     <div className="app">
+      {cursorActive && <Cursor />}
       <Nav activePath={path} />
       <div key={routeKey} className="page page-enter">
         {routeNode}
@@ -236,7 +276,11 @@ export default function App() {
           source={modalSource}
           onClose={() => {
             setModalOpen(false);
-            try { window.sessionStorage.setItem("dc.waitlist.popup", "seen"); } catch {}
+            // Lock the popup across all sessions — once a user dismisses
+            // (X, escape, or backdrop click), the dual trigger never fires
+            // again on this browser. The lock is already set when the
+            // trigger itself fires, so this is the dismiss path.
+            try { window.localStorage.setItem("dc.waitlist.popup.lock", "locked"); } catch {}
           }}
         />
       )}

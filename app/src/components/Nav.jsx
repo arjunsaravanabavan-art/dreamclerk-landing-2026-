@@ -57,6 +57,8 @@ export default function Nav({ activePath = "/" } = {}) {
           <a href="/companies" {...ariaCurrent("/companies")} onClick={() => setOpen(false)}>companies</a>
           <a href="/faq"       {...ariaCurrent("/faq")}       onClick={() => setOpen(false)}>faq</a>
           <a href="/blog"      {...ariaCurrent("/blog")}      onClick={() => setOpen(false)}>blog</a>
+          <a href="/contact"   {...ariaCurrent("/contact")}   onClick={() => setOpen(false)}>contact</a>
+          <a href="/feedback"  {...ariaCurrent("/feedback")}  onClick={() => setOpen(false)}>feedback</a>
         </nav>
 
         <div className="nav__cta">
@@ -64,7 +66,7 @@ export default function Nav({ activePath = "/" } = {}) {
             <span className="dot" /> systems normal
           </span>
           <a className="btn btn--solid" href="#" data-open-modal data-open-source="nav-cta">
-            apply <span className="arr" aria-hidden="true">→</span>
+            know more <span className="arr" aria-hidden="true">→</span>
           </a>
           <button
             className={"nav__burger" + (open ? " is-open" : "")}
