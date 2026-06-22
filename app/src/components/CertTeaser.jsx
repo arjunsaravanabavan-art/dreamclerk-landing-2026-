@@ -1,9 +1,16 @@
 /**
- * Certificate teaser — the lead-in section above the detailed Certificate/verify panel.
+ * Certificate teaser — the lead-in section above the existing Certificate/verify panel.
  *
- * A high-level preview of what the certificate IS and a "claim yours" notify CTA.
+ * A 2-up layout:
+ *  - Left: a real, readable certificate card (the document a recruiter opens). Static
+ *    SVG-style DOM with the holder, track, sprint metrics, capstone, signature, and
+ *    verify URL. Looks like a real cert, not a jpeg.
+ *  - Right: a short terminal-style "claim yours" block with the notify CTA and a
+ *    micro-stats strip.
+ *
+ * The card has a tiny "live" pulse on the signature line so the eye notices it.
  * Sits between Companies and the existing Certificate section so the two read as
- * a paired sequence ("here's what it is → here's the verify demo").
+ * a paired sequence ("here's the document → here's the verify panel").
  */
 export default function CertTeaser() {
   return (
@@ -24,45 +31,95 @@ export default function CertTeaser() {
           </div>
         </header>
 
-        <div className="cert-teaser reveal">
-          {/* Card 1: what's in it */}
-          <article className="cert-teaser__card">
-            <span className="cert-teaser__cmd">$ cat certificate.yaml</span>
-            <div className="cert-teaser__kv">
-              <span className="cert-teaser__k">signed:</span>
-              <span className="cert-teaser__v">sha256</span>
+        <div className="ct-grid reveal">
+          {/* ── Real certificate card ─────────────────────────────────────── */}
+          <article className="ct-cert" aria-label="sample dreamclerk certificate">
+            <div className="ct-cert__corner ct-cert__corner--tl" />
+            <div className="ct-cert__corner ct-cert__corner--tr" />
+            <div className="ct-cert__corner ct-cert__corner--bl" />
+            <div className="ct-cert__corner ct-cert__corner--br" />
+
+            <header className="ct-cert__head">
+              <div className="ct-cert__brand">
+                <span className="ct-cert__mark" aria-hidden="true" />
+                <span className="ct-cert__brandname">dreamclerk</span>
+              </div>
+              <div className="ct-cert__seal" aria-hidden="true">
+                <span>VERIFIED</span>
+                <small>sha256 · 8f4a…9c2b</small>
+              </div>
+            </header>
+
+            <div className="ct-cert__body">
+              <p className="ct-cert__eyebrow">certificate of verified work</p>
+              <h3 className="ct-cert__name">aanya sharma</h3>
+              <p className="ct-cert__track">backend engineering · junior</p>
+
+              <dl className="ct-cert__grid">
+                <div className="ct-cert__metric">
+                  <dt>sprints completed</dt>
+                  <dd>2</dd>
+                </div>
+                <div className="ct-cert__metric">
+                  <dt>prs merged</dt>
+                  <dd>34</dd>
+                </div>
+                <div className="ct-cert__metric">
+                  <dt>merge rate</dt>
+                  <dd>91%</dd>
+                </div>
+                <div className="ct-cert__metric">
+                  <dt>avg review</dt>
+                  <dd>84<span className="ct-cert__unit">/100</span></dd>
+                </div>
+                <div className="ct-cert__metric ct-cert__metric--wide">
+                  <dt>capstone</dt>
+                  <dd className="ct-cert__code">"rate-limiter middleware"</dd>
+                </div>
+                <div className="ct-cert__metric ct-cert__metric--wide">
+                  <dt>company</dt>
+                  <dd>vivacity</dd>
+                </div>
+              </dl>
             </div>
-            <div className="cert-teaser__kv">
-              <span className="cert-teaser__k">audit:</span>
-              <span className="cert-teaser__v">prs + review</span>
-            </div>
-            <div className="cert-teaser__kv">
-              <span className="cert-teaser__k">verify:</span>
-              <span className="cert-teaser__v">1-click</span>
-            </div>
-            <p className="cert-teaser__note">
-              every certificate contains your actual code, merge history, and capstone repo.
-            </p>
+
+            <footer className="ct-cert__foot">
+              <div className="ct-cert__sig">
+                <span className="ct-cert__sigdot" aria-hidden="true" />
+                <span>signature ok</span>
+              </div>
+              <div className="ct-cert__url">dreamclerk.com/v/dc-2026-8f4a-9c2b</div>
+              <div className="ct-cert__date">issued 2026-07-12</div>
+            </footer>
           </article>
 
-          {/* Card 2: claim yours CTA */}
-          <article className="cert-teaser__card cert-teaser__card--cta">
-            <span className="cert-teaser__cmd">$ claim --yours</span>
-            <p className="cert-teaser__lede">
-              join the beta, ship real work, earn a work record that recruiters actually open.
+          {/* ── Terminal claim block ──────────────────────────────────────── */}
+          <aside className="ct-claim">
+            <div className="ct-claim__cmd">$ claim --yours</div>
+            <p className="ct-claim__lede">
+              join the beta, ship real work, earn a work record that recruiters
+              actually open.
             </p>
+
+            <ul className="ct-claim__points">
+              <li><span className="ct-claim__ok">●</span> cryptographically signed</li>
+              <li><span className="ct-claim__ok">●</span> links to your merged prs and reviews</li>
+              <li><span className="ct-claim__ok">●</span> one-click verify page for recruiters</li>
+            </ul>
+
             <a
               href="#"
-              className="btn btn--solid"
+              className="btn btn--solid ct-claim__btn"
               data-open-modal
               data-open-source="cert-teaser"
             >
               claim yours <span className="arr" aria-hidden="true">→</span>
             </a>
-            <p className="cert-teaser__note">
+
+            <p className="ct-claim__note">
               free during beta · open to indian undergraduates.
             </p>
-          </article>
+          </aside>
         </div>
       </div>
     </section>

@@ -1,13 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { RouterLink } from "../lib/router.jsx";
 
 /**
  * Founder — /founder
  * The founder's own note. No fake achievements, no fluff.
+ *
+ * Layout:
+ *  - Left column: lede + 3 paragraphs written in present continuous ("I'm
+ *    building…", "I'm running…"), exactly as the founder writes in public.
+ *  - Right column: live "currently building" panel — a stack of build cards
+ *    with staggered entrance and a continuously running marquee pulse on
+ *    the active item. Animated entrance + ongoing pulse, with
+ *    prefers-reduced-motion honored.
+ *  - Below both: the contact card.
  */
+
+const BUILDING = [
+  { tag: "[shipped]",     label: "dreamclerk beta — verify engine v1",     dot: "ok",   ms: 0    },
+  { tag: "[shipping]",    label: "deterministic review · /how-beta",        dot: "live", ms: 600  },
+  { tag: "[shipping]",    label: "rate-limiter middleware (capstone seed)", dot: "live", ms: 1200 },
+  { tag: "[shipping]",    label: "student stories — first 5 interviews",    dot: "live", ms: 1800 },
+  { tag: "[next]",        label: "cohort 2 invite · end of july",            dot: "wait", ms: 2400 },
+  { tag: "[always]",      label: "responding to arjun@dreamclerk.com",      dot: "ok",   ms: 3000 },
+];
+
 export default function FounderPage() {
+  const [mounted, setMounted] = useState(false);
   useEffect(() => { document.title = "founder — dreamclerk"; }, []);
+  useEffect(() => {
+    // small rAF delay so the .fp-enter animations can play after mount
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <section className="section about" id="founder">
@@ -17,141 +42,121 @@ export default function FounderPage() {
         <h1 className="about__title">arjun sv.</h1>
         <p className="about__meta">founder · dreamclerk · age 22 · chennai</p>
 
-        <p className="about__lede">
-          i built dreamclerk because i lived the problem first. a real-world career simulation platform for indian undergraduates — so no one graduates into unemployment wondering whether the system saw them at all.
-        </p>
+        {/* Two-column lede + live build panel */}
+        <div className={"fp-cols" + (mounted ? " is-in" : "")}>
+          {/* ── LEFT: paragraphs in present-continuous ────────────────── */}
+          <div className="fp-cols__left">
+            <p className="about__lede">
+              i built dreamclerk because i lived the problem first. a real-world
+              career simulation platform for indian undergraduates — so no one
+              graduates into unemployment wondering whether the system saw them
+              at all.
+            </p>
 
-        <h2 className="contact__h2">$ why i built this</h2>
-        <p className="legal__lede">
-          i am 22. i watched classmates finish four years of coursework and still get rejected from entry-level roles because the role already had 1,000 applicants. dreamclerk is what i wish someone had handed me in second year — a way to ship real code, take real review, earn a real work record that employers actually open.
-        </p>
+            <h2 className="contact__h2">$ what i'm building</h2>
+            <p className="legal__lede">
+              i'm building a platform where students don't just watch tutorials —
+              they get hired by an ai recruiter, ship code in a full in-browser
+              ide, take real review, and walk away with a verified work record
+              that an employer can open in 30 seconds. i'm running the beta
+              myself, with a 1-person team, built in public, from chennai.
+            </p>
 
-        <h2 className="contact__h2">$ what i believe</h2>
-        <p className="legal__lede">
-          a degree is not a work record. a work record is a work record. every dreamclerk certificate is signed, audit-trail-verified, and one-click verifiable. no badges, no fluff.
-        </p>
+            <h2 className="contact__h2">$ why this works</h2>
+            <p className="legal__lede">
+              i'm shipping the only signal a recruiter actually trusts: your
+              merged code, your review notes, your sprint velocity, and a
+              capstone you can demo live. i'm running the review engine
+              deterministically so two reviewers always agree. i'm writing
+              every line of the cert code so the trail is auditable, signed,
+              and one-click verifiable. no badges, no fluff.
+            </p>
+
+            <h2 className="contact__h2">$ who i am</h2>
+            <p className="legal__lede">
+              i'm arjun, 22, in chennai. i'm building dreamclerk alone. i'm
+              writing this site, the beta engine, the sql schema, and the
+              landing copy. i'm not raising. i'm not hiring. i'm just
+              shipping, one sprint at a time, until the certificate is what
+              gets a student through the door.
+            </p>
+          </div>
+
+          {/* ── RIGHT: live "currently building" panel ─────────────────── */}
+          <aside className="fp-cols__right" aria-label="currently building">
+            <div className="fp-build">
+              <div className="fp-build__bar">
+                <span className="fp-build__dot" aria-hidden="true" />
+                <span className="fp-build__title">live · currently building</span>
+                <span className="fp-build__time">{mounted ? "online" : "boot…"}</span>
+              </div>
+
+              <ul className="fp-build__list">
+                {BUILDING.map((b, i) => (
+                  <li
+                    key={b.label}
+                    className="fp-build__item"
+                    style={{ animationDelay: `${b.ms}ms` }}
+                  >
+                    <span className={`fp-build__tag fp-build__tag--${b.dot}`}>{b.tag}</span>
+                    <span className="fp-build__label">{b.label}</span>
+                    <span className={`fp-build__pip fp-build__pip--${b.dot}`} aria-hidden="true" />
+                  </li>
+                ))}
+              </ul>
+
+              <div className="fp-build__foot">
+                <span className="fp-build__line" aria-hidden="true">
+                  <span>$ tail -f /founder/build.log</span>
+                  <span className="fp-build__cursor" />
+                </span>
+              </div>
+            </div>
+
+            <a className="fp-quote" href="https://www.linkedin.com/in/arjun-sv-6bbb8a316/" target="_blank" rel="noreferrer noopener">
+              <span className="fp-quote__mark">"</span>
+              <span className="fp-quote__body">
+                building this in public. if you want to follow along, i post
+                every sprint, every mistake, every merge.
+              </span>
+              <span className="fp-quote__src">— arjun sv · linkedin ↗</span>
+            </a>
+          </aside>
+        </div>
 
         {/* Single founder card — ContactPage style */}
-        <article
-          style={{
-            border: "1px solid var(--line)",
-            borderTop: "3px solid var(--ok)",
-            padding: "22px 22px 20px",
-            borderRadius: 4,
-            background: "var(--paper)",
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-            maxWidth: 640,
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "var(--mono)",
-              fontSize: 12,
-              color: "var(--muted)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            $ whoami arjun-sv
-          </span>
+        <article className="founder-card">
+          <span className="founder-card__cmd">$ whoami arjun-sv</span>
 
-          <h3
-            style={{
-              margin: 0,
-              fontSize: 22,
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-            }}
-          >
-            founder, dreamclerk.
-          </h3>
+          <h3 className="founder-card__title">founder, dreamclerk.</h3>
 
-          <p
-            style={{
-              margin: 0,
-              color: "var(--muted)",
-              fontSize: 14,
-              lineHeight: 1.55,
-            }}
-          >
+          <p className="founder-card__sub">
             chennai, india · 1-person team · built in public.
           </p>
 
-          <div
-            style={{
-              fontFamily: "var(--mono)",
-              fontSize: 13,
-              color: "var(--ink)",
-              padding: "8px 0",
-              borderTop: "1px dashed var(--line)",
-              borderBottom: "1px dashed var(--line)",
-            }}
-          >
+          <div className="founder-card__kv">
             <div>linkedin.com/in/arjun-sv-6bbb8a316/</div>
             <div>arjun@dreamclerk.com</div>
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              flexWrap: "wrap",
-            }}
-          >
+          <div className="founder-card__ctas">
             <a
               href="https://www.linkedin.com/in/arjun-sv-6bbb8a316/"
               target="_blank"
               rel="noreferrer noopener"
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 13,
-                padding: "10px 14px",
-                border: "1px solid var(--ink)",
-                background: "var(--ink)",
-                color: "var(--paper)",
-                borderRadius: 3,
-                letterSpacing: "0.04em",
-                textTransform: "lowercase",
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-              }}
+              className="founder-card__btn"
             >
               open linkedin ↗
             </a>
             <a
               href="mailto:arjun@dreamclerk.com"
-              style={{
-                fontFamily: "var(--mono)",
-                fontSize: 13,
-                padding: "10px 14px",
-                border: "1px solid var(--ink)",
-                background: "var(--ink)",
-                color: "var(--paper)",
-                borderRadius: 3,
-                letterSpacing: "0.04em",
-                textTransform: "lowercase",
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-              }}
+              className="founder-card__btn"
             >
               send email →
             </a>
           </div>
 
-          <p
-            style={{
-              margin: 0,
-              fontFamily: "var(--mono)",
-              fontSize: 11,
-              color: "var(--muted-2)",
-              letterSpacing: "0.04em",
-            }}
-          >
+          <p className="founder-card__foot">
             founder · 1-person team · chennai, india
           </p>
         </article>
