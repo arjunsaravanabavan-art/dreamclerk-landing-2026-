@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Real-path sitemap. The site is a Vite SPA served with the rewrite
-  `/(.*) → /index.html` (see vercel.json), so each path here resolves
-  to the same index.html but with a unique URL that search engines
-  can index separately. Lastmod is updated per-route whenever the
-  underlying content changes.
--->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.dreamclerk.com/</loc>
     <lastmod>2026-06-16</lastmod>
@@ -112,67 +104,67 @@
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/what-a-good-postmortem-looks-like</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/the-first-90-days-at-your-first-tech-job</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/6-pip-signals-and-how-to-flip-4-in-30-days</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/off-campus-hiring-2026-the-7-channels-that-still-work</loc>
-    <lastmod>2026-07-28</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/india-it-services-the-fresher-pipeline-is-broken-and-it-is-not-the-colleges-fault</loc>
-    <lastmod>2026-07-13</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/building-the-in-browser-ide-a-postmortem</loc>
-    <lastmod>2026-07-10</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/the-cost-of-a-bad-junior-hire-is-not-the-onboarding</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/why-we-stopped-using-take-home-projects</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/the-intern-cheat-sheet-for-the-pushback-round</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/the-dual-path-review-engine</loc>
-    <lastmod>2026-07-01</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.dreamclerk.com/blog/the-2026-pr-review-is-async-and-warm</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
