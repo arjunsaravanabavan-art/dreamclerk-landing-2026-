@@ -1,50 +1,77 @@
-# Deploying DreamClerk landing to Vercel
+# How to remove a row from notify_signups
 
-## Required env vars
+The `notify_signups` table has Row Level Security (RLS) with only an
+INSERT policy. There is no public DELETE — by design, we don't want
+random visitors to be able to delete other people's entries.
 
-The Vite client bundle inlines `import.meta.env.VITE_*` at build time. If these
-are missing, the EmailModal falls into "dev mode" (the success state shows the
-dev-mode warning instead of saving to Supabase). The build will succeed, but
-the live site will be silently broken.
+To remove a specific row, use one of the following.
 
-Set both of these in **Vercel → Project Settings → Environment Variables** for
-the **Production** environment:
+## Option 1 — Supabase SQL Editor (fastest, manual)
 
-| Name | Value | Where to find it |
-|---|---|---|
-| `VITE_SUPABASE_URL` | `https://hmeglzxbxbqetgydkynl.supabase.co` | Supabase project dashboard → Settings → API |
-| `VITE_SUPABASE_ANON_KEY` | (the `anon` / `public` JWT for the project) | Same place, "Project API keys" → "anon" / "public" |
+1. Open https://supabase.com/dashboard/project/hmeglzxbxbqetgydkynl/sql
+2. Paste and run:
 
-The URL is also committed to `vercel.json` as a `build.env` default so the
-project works on first push. The key is **not** committed (it's per-project
-and may rotate). Copy the current value from your local `.env` or from
-Supabase Settings → API.
+```sql
+-- Delete by email
+delete from public.notify_signups
+where email = 'arjun@dreamclerk.com';
 
-After changing env vars, **trigger a redeploy from the Deployments tab**.
-Vercel does NOT auto-rebuild when env vars change.
+-- Or by id (find the id first):
+select id, email, name, source, created_at
+from public.notify_signups
+order by created_at desc
+limit 10;
 
-## Defense-in-depth
+-- Then:
+delete from public.notify_signups
+where id = '<paste the id here>';
+```
 
-`app/src/lib/supabase.js` hardcodes a URL fallback (the project URL is public,
-not a secret) so the build never inlines `undefined` for `VITE_SUPABASE_URL`.
-The anon key remains env-driven so key rotations are a deploy action, not a
-code change.
+The SQL Editor uses the service role, so it bypasses RLS.
 
-## Verifying a deploy
+## Option 2 — Add a delete RPC for admin use
 
-1. Build completes with 0 errors.
-2. New bundle contains the URL substring:
-   ```bash
-   curl -s "https://www.dreamclerk.com/assets/index-XXXX.js" | grep -c hmeglzxbxbqetgydkynl
-   # expect: 2 (or more)
-   ```
-3. Submit a test email from the live site. Success state should read:
-   `● saved to supabase · notify_signups (you@…)`
-   Not the dev-mode warning.
-4. Verify in Supabase SQL Editor:
-   ```sql
-   select id, email, source, created_at
-   from public.notify_signups
-   order by created_at desc
-   limit 5;
-   ```
+If you'll be cleaning up entries often, add a Postgres function and grant
+execute to the anon role (with an admin-email check) so the admin page
+can call it. Run once in the SQL editor:
+
+```sql
+create or replace function public.admin_delete_notify_signup(target_email text)
+returns boolean
+language plpgsql
+security definer  -- runs as the function owner (postgres), bypasses RLS
+as $$
+begin
+  delete from public.notify_signups where email = target_email;
+  return found;
+end;
+$$;
+
+grant execute on function public.admin_delete_notify_signup(text) to anon, authenticated;
+```
+
+Then in `app/src/lib/supabase.js`, expose:
+
+```js
+export async function adminDeleteNotifySignup(email) {
+  if (!isConfigured || !supabase) return { ok: false, error: "not configured" };
+  const { data, error } = await supabase.rpc("admin_delete_notify_signup", {
+    target_email: email,
+  });
+  return { ok: !error, error: error?.message, deleted: data };
+}
+```
+
+And in the admin page, wire a "delete entry by email" UI to it. The
+service-role bypass on the function ensures it works even though the
+table's DELETE policy is absent.
+
+## Why the test insert didn't work for me
+
+The anon key in `app/.env.example` (ending `…cNZ7E`) is rejected by the
+live Supabase project as `Invalid API key`. The fix requires a freshly
+issued anon key from the Supabase dashboard. If the live site is
+showing "saved to supabase · notify_signups (you@…)" then the bundle
+on Vercel has the **correct** key — not the one in `.env.example`. The
+.env file in the repo is stale and should be updated to match whatever
+key is currently in the Vercel project env.
