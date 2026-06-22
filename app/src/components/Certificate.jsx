@@ -34,6 +34,10 @@ export default function Certificate() {
     { kind: "kv", key: "incidents",     val: "2",                    indent: 2, kindVal: "n" },
     { kind: "kv", key: "capstone",      val: "rate-limiter middleware", indent: 2, kindVal: "s", quote: true },
     { kind: "sp", t: "" },
+    { kind: "kv", key: "chain",         val: "eth-sepolia",            indent: 2, kindVal: "k" },
+    { kind: "kv", key: "tx",            val: "0x8f4a…9c2b…7e21",       indent: 2, kindVal: "s", quote: true },
+    { kind: "kv", key: "block",         val: "9421821",                indent: 2, kindVal: "n" },
+    { kind: "sp", t: "" },
     { kind: "url", val: verifyUrl },
   ];
 
@@ -162,15 +166,19 @@ export default function Certificate() {
 
             <div className="cert__panel-foot">
               <span>sha256: 8f4a…9c2b</span>
+              <span>chain: eth-sepolia · 0x8f4a…9c2b…7e21</span>
               <span>issued: 2026-07-12</span>
-              <span>verifications: 1,204 / mo</span>
             </div>
           </div>
 
           <aside className="cert__side">
             <h3>what's in it.</h3>
             <p>
-              your cert is not a jpeg. it links directly to your merged prs, your review threads, and your capstone repo. employers can audit the entire trail in 30 seconds.
+              your cert is not a jpeg. it is signed twice — once with sha256
+              for the work record, and once on a public blockchain so the
+              signature itself can be audited. links to your merged prs, your
+              review threads, and your capstone repo. employers verify in one
+              click; the chain proves nobody altered the cert after issuance.
             </p>
             <ul className="cert__checklist">
               <li>line-level ai code reviewer notes, timestamped</li>
@@ -178,6 +186,7 @@ export default function Certificate() {
               <li>capstone repo, deploy link, and live demo</li>
               <li>incident postmortems you authored</li>
               <li>sha256 signature of the work record</li>
+              <li>on-chain signature anchor · tamper-evident</li>
               <li>one-click verify page for recruiters</li>
             </ul>
             <div className="cert__side-cta">

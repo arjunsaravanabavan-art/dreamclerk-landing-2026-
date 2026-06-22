@@ -282,6 +282,7 @@ export default function App() {
       <Footer />
       {modalOpen && (
         <EmailModal
+          open={modalOpen}
           source={modalSource}
           onClose={() => {
             setModalOpen(false);

@@ -159,9 +159,6 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
             <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
               close <span className="arr">→</span>
             </button>
-            <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
-              close <span className="arr">→</span>
-            </button>
           </div>
         ) : (
           <div className="modal__body">
