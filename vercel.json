@@ -1,6 +1,11 @@
 {
   "buildCommand": "cd app && npm install --no-audit --no-fund --loglevel=error && npm run build",
   "outputDirectory": "app/dist",
+  "build": {
+    "env": {
+      "VITE_SUPABASE_URL": "https://hmeglzxbxbqetgydkynl.supabase.co"
+    }
+  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],

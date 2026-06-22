@@ -18,10 +18,19 @@
 
 import { createClient } from "@supabase/supabase-js";
 
-const URL = import.meta.env.VITE_SUPABASE_URL;
+// URL has a hardcoded fallback so the prod site never silently degrades to
+// "dev mode" if Vercel env vars go missing. The anon key stays env-driven
+// because it's the only thing gating the RLS-protected writes — we want key
+// rotations to be a deploy action, not a code change.
+const URL =
+  import.meta.env.VITE_SUPABASE_URL || "https://hmeglzxbxbqetgydkynl.supabase.co";
 const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 export const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "admin@dreamclerk.in";
 
+// isConfigured is now true if BOTH URL and KEY are set. URL has a hardcoded
+// fallback, so URL alone is "always set"; what flips the flag is whether the
+// anon key reached the build. If the key is missing we fall into the
+// existing dev/mock path and surface a clear warning.
 export const isConfigured = Boolean(URL && KEY);
 
 export const supabase = isConfigured
