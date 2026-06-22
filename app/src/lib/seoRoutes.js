@@ -70,6 +70,12 @@ export const STATIC_ROUTES = {
     description: "founded in chennai in 2025 by ananya, raghav, and priya. bootstrapped. never charging students what they can't pay. the team page, the advisors, the press, and the funding story.",
     keywords: "dreamclerk team, dreamclerk founders, dreamclerk about, chennai startup, indian startup, career simulation founders",
   },
+  "/founder": {
+    path: "/founder",
+    title: "founder — arjun sv, dreamclerk",
+    description: "arjun sv built dreamclerk because he lived the problem first. age 22, chennai, 1-person team. the founder's note on why dreamclerk exists and what it believes.",
+    keywords: "dreamclerk founder, arjun sv, chennai founder, dreamclerk story, why dreamclerk, indie founder india, undergraduate career platform founder",
+  },
   "/privacy": {
     path: "/privacy",
     title: "privacy — what we collect, what we don't",

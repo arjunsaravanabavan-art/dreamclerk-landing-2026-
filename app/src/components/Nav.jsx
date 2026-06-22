@@ -58,7 +58,6 @@ export default function Nav({ activePath = "/" } = {}) {
           <a href="/faq"       {...ariaCurrent("/faq")}       onClick={() => setOpen(false)}>faq</a>
           <a href="/blog"      {...ariaCurrent("/blog")}      onClick={() => setOpen(false)}>blog</a>
           <a href="/contact"   {...ariaCurrent("/contact")}   onClick={() => setOpen(false)}>contact</a>
-          <a href="/feedback"  {...ariaCurrent("/feedback")}  onClick={() => setOpen(false)}>feedback</a>
         </nav>
 
         <div className="nav__cta">

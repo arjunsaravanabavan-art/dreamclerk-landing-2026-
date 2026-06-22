@@ -12,6 +12,7 @@ import Loop from "./components/Loop.jsx";
 import Workspace from "./components/Workspace.jsx";
 import Tracks from "./components/Tracks.jsx";
 import Companies from "./components/Companies.jsx";
+import CertTeaser from "./components/CertTeaser.jsx";
 import Certificate from "./components/Certificate.jsx";
 import Stats from "./components/Stats.jsx";
 import Testimonials from "./components/Testimonials.jsx";
@@ -29,8 +30,8 @@ import CompaniesPage from "./components/CompaniesPage.jsx";
 import FAQPage from "./components/FAQPage.jsx";
 import BlogListPage from "./components/BlogListPage.jsx";
 import BlogPostPage from "./components/BlogPostPage.jsx";
-import FeedbackPage from "./components/FeedbackPage.jsx";
 import ContactPage from "./components/ContactPage.jsx";
+import FounderPage from "./components/FounderPage.jsx";
 import AdminPage from "./components/AdminPage.jsx";
 import BetaPage from "./components/BetaPage.jsx";
 import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
@@ -67,6 +68,7 @@ function LandingPage() {
       <Workspace />
       <Tracks />
       <Companies />
+      <CertTeaser />
       <Certificate />
       <Stats />
       <Testimonials />
@@ -120,6 +122,8 @@ export default function App() {
       const t = e.target.closest("[data-open-modal]");
       if (t) {
         e.preventDefault();
+        const src = t.getAttribute("data-open-source") || "modal";
+        setModalSource(src);
         setModalOpen(true);
       }
       const c = e.target.closest("[data-close-modal]");
@@ -147,50 +151,63 @@ export default function App() {
 
   // Auto-open the waitlist modal on every landing visit.
   //
-  // Two triggers, first one wins:
-  //   1. 3-second timer (so the hero animation lands first and the modal
-  //      never feels like an interruption)
-  //   2. 50% scroll-depth (so engaged readers get it even before the timer)
+  // Triggers, first one wins:
+  //   1. 2-second timer (reduced to 2s per hardening)
+  //   2. 35% scroll-depth (lowered from 50%)
+  //   3. Hero CTA "get notified" button click (open-modal)
   //
-  // Fires on EVERY visit to "/", every time the user lands. There is no
-  // localStorage lock — per the latest ask: "show on enter, show on 50%
-  // scroll, and again on next enter." The pop-up is gated only to the
-  // marketing landing route; /about, /blog, /verify, /admin, /feedback,
-  // /contact, and the beta flow stay quiet.
+  // Safety: 8-second auto-close if user hasn't engaged (clicked / typed).
+  // No localStorage lock — shows every visit. Gated to "/" only.
   useEffect(() => {
     if (path !== "/") return;
     if (typeof window === "undefined") return;
 
     let opened = false;
+    let engaged = false;
+    let closeSafety = null;
+
     const openOnce = (why) => {
       if (opened) return;
       opened = true;
       setModalOpen(true);
-      setModalSource(why === "scroll" ? "modal-scroll" : "modal-timer");
-      cleanup();
+      setModalSource(why === "scroll" ? "modal-scroll" : why === "hero" ? "modal-hero" : "modal-timer");
+
+      // 8-second safety: close modal if no user interaction yet
+      closeSafety = setTimeout(() => {
+        if (!engaged) {
+          setModalOpen(false);
+        }
+      }, 8000);
     };
 
     const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const timerDelay = reducedMotion ? 200 : 3000;
+    const timerDelay = reducedMotion ? 200 : 2000;
 
     // Trigger 1: timer
     const t = setTimeout(() => openOnce("timer"), timerDelay);
 
-    // Trigger 2: 50% scroll depth. Listen on window scroll, recompute
-    // scroll percentage each tick, fire exactly once at >= 50%.
+    // Trigger 2: 35% scroll depth
     const onScroll = () => {
       const doc = document.documentElement;
       const scrolled = window.scrollY + window.innerHeight;
       const total = doc.scrollHeight;
-      if (total > 0 && scrolled / total >= 0.5) {
+      if (total > 0 && scrolled / total >= 0.35) {
         openOnce("scroll");
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    // Mark engagement on any keydown or click
+    const onEngage = () => { engaged = true; };
+    window.addEventListener("keydown", onEngage, { passive: true });
+    window.addEventListener("click", onEngage, { passive: true });
+
     const cleanup = () => {
       clearTimeout(t);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("keydown", onEngage);
+      window.removeEventListener("click", onEngage);
+      if (closeSafety) clearTimeout(closeSafety);
     };
     return cleanup;
   }, [path]);
@@ -236,8 +253,8 @@ export default function App() {
   else if (path === "/blog") routeNode = <BlogListPage />;
   else if (path.startsWith("/blog/")) {
     routeNode = <BlogPostPage slug={path.replace("/blog/", "").replace(/\/$/, "")} />;
-  } else if (path === "/feedback") routeNode = <FeedbackPage />;
-  else if (path === "/contact") routeNode = <ContactPage />;
+  } else if (path === "/contact") routeNode = <ContactPage />;
+  else if (path === "/founder") routeNode = <FounderPage />;
   else if (path === "/admin" || path.startsWith("/admin/")) {
     routeNode = <AdminPage />;
   } else if (path === "/beta" || path.startsWith("/beta/")) {
