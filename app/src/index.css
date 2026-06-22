@@ -7675,3 +7675,72 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
 @media (prefers-reduced-motion: reduce) {
   .about__title, .about__lede { animation: none; }
 }
+
+/* ─── CertTeaser (lead-in to Certificate section) ───────────────────────────── */
+.cert-teaser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 32px;
+}
+@media (max-width: 720px) {
+  .cert-teaser { grid-template-columns: 1fr; gap: 20px; }
+}
+
+.cert-teaser__card {
+  font-family: var(--mono);
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 18px 18px 16px;
+  background: var(--paper);
+}
+.cert-teaser__card--cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cert-teaser__cmd {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  margin-bottom: 12px;
+}
+
+.cert-teaser__kv {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 6px 0;
+}
+.cert-teaser__k {
+  opacity: 0.7;
+  font-size: 12px;
+}
+.cert-teaser__v {
+  font-weight: 500;
+}
+
+.cert-teaser__lede {
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 44ch;
+  margin: 8px 0 14px;
+}
+
+.cert-teaser__note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  opacity: 0.65;
+  max-width: 50ch;
+}
+.cert-teaser__card--cta .cert-teaser__note {
+  margin-top: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-teaser { transition: none; }
+}
