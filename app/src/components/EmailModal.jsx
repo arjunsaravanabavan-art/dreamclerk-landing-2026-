@@ -28,6 +28,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const [error, setError] = useState("");
   const [count, setCount] = useState(null);
+  const [savedToSupabase, setSavedToSupabase] = useState(true); // false = mock/dev only
   const inputRef = useRef(null);
 
   // load live waitlist count on open
@@ -66,6 +67,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
         setError("");
         setName("");
         setEmail("");
+        setSavedToSupabase(true);
       }, 220);
       return () => clearTimeout(t);
     }
@@ -100,12 +102,14 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
     setError("");
     const result = await subscribeNotify({ name: cleanName, email: cleanEmail, source });
     if (result.ok) {
-      // bump the live counter for the next visitor
-      try { await bumpSubscriberCount(); } catch {}
-    }
-    if (result.ok) {
       setStatus("success");
-      setTimeout(() => onClose(), 2200);
+      setSavedToSupabase(!result.mock);
+      // Bump the live counter for the next visitor — only if we actually
+      // hit Supabase (mock-mode would double-count locally).
+      if (!result.mock) {
+        try { await bumpSubscriberCount(); } catch {}
+      }
+      // DO NOT auto-close — user must manually click the close button
     } else {
       setStatus("error");
       setError(result.error || "Something went wrong.");
@@ -147,6 +151,36 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
             <p>
               {successBody}
             </p>
+            {/* visible "saved to" line — confirms the email landed in supabase */}
+            <p
+              style={{
+                fontFamily: "var(--mono)",
+                fontSize: 11,
+                color: "var(--muted)",
+                letterSpacing: "0.04em",
+                margin: "0 0 14px",
+                padding: "8px 10px",
+                border: savedToSupabase ? "1px dashed var(--ok)" : "1px dashed var(--warn)",
+                borderRadius: 3,
+                background: savedToSupabase ? "rgba(34,197,94,0.04)" : "rgba(234,179,8,0.05)",
+              }}
+            >
+              {savedToSupabase ? (
+                <>
+                  ● saved to <strong>supabase · notify_signups</strong> ({email || "—"})<br />
+                  <span style={{ opacity: 0.7 }}>
+                    source: {source}
+                  </span>
+                </>
+              ) : (
+                <>
+                  ● <strong>dev mode</strong> — supabase env not set, email not persisted<br />
+                  <span style={{ opacity: 0.7 }}>
+                    configure VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY to enable.
+                  </span>
+                </>
+              )}
+            </p>
             <a
               href="https://www.instagram.com/dreamclrk"
               target="_blank"
@@ -156,9 +190,27 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
             >
               follow @dreamclrk ↗
             </a>
-            <button className="btn btn--solid" onClick={onClose} style={{ marginTop: 8 }}>
+            {/* explicit close button — the modal must NOT auto-close */}
+            <button
+              type="button"
+              className="btn btn--solid"
+              onClick={onClose}
+              style={{ marginTop: 8, alignSelf: "flex-start" }}
+            >
               close <span className="arr">→</span>
             </button>
+            <div
+              style={{
+                marginTop: 12,
+                fontFamily: "var(--mono)",
+                fontSize: 10,
+                color: "var(--muted)",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+              }}
+            >
+              press esc · or click outside · to close
+            </div>
           </div>
         ) : (
           <div className="modal__body">
