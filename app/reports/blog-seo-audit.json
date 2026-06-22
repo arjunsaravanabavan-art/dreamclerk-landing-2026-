@@ -1,0 +1,546 @@
+[
+  {
+    "slug": "the-2026-pr-review-is-async-and-warm",
+    "title": "the 2026 pr review is async-first and warm — here's what that means",
+    "published_at": "2026-06-29T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1069,
+    "h2": 8,
+    "h3": 4,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 6,
+    "issues": [
+      "title too long (67 chars; will truncate in SERP)",
+      "excerpt too long (209 chars; will truncate)",
+      "body short (1069 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (10min) doesn't match actual (5min)"
+    ],
+    "wins": [
+      "8 h2s"
+    ]
+  },
+  {
+    "slug": "the-dual-path-review-engine",
+    "title": "the dual-path review engine — claude haiku on top of a deterministic regex, with",
+    "published_at": "2026-07-01T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1132,
+    "h2": 9,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 6,
+    "issues": [
+      "title too long (93 chars; will truncate in SERP)",
+      "excerpt too long (239 chars; will truncate)",
+      "body short (1132 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (12min) doesn't match actual (5min)"
+    ],
+    "wins": [
+      "9 h2s"
+    ]
+  },
+  {
+    "slug": "the-intern-cheat-sheet-for-the-pushback-round",
+    "title": "the intern cheat sheet for the pushback round — how to prep, run, and recover",
+    "published_at": "2026-07-03T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1265,
+    "h2": 7,
+    "h3": 8,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": false,
+    "issue_count": 6,
+    "issues": [
+      "title too long (77 chars; will truncate in SERP)",
+      "excerpt too long (217 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "no outbound_links list — AI crawlers use this to confirm external citation",
+      "reading_time (9min) doesn't match actual (6min)"
+    ],
+    "wins": [
+      "body 1265 words",
+      "7 h2s"
+    ]
+  },
+  {
+    "slug": "why-we-stopped-using-take-home-projects",
+    "title": "why we stopped using take-home projects — the data showing they're anti-correlat",
+    "published_at": "2026-07-06T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 813,
+    "h2": 6,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 6,
+    "issues": [
+      "title too long (95 chars; will truncate in SERP)",
+      "excerpt too long (241 chars; will truncate)",
+      "body short (813 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (8min) doesn't match actual (4min)"
+    ],
+    "wins": [
+      "6 h2s"
+    ]
+  },
+  {
+    "slug": "the-cost-of-a-bad-junior-hire-is-not-the-onboarding",
+    "title": "the cost of a bad junior hire is not the onboarding — it's the 6 months of atten",
+    "published_at": "2026-07-08T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1118,
+    "h2": 7,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 6,
+    "issues": [
+      "title too long (90 chars; will truncate in SERP)",
+      "excerpt too long (234 chars; will truncate)",
+      "body short (1118 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (9min) doesn't match actual (5min)"
+    ],
+    "wins": [
+      "7 h2s"
+    ]
+  },
+  {
+    "slug": "building-the-in-browser-ide-a-postmortem",
+    "title": "building the in-browser ide — a postmortem of the 4.2s cold-start regression",
+    "published_at": "2026-07-10T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1515,
+    "h2": 9,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": false,
+    "issue_count": 6,
+    "issues": [
+      "title too long (76 chars; will truncate in SERP)",
+      "excerpt too long (221 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "no outbound_links list — AI crawlers use this to confirm external citation",
+      "reading_time (11min) doesn't match actual (7min)"
+    ],
+    "wins": [
+      "body 1515 words",
+      "9 h2s"
+    ]
+  },
+  {
+    "slug": "inside-our-bias-audit",
+    "title": "inside our bias audit: the rubric, the data, the changes",
+    "published_at": "2026-05-04T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 953,
+    "h2": 6,
+    "h3": 0,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 5,
+    "issues": [
+      "excerpt too long (161 chars; will truncate)",
+      "body short (953 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (12min) doesn't match actual (4min)"
+    ],
+    "wins": [
+      "title length 56 chars",
+      "6 h2s"
+    ]
+  },
+  {
+    "slug": "india-it-services-the-fresher-pipeline-is-broken-and-it-is-not-the-colleges-fault",
+    "title": "india it services — the fresher pipeline is broken, and it's not the colleges' f",
+    "published_at": "2026-07-13T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1548,
+    "h2": 11,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 5,
+    "issues": [
+      "title too long (84 chars; will truncate in SERP)",
+      "excerpt too long (250 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (10min) doesn't match actual (7min)"
+    ],
+    "wins": [
+      "body 1548 words",
+      "11 h2s"
+    ]
+  },
+  {
+    "slug": "why-we-built-dreamclerk",
+    "title": "the 90-second internship interview that changed 14% of outcomes",
+    "published_at": "2026-02-22T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 810,
+    "h2": 5,
+    "h3": 0,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "body short (810 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "reading_time (9min) doesn't match actual (4min)"
+    ],
+    "wins": [
+      "title length 63 chars",
+      "excerpt length 131 chars",
+      "5 h2s"
+    ]
+  },
+  {
+    "slug": "coding-interview-with-no-experience",
+    "title": "how to pass a coding interview with no experience",
+    "published_at": "2026-05-04T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1378,
+    "h2": 8,
+    "h3": 0,
+    "internal_links": 4,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": false,
+    "issue_count": 4,
+    "issues": [
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets",
+      "no outbound_links list — AI crawlers use this to confirm external citation",
+      "reading_time (14min) doesn't match actual (6min)"
+    ],
+    "wins": [
+      "title length 49 chars",
+      "excerpt length 159 chars",
+      "body 1378 words",
+      "8 h2s"
+    ]
+  },
+  {
+    "slug": "shipping-code-vs-knowing-code",
+    "title": "shipping code vs knowing code: a 5-minute glossary",
+    "published_at": "2026-06-10T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1397,
+    "h2": 0,
+    "h3": 0,
+    "internal_links": 0,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "only 0 h2s; aim ≥3 for outline ranking",
+      "no internal /blog/ links — add ≥2 for crawl depth",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets"
+    ],
+    "wins": [
+      "title length 50 chars",
+      "excerpt length 156 chars",
+      "body 1397 words"
+    ]
+  },
+  {
+    "slug": "fresher-unemployment-india-2026-the-numbers-and-the-fix",
+    "title": "fresher unemployment in india 2026: the numbers, the cause, and the one fix that",
+    "published_at": "2026-06-16T09:00:00.000Z",
+    "author": "Ananya Subramanian",
+    "body_words": 1323,
+    "h2": 7,
+    "h3": 8,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "title too long (86 chars; will truncate in SERP)",
+      "excerpt too long (231 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "reading_time (9min) doesn't match actual (6min)"
+    ],
+    "wins": [
+      "body 1323 words",
+      "7 h2s",
+      "FAQ block (5 pairs)"
+    ]
+  },
+  {
+    "slug": "how-to-get-hired-as-a-fresher-with-no-internship-and-no-network",
+    "title": "how to get hired as a fresher with no internship and no network: a 6-week playbo",
+    "published_at": "2026-06-22T09:00:00.000Z",
+    "author": "Ananya Subramanian",
+    "body_words": 1744,
+    "h2": 12,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "title too long (82 chars; will truncate in SERP)",
+      "excerpt too long (241 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "reading_time (11min) doesn't match actual (8min)"
+    ],
+    "wins": [
+      "body 1744 words",
+      "12 h2s",
+      "FAQ block (5 pairs)"
+    ]
+  },
+  {
+    "slug": "why-2-years-experience-required-is-a-tax",
+    "title": "why \"2 years experience required\" is a tax on your future engineering team",
+    "published_at": "2026-06-25T09:00:00.000Z",
+    "author": "Raghav Krishnan",
+    "body_words": 1113,
+    "h2": 8,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "title too long (74 chars; will truncate in SERP)",
+      "excerpt too long (201 chars; will truncate)",
+      "body short (1113 words; aim 1200+ to rank for long-tail)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)"
+    ],
+    "wins": [
+      "8 h2s",
+      "FAQ block (5 pairs)"
+    ]
+  },
+  {
+    "slug": "what-a-good-postmortem-looks-like",
+    "title": "what a good postmortem looks like — a worked example, with the 5 sections, in 30",
+    "published_at": "2026-07-15T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1290,
+    "h2": 13,
+    "h3": 13,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "title too long (88 chars; will truncate in SERP)",
+      "excerpt too long (233 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets"
+    ],
+    "wins": [
+      "body 1290 words",
+      "13 h2s"
+    ]
+  },
+  {
+    "slug": "the-first-90-days-at-your-first-tech-job",
+    "title": "the first 90 days at your first tech job — week 1, week 4, week 12",
+    "published_at": "2026-07-22T09:00:00.000Z",
+    "author": "Ananya Subramanian",
+    "body_words": 1772,
+    "h2": 8,
+    "h3": 0,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "title too long (66 chars; will truncate in SERP)",
+      "excerpt too long (195 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "reading_time (11min) doesn't match actual (8min)"
+    ],
+    "wins": [
+      "body 1772 words",
+      "8 h2s",
+      "FAQ block (4 pairs)"
+    ]
+  },
+  {
+    "slug": "6-pip-signals-and-how-to-flip-4-in-30-days",
+    "title": "6 signals your manager uses to decide your pip — and how to flip 4 of them in 30",
+    "published_at": "2026-07-25T09:00:00.000Z",
+    "author": "Raghav Krishnan",
+    "body_words": 2030,
+    "h2": 7,
+    "h3": 12,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 4,
+    "issues": [
+      "title too long (85 chars; will truncate in SERP)",
+      "excerpt too long (227 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "reading_time (12min) doesn't match actual (9min)"
+    ],
+    "wins": [
+      "body 2030 words",
+      "7 h2s",
+      "FAQ block (4 pairs)"
+    ]
+  },
+  {
+    "slug": "in-browser-ide-explained",
+    "title": "the in-browser ide: what it actually runs, what it can't",
+    "published_at": "2026-06-10T09:00:00.000Z",
+    "author": "dreamclerk team",
+    "body_words": 1279,
+    "h2": 8,
+    "h3": 0,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": false,
+    "has_person": false,
+    "has_outbound_list": true,
+    "issue_count": 3,
+    "issues": [
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)",
+      "slug words rarely appear in body (1) — Google may mismatch intent",
+      "no FAQ block — adding 2-3 Q&A pairs enables FAQPage schema + featured snippets"
+    ],
+    "wins": [
+      "title length 56 chars",
+      "excerpt length 141 chars",
+      "body 1279 words",
+      "8 h2s"
+    ]
+  },
+  {
+    "slug": "the-2-year-experience-trap",
+    "title": "the 2-year experience trap: why the requirement exists, and what it actually buy",
+    "published_at": "2026-06-19T09:00:00.000Z",
+    "author": "Raghav Krishnan",
+    "body_words": 1239,
+    "h2": 7,
+    "h3": 7,
+    "internal_links": 3,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 3,
+    "issues": [
+      "title too long (81 chars; will truncate in SERP)",
+      "excerpt too long (235 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)"
+    ],
+    "wins": [
+      "body 1239 words",
+      "7 h2s",
+      "FAQ block (5 pairs)"
+    ]
+  },
+  {
+    "slug": "the-resume-is-dead-three-signals",
+    "title": "the resume is dead: 3 signals that actually predict a good hire in 2026",
+    "published_at": "2026-06-28T09:00:00.000Z",
+    "author": "Raghav Krishnan",
+    "body_words": 1251,
+    "h2": 6,
+    "h3": 0,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 3,
+    "issues": [
+      "title too long (71 chars; will truncate in SERP)",
+      "excerpt too long (239 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)"
+    ],
+    "wins": [
+      "body 1251 words",
+      "6 h2s",
+      "FAQ block (5 pairs)"
+    ]
+  },
+  {
+    "slug": "off-campus-hiring-2026-the-7-channels-that-still-work",
+    "title": "off-campus hiring 2026 — the 7 channels that still work (and the 4 that don't)",
+    "published_at": "2026-07-28T09:00:00.000Z",
+    "author": "Ananya Subramanian",
+    "body_words": 1828,
+    "h2": 4,
+    "h3": 11,
+    "internal_links": 2,
+    "outbound_links": 0,
+    "has_faq": true,
+    "has_person": true,
+    "has_outbound_list": true,
+    "issue_count": 3,
+    "issues": [
+      "title too long (78 chars; will truncate in SERP)",
+      "excerpt too long (210 chars; will truncate)",
+      "no outbound links — add ≥1 to a primary source (ai-crawler signal)"
+    ],
+    "wins": [
+      "body 1828 words",
+      "4 h2s",
+      "FAQ block (4 pairs)"
+    ]
+  }
+]

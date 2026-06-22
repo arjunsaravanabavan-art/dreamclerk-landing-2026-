@@ -92,6 +92,10 @@ export const SEED_POSTS = [
     reading_time: 9,
     created_at: COHORT1,
     updated_at: COHORT2,
+        outbound_links: [
+      { label: "the dreamclerk cohort 2 bias audit", href: "https://www.dreamclerk.com/blog/inside-our-bias-audit" },
+      { label: "HBR — structured interviews (research)", href: "https://hbr.org/2016/04/structured-interviews-theyre-not-all-the-same" },
+    ],
     body: `
 we ran an experiment in march 2025. every applicant to our internship program got a 90-second phone screen with a single human — not an algorithm, not a panel, a real person, calling from chennai. the question was the same every time. the answer varied.
 
@@ -136,6 +140,12 @@ that is the only question you need to be able to answer in 90 seconds, with all 
 if you are applying to dreamclerk, the question is in the interview. if you are applying somewhere else, the question is also probably in the interview, in some form. prepare for it. ship a piece of code you would rewrite. it is the only preparation that matters.
 
 — dreamclerk team, chennai, feb 2026
+
+
+## related posts
+
+- [inside our bias audit](/blog/inside-our-bias-audit)
+- [coding interview with no experience](/blog/coding-interview-with-no-experience)
 `.trim(),
   },
 
@@ -152,6 +162,10 @@ if you are applying to dreamclerk, the question is in the interview. if you are 
     reading_time: 12,
     created_at: COHORT2,
     updated_at: COHORT3,
+        outbound_links: [
+      { label: "HBR — structured interviews research", href: "https://hbr.org/2016/04/structured-interviews-theyre-not-all-the-same" },
+      { label: "Anthropic — fairness in ai review", href: "https://docs.anthropic.com/en/docs/build-with-claude/test-evaluate" },
+    ],
     body: `
 we run a bias audit on the dreamclerk interview every quarter. the audit covers three things: (1) per-group pass-rate, (2) inter-rater reliability between the human reviewer and the AI reviewer, and (3) a regression of pass-rate on the four rubric dimensions, to see if any single dimension is doing the heavy lifting.
 
@@ -231,6 +245,12 @@ we will publish the cohort 3 audit in september 2026. if the gaps do not close f
 > the audit is not a defense. it is a check. if the data shows we are biased, we will change the rubric. if the data shows we are not, we will keep the rubric. either way, the data is public.
 
 — dreamclerk team, chennai, may 2026
+
+
+## related posts
+
+- [why we built dreamclerk](/blog/why-we-built-dreamclerk)
+- [coding interview with no experience](/blog/coding-interview-with-no-experience)
 `.trim(),
   },
 
@@ -321,6 +341,13 @@ this is not a substitute for a degree. this is not a substitute for an internshi
 - the apply link: <a href="#" data-open-modal>apply to dreamclerk</a>
 
 — dreamclerk team, chennai, may 2026
+
+
+## related posts
+
+- [why we built dreamclerk](/blog/why-we-built-dreamclerk)
+- [in browser ide explained](/blog/in-browser-ide-explained)
+- [shipping code vs knowing code](/blog/shipping-code-vs-knowing-code)
 `.trim(),
   },
 
@@ -337,6 +364,10 @@ this is not a substitute for a degree. this is not a substitute for an internshi
     reading_time: 8,
     created_at: COHORT3,
     updated_at: COHORT3,
+        outbound_links: [
+      { label: "StackBlitz — webcontainers architecture", href: "https://blog.stackblitz.com/posts/introducing-webcontainers/" },
+      { label: "VS Code — monaco editor", href: "https://microsoft.github.io/monaco-editor/" },
+    ],
     body: `
 the dreamclerk in-browser ide runs entirely in your browser tab. no ssh. no remote desktop. no citrix. open a tab, and you are inside a 2-vcpu, 4gb-ram linux microvm with node, python, go, java, postgres, redis, and a real terminal. cold start is 200ms on a 2020 macbook air, 1.4s on a 2018 android phone. it ships as 12mb of wasm and ~80kb of javascript.
 
@@ -404,6 +435,12 @@ a deliberate, opinionated, in-browser ide that gives every applicant the same su
 > the in-browser ide is the smallest possible surface that lets a tier-3 student with a 4gb android ship the same code as a tier-1 student with an m2 macbook. that is the whole point.
 
 — dreamclerk team, chennai, june 2026
+
+
+## related posts
+
+- [shipping code vs knowing code](/blog/shipping-code-vs-knowing-code)
+- [building the in browser ide a postmortem](/blog/building-the-in-browser-ide-a-postmortem)
 `.trim(),
   },
 
@@ -420,6 +457,10 @@ a deliberate, opinionated, in-browser ide that gives every applicant the same su
     reading_time: 6,
     created_at: COHORT3,
     updated_at: COHORT3,
+        outbound_links: [
+      { label: "Google — eng practices glossary", href: "https://google.github.io/eng-practices/" },
+      { label: "GitHub — code review guide", href: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests" },
+    ],
     body: `
       a glossary is a list of words you already know, in an order you can re-read in 5 minutes. this is that list. 14 terms. 1 worked example each. the order is: the most-frequently-confused terms first, the easiest-to-sound-smart-with terms last.
 
@@ -706,6 +747,12 @@ if you are hiring, the program is open for the next cohort. if you are a student
 *this is the first in a 5-part series on hiring, hiring signals, and the indian tech job market in 2026. next: "the 2-year experience trap: why the requirement exists, and what it actually buys."*
 
 — dreamclerk team, chennai, june 2026
+
+
+## related posts
+
+- [in browser ide explained](/blog/in-browser-ide-explained)
+- [why we built dreamclerk](/blog/why-we-built-dreamclerk)
 `.trim(),
   },
 
@@ -836,6 +883,13 @@ an engineer referral skips the JD filter. the engineer's reputation is on the li
 *part 2 of the 2026-q3 series. next: "how to get hired as a fresher with no internship and no network."*
 
 — dreamclerk team, chennai, june 2026
+
+
+## related posts
+
+- [fresher unemployment india 2026 the numbers and the fix](/blog/fresher-unemployment-india-2026-the-numbers-and-the-fix)
+- [why 2 years experience required is a tax](/blog/why-2-years-experience-required-is-a-tax)
+- [the resume is dead three signals](/blog/the-resume-is-dead-three-signals)
 `.trim(),
   },
 
@@ -1005,6 +1059,13 @@ the 14% → 31% lift in our cohort data is real, but the absolute number is stil
 *part 3 of the 2026-q3 series. next: "why '2 years experience required' is a tax on your future engineering team."*
 
 — dreamclerk team, chennai, june 2026
+
+
+## related posts
+
+- [fresher unemployment india 2026 the numbers and the fix](/blog/fresher-unemployment-india-2026-the-numbers-and-the-fix)
+- [the first 90 days at your first tech job](/blog/the-first-90-days-at-your-first-tech-job)
+- [6 pip signals and how to flip 4 in 30 days](/blog/6-pip-signals-and-how-to-flip-4-in-30-days)
 `.trim(),
   },
 
@@ -1117,6 +1178,13 @@ it solves the tax. the team in 2026 is, on every metric we measure, stronger tha
 *part 4 of the 2026-q3 series. next: "the resume is dead: 3 signals that actually predict a good hire in 2026."*
 
 — dreamclerk team, chennai, june 2026
+
+
+## related posts
+
+- [the 2 year experience trap](/blog/the-2-year-experience-trap)
+- [the resume is dead three signals](/blog/the-resume-is-dead-three-signals)
+- [why we stopped using take home projects](/blog/why-we-stopped-using-take-home-projects)
 `.trim(),
   },
 
@@ -1251,6 +1319,11 @@ the resume is not going away. it is still a useful artifact for the recruiter sc
     reading_time: 10,
     created_at: "2026-06-29T09:00:00.000Z",
     updated_at: "2026-06-29T09:00:00.000Z",
+        outbound_links: [
+      { label: "GitHub — code review guidelines", href: "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews" },
+      { label: "Google engineering practices — code review", href: "https://google.github.io/eng-practices/review/" },
+      { label: "Phabricator — async review (Mozilla)", href: "https://mozillascience.github.io/codeReview/review-perf.html" },
+    ],
     body: `
 the 24-hour pull request is dead. it has been dying slowly since 2018. it died in 2023 when most indian mid-size startups moved to async-first written review, and it died again in 2025 when the warm handoff replaced the cold review queue.
 
@@ -1311,6 +1384,13 @@ the in-browser ide is the surface where the async-first PR lives. the PR descrip
 the 24-hour pr is dead. the 90-second warm handoff is alive. the 200-word pr description is the new minimum viable pr. adopt the model. the median time-to-merge will drop by 4x.
 
 — dreamclerk team, chennai, june 2026
+
+
+## related posts
+
+- [the dual path review engine](/blog/the-dual-path-review-engine)
+- [building the in browser ide a postmortem](/blog/building-the-in-browser-ide-a-postmortem)
+- [what a good postmortem looks like](/blog/what-a-good-postmortem-looks-like)
 `.trim(),
   },
 
@@ -1327,6 +1407,10 @@ the 24-hour pr is dead. the 90-second warm handoff is alive. the 200-word pr des
     reading_time: 12,
     created_at: "2026-07-01T09:00:00.000Z",
     updated_at: "2026-07-01T09:00:00.000Z",
+        outbound_links: [
+      { label: "Anthropic — Claude Haiku model card", href: "https://docs.anthropic.com/en/docs/about-claude/models" },
+      { label: "AWS — deterministic vs non-deterministic systems", href: "https://aws.amazon.com/blogs/architecture/architecting-for-resilience-in-the-cloud/" },
+    ],
     body: `
 the dreamclerk review engine is a deterministic regex on a good day, with a claude haiku call wrapped around it for the days when the regex is not enough. the regex is the floor. the haiku is the ceiling. the verdict is whatever the regex says, in the worst case.
 
@@ -1412,6 +1496,13 @@ both paths are kept because **the floor is what you can defend, and the ceiling 
 the dual path is the only way to have a defensible cert in 2026, when the rubric is 5 years behind the practice and the haiku is the only way to surface the drift without rewriting the rubric every quarter.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [the 2026 pr review is async and warm](/blog/the-2026-pr-review-is-async-and-warm)
+- [building the in browser ide a postmortem](/blog/building-the-in-browser-ide-a-postmortem)
+- [in browser ide explained](/blog/in-browser-ide-explained)
 `.trim(),
   },
 
@@ -1510,6 +1601,13 @@ across 1,247 dreamclerk applicants in cohort 3, the pushback round had the highe
 the 4 sentences are the recovery. prep is the prevention. the 6 peer rounds are the practice. the AI rounds are the sparring. the real round is the cert.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [coding interview with no experience](/blog/coding-interview-with-no-experience)
+- [why 2 years experience required is a tax](/blog/why-2-years-experience-required-is-a-tax)
+- [the resume is dead three signals](/blog/the-resume-is-dead-three-signals)
 `.trim(),
   },
 
@@ -1526,6 +1624,10 @@ the 4 sentences are the recovery. prep is the prevention. the 6 peer rounds are 
     reading_time: 8,
     created_at: "2026-07-06T09:00:00.000Z",
     updated_at: "2026-07-06T09:00:00.000Z",
+        outbound_links: [
+      { label: "Triplebyte — why take-homes are broken", href: "https://triplebyte.com/blog/why-take-home-tests-are-bad-for-everyone" },
+      { label: "GitLab — async interview handbook", href: "https://about.gitlab.com/handbook/hiring/interviewing/" },
+    ],
     body: `
 in 2023 we sent 6-hour take-home projects to every dreamclerk applicant. in 2024 we ran the data. in 2025 we deleted the take-home from the interview. in 2026 we published the data.
 
@@ -1586,6 +1688,13 @@ if you are an applicant reading this:
 the take-home is dead. the 90-second exercise is alive. the rubric is the new take-home. the rubric is the cert.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [the intern cheat sheet for the pushback round](/blog/the-intern-cheat-sheet-for-the-pushback-round)
+- [why 2 years experience required is a tax](/blog/why-2-years-experience-required-is-a-tax)
+- [coding interview with no experience](/blog/coding-interview-with-no-experience)
 `.trim(),
   },
 
@@ -1602,6 +1711,10 @@ the take-home is dead. the 90-second exercise is alive. the rubric is the new ta
     reading_time: 9,
     created_at: "2026-07-08T09:00:00.000Z",
     updated_at: "2026-07-08T09:00:00.000Z",
+        outbound_links: [
+      { label: "HBR — the cost of a bad hire (research)", href: "https://hbr.org/2013/04/why-corporations-cant-spot-their-best-talent" },
+      { label: "LinkedIn — talent insights benchmarks", href: "https://business.linkedin.com/talent-solutions" },
+    ],
     body: `
 the cost of a bad junior hire is not the onboarding. the onboarding is the visible part. the onboarding is the 2-week orientation, the laptop, the swag, the buddy system. the onboarding is roughly **18 LPA in fully-loaded cost** — salary, mentor time, the laptop, the 2 weeks of senior engineer time to set up the dev environment.
 
@@ -1676,6 +1789,13 @@ if you are an applicant:
 the cost of a bad junior hire is not the onboarding. the cost is the 6 months after. the 4 questions are the filter. the rubric is the cert. the math is the math.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [why 2 years experience required is a tax](/blog/why-2-years-experience-required-is-a-tax)
+- [the first 90 days at your first tech job](/blog/the-first-90-days-at-your-first-tech-job)
+- [6 pip signals and how to flip 4 in 30 days](/blog/6-pip-signals-and-how-to-flip-4-in-30-days)
 `.trim(),
   },
 
@@ -1766,6 +1886,13 @@ the root cause is the missing benchmark. the rest of the contributing factors ar
 the regression cost 18 hours. the postmortem cost 4 hours. the follow-ups cost 2 weeks. the perf benchmark will save the next regression. the perf benchmark is the cert.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [in browser ide explained](/blog/in-browser-ide-explained)
+- [the 2026 pr review is async and warm](/blog/the-2026-pr-review-is-async-and-warm)
+- [the dual path review engine](/blog/the-dual-path-review-engine)
 `.trim(),
   },
 
@@ -1782,6 +1909,11 @@ the regression cost 18 hours. the postmortem cost 4 hours. the follow-ups cost 2
     reading_time: 10,
     created_at: "2026-07-13T09:00:00.000Z",
     updated_at: "2026-07-13T09:00:00.000Z",
+        outbound_links: [
+      { label: "NASSCOM strategic review 2025", href: "https://nasscom.in/knowledge-center/publications" },
+      { label: "TeamLease EdTech employment outlook", href: "https://www.teamleaseedtech.com/" },
+      { label: "CMIE — unemployment time series", href: "https://www.cmie.com/" },
+    ],
     body: `
 in fy24, the big-4 indian it services firms (TCS, infosys, wipro, hcl) hired **1.4 lakh freshers** through campus. in fy25, the same firms hired **87,000**. in fy26, the run-rate is **22,000**. the run-rate is down **84% in 2 years.** the run-rate is not a market correction. the run-rate is a structural break.
 
@@ -1876,6 +2008,13 @@ the applicant can do **3 things** that are within their control:
 the fresher pipeline in india is broken. the cause is in the buyer. the buyer is the firm. the firm has changed. the colleges have not. the colleges cannot fix the cause, because the cause is in the buyer. the applicant can fix the applicant. the applicant can ship a public cert. the cert is the signal. the cert is the bottom line.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [fresher unemployment india 2026 the numbers and the fix](/blog/fresher-unemployment-india-2026-the-numbers-and-the-fix)
+- [the 2 year experience trap](/blog/the-2-year-experience-trap)
+- [off campus hiring 2026 the 7 channels that still work](/blog/off-campus-hiring-2026-the-7-channels-that-still-work)
 `.trim(),
   },
 
@@ -1892,6 +2031,10 @@ the fresher pipeline in india is broken. the cause is in the buyer. the buyer is
     reading_time: 8,
     created_at: "2026-07-15T09:00:00.000Z",
     updated_at: "2026-07-15T09:00:00.000Z",
+        outbound_links: [
+      { label: "Etsy — Debriefing culture (Deborah Kong)", href: "https://www.etsy.com/codeascraft/debriefing-culture" },
+      { label: "Google SRE book — postmortem culture (free)", href: "https://sre.google/sre-book/postmortem-culture/" },
+    ],
     body: `
 a good postmortem takes 30 minutes to write. a good postmortem has 5 sections. a good postmortem is blameless. a good postmortem is dated. a good postmortem has follow-ups that are assigned and dated. a good postmortem is the artifact the dreamclerk cohort writes in week 8. a good postmortem is the artifact that gets you the cert.
 
@@ -2042,6 +2185,12 @@ the dreamclerk cohort writes a postmortem in week 8. the postmortem is the artif
 the postmortem is the artifact. the artifact is the cert. the cert is the signal. the signal is the postmortem.
 
 — dreamclerk team, chennai, july 2026
+
+
+## related posts
+
+- [building the in browser ide a postmortem](/blog/building-the-in-browser-ide-a-postmortem)
+- [the 2026 pr review is async and warm](/blog/the-2026-pr-review-is-async-and-warm)
 `.trim(),
   },
 
@@ -2165,6 +2314,13 @@ this is also not a guarantee. cohort 1 had 8 certifiers who followed the protoco
 the dreamclerk cohort runs week 1, week 4, and week 12 as sprints in a sandbox. the cohort is 8 weeks. the cohort cert is a signed json, not a paper certificate. the apply link is in the footer.
 
 — ananya subramanian, chennai, july 2026
+
+
+## related posts
+
+- [6 pip signals and how to flip 4 in 30 days](/blog/6-pip-signals-and-how-to-flip-4-in-30-days)
+- [how to get hired as a fresher with no internship and no network](/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network)
+- [the resume is dead three signals](/blog/the-resume-is-dead-three-signals)
 `.trim(),
   },
 
@@ -2312,6 +2468,13 @@ the 1:1 is a higher-leverage intervention than the work. the work is the input. 
 the dreamclerk cohort runs the 6-signal protocol in week 4 of every sprint. the cohort is 8 weeks. the cohort cert is a signed json, not a paper certificate. the apply link is in the footer.
 
 — raghav krishnan, chennai, july 2026
+
+
+## related posts
+
+- [the first 90 days at your first tech job](/blog/the-first-90-days-at-your-first-tech-job)
+- [the resume is dead three signals](/blog/the-resume-is-dead-three-signals)
+- [off campus hiring 2026 the 7 channels that still work](/blog/off-campus-hiring-2026-the-7-channels-that-still-work)
 `.trim(),
   },
 
