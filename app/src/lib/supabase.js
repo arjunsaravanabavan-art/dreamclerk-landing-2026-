@@ -25,7 +25,7 @@ import { createClient } from "@supabase/supabase-js";
 const URL =
   import.meta.env.VITE_SUPABASE_URL || "https://hmeglzxbxbqetgydkynl.supabase.co";
 const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
-export const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "admin@dreamclerk.in";
+export const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL || "info@dreamclerk.com";
 
 // isConfigured is now true if BOTH URL and KEY are set. URL has a hardcoded
 // fallback, so URL alone is "always set"; what flips the flag is whether the

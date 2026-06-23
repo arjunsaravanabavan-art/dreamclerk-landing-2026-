@@ -19,7 +19,7 @@
 --
 -- After this runs:
 --   - Create your admin user: supabase-auth-users table → Add user
---   - Set the email to the value of VITE_ADMIN_EMAIL (admin@dreamclerk.in by default)
+--   - Set the email to the value of VITE_ADMIN_EMAIL (info@dreamclerk.com by default)
 --   - The RLS policies automatically gate writes to that email.
 -- =============================================================================
 
@@ -147,26 +147,26 @@ drop policy if exists "admin can read all posts" on public.posts;
 create policy "admin can read all posts"
   on public.posts for select
   to authenticated
-  using (auth.jwt() ->> 'email' = 'admin@dreamclerk.in');
+  using (auth.jwt() ->> 'email' = 'info@dreamclerk.com');
 
 drop policy if exists "admin can insert posts" on public.posts;
 create policy "admin can insert posts"
   on public.posts for insert
   to authenticated
-  with check (auth.jwt() ->> 'email' = 'admin@dreamclerk.in');
+  with check (auth.jwt() ->> 'email' = 'info@dreamclerk.com');
 
 drop policy if exists "admin can update posts" on public.posts;
 create policy "admin can update posts"
   on public.posts for update
   to authenticated
-  using (auth.jwt() ->> 'email' = 'admin@dreamclerk.in')
-  with check (auth.jwt() ->> 'email' = 'admin@dreamclerk.in');
+  using (auth.jwt() ->> 'email' = 'info@dreamclerk.com')
+  with check (auth.jwt() ->> 'email' = 'info@dreamclerk.com');
 
 drop policy if exists "admin can delete posts" on public.posts;
 create policy "admin can delete posts"
   on public.posts for delete
   to authenticated
-  using (auth.jwt() ->> 'email' = 'admin@dreamclerk.in');
+  using (auth.jwt() ->> 'email' = 'info@dreamclerk.com');
 
 -- updated_at trigger
 create or replace function public.set_updated_at()

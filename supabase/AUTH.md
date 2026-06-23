@@ -15,7 +15,7 @@ All auth flows go through `@supabase/supabase-js`. The client is created in
 
 1. **Authentication → Providers → Email** — leave on (default).
 2. **Authentication → Users → Add user** — create the admin account.
-   - Email = the value of `VITE_ADMIN_EMAIL` (default: `admin@dreamclerk.in`)
+   - Email = the value of `VITE_ADMIN_EMAIL` (default: `info@dreamclerk.com`)
    - Password = a strong secret you store in your password manager
    - **Uncheck** "Auto Confirm User" if you want the password-confirm email flow
      to apply (we do want it auto-confirmed for the admin).
@@ -63,12 +63,12 @@ create policy "admin can do anything with posts"
   using (
     (auth.jwt() ->> 'email') = current_setting('app.admin_email', true)
     or
-    (auth.jwt() ->> 'email') = 'admin@dreamclerk.in'
+    (auth.jwt() ->> 'email') = 'info@dreamclerk.com'
   )
   with check (
     (auth.jwt() ->> 'email') = current_setting('app.admin_email', true)
     or
-    (auth.jwt() ->> 'email') = 'admin@dreamclerk.in'
+    (auth.jwt() ->> 'email') = 'info@dreamclerk.com'
   );
 ```
 

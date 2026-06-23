@@ -71,7 +71,7 @@ export default function AdminPage() {
         <div className="wrap adm0__wrap">
           <SectionLabel status="warn">$ supabase not configured</SectionLabel>
           <h1 className="adm0__h1">admin is offline.</h1>
-          <p>to enable admin features, add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>app/.env</code> and run <code>supabase/schema.sql</code> in your project. then create an admin user in supabase auth and set <code>VITE_ADMIN_EMAIL</code> to that email.</p>
+          <p>to enable admin features, add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>app/.env</code> and run <code>supabase/schema.sql</code> in your project. then create an admin user in supabase auth with the email <code>info@dreamclerk.com</code>.</p>
         </div>
       </section>
     );
