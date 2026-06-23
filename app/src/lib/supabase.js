@@ -192,6 +192,37 @@ export async function submitFeedback({ email, category, message, source = "feedb
   }
 }
 
+// Admin: list all feedback, newest first. Mirrors `listAllPostsAdmin`.
+// RLS gated: the helper silently returns [] if the signed-in user isn't
+// info@dreamclerk.com, since the RLS policy denies non-admin select.
+export async function listAllFeedbackAdmin() {
+  if (!isConfigured || !supabase) return [];
+  try {
+    const { data, error } = await supabase
+      .from("feedback")
+      .select("id, email, category, message, source, user_agent, created_at")
+      .order("created_at", { ascending: false })
+      .limit(500);
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.warn("[supabase] listAllFeedbackAdmin:", err?.message || err);
+    return [];
+  }
+}
+
+// Admin: delete one feedback row. RLS allows delete for the admin email.
+export async function deleteFeedback(id) {
+  if (!isConfigured || !supabase) return { ok: false, error: "Supabase not configured." };
+  try {
+    const { error } = await supabase.from("feedback").delete().eq("id", id);
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err?.message || "Network error." };
+  }
+}
+
 // ─── posts (blog) ───────────────────────────────────────────────────────────
 //
 // Public read (RLS: select where published = true).

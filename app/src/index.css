@@ -5770,6 +5770,78 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
 .adm0__del-confirm { background: var(--err); color: var(--paper); border-color: var(--err); }
 .adm0__del-confirm:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
+/* --- Tabs (P1 posts | F1 feedback) --- */
+.adm0__tabs {
+  display: flex;
+  gap: 0;
+  margin-top: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.adm0__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  text-transform: lowercase;
+  transition: color 200ms var(--ease-out-quart), border-color 200ms var(--ease-out-quart);
+  margin-bottom: -1px; /* overlap the wrap border */
+}
+.adm0__tab:hover { color: var(--ink); }
+.adm0__tab.is-active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+.adm0__tab-idx { color: var(--muted); font-size: 11px; }
+.adm0__tab.is-active .adm0__tab-idx { color: var(--ink); }
+.adm0__tab-count {
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--paper-2);
+  padding: 1px 6px;
+  border-radius: 99px;
+  min-width: 18px;
+  text-align: center;
+}
+.adm0__tab.is-active .adm0__tab-count { background: var(--ink); color: var(--paper); }
+
+/* --- Feedback table --- */
+.adm0__table--feedback .adm0__msg-cell {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 480px;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+.adm0__anon { color: var(--muted); font-style: italic; }
+.adm0__src { font-size: 10px; color: var(--muted); }
+.adm0__pill--cat {
+  background: var(--paper-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+}
+.adm0__pill--cat-bug    { border-color: var(--err); color: var(--err); }
+.adm0__pill--cat-idea   { border-color: var(--ok);  color: var(--ok);  }
+.adm0__pill--cat-content{ border-color: var(--warn); color: var(--warn); }
+.adm0__pill--cat-story  { border-color: var(--ink);  color: var(--ink);  }
+.adm0__pill--cat-other  { border-color: var(--line); color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .adm0__tab { transition: none; }
+}
+
 /* =========================================================
    MOBILE PASS — overrides to fix narrow-viewport issues
    ========================================================= */
