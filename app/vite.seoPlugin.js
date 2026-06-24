@@ -5,6 +5,8 @@
 // block in <head>, plus a tiny inline IIFE that swaps <title>, <meta>,
 // <link rel="canonical">, and <script type="application/ld+json"> on
 // first paint based on location.pathname — before React hydrates.
+
+import { SEED_POSTS } from "./src/lib/seedPosts.js";
 //
 // IMPORTANT: Vite's transformIndexHtml hook, when it returns a string,
 // REPLACES the whole HTML. To inject, we must receive the html
@@ -304,18 +306,19 @@ function buildData() {
           "@type": "ItemList",
           name: "DreamClerk blog",
           itemListOrder: "https://schema.org/ItemListOrderDescending",
-          itemListElement: [
-            { "@type": "ListItem", position: 1,  url: SITE + "/blog/fresher-unemployment-india-2026-the-numbers-and-the-fix",                name: "fresher unemployment in india 2026 — the numbers, the cause, and the one fix that works" },
-            { "@type": "ListItem", position: 2,  url: SITE + "/blog/the-2-year-experience-trap",                                            name: "the 2-year experience trap" },
-            { "@type": "ListItem", position: 3,  url: SITE + "/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network",        name: "how to get hired as a fresher with no internship and no network" },
-            { "@type": "ListItem", position: 4,  url: SITE + "/blog/why-2-years-experience-required-is-a-tax",                               name: "why \"2 years experience required\" is a tax on your future engineering team" },
-            { "@type": "ListItem", position: 5,  url: SITE + "/blog/the-resume-is-dead-three-signals",                                       name: "the resume is dead — 3 signals that actually predict a good hire in 2026" },
-            { "@type": "ListItem", position: 6,  url: SITE + "/blog/inside-our-bias-audit",                                                   name: "inside our bias audit" },
-            { "@type": "ListItem", position: 7,  url: SITE + "/blog/coding-interview-with-no-experience",                                     name: "how to pass a coding interview with no experience" },
-            { "@type": "ListItem", position: 8,  url: SITE + "/blog/why-we-built-dreamclerk",                                                  name: "the 90-second internship interview that changed 14% of outcomes" },
-            { "@type": "ListItem", position: 9,  url: SITE + "/blog/in-browser-ide-explained",                                                name: "the in-browser ide — what it actually runs, what it can't" },
-            { "@type": "ListItem", position: 10, url: SITE + "/blog/shipping-code-vs-knowing-code",                                            name: "shipping code vs knowing code — a 5-minute glossary" },
-          ],
+          itemListElement: SEED_POSTS
+            .slice()
+            .sort((a, b) => {
+              const da = a.published_at ? new Date(a.published_at).getTime() : 0;
+              const db = b.published_at ? new Date(b.published_at).getTime() : 0;
+              return db - da;
+            })
+            .map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: SITE + "/blog/" + p.slug,
+              name: p.title,
+            })),
         },
       ],
     },
