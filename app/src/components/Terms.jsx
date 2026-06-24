@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import SectionLabel from "./SectionLabel.jsx";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * Terms — concise, no boilerplate for its own sake.
@@ -70,7 +71,7 @@ export default function Terms() {
         <p>these terms are governed by the laws of india, specifically the digital personal data protection act, 2023. no exceptions.</p>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

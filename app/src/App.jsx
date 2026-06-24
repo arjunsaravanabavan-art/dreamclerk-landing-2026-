@@ -86,6 +86,17 @@ export default function App() {
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
 
+  // Disable browser-default scroll restoration. Without this, the browser
+  // can restore prior scroll position on back/forward navigations, which
+  // overrides the route-change scrollTo above and leaves the user mid-page.
+  // We own scroll position ourselves (every route change → top), so the
+  // browser should stay out of it.
+  useEffect(() => {
+    if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
   // Custom inverted-color cursor. The <Cursor /> component manages its
   // own enable/disable (desktop only, no reduced motion) and toggles a
   // body class while it is active so the stylesheet can hide the native
@@ -212,11 +223,19 @@ export default function App() {
     return cleanup;
   }, [path]);
 
-  // Scroll to top on real route change (skip on initial /).
+  // Scroll to top on every real route change.
   // Instant scroll keeps the page-enter animation clean — smooth scroll at
   // the same time as the fade+rise would double-animate the viewport.
+  //
+  // Why the `path !== "/"` guard was removed: returning to "/" from any
+  // other route would leave the user mid-page because the only scrollTo
+  // was skipped on the home route. Now every nav lands at the top.
+  //
+  // Hash anchors (<a href="#how"> on /) are unaffected because the path
+  // does NOT change in that case, so this effect does not re-fire and the
+  // browser handles the smooth in-page jump natively.
   useEffect(() => {
-    if (path && path !== "/") {
+    if (path) {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [path]);

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { ArrowRight } from "./Svg.jsx";
 import { useSEO, SEO } from "../lib/seo.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * CompaniesPage — STACK OF COMPANY PROFILES.
@@ -241,7 +242,7 @@ export default function CompaniesPage() {
         </div>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

@@ -1,7 +1,13 @@
 import { useEffect, useState, Fragment } from "react";
 import SectionLabel from "./SectionLabel.jsx";
-import { listAllPostsAdmin, deletePost, listAllFeedbackAdmin, deleteFeedback } from "../lib/supabase.js";
+import { listAllPostsAdmin, deletePost, listAllFeedbackAdmin, deleteFeedback, listAllSubscribersAdmin, deleteSubscriber, listAllNotifySignupsAdmin, deleteNotifySignup } from "../lib/supabase.js";
 import PostEditor from "./PostEditor.jsx";
+import { RouterLink } from "../lib/router.jsx";
+
+// Single constant for the admin badge shown in the tab headers.
+// The signed-in user's actual email is never rendered in the DOM —
+// this protects against screen-share leaks and screenshot exposure.
+const ADMIN_BADGE = "admin";
 
 /**
  * AdminDashboard — list of all posts (drafts + published) with edit/delete.
@@ -30,6 +36,20 @@ export default function AdminDashboard({ session, onSignOut }) {
   const [feedbackConfirmingId, setFeedbackConfirmingId] = useState(null);
   const [feedbackBusyId, setFeedbackBusyId] = useState(null);
 
+  // Waitlist (subscribers) state. Same pattern as feedback.
+  const [subscribers, setSubscribers] = useState([]);
+  const [subscribersLoading, setSubscribersLoading] = useState(false);
+  const [subscribersErr, setSubscribersErr] = useState("");
+  const [subscribersConfirmingId, setSubscribersConfirmingId] = useState(null);
+  const [subscribersBusyId, setSubscribersBusyId] = useState(null);
+
+  // notify-me (notify_signups) state. Same pattern as feedback + subscribers.
+  const [notify, setNotify] = useState([]);
+  const [notifyLoading, setNotifyLoading] = useState(false);
+  const [notifyErr, setNotifyErr] = useState("");
+  const [notifyConfirmingId, setNotifyConfirmingId] = useState(null);
+  const [notifyBusyId, setNotifyBusyId] = useState(null);
+
   async function reload() {
     setLoading(true);
     try {
@@ -57,6 +77,12 @@ export default function AdminDashboard({ session, onSignOut }) {
   useEffect(() => {
     if (tab === "feedback" && feedback.length === 0 && !feedbackLoading) {
       reloadFeedback();
+    }
+    if (tab === "waitlist" && subscribers.length === 0 && !subscribersLoading) {
+      reloadSubscribers();
+    }
+    if (tab === "notify" && notify.length === 0 && !notifyLoading) {
+      reloadNotify();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab]);
@@ -94,6 +120,70 @@ export default function AdminDashboard({ session, onSignOut }) {
     if (!r?.ok) { setFeedbackErr(r?.error || "delete failed"); return; }
     // Optimistic remove from local list (no need to round-trip the table).
     setFeedback((rows) => rows.filter((row) => row.id !== id));
+  }
+
+  // ─── subscribers (waitlist) ──────────────────────────────────────────────
+  async function reloadSubscribers() {
+    setSubscribersLoading(true);
+    setSubscribersErr("");
+    try {
+      const data = await listAllSubscribersAdmin();
+      setSubscribers(data || []);
+    } catch (e) {
+      setSubscribersErr(e?.message || "could not load waitlist");
+    } finally {
+      setSubscribersLoading(false);
+    }
+  }
+
+  // Auto-cancel inline subscribers confirm after 4s of inactivity.
+  useEffect(() => {
+    if (!subscribersConfirmingId) return;
+    const t = setTimeout(() => setSubscribersConfirmingId(null), 4000);
+    return () => clearTimeout(t);
+  }, [subscribersConfirmingId]);
+
+  async function onDeleteSubscriber(id) {
+    setSubscribersErr("");
+    setSubscribersBusyId(id);
+    const r = await deleteSubscriber(id);
+    setSubscribersBusyId(null);
+    setSubscribersConfirmingId(null);
+    if (!r?.ok) { setSubscribersErr(r?.error || "delete failed"); return; }
+    // Optimistic remove from local list.
+    setSubscribers((rows) => rows.filter((row) => row.id !== id));
+  }
+
+  // ─── notify_signups ("notify me" CTAs) ─────────────────────────────────
+  async function reloadNotify() {
+    setNotifyLoading(true);
+    setNotifyErr("");
+    try {
+      const data = await listAllNotifySignupsAdmin();
+      setNotify(data || []);
+    } catch (e) {
+      setNotifyErr(e?.message || "could not load notify signups");
+    } finally {
+      setNotifyLoading(false);
+    }
+  }
+
+  // Auto-cancel inline notify confirm after 4s of inactivity.
+  useEffect(() => {
+    if (!notifyConfirmingId) return;
+    const t = setTimeout(() => setNotifyConfirmingId(null), 4000);
+    return () => clearTimeout(t);
+  }, [notifyConfirmingId]);
+
+  async function onDeleteNotify(id) {
+    setNotifyErr("");
+    setNotifyBusyId(id);
+    const r = await deleteNotifySignup(id);
+    setNotifyBusyId(null);
+    setNotifyConfirmingId(null);
+    if (!r?.ok) { setNotifyErr(r?.error || "delete failed"); return; }
+    // Optimistic remove from local list.
+    setNotify((rows) => rows.filter((row) => row.id !== id));
   }
 
   if (editing) {
@@ -134,6 +224,26 @@ export default function AdminDashboard({ session, onSignOut }) {
             <span className="adm0__tab-idx">[F1]</span> feedback
             {feedback.length > 0 ? <span className="adm0__tab-count">{feedback.length}</span> : null}
           </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "waitlist"}
+            className={`adm0__tab ${tab === "waitlist" ? "is-active" : ""}`}
+            onClick={() => setTab("waitlist")}
+          >
+            <span className="adm0__tab-idx">[W1]</span> waitlist
+            {subscribers.length > 0 ? <span className="adm0__tab-count">{subscribers.length}</span> : null}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={tab === "notify"}
+            className={`adm0__tab ${tab === "notify" ? "is-active" : ""}`}
+            onClick={() => setTab("notify")}
+          >
+            <span className="adm0__tab-idx">[N1]</span> notify-me
+            {notify.length > 0 ? <span className="adm0__tab-count">{notify.length}</span> : null}
+          </button>
         </nav>
 
         {tab === "posts" && (
@@ -141,7 +251,7 @@ export default function AdminDashboard({ session, onSignOut }) {
             <header className="adm0__head">
               <div>
                 <h1 className="adm0__h1">posts.</h1>
-                <p className="adm0__sub">{session?.user?.email} · {posts.length} {posts.length === 1 ? "post" : "posts"}</p>
+                <p className="adm0__sub">{ADMIN_BADGE} · {posts.length} {posts.length === 1 ? "post" : "posts"}</p>
               </div>
               <div className="adm0__head-actions">
                 <a className="btn" href="/blog" target="_blank" rel="noreferrer">view public blog ↗</a>
@@ -214,7 +324,7 @@ export default function AdminDashboard({ session, onSignOut }) {
             <header className="adm0__head">
               <div>
                 <h1 className="adm0__h1">feedback.</h1>
-                <p className="adm0__sub">{session?.user?.email} · {feedback.length} {feedback.length === 1 ? "submission" : "submissions"}</p>
+                <p className="adm0__sub">{ADMIN_BADGE} · {feedback.length} {feedback.length === 1 ? "submission" : "submissions"}</p>
               </div>
               <div className="adm0__head-actions">
                 <button className="btn" onClick={reloadFeedback} disabled={feedbackLoading}>
@@ -283,7 +393,139 @@ export default function AdminDashboard({ session, onSignOut }) {
           </Fragment>
         )}
 
-        <p className="legal__back"><a href="/">← back to dreamclerk</a></p>
+        {tab === "waitlist" && (
+          <Fragment>
+            <header className="adm0__head">
+              <div>
+                <h1 className="adm0__h1">waitlist.</h1>
+                <p className="adm0__sub">{ADMIN_BADGE} · {subscribers.length} {subscribers.length === 1 ? "subscriber" : "subscribers"}</p>
+              </div>
+              <div className="adm0__head-actions">
+                <button className="btn" onClick={reloadSubscribers} disabled={subscribersLoading}>
+                  {subscribersLoading ? "refreshing…" : "↻ refresh"}
+                </button>
+                <a className="btn" href="/" target="_blank" rel="noreferrer">view public form ↗</a>
+                <button className="btn" onClick={onSignOut}>sign out</button>
+              </div>
+            </header>
+
+            {subscribersErr ? <p className="adm0__err">! {subscribersErr}</p> : null}
+
+            {subscribersLoading && subscribers.length === 0 ? (
+              <p className="adm0__loading">$ loading waitlist…</p>
+            ) : subscribers.length === 0 ? (
+              <div className="adm0__empty">
+                <p>no subscribers yet. the waitlist form on the landing page is wired — emails land here.</p>
+                <p className="adm0__empty-h">$ what lands here</p>
+                <p>every email captured by the homepage waitlist counter, with timestamp. RLS gates this view to the admin email only.</p>
+              </div>
+            ) : (
+              <table className="adm0__table adm0__table--waitlist">
+                <thead>
+                  <tr>
+                    <th>when</th>
+                    <th>email</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subscribers.map((s) => (
+                    <tr key={s.id}>
+                      <td className="adm0__date">{new Date(s.created_at).toLocaleString("en-IN", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</td>
+                      <td><a href={`mailto:${s.email}`} className="adm0__email">{s.email}</a></td>
+                      <td className="adm0__row-actions">
+                        {subscribersConfirmingId === s.id ? (
+                          <>
+                            <button
+                              className="btn adm0__del adm0__del-confirm"
+                              disabled={subscribersBusyId === s.id}
+                              onClick={() => onDeleteSubscriber(s.id)}
+                            >
+                              {subscribersBusyId === s.id ? "deleting…" : "confirm delete"}
+                            </button>
+                            <button className="btn" onClick={() => setSubscribersConfirmingId(null)}>cancel</button>
+                          </>
+                        ) : (
+                          <button className="btn adm0__del" onClick={() => setSubscribersConfirmingId(s.id)}>delete</button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </Fragment>
+        )}
+
+        {tab === "notify" && (
+          <Fragment>
+            <header className="adm0__head">
+              <div>
+                <h1 className="adm0__h1">notify-me.</h1>
+                <p className="adm0__sub">{ADMIN_BADGE} · {notify.length} {notify.length === 1 ? "signup" : "signups"}</p>
+              </div>
+              <div className="adm0__head-actions">
+                <button className="btn" onClick={reloadNotify} disabled={notifyLoading}>
+                  {notifyLoading ? "refreshing…" : "↻ refresh"}
+                </button>
+                <a className="btn" href="/" target="_blank" rel="noreferrer">view public CTAs ↗</a>
+                <button className="btn" onClick={onSignOut}>sign out</button>
+              </div>
+            </header>
+
+            {notifyErr ? <p className="adm0__err">! {notifyErr}</p> : null}
+
+            {notifyLoading && notify.length === 0 ? (
+              <p className="adm0__loading">$ loading notify-me signups…</p>
+            ) : notify.length === 0 ? (
+              <div className="adm0__empty">
+                <p>no "notify me" signups yet. the CTAs across the landing site are wired — emails land here.</p>
+                <p className="adm0__empty-h">$ what lands here</p>
+                <p>every "notify me" click on hero, tracks, final CTA, and /about. shows the source CTA so you can see which page actually converts.</p>
+              </div>
+            ) : (
+              <table className="adm0__table adm0__table--notify">
+                <thead>
+                  <tr>
+                    <th>when</th>
+                    <th>email</th>
+                    <th>name</th>
+                    <th>source</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {notify.map((row) => (
+                    <tr key={row.id}>
+                      <td className="adm0__date">{new Date(row.created_at).toLocaleString("en-IN", { month: "short", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</td>
+                      <td><a href={`mailto:${row.email}`} className="adm0__email">{row.email}</a></td>
+                      <td className="adm0__name">{row.name || <span className="adm0__anon">—</span>}</td>
+                      <td><span className="adm0__src-pill">{row.source || "modal"}</span></td>
+                      <td className="adm0__row-actions">
+                        {notifyConfirmingId === row.id ? (
+                          <>
+                            <button
+                              className="btn adm0__del adm0__del-confirm"
+                              disabled={notifyBusyId === row.id}
+                              onClick={() => onDeleteNotify(row.id)}
+                            >
+                              {notifyBusyId === row.id ? "deleting…" : "confirm delete"}
+                            </button>
+                            <button className="btn" onClick={() => setNotifyConfirmingId(null)}>cancel</button>
+                          </>
+                        ) : (
+                          <button className="btn adm0__del" onClick={() => setNotifyConfirmingId(row.id)}>delete</button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </Fragment>
+        )}
+
+        <p className="legal__back"><RouterLink to="/">← back to dreamclerk</RouterLink></p>
       </div>
     </section>
   );

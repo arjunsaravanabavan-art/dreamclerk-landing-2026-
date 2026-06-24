@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { IconCheck, IconClock, IconTerminal, IconRocket, IconCode, ArrowRight, IconStar } from "./Svg.jsx";
 import { useSEO, SEO } from "../lib/seo.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * HowItWorksPage — REAL-WORK TIMELINE.
@@ -437,7 +438,7 @@ export default function HowItWorksPage() {
         </div>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

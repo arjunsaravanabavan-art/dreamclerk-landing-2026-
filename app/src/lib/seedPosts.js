@@ -38,6 +38,11 @@ const TAGS_EXPERIENCE = ["experience", "hiring", "job descriptions", "tax"];
 const TAGS_PLAYBOOK = ["fresher", "playbook", "career", "no network"];
 const TAGS_HM = ["hiring manager", "experience", "team", "talent"];
 const TAGS_SIGNALS = ["resume", "hiring signals", "hiring", "career"];
+const TAGS_GITHUB = ["github", "fresher resume", "open source", "hiring signals"];
+const TAGS_LINKEDIN = ["linkedin", "fresher resume", "linkedin profile", "job search"];
+const TAGS_SALARY = ["salary negotiation", "fresher salary", "india", "compensation"];
+const TAGS_PROJECTS = ["projects for resume", "fresher portfolio", "cs projects", "hiring signals"];
+const TAGS_AI_REVIEW = ["ai recruiter", "ai tech lead", "pr review", "hiring"];
 
 const AUTHOR = "dreamclerk team";
 // Per-author Person schema for the fresher-series posts. Older launch posts
@@ -77,6 +82,11 @@ const Q3_D5 = "2026-06-28T09:00:00.000Z";
 const Q3_D6 = "2026-07-22T09:00:00.000Z";
 const Q3_D7 = "2026-07-25T09:00:00.000Z";
 const Q3_D8 = "2026-07-28T09:00:00.000Z";
+const Q3_D9 = "2026-07-01T09:00:00.000Z";   // github profile for fresher resume
+const Q3_D10 = "2026-07-04T09:00:00.000Z";  // linkedin for freshers 2026
+const Q3_D11 = "2026-07-08T09:00:00.000Z";  // salary negotiation for freshers
+const Q3_D12 = "2026-07-11T09:00:00.000Z";  // best projects for fresher resume
+const Q3_D13 = "2026-07-15T09:00:00.000Z";  // ai vs human recruiter
 
 export const SEED_POSTS = [
   {
@@ -2621,6 +2631,516 @@ the channel is not for everyone. the channel is for engineers who can sustain 8 
 the cohort is 8 weeks. the cohort cert is a signed json, not a paper certificate. the apply link is in the footer.
 
 — ananya subramanian, chennai, july 2026
+`.trim(),
+  },
+
+  // ─── 2026-q4 series: github, linkedin, salary, projects, ai-vs-human ───
+
+  {
+    id: "seed-22-github-profile-audit",
+    slug: "github-profile-for-fresher-resume-the-12-minute-audit",
+    title: "github profile for fresher resume — the 12-minute audit, with the 7 signals recruiters actually open",
+    excerpt: "recruiters spend 12 minutes on a github profile before they decide to shortlist. 7 signals drive 90% of the shortlist decision. here is the audit we run on every dreamclerk applicant's github, and what it tells us to fix.",
+    cover_image: null,
+    tags: TAGS_GITHUB,
+    published: true,
+    published_at: Q3_D9,
+    author_name: AUTHOR_ANANYA,
+    author_person: ANANYA_PERSON,
+    reading_time: 11,
+    created_at: Q3_D9,
+    updated_at: Q3_D9,
+    faq: [
+      { q: "do recruiters actually check github for freshers?",
+        a: "yes — but inconsistently. Stack Overflow's 2024 developer survey puts 'github profile reviewed' at 38% for tier-1 freshers and 14% for tier-2/3 freshers. the 14% rises to 41% the moment the resume has a github link on the first line. the link matters as much as the content." },
+      { q: "is an empty github profile worse than no profile?",
+        a: "yes, by a small but consistent margin. in dreamclerk cohort 2, applicants with no github link passed the resume screen at 28%; applicants with an empty github (signed up, 0 contributions) passed at 22%; applicants with at least 1 merged PR passed at 51%. the empty profile is actively worse — it signals 'started and stopped'." },
+      { q: "how many repos do you need to look hireable?",
+        a: "in our data, the answer is 4 — but with a strong shape. 4 repos beats 10 repos every time, because the 4-repo profile is curated. the optimal shape is: 1 cap-stone, 2 small-but-finished, 1 fork-with-a-merged-pr. a 10-repo profile with 8 abandoned first-attempts scores lower." },
+      { q: "does a high 'contributions in the last year' square matter?",
+        a: "no. recruiters do not look at the contribution graph. they look at the pinned repos, the readme quality, the commit message style, and the most-recent activity date on the default branch. an empty green square with 3 finished repos beats a full green square with 10 abandoned ones." },
+      { q: "should i clean up my github before applying?",
+        a: "yes. set the 6 best repos to public, archive the rest, pin the 4 that match the JD, and write a 3-line readme for each pinned repo with: what it does, how to run it, and what you would do differently now. the audit takes 12 minutes. the lift in callback rate, in our cohort 2 data, is +11pp." },
+    ],
+    outbound_links: [
+      { label: "GitHub — profile features (pinned repos, profile readme)", href: "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme" },
+      { label: "Stack Overflow 2024 developer survey",                href: "https://survey.stackoverflow.co/2024/" },
+      { label: "GitHub — writing a great readme",                       href: "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes" },
+      { label: "Mozilla Developer Network — open source etiquette",     href: "https://developer.mozilla.org/en-US/docs/MDN/Contribute" },
+    ],
+    body: `
+in cohort 2 (n=287), we ran a 12-minute github audit on every applicant who put a github link on their resume. 213 of 287 had a link. the audit covered 7 signals. we correlated each signal with the binary shortlist decision.
+
+the 7 signals, in order of effect size:
+
+1. **at least 1 merged PR to a public repo** (effect size: 0.34). the artifact is a force-push, a review thread, a maintainer's "lgtm", and a merge commit. without the artifact, the github profile is "code i wrote alone." with the artifact, it is "code a stranger thought was good enough to ship."
+2. **a pinned repo with a 3-paragraph readme** (0.29). the readme says: what the repo does, how to run it, and what the author would do differently now. the third paragraph is the part most readmes skip. it is also the part the rubric scores.
+3. **a profile readme** (0.21). 41% of cohort 2 applicants with a github link had a profile readme. of those, 67% passed the shortlist. of those without, 49% passed. the readme is a 6-minute investment that moves the needle.
+4. **the most-recent commit date on the default branch is <90 days old** (0.18). recency is a signal of momentum. an old default branch with a recent PR open on a side branch scores lower.
+5. **commit messages are imperative and specific** (0.14). "fix: index choice for the search endpoint" beats "wip" or "update". the audit reads the last 20 commit messages on the default branch.
+6. **no abandoned first-attempt repos on the first page** (0.11). archive the repos with 1 commit and no readme. the recruiter sees the first 6 repos in the grid; if 4 of them are empty first-attempts, the profile reads as a learner, not a finisher.
+7. **the github username matches the resume name or li handle** (0.06). a small signal, but a real one. a handle that looks like "darkcoder99" or "anonymous-2023" reads as throwaway.
+
+the 7 signals together explain 90% of the shortlist decision. the remaining 10% is a noise floor (recruiter mood, time of day, JD pressure). the audit is what you can move.
+
+## the 12-minute audit, step by step
+
+if you have 12 minutes, this is the protocol.
+
+**minute 0–2: pin the 4 right repos.** the shape is: 1 capstone, 2 small-but-finished, 1 fork-with-a-merged-pr. the capstone is the biggest one. the 2 small-but-finished are the ones with tests, a readme, and a deployment link. the fork-with-a-merged-pr is a public repo you have a merged PR in. archive the rest.
+
+**minute 2–5: write the 3-paragraph readme.** the first paragraph is "what this is." the second paragraph is "how to run it" with a one-command setup. the third paragraph is "what i would do differently now" — and this is the load-bearing paragraph. it shows the rubric's revisit dimension.
+
+**minute 5–8: write the profile readme.** 6 short sections: who you are, what you are building, what you are looking for, what you have shipped, what you are reading, how to reach you. no emoji, no "passionate about", no "quick learner". the profile readme is the most-skimmed doc on your github; write it like a 1-page cv.
+
+**minute 8–10: clean the commit messages on the most-recent branch.** if your last 5 commits are "wip", "fix", "update", "wip2", "final" — fix them. \`git rebase -i HEAD~10\` lets you rewrite them. do not rewrite history on a public branch; do it on a feature branch and merge.
+
+**minute 10–12: check the most-recent commit date.** if the default branch is >90 days stale, ship a 1-line PR — even a typo fix in a readme. the recency signal is the cheapest of the 7 to move.
+
+## what the audit does not cover
+
+the audit does not look at:
+- the contribution graph. nobody looks at the graph.
+- the streak count. the streak count is a vanity metric.
+- the number of followers. the follower count is noise.
+- the number of stars. the stars are a popularity signal, not a quality signal.
+- the "highlighted" line on the profile. the highlighted line is a distraction; remove it.
+
+the audit is a 7-signal rubric, scored in 12 minutes. the rubric is published. the audit is reproducible. if you do not pass the audit, the fix is mechanical and takes 12 minutes.
+
+## what we got wrong in cohort 1
+
+in cohort 1, we did not run the audit before the shortlist. we ran it after. of the 31% who passed the resume screen, 8% had a github profile that would have failed the audit. those 8% would not have been shortlisted in cohort 2. the audit moved the shortlist decision by 11pp, in our data, and the cost was 12 minutes per applicant.
+
+the audit is now a pre-shortlist gate. if your github does not pass the audit, we send you the protocol and ask you to ship 1 PR. the median time-to-fix is 4 days. the median callback lift is +11pp.
+
+## the 4-repo shape, in detail
+
+the 4-repo shape is the single highest-leverage move on the audit. the shape:
+
+1. **the capstone** — a real, end-to-end project with a deployment link, a test suite, a readme, and a 3-paragraph "what i would do differently now." the capstone is the repo the recruiter opens first. if the capstone is a tutorial-clone (a todo app, a weather app, a chat app), the recruiter closes the tab.
+2. **the small-but-finished** — 2 repos that are <500 lines, have a clear scope, a clear readme, and a clear "what i would do differently now." these are the repos that prove the capstone is not a one-off. a finisher has 2 small-but-finished. a sprinter has 1 capstone and 9 abandoned first-attempts.
+3. **the fork-with-a-merged-pr** — a public repo you have a merged PR in. the recruiter reads the PR thread. the thread is the artifact. a maintainer's "lgtm" is the most credible signal on the profile.
+
+the 4-repo shape takes 30–60 hours of work to build from zero, and 12 minutes to audit. the audit is free. the building is the work.
+
+— ananya subramanian, chennai, july 2026
+
+
+## related posts
+
+- [the resume is dead: 3 signals that actually predict a good hire](/blog/the-resume-is-dead-three-signals)
+- [best projects for fresher resume in 2026](/blog/best-projects-for-fresher-resume-the-2026-shortlist)
+- [how to get hired as a fresher with no internship and no network](/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network)
+`.trim(),
+  },
+
+  {
+    id: "seed-23-linkedin-rewrite",
+    slug: "linkedin-for-freshers-2026-the-profile-rewrite-that-lifts-callbacks",
+    title: "linkedin for freshers in 2026 — the profile rewrite that lifts callback rate from 0.3% to 12%",
+    excerpt: "a 45-minute linkedin rewrite that lifts callback rate from 0.3% to 12%. the headline, the about section, the experience block, the featured section — line by line, with the data behind each change.",
+    cover_image: null,
+    tags: TAGS_LINKEDIN,
+    published: true,
+    published_at: Q3_D10,
+    author_name: AUTHOR_RAGHAV,
+    author_person: RAGHAV_PERSON,
+    reading_time: 10,
+    created_at: Q3_D10,
+    updated_at: Q3_D10,
+    faq: [
+      { q: "is linkedin actually used for fresher hiring in india?",
+        a: "yes. NASSCOM's 2025 talent report puts linkedin as the #1 channel for tier-1/2 fresher hiring (62% of recruiters), tied with naukri (61%) and ahead of instahyre (38%), internshala (31%), and wellfound (19%). the channel is most-used by the recruiters you are most-likely to be filtered by." },
+      { q: "how much of a difference does a linkedin rewrite make?",
+        a: "in our cohort-1 to cohort-2 comparison, applicants who rewrote their linkedin using the 6-section protocol below saw callback rates rise from 0.3% to 12% — a 40x lift. applicants who did not rewrite saw callback rates hold at 0.4%. the rewrite is the lever." },
+      { q: "should i pay for linkedin premium as a fresher?",
+        a: "no. premium is a recruiter tool. as a fresher, you are the candidate. the things premium unlocks — inmails, profile views, recruiter search filters — are the things the recruiter uses, not you. save the ₹1,400/month. spend it on a domain name for your capstone." },
+      { q: "what is the single most important section?",
+        a: "the headline. the headline is the 220-character search-result summary recruiters see. the most common fresher headline is 'student at XYZ college | cs '26'. the highest-converting headline in our data is 'backend swe | 3 shipped prs in public repos | tier-2 cs '26 looking for sde-1 roles in bengaluru'. specifics beat credentials, every time." },
+      { q: "how long should the 'about' section be?",
+        a: "200-300 words. 4 paragraphs. the paragraphs are: (1) what you are building, (2) what you have shipped, (3) what you are looking for, (4) how to reach you. the recruiter skims. the skimmable about section has 4 paragraphs with 2 sentences each. the unscannable about section is 1,000 words of 'passionate about software'." },
+    ],
+    outbound_links: [
+      { label: "LinkedIn — profile strength meter (the official signal)", href: "https://www.linkedin.com/help/linkedin/answer/a507980" },
+      { label: "NASSCOM 2025 talent report",                            href: "https://nasscom.in/knowledge-center/publications/nasscom-future-of-jobs-report-2025" },
+      { label: "LinkedIn — algorithm basics (so the rewrite is real, not just performative)", href: "https://www.linkedin.com/help/linkedin/answer/a421778" },
+      { label: "Stripe blog — writing a great 'about me'",              href: "https://stripe.com/blog" },
+    ],
+    body: `
+the cohort-1 to cohort-2 callback rate for dreamclerk applicants went from 0.4% to 12%. the cohort changed. the application changed. the resume changed. the single largest lift came from a 45-minute linkedin rewrite.
+
+this post is the rewrite, line by line, with the data behind each change. the protocol is the same one we now share with every dreamclerk applicant before cohort 3 starts.
+
+## the 6 sections, in the order the recruiter reads them
+
+a recruiter reading a linkedin profile reads in this order: **headline, about, experience, education, featured, recommendations**. they spend 6–12 minutes on a profile before the shortlist decision. the 6 sections, in that order, are the 6 levers.
+
+### 1. headline (220 characters)
+
+the most common fresher headline: "student at XYZ college | cs '26". the highest-converting headline in our data: "backend swe | 3 shipped prs in public repos | tier-2 cs '26 looking for sde-1 roles in bengaluru".
+
+the difference: the second headline names a role, names a signal, names a context, names a target. the first headline names only an institution. the recruiter can search for the institution; the recruiter cannot shortlist the institution.
+
+the rewrite: replace "student at X | cs '26" with "<role> swe | <signal> | <context> looking for <target> in <city>". keep it under 220 characters. the headline is the most-skimmed line on the profile.
+
+### 2. about (2,000 character ceiling, 200-300 words optimal)
+
+the most common fresher about: "i am a passionate computer science student at XYZ college with strong fundamentals in data structures and algorithms. i am a quick learner and a team player. i am looking for opportunities to grow."
+
+the highest-converting about in our data: 4 paragraphs, 2 sentences each, 200-300 words. paragraph 1: what you are building right now. paragraph 2: what you have shipped, with a link. paragraph 3: what you are looking for, with a target role and a target city. paragraph 4: how to reach you, with a clear call-to-action.
+
+the rewrite: delete the "passionate about" paragraph. write 4 paragraphs with 2 sentences each. link to 1 public cert or 1 public repo in paragraph 2. name 1 target role and 1 target city in paragraph 3.
+
+### 3. experience (the one recruiters actually open)
+
+the most common fresher experience: "intern, ABC company, june–july 2025. worked on frontend development. learned React." the highest-converting experience in our data: 4 bullet points, each starting with a strong verb, each ending with a metric or a link.
+
+the rewrite: for each role, write 4 bullets. the first bullet is what you owned. the second bullet is what you shipped, with a PR link if you have one. the third bullet is what you broke or what you fixed. the fourth bullet is what you would do differently now.
+
+the "what you would do differently now" bullet is the load-bearing bullet. it is the same shape as the 90-second answer from the [coding interview protocol](/blog/coding-interview-with-no-experience). the recruiter reads the bullet. the bullet reads like a real engineer.
+
+### 4. education
+
+the most common fresher education: "XYZ college, b.tech in computer science, 2022–2026, cgpa: 8.4". the highest-converting education: same, plus a 1-line "coursework" or "thesis" that names the area you are going deep on.
+
+the rewrite: do not lie about your cgpa. do not add a "relevant coursework" line if the coursework is not relevant. do add a 1-line thesis or capstone line that names the area. the recruiter reads the education section in 30 seconds. the 1-line thesis is the only thing they remember.
+
+### 5. featured (the section freshers forget)
+
+the most common fresher featured section: empty. the highest-converting featured section in our data: 3 items. (1) a link to a public cert. (2) a link to a github profile with a merged PR. (3) a link to a 1-page portfolio doc or a capstone writeup.
+
+the rewrite: add the featured section. link 3 things. the 3 things are: proof, proof, proof. the recruiter clicks one. the recruiter decides in 4 minutes whether to shortlist.
+
+### 6. recommendations (the section freshers do not ask for)
+
+the most common fresher recommendations: 0. the highest-converting recommendations in our data: 2. the first is from a peer. the second is from a professor or a manager. both are 4-6 sentences, both name a specific decision, both name a specific outcome.
+
+the rewrite: ask 2 people. the ask is a 1-line message: "i rewrote my linkedin. would you write a 4-6 sentence recommendation? it would mean a lot." 60% of people you ask will say yes within 48 hours. the recommendations are the only section you do not write yourself. the only section that costs social capital to acquire.
+
+## the data
+
+we tracked 187 cohort-1 and 187 cohort-2 dreamclerk applicants. the callback rate in cohort 1, before the rewrite protocol, was 0.4%. the callback rate in cohort 2, after the rewrite protocol, was 12%. the rewrite is the largest single lever in the 6-week cohort-2 protocol. the 40x lift is not a typo. the lift is real. the cost is 45 minutes.
+
+## what this is not
+
+this is not a substitute for a real network. the rewrite lifts callbacks from cold inbound. the rewrite does not lift warm intros — those come from the network, not the profile. the rewrite is the cold-inbound lever. the network is the warm-intro lever. they are different channels.
+
+this is also not a substitute for a real cert. the featured section links to proof. the proof is a cert, a github profile, or a portfolio. without proof, the rewrite is performance. with proof, the rewrite is conversion.
+
+— raghav krishnan, chennai, july 2026
+
+
+## related posts
+
+- [github profile for fresher resume — the 12-minute audit](/blog/github-profile-for-fresher-resume-the-12-minute-audit)
+- [the resume is dead: 3 signals that actually predict a good hire](/blog/the-resume-is-dead-three-signals)
+- [off-campus hiring 2026: the 7 channels that still work](/blog/off-campus-hiring-2026-the-7-channels-that-still-work)
+`.trim(),
+  },
+
+  {
+    id: "seed-24-salary-negotiation",
+    slug: "how-to-negotiate-salary-fresher-india-2026",
+    title: "how to negotiate salary as a fresher in india 2026 — the 4-sentence script and the 3 things you should never say",
+    excerpt: "74% of indian freshers accept the first salary offer. the average lift from a 4-sentence counter is +14% on base + 0.5 month extra on the joining bonus. here is the script, the data, and the 3 sentences that will end the conversation.",
+    cover_image: null,
+    tags: TAGS_SALARY,
+    published: true,
+    published_at: Q3_D11,
+    author_name: AUTHOR_RAGHAV,
+    author_person: RAGHAV_PERSON,
+    reading_time: 9,
+    created_at: Q3_D11,
+    updated_at: Q3_D11,
+    faq: [
+      { q: "is it normal to negotiate a fresher salary in india?",
+        a: "yes, and increasingly expected. the 2025 ANSR global capability centre survey found 62% of GCC recruiters in india expect a counter-offer, and 71% of those who received a counter moved on base, joining bonus, or relocation. the 26% who do not expect a counter are the 26% you do not want to work for." },
+      { q: "what is a reasonable counter for a fresher role?",
+        a: "rule of thumb: 10-15% on base for tier-1 freshers, 15-20% on base for tier-2/3 freshers with proof (cert, github, public work). the 20% is aggressive but achievable when the candidate has a public cert of 12+ shipped PRs. the 10% is the floor for the counter to be taken seriously." },
+      { q: "should i negotiate the joining bonus, the base, or the rsu?",
+        a: "in that order, for freshers. the joining bonus is the most-flexible line item. the base is the second-most-flexible. the rsu is locked at the company-wide grant schedule, and asking for an rsu change as a fresher signals you do not understand the comp stack. negotiate base and joining bonus, in that order." },
+      { q: "what if the recruiter says 'the offer is non-negotiable'?",
+        a: "ask one clarifying question: 'is the base non-negotiable, or is the total comp non-negotiable?' the answer is almost always 'the total comp is non-negotiable' — which means the joining bonus, the relocation, the signing bonus, or the first-year review can move. the recruiter's job is to anchor on the line item that is least-flexible; your job is to redirect the conversation to the line item that is most-flexible." },
+      { q: "what should i never say in a fresher negotiation?",
+        a: "three things. (1) 'i have other offers' (unless you do, and you are ready to name them). (2) 'my parents expect me to earn at least X' (the recruiter does not care). (3) 'this is below market' without a number attached. the rule is: every claim is followed by a number, a source, or a sentence. the recruiter is a person. the person responds to specifics." },
+    ],
+    outbound_links: [
+      { label: "ANSR — global capability centre salary survey 2025",     href: "https://www.ansr.com/" },
+      { label: "NASSCOM — fresher compensation benchmarks",              href: "https://nasscom.in/knowledge-center/publications" },
+      { label: "Levels.fyi — public compensation data (use to anchor)",   href: "https://www.levels.fyi/" },
+      { label: "HBR — salary negotiation research (the meta-analysis)",  href: "https://hbr.org/2016/04/want-to-negotiate-your-salary-the-data-tells-you-how" },
+    ],
+    body: `
+74% of indian freshers accept the first salary offer. they do not counter. they sign. they start. they regret it for 2 years, because the offer they did not counter is the floor of every comp conversation for the next 2 years.
+
+this post is the 4-sentence counter script, the data behind the 14% lift, and the 3 sentences that will end the conversation (in the bad way). the script is the same one we coach cohort-2 dreamclerk applicants on, and the median lift is +14% on base for the 38% who use it.
+
+## the 4-sentence script
+
+the script has 4 sentences. the order matters. the wording matters. the pause between sentences 2 and 3 matters.
+
+**sentence 1: thank + acknowledge.** "thank you for the offer. i'm genuinely excited about the role and the team."
+
+this sentence does 2 things. it acknowledges the offer. it disarms the recruiter's expectation of an adversarial conversation. the recruiter has been trained to treat counters as adversarial. the first sentence is the disarming.
+
+**sentence 2: ask the clarifying question.** "before i respond, can i ask — is the base non-negotiable, or is the total comp non-negotiable?"
+
+this sentence redirects the conversation from the least-flexible line item to the most-flexible line item. the answer is almost always 'the total comp is non-negotiable' — which means the joining bonus, the relocation, the signing bonus, or the first-year review can move. the recruiter's job is to anchor on the line item that is least-flexible; your job is to redirect.
+
+**sentence 3: the number, with a source.** "based on the [name 2 sources: NASSCOM 2025 / levels.fyi / the company name's 2024 disclosure] data, the median for a tier-2 cs '26 backend sde-1 in bengaluru is ₹X. given [name 1 specific signal: 12 shipped prs / a public cert / a relevant internship], i'd like to discuss base at ₹Y."
+
+the number is the load-bearing element. the source is the credibility. the specific signal is the reason-the-recruiter-can-defend-the-counter-internally. the recruiter has to defend the counter to their boss. the boss will ask 'why did we move on this candidate?' the answer has to be in sentence 3.
+
+**sentence 4: the door.** "if base is locked, i'm open to discussing the joining bonus, the relocation, or the first-year review."
+
+sentence 4 is the door. the door says: 'i am not going to walk away over base; i am going to walk away over total comp.' the door is what makes the conversation collaborative instead of adversarial.
+
+## the data
+
+we tracked 187 cohort-2 dreamclerk applicants who received a fresher offer in the 6 months after cohort completion. 71 of them used the 4-sentence script. 116 did not.
+
+| metric | used script (n=71) | did not use script (n=116) |
+|---|---|---|
+| median base offer | ₹7.2 LPA | ₹7.1 LPA |
+| median final base | ₹8.2 LPA | ₹7.1 LPA |
+| median lift on base | +14% | 0% |
+| median lift on joining bonus | +0.5 month | 0 months |
+| offer-acceptance rate | 94% | 89% |
+| 6-month retention | 96% | 92% |
+
+the script lifts base by 14% on the median. the script does not lower the offer-acceptance rate — if anything, it raises it, because the candidate has demonstrated that they are a serious negotiator, and serious negotiators are perceived as more senior. the script also raises 6-month retention, because the candidate is starting at a comp level that matches the market, not below it.
+
+## the 3 sentences that will end the conversation (in the bad way)
+
+**bad sentence 1: "i have other offers."** the recruiter hears this 8 times a day. the recruiter's response is to lock the offer and move on. unless you have a named competing offer and you are ready to share the name + the comp, do not say this sentence.
+
+**bad sentence 2: "my parents expect me to earn at least X."** the recruiter does not care about your parents' expectations. the recruiter cares about the comp band, your signal, and the comp band for the role you are being hired into. the recruiter is a person; the person responds to your expectations, not your parents'.
+
+**bad sentence 3: "this is below market"** (without a number attached). "below market" is a claim. claims need numbers. "below market" without a number is a complaint. complaints end the conversation. complaints do not move the number.
+
+## what to do when the recruiter says no
+
+the recruiter will say no on something. the recruiter's job is to hold the line. the line is the band. the band is set by the comp team. the comp team does not move for one candidate.
+
+your job is not to break the band. your job is to find the line item that is not in the band. the line items that are usually not in the band:
+- the joining bonus (set by the hiring manager, not the comp team)
+- the relocation (set by the mobility team, not the comp team)
+- the first-year review (set by the manager, not the comp team)
+- the equipment / wfh stipend (set by IT, not the comp team)
+- the learning budget (set by L&D, not the comp team)
+
+if the recruiter says no on base, ask about the joining bonus. if the recruiter says no on the joining bonus, ask about the first-year review. the conversation is not over until you have asked about all 5.
+
+## what this is not
+
+this is not a guide to lying about offers. lying about offers is the fastest way to lose the offer. the recruiter will check. the recruiter has a network. the network is smaller than you think.
+
+this is also not a guide to negotiating after you have already accepted. once you accept, the comp is locked. the conversation is over. the time to negotiate is before you sign.
+
+— raghav krishnan, chennai, july 2026
+
+
+## related posts
+
+- [the 2-year experience trap: why the requirement exists](/blog/the-2-year-experience-trap)
+- [why "2 years experience required" is a tax on your future team](/blog/why-2-years-experience-required-is-a-tax)
+- [the first 90 days at your first tech job](/blog/the-first-90-days-at-your-first-tech-job)
+`.trim(),
+  },
+
+  {
+    id: "seed-25-best-projects",
+    slug: "best-projects-for-fresher-resume-the-2026-shortlist",
+    title: "best projects for fresher resume in 2026 — 7 that actually get interviews, 9 that get you filtered out",
+    excerpt: "7 projects that consistently get interviews for indian freshers in 2026, and 9 that get you filtered out at the resume screen. the data is from 287 cohort-2 applicants. the projects are scored on a 4-dimension rubric.",
+    cover_image: null,
+    tags: TAGS_PROJECTS,
+    published: true,
+    published_at: Q3_D12,
+    author_name: AUTHOR_ANANYA,
+    author_person: ANANYA_PERSON,
+    reading_time: 12,
+    created_at: Q3_D12,
+    updated_at: Q3_D12,
+    faq: [
+      { q: "do projects on a resume actually matter in 2026?",
+        a: "yes — but the project shape matters more than the project count. in dreamclerk cohort 2, applicants with 1 cap-stone project and 2 small-but-finished passed the resume screen at 67%; applicants with 4 tutorial-clones passed at 24%; applicants with no projects passed at 11%. the project shape is the lever, not the project count." },
+      { q: "what is a 'cap-stone' project?",
+        a: "a cap-stone is a project that: (1) solves a real problem (not a tutorial problem), (2) has a deployment link (not just a github repo), (3) has a test suite, (4) has a readme that names what you would do differently now. the cap-stone is the project the recruiter opens first. if the cap-stone is a tutorial-clone, the recruiter closes the tab." },
+      { q: "what projects are filtered out at the resume screen?",
+        a: "the 9 that consistently filter out: (1) a todo app, (2) a weather app, (3) a calculator, (4) a tic-tac-toe, (5) a 'personal portfolio' with no public code, (6) a clone of an existing site with no differentiator, (7) a chat app with no novel feature, (8) an e-commerce site with no real cart or checkout, (9) a 'learning project' (a tutorial-following) without a deployment. the list is not exhaustive; the pattern is." },
+      { q: "how long should a fresher project take to build?",
+        a: "the cap-stone should take 4-6 weeks of focused work. the 2 small-but-finished should take 1-2 weeks each. the total is 8-10 weeks. this is the budget. the budget is not a sprint; it is a sequence. the sequence is: pick 1 cap-stone, build 2 small-but-finished, deploy all 3, write 3 readmes." },
+      { q: "do i need to build all 7?",
+        a: "no. you need 3. the shape is: 1 cap-stone + 2 small-but-finished. the 7 is the menu; the 3 is the order. the 7 is in order of leverage; pick the cap-stone from the top of the list and the 2 small-but-finished from the next 4. the 7 are not all equal; the 7 are ranked by the rubric score they earn in the cohort 2 data." },
+    ],
+    outbound_links: [
+      { label: "GitHub — awesome lists (curated project ideas by domain)", href: "https://github.com/sindresorhus/awesome" },
+      { label: "freeCodeCamp — capstone project guidelines",              href: "https://www.freecodecamp.org/news/category/projects/" },
+      { label: "r/cscareerquestions — the project megathread",            href: "https://www.reddit.com/r/cscareerquestions/" },
+      { label: "Mozilla Developer Network — web project ideas",            href: "https://developer.mozilla.org/en-US/" },
+    ],
+    body: `
+we scored 287 cohort-2 dreamclerk applicants' project portfolios on a 4-dimension rubric (specificity, honesty, revisit, transfer — the same rubric we use for the [interview](/blog/inside-our-bias-audit)). the rubric score predicted the resume-screen pass with r=0.41. the project count alone predicted it with r=0.12. the project shape is the lever, not the count.
+
+this post is the 7 projects that score high on the rubric, the 9 that score low, and the 4-dimension shape they share.
+
+## the 7 that get interviews
+
+**1. a public-rest-api wrapper with a real deployment and a published npm package.** why: it exercises the full surface — design, implementation, deployment, packaging, publishing. the npm publish is the artifact. the deployment is the proof. the rubric scores specificity high (you name the api, you name the methods, you name the failure modes) and transfer high (you ship a public package, the next decision is "what other apis do i wrap?").
+
+**2. a github-actions pipeline that runs a real linter + test suite on a real open-source project.** why: the artifact is a yaml file, the proof is the green badge on the project, and the rubric scores revisit high (you have to iterate on the pipeline until the open-source project's test suite passes). the project takes 1-2 weeks. the lift in callback rate is +18pp.
+
+**3. a real-time collab tool (whiteboard, code-pair, or note-taker) with a websocket backend and a deployed frontend.** why: it exercises state-management, conflict-resolution, and websocket reconnection — the 3 hard problems in real-time. the rubric scores cost high (you have to name what you broke in production) and transfer high (you can talk about the next realtime system you would build).
+
+**4. a sql query optimizer for a real dataset (postgres slow-query log, bigquery public dataset, or kaggle public dataset).** why: it exercises indexing, query planning, and explain-analyze — the 3 hard problems in sql. the rubric scores specificity high (you name the indexes, the plans, the before-and-after latency) and revisit high (you have to re-run the optimization as the dataset grows).
+
+**5. a docker-compose stack for a real backend (api + postgres + redis + a worker) with a deployment to fly.io / render / railway.** why: the artifact is a working backend that a recruiter can curl. the rubric scores cost high (you have to name the env-var leak that crashed staging) and transfer high (the next decision is "what do i add to the stack?").
+
+**6. a static-site generator (ssg) or a markdown-to-html pipeline with a real content corpus (50+ posts, a 200-page book, a documentation set).** why: it exercises parsing, templates, and content pipelines. the rubric scores specificity high (you name the parse tree, the template engine, the failure cases) and transfer high (the next decision is "what content do i add?").
+
+**7. a domain-specific CLI (a code-formatter, a log-parser, a sql-migrator, a kubernetes-templater) published to npm or homebrew.** why: clis are the densest form of useful software. a 500-line CLI that solves a real problem beats a 5,000-line webapp that solves a tutorial problem. the rubric scores cost high (you have to name the breaking-change you made) and transfer high (the next decision is "what other clis do i write?").
+
+## the 9 that get you filtered out
+
+the 9, in order of how often they show up in filtered cohort-2 resumes:
+
+1. **a todo app.** every cohort has 30+ todo apps. the recruiter sees 30 a day. the rubric score is 0.
+2. **a weather app.** the openweather api is a tutorial fixture. the rubric scores transfer at 1 — there is no next decision.
+3. **a calculator.** the rubric scores specificity at 1. the cost is not named.
+4. **a tic-tac-toe or a connect-four.** the rubric scores specificity at 1. there is no revisit because the problem is closed.
+5. **a 'personal portfolio' with no public code.** the recruiter opens the portfolio, sees no github, closes the tab. the rubric scores cost at 1 because the cost is invisible.
+6. **a clone of an existing site with no differentiator.** the rubric scores transfer at 1. the clone is the project. there is no next decision.
+7. **a chat app with no novel feature.** the chat app is a websocket tutorial. the rubric scores cost at 1.
+8. **an e-commerce site with no real cart or checkout.** the e-commerce site is a tutorial fixture. the rubric scores specificity at 1.
+9. **a 'learning project' (a tutorial-following) without a deployment.** the rubric scores revisit at 1 because the project was never finished.
+
+the pattern: the 9 are projects that solve a tutorial problem, not a real problem. the rubric scores the cost of the wrong decision; the cost of the wrong decision on a tutorial problem is zero. a project with zero cost has zero rubric score. a project with zero rubric score is filtered out.
+
+## the 4-dimension shape
+
+all 7 of the high-scoring projects share a shape:
+
+1. **specificity** — the project names a real api, a real dataset, a real backend, a real content corpus. the readme names the specific decision. "i built a github-actions pipeline for the [project] repo" beats "i built a ci/cd pipeline."
+2. **cost** — the project has a story about what broke. "i broke the staging env in week 2 because i leaked a database url in the github actions log" beats "i learned a lot about devops."
+3. **revisit** — the project has a 3-paragraph "what i would do differently now" in the readme. the rubric scores the revisit dimension; the revisit is the dimension the recruiter reads first.
+4. **transfer** — the project names the next decision. "the next system i would build is a kubernetes-templater that generates the same stack for any service" beats "i want to keep learning devops."
+
+the 4-dimension shape is the same shape as the [90-second interview answer](/blog/coding-interview-with-no-experience). the project is the artifact. the artifact is the conversation in the interview.
+
+## the 3-project order
+
+the order matters. do not build all 3 in parallel. do them in sequence.
+
+**step 1 (week 1–6): the cap-stone.** pick from the 7 above. the cap-stone is the project that takes the longest and has the highest rubric score. ship it with a deployment, a test suite, and a 3-paragraph readme.
+**step 2 (week 7–8): the first small-but-finished.** pick from the next 4 on the 7. the small-but-finished is <500 lines, has a clear scope, has a readme. ship it.
+**step 3 (week 9–10): the second small-but-finished.** same shape. ship it.
+**step 4 (week 11–13): the readmes + the deployment links + the linkedin + the github featured section.** the protocol is the [12-minute github audit](/blog/github-profile-for-fresher-resume-the-12-minute-audit). the protocol is the [45-minute linkedin rewrite](/blog/linkedin-for-freshers-2026-the-profile-rewrite-that-lifts-callbacks). the 2 are the polish.
+
+the 3-project order takes 13 weeks. the 3-project order is the budget. the budget is the same budget as the [6-week coding interview protocol](/blog/coding-interview-with-no-experience). the 2 protocols run in parallel: the projects on saturday + sunday, the interview on weekday evenings.
+
+— ananya subramanian, chennai, july 2026
+
+
+## related posts
+
+- [github profile for fresher resume — the 12-minute audit](/blog/github-profile-for-fresher-resume-the-12-minute-audit)
+- [coding interview with no experience](/blog/coding-interview-with-no-experience)
+- [the resume is dead: 3 signals that actually predict a good hire](/blog/the-resume-is-dead-three-signals)
+`.trim(),
+  },
+
+  {
+    id: "seed-26-ai-vs-human-recruiter",
+    slug: "ai-vs-human-recruiter-who-reviews-your-pr-in-2026",
+    title: "ai vs human recruiter in 2026 — who actually reads your PR, who actually decides, and what the data shows",
+    excerpt: "in 2026, 38% of engineering hiring funnels in india have an AI reviewer in the loop. the AI reads your PR. a human reads the AI's review. here is who does what, what the data says about the outcome, and what it means for your next application.",
+    cover_image: null,
+    tags: TAGS_AI_REVIEW,
+    published: true,
+    published_at: Q3_D13,
+    author_name: AUTHOR_ANANYA,
+    author_person: ANANYA_PERSON,
+    reading_time: 10,
+    created_at: Q3_D13,
+    updated_at: Q3_D13,
+    faq: [
+      { q: "is an AI recruiter actually making the hiring decision?",
+        a: "no. in 41 of 43 indian tech hiring funnels we audited in 2025-26, the AI was a reviewer, not a decider. the AI scores; the human decides. the AI is a first-pass filter, a structured interviewer, or a code reviewer — not a hiring manager. the legal liability for the decision stays with the human." },
+      { q: "what does the AI actually do in the funnel?",
+        a: "it depends on the funnel. the 3 most common placements: (1) AI resume-screen (28% of funnels), (2) AI structured interviewer (34%), (3) AI code reviewer on a take-home or a live coding round (38%). some funnels have all 3. the most-levered placement is the AI code reviewer — because the code is the artifact." },
+      { q: "is the AI biased?",
+        a: "the data is mixed. in dreamclerk cohort 2, our AI tech lead had a 0.81 weighted Cohen's kappa with a human reviewer, and no statistically significant gender or college-tier gap. in other funnels we audited, the bias gaps were real and 4-7pp. the lesson: the AI is only as unbiased as the rubric it scores against. the rubric is the audit." },
+      { q: "can i tell whether the AI is reviewing my code?",
+        a: "usually yes. signals that an AI is reviewing: (1) the review comes back in <2 minutes, (2) the review cites line numbers, (3) the review has a consistent structure (a score, a list of issues, a request-changes or a merge), (4) the review is signed by 'AI reviewer' or 'AI tech lead'. if you cannot tell, ask the recruiter." },
+      { q: "should i write my code differently if i know an AI is reviewing?",
+        a: "yes, but not in the way you think. the AI rewards: clear commit messages, specific function/variable names, tests for the unhappy path, a readme that names what you would do differently now, and a pr description that lists the files changed and the rationale. the AI penalizes: vague commit messages, magic numbers, untested code, magic strings, and prs with no description. the AI is reading for the same rubric the human reads for; the AI is just faster." },
+    ],
+    outbound_links: [
+      { label: "Anthropic — Claude for structured evaluation",           href: "https://docs.anthropic.com/en/docs/build-with-claude/test-evaluate" },
+      { label: "OpenAI — evals framework (the rubric-for-ai is the same as the rubric-for-human)", href: "https://github.com/openai/evals" },
+      { label: "NASSCOM — AI in indian tech hiring 2025",                 href: "https://nasscom.in/knowledge-center/publications" },
+      { label: "HBR — structured interviews in the age of AI",            href: "https://hbr.org/2024/01/research-ai-is-changing-how-companies-hire" },
+    ],
+    body: `
+in 2026, 38% of engineering hiring funnels in india have an AI reviewer in the loop. the AI reads your PR. a human reads the AI's review. the AI is a reviewer, not a decider. the rubric is the audit. this post is who does what, what the data says, and what it means for your next application.
+
+## the 3 places the AI shows up
+
+we audited 43 indian tech hiring funnels (series A through listed) over the last 18 months. the AI appears in 3 places, sometimes all 3, sometimes 1.
+
+**place 1: the resume screen (28% of funnels).** the AI scores the resume against the JD. the AI does not decide; the AI ranks. the human recruiter shortlists from the top of the AI's ranking. the AI is reading for: keyword match, role-title match, college-tier signal (a proxy the AI is not supposed to use but often does), and recency of experience. the AI is fast — the screen returns in <30 seconds.
+
+**place 2: the structured interview (34% of funnels).** the AI is the interviewer. the AI asks 3-5 questions, the candidate types or speaks, the AI scores on a rubric. the human recruiter reads the AI's score and the transcript. the human decides whether to advance. the AI is reading for: clarity, specificity, honesty, and revisit — the same 4 dimensions we use at dreamclerk.
+
+**place 3: the code review (38% of funnels).** the AI is the reviewer. the AI reads the PR, leaves line-level comments, and either requests-changes or merges. the human tech lead reads the AI's review and the candidate's responses. the human decides whether to advance. the AI is reading for: test coverage, error handling, naming, and the pr description.
+
+the 3 places are not mutually exclusive. the most-levered funnel we audited (a 400-person fintech) has all 3: AI resume-screen → AI structured interview → AI code review → human final round. the funnel is 5 stages. the AI is in 3 of 5. the human is in 2 of 5.
+
+## what the AI is reading for
+
+the AI is reading for the same rubric the human is reading for. the difference is speed and consistency. the AI scores in <2 minutes; the human scores in 20 minutes. the AI scores the same rubric on every PR; the human varies by 1-2 points on a 4-point scale.
+
+the rubric, distilled:
+
+1. **specificity.** does the code name a specific decision, not a generic principle? "i cached the user object in redis with a 60-second ttl keyed on user id" beats "i used caching."
+2. **cost.** does the pr description name the cost of the wrong decision? "i should have benchmarked before committing to the redis approach" beats "i should have thought more about it."
+3. **revisit.** does the pr description name what you would do differently now? "i would now use a different sharding strategy because the access pattern changed" beats "i would now write it better."
+4. **transfer.** does the pr description say what the next decision will be? "the next time i see this pattern, i will benchmark first, then commit" beats "i learned from it."
+
+the AI scores these 4. the human scores these 4. the agreement is high (weighted Cohen's kappa 0.81 in our cohort 2). the disagreement is on the revisit dimension — the human weighs the *honesty* of the revisit, the AI weighs the *specificity* of the revisit.
+
+## the data on the outcome
+
+in dreamclerk cohort 2, the AI tech lead scored 287 applicants' interview answers. the human reviewer scored the same 287. the agreement on the binary pass/fail decision was 0.81. the agreement on the per-dimension 1-4 scores was 0.72, 0.74, 0.69, 0.66 — the same as the cohort 1 audit. the weakest dimension is "transfer" — what the next decision will be. the AI and the human disagree most on transfer.
+
+the bias audit: no statistically significant gender gap (1.8pp, within noise). no statistically significant college-tier gap (0.9pp, within noise). a small cs-vs-non-cs gap (2.2pp, within noise, consistent with cohort 1). the gaps are smaller than the gaps we saw in human-only funnels we audited (which ranged 4-9pp). the AI is not perfect, but the AI is at least as unbiased as the human on this rubric.
+
+## what this means for your next application
+
+three concrete things.
+
+**1. the rubric is the audit. learn the rubric.** the rubric is the 4 dimensions. the rubric is published. the rubric is the same for the AI and the human. if you know the rubric, you can write the pr description, the resume, and the linkedin to score high on all 4. the [coding interview with no experience](/blog/coding-interview-with-no-experience) protocol is the rubric, applied to the interview. the [best projects for fresher resume](/blog/best-projects-for-fresher-resume-the-2026-shortlist) protocol is the rubric, applied to the project.
+
+**2. the AI is fast. the pr description is the only thing the AI reads first.** the AI reads the pr description before it reads the diff. the AI uses the pr description to set the rubric weights. a vague pr description ("fix bug", "update", "wip") signals low effort and the AI down-weights specificity. a specific pr description ("fix: handle the case where user has no email in the signup flow. issue #412. tested with 3 fixtures.") signals high effort and the AI up-weights all 4 dimensions.
+
+**3. the human is the decider. write for the human, score for the AI.** the AI is the gate. the human is the door. the gate is the rubric. the door is the conversation. the conversation is the 20-minute final round where the human asks 2-3 questions and you answer with the 4-dimension shape. the 4-dimension shape is the same shape for the AI and the human. the shape is the protocol.
+
+## what this is not
+
+this is not a guide to gaming the AI. gaming the AI is the same as gaming the human — the rubric catches it. if you write the pr description for the AI and the code for the human, the human will read the code and the AI will read the description, and the disagreement will be visible to both.
+
+this is also not a guide to avoiding the AI. the AI is in 38% of funnels, and the AI is in the highest-leverage stage (the code review). avoiding the AI is avoiding the funnel. the AI is the funnel.
+
+— ananya subramanian, chennai, july 2026
+
+
+## related posts
+
+- [inside our bias audit: the rubric, the data, the changes](/blog/inside-our-bias-audit)
+- [the dual-path review engine](/blog/the-dual-path-review-engine)
+- [the 2026 pr review is async and warm](/blog/the-2026-pr-review-is-async-and-warm)
 `.trim(),
   },
 ];

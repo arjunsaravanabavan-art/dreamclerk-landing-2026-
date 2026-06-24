@@ -223,6 +223,86 @@ export async function deleteFeedback(id) {
   }
 }
 
+// ─── subscribers (legacy waitlist — homepage stat) ─────────────────────────
+//
+// Public insert (RLS: anon can insert, with check true).
+// Admin read-all + delete (RLS: gated on auth.jwt() ->> 'email' =
+// 'info@dreamclerk.com'). See supabase/migrations/2026-06-22-admin-
+// subscribers-rls.sql.
+//
+// The frontend cannot bypass the admin gate — only the admin user's
+// authenticated JWT matches the policy; anon returns [].
+
+export async function listAllSubscribersAdmin() {
+  if (!isConfigured || !supabase) return [];
+  try {
+    const { data, error } = await supabase
+      .from("subscribers")
+      .select("id, email, created_at")
+      .order("created_at", { ascending: false })
+      .limit(1000);
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.warn("[supabase] listAllSubscribersAdmin:", err?.message || err);
+    return [];
+  }
+}
+
+// Admin: delete one subscriber row. RLS allows delete for the admin email.
+export async function deleteSubscriber(id) {
+  if (!isConfigured || !supabase) return { ok: false, error: "Supabase not configured." };
+  try {
+    const { error } = await supabase.from("subscribers").delete().eq("id", id);
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err?.message || "Network error." };
+  }
+}
+
+// ─── notify_signups ("notify me" — landing site CTAs) ──────────────────────
+//
+// Public insert (RLS: anon can insert, with check true).
+// Admin read-all + delete (RLS: gated on auth.jwt() ->> 'email' =
+// 'info@dreamclerk.com'). See supabase/migrations/2026-06-22-admin-
+// notify-signups-rls.sql.
+//
+// Columns: id, email, name, source, created_at.
+//   `source` is the page where the user clicked "notify me" — useful for
+//   seeing which CTA actually converts.
+//
+// The frontend cannot bypass the admin gate — only the admin user's
+// authenticated JWT matches the policy; anon returns [].
+
+export async function listAllNotifySignupsAdmin() {
+  if (!isConfigured || !supabase) return [];
+  try {
+    const { data, error } = await supabase
+      .from("notify_signups")
+      .select("id, email, name, source, created_at")
+      .order("created_at", { ascending: false })
+      .limit(1000);
+    if (error) throw error;
+    return data || [];
+  } catch (err) {
+    console.warn("[supabase] listAllNotifySignupsAdmin:", err?.message || err);
+    return [];
+  }
+}
+
+// Admin: delete one notify_signups row. RLS allows delete for the admin email.
+export async function deleteNotifySignup(id) {
+  if (!isConfigured || !supabase) return { ok: false, error: "Supabase not configured." };
+  try {
+    const { error } = await supabase.from("notify_signups").delete().eq("id", id);
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: err?.message || "Network error." };
+  }
+}
+
 // ─── posts (blog) ───────────────────────────────────────────────────────────
 //
 // Public read (RLS: select where published = true).

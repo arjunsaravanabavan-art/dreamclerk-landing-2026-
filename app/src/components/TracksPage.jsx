@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { IconCode, IconTerminal, IconFile, IconNode, IconCheck, IconPadlock, IconStar, IconRocket, ArrowRight } from "./Svg.jsx";
 import { useSEO, SEO } from "../lib/seo.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * TracksPage — TRACK PICKER. completely fresh layout.
@@ -291,7 +292,7 @@ export default function TracksPage() {
         </div>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

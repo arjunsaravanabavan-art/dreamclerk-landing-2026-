@@ -51,7 +51,7 @@ export default function Footer() {
               <li><RouterLink to="/how">how it works</RouterLink></li>
               <li><RouterLink to="/workspace">workspace</RouterLink></li>
               <li><RouterLink to="/tracks">role tracks</RouterLink></li>
-              <li><a href="/certificate">certificate</a></li>
+              <li><RouterLink to="/certificate">certificate</RouterLink></li>
             </ul>
           </div>
 
@@ -60,7 +60,7 @@ export default function Footer() {
             <ul>
               <li><RouterLink to="/faq">faq</RouterLink></li>
               <li><RouterLink to="/blog">blog</RouterLink></li>
-              <li><a href="/proof">student stories</a></li>
+              <li><RouterLink to="/proof">student stories</RouterLink></li>
               <li><a href="https://www.dreamclerk.com" rel="noreferrer">dreamclerk.com ↗</a></li>
             </ul>
 
@@ -172,7 +172,7 @@ export default function Footer() {
             <h5>company</h5>
             <ul>
               <li><RouterLink to="/about">about us</RouterLink></li>
-              <li><a href="/about#team">team</a></li>
+              <li><RouterLink to="/about#team">team</RouterLink></li>
               <li><RouterLink to="/founder">founder</RouterLink></li>
               <li><RouterLink to="/contact">contact</RouterLink></li>
               <li><RouterLink to="/contact#feedback">feedback</RouterLink></li>

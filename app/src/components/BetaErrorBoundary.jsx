@@ -7,6 +7,7 @@
 // The BetaPage itself is wrapped in this boundary in App.jsx.
 
 import { Component } from "react";
+import { RouterLink } from "../lib/router.jsx";
 
 export default class BetaErrorBoundary extends Component {
   constructor(props) {
@@ -41,9 +42,9 @@ export default class BetaErrorBoundary extends Component {
                 <pre>{this.state.error.toString()}</pre>
               </details>
             )}
-            <a href="/" className="beta-error-boundary__cta">
+            <RouterLink to="/" className="beta-error-boundary__cta">
               back to beta
-            </a>
+            </RouterLink>
           </div>
         </div>
       );

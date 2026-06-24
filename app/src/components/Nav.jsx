@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * Nav — sticky, monochrome, terminal-friendly.
@@ -51,14 +52,14 @@ export default function Nav({ activePath = "/" } = {}) {
         </a>
 
         <nav id="primary-nav" className={"nav__links" + (open ? " is-open" : "")} aria-label="primary">
-          <a href="/how"       {...ariaCurrent("/how")}       onClick={() => setOpen(false)}>how it works</a>
-          <a href="/workspace" {...ariaCurrent("/workspace")} onClick={() => setOpen(false)}>workspace</a>
-          <a href="/tracks"    {...ariaCurrent("/tracks")}    onClick={() => setOpen(false)}>tracks</a>
-          <a href="/companies" {...ariaCurrent("/companies")} onClick={() => setOpen(false)}>companies</a>
-          <a href="/faq"       {...ariaCurrent("/faq")}       onClick={() => setOpen(false)}>faq</a>
-          <a href="/blog"      {...ariaCurrent("/blog")}      onClick={() => setOpen(false)}>blog</a>
-          <a href="/contact"   {...ariaCurrent("/contact")}   onClick={() => setOpen(false)}>contact</a>
-          <a href="/founder"   {...ariaCurrent("/founder")}   onClick={() => setOpen(false)}>founder</a>
+          <RouterLink to="/how"       {...ariaCurrent("/how")}       onClick={() => setOpen(false)}>how it works</RouterLink>
+          <RouterLink to="/workspace" {...ariaCurrent("/workspace")} onClick={() => setOpen(false)}>workspace</RouterLink>
+          <RouterLink to="/tracks"    {...ariaCurrent("/tracks")}    onClick={() => setOpen(false)}>tracks</RouterLink>
+          <RouterLink to="/companies" {...ariaCurrent("/companies")} onClick={() => setOpen(false)}>companies</RouterLink>
+          <RouterLink to="/faq"       {...ariaCurrent("/faq")}       onClick={() => setOpen(false)}>faq</RouterLink>
+          <RouterLink to="/blog"      {...ariaCurrent("/blog")}      onClick={() => setOpen(false)}>blog</RouterLink>
+          <RouterLink to="/contact"   {...ariaCurrent("/contact")}   onClick={() => setOpen(false)}>contact</RouterLink>
+          <RouterLink to="/founder"   {...ariaCurrent("/founder")}   onClick={() => setOpen(false)}>founder</RouterLink>
         </nav>
 
         <div className="nav__cta">

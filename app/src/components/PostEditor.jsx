@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { getPostById, upsertPost, deletePost, ADMIN_EMAIL } from "../lib/supabase.js";
 import { renderMarkdown, slugify } from "../lib/markdown.jsx";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * PostEditor — markdown editor with live preview.
@@ -220,7 +221,7 @@ export default function PostEditor({ postId, onClose, onSaved }) {
           </div>
         </div>
 
-        <p className="legal__back"><a href="/admin">← back to dashboard</a></p>
+        <p className="legal__back"><RouterLink to="/admin">← back to dashboard</RouterLink></p>
       </div>
     </section>
   );

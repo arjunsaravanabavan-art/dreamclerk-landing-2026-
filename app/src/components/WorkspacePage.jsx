@@ -3,6 +3,7 @@ import SectionLabel from "./SectionLabel.jsx";
 import { IconCode, IconTerminal, IconFile, IconNode, IconCheck, IconPadlock, IconRocket, IconStar, ArrowRight, IconBrush, IconScale, IconTrend } from "./Svg.jsx";
 import { tracks } from "../lib/trackData.js";
 import { useSEO, SEO } from "../lib/seo.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * WorkspacePage V4 — track-filtered, 24 unique mock surfaces.
@@ -337,7 +338,7 @@ export default function WorkspacePage() {
         </div>
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

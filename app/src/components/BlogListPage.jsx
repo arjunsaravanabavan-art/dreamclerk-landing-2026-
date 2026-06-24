@@ -3,6 +3,7 @@ import SectionLabel from "./SectionLabel.jsx";
 import { listPublishedPosts, isConfigured } from "../lib/supabase.js";
 import { useSEO, SEO } from "../lib/seo.js";
 import { SEED_POSTS } from "../lib/seedPosts.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * BlogListPage — public blog index. /blog
@@ -52,7 +53,7 @@ export default function BlogListPage() {
           <p className="blog3__loading">$ loading posts…</p>
         ) : posts.length === 0 ? (
           <p className="blog3__empty">
-            no posts yet. sign in at <a href="/admin">/admin</a> to publish the first one.
+            no posts yet. sign in at <RouterLink to="/admin">/admin</RouterLink> to publish the first one.
           </p>
         ) : (
           <ol className="blog3__list">
@@ -80,7 +81,7 @@ export default function BlogListPage() {
         )}
 
         <p className="legal__back">
-          <a href="/">← back to dreamclerk</a>
+          <RouterLink to="/">← back to dreamclerk</RouterLink>
         </p>
       </div>
     </section>

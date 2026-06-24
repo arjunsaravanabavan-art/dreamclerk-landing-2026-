@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import SectionLabel from "./SectionLabel.jsx";
 import { signInAdmin, signOutAdmin, getSession, isConfigured, ADMIN_EMAIL } from "../lib/supabase.js";
+import { RouterLink } from "../lib/router.jsx";
+// ADMIN_EMAIL is intentionally NOT pre-filled into the email input — the
+// admin types their own address. This keeps the literal address out of the
+// rendered DOM (so it cannot be screen-scraped or shared by accident). The
+// dev who needs to know the default reads the env var.
 import AdminDashboard from "./AdminDashboard.jsx";
 import { useSEO } from "../lib/seo.js";
 
@@ -12,7 +17,7 @@ import { useSEO } from "../lib/seo.js";
 export default function AdminPage() {
   const [session, setSession] = useState(null);
   const [bootChecking, setBootChecking] = useState(true);
-  const [email, setEmail] = useState(ADMIN_EMAIL);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [err, setErr] = useState("");
@@ -51,8 +56,14 @@ export default function AdminPage() {
     setSubmitting(true);
     try {
       const result = await signInAdmin(email, password);
-      if (result?.error) setErr(result.error.message || "sign-in failed");
-      else setSession(result?.data?.session || null);
+      if (!result?.ok) {
+        setErr(result?.error || "sign-in failed");
+        return;
+      }
+      // signInAdmin returns { ok, user, error }; refresh session from supabase
+      // so onAuthStateChange and downstream state stay in sync.
+      const fresh = await getSession();
+      setSession(fresh);
     } catch (e2) {
       setErr(e2?.message || "sign-in failed");
     } finally {
@@ -71,7 +82,7 @@ export default function AdminPage() {
         <div className="wrap adm0__wrap">
           <SectionLabel status="warn">$ supabase not configured</SectionLabel>
           <h1 className="adm0__h1">admin is offline.</h1>
-          <p>to enable admin features, add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>app/.env</code> and run <code>supabase/schema.sql</code> in your project. then create an admin user in supabase auth with the email <code>info@dreamclerk.com</code>.</p>
+          <p>to enable admin features, add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_ANON_KEY</code> to <code>app/.env</code> and run <code>supabase/schema.sql</code> in your project. then create an admin user in supabase auth with the email set in <code>VITE_ADMIN_EMAIL</code> (default: <code>info@dreamclerk.com</code>).</p>
         </div>
       </section>
     );
@@ -108,6 +119,7 @@ export default function AdminPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               autoComplete="username"
+              placeholder="admin email"
               required
             />
           </label>
@@ -128,7 +140,7 @@ export default function AdminPage() {
           </button>
         </form>
 
-        <p className="legal__back"><a href="/">← back to dreamclerk</a></p>
+        <p className="legal__back"><RouterLink to="/">← back to dreamclerk</RouterLink></p>
       </div>
     </section>
   );

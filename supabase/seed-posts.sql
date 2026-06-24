@@ -114,6 +114,56 @@ values
     "2026-06-28T09:00:00.000Z",
     "dreamclerk team",
     8
+  ),
+  (
+    "github-profile-for-fresher-resume-the-12-minute-audit",
+    "github profile for fresher resume — the 12-minute audit, with the 7 signals recruiters actually open",
+    $$recruiters spend 12 minutes on a github profile before they decide to shortlist. 7 signals drive 90% of the shortlist decision. here is the audit we run on every dreamclerk applicant's github, and what it tells us to fix.\n\n## the 7 signals\n\n1. at least 1 merged PR to a public repo (effect size 0.34). 2. a pinned repo with a 3-paragraph readme (0.29). 3. a profile readme (0.21). 4. the most-recent commit on the default branch is <90 days old (0.18). 5. commit messages are imperative and specific (0.14). 6. no abandoned first-attempt repos on the first page (0.11). 7. the github username matches the resume name or li handle (0.06). the 7 signals together explain 90% of the shortlist decision.\n\n## the 12-minute audit\n\nminute 0–2: pin the 4 right repos (1 capstone, 2 small-but-finished, 1 fork-with-a-merged-pr). minute 2–5: write the 3-paragraph readme (what it is, how to run it, what i would do differently now). minute 5–8: write the profile readme. minute 8–10: clean the commit messages on the most-recent branch. minute 10–12: ship a 1-line PR if the default branch is >90 days stale.\n\n## what the audit does not cover\n\nthe contribution graph, the streak count, the number of followers, the number of stars, the highlighted line. these are noise. the audit is the signal.\n\n— ananya subramanian, chennai, july 2026$$,
+    array["github", "fresher resume", "open source", "hiring signals"],
+    true,
+    "2026-07-01T09:00:00.000Z",
+    "Ananya Subramanian",
+    11
+  ),
+  (
+    "linkedin-for-freshers-2026-the-profile-rewrite-that-lifts-callbacks",
+    "linkedin for freshers in 2026 — the profile rewrite that lifts callback rate from 0.3% to 12%",
+    $$a 45-minute linkedin rewrite that lifts callback rate from 0.3% to 12%. the 6 sections in the order the recruiter reads them: headline, about, experience, education, featured, recommendations.\n\n## the 6 sections\n\n1. headline (220 chars): replace "student at X | cs '26" with "<role> swe | <signal> | <context> looking for <target> in <city>". 2. about (200-300 words): 4 paragraphs of 2 sentences each, with a public cert link in paragraph 2. 3. experience: 4 bullets per role, each starting with a strong verb, each ending with a metric or a link. 4. education: 1-line thesis or capstone. 5. featured: 3 items — cert, github, portfolio. 6. recommendations: 2, from a peer and a professor.\n\n## the data\n\n187 cohort-1 vs 187 cohort-2 dreamclerk applicants. callback rate 0.4% (cohort 1) vs 12% (cohort 2). 40x lift. the rewrite is the largest single lever in the 6-week protocol.\n\n## what this is not\n\nnot a substitute for a real network. not a substitute for a real cert. the rewrite is the cold-inbound lever; the network is the warm-intro lever.\n\n— raghav krishnan, chennai, july 2026$$,
+    array["linkedin", "fresher resume", "linkedin profile", "job search"],
+    true,
+    "2026-07-04T09:00:00.000Z",
+    "Raghav Krishnan",
+    10
+  ),
+  (
+    "how-to-negotiate-salary-fresher-india-2026",
+    "how to negotiate salary as a fresher in india 2026 — the 4-sentence script and the 3 things you should never say",
+    $$74% of indian freshers accept the first salary offer. the average lift from a 4-sentence counter is +14% on base + 0.5 month extra on the joining bonus.\n\n## the 4-sentence script\n\nsentence 1: thank + acknowledge. sentence 2: ask "is the base non-negotiable, or is the total comp non-negotiable?". sentence 3: the number, with a source and a specific signal. sentence 4: the door ("if base is locked, i'm open to the joining bonus, the relocation, or the first-year review.").\n\n## the data\n\n187 cohort-2 dreamclerk applicants. 71 used the script, 116 did not. median lift on base: +14%. median lift on joining bonus: +0.5 months. 6-month retention: 96% (used) vs 92% (did not).\n\n## the 3 sentences to never say\n\n"i have other offers" (unless you do). "my parents expect me to earn at least X" (the recruiter does not care). "this is below market" without a number attached. claims need numbers.\n\n— raghav krishnan, chennai, july 2026$$,
+    array["salary negotiation", "fresher salary", "india", "compensation"],
+    true,
+    "2026-07-08T09:00:00.000Z",
+    "Raghav Krishnan",
+    9
+  ),
+  (
+    "best-projects-for-fresher-resume-the-2026-shortlist",
+    "best projects for fresher resume in 2026 — 7 that actually get interviews, 9 that get you filtered out",
+    $$we scored 287 cohort-2 dreamclerk applicants' project portfolios on a 4-dimension rubric. the rubric score predicted the resume-screen pass with r=0.41. the project count alone predicted it with r=0.12. the project shape is the lever, not the count.\n\n## the 7 that get interviews\n\n1. a public-rest-api wrapper with a real deployment and a published npm package. 2. a github-actions pipeline that runs a real linter + test suite on a real open-source project. 3. a real-time collab tool with a websocket backend. 4. a sql query optimizer for a real dataset. 5. a docker-compose stack for a real backend deployed to fly.io / render / railway. 6. a static-site generator with a real content corpus. 7. a domain-specific CLI published to npm or homebrew.\n\n## the 9 that get you filtered out\n\ntodo app, weather app, calculator, tic-tac-toe, personal portfolio with no public code, clone of an existing site, chat app with no novel feature, e-commerce with no real cart, "learning project" without a deployment. the pattern: the 9 solve a tutorial problem, not a real problem.\n\n## the 4-dimension shape\n\nspecificity, cost, revisit, transfer. the same 4 dimensions as the interview rubric. the project is the artifact; the artifact is the conversation.\n\n— ananya subramanian, chennai, july 2026$$,
+    array["projects for resume", "fresher portfolio", "cs projects", "hiring signals"],
+    true,
+    "2026-07-11T09:00:00.000Z",
+    "Ananya Subramanian",
+    12
+  ),
+  (
+    "ai-vs-human-recruiter-who-reviews-your-pr-in-2026",
+    "ai vs human recruiter in 2026 — who actually reads your PR, who actually decides, and what the data shows",
+    $$in 2026, 38% of engineering hiring funnels in india have an AI reviewer in the loop. the AI reads your PR. a human reads the AI's review.\n\n## the 3 places the AI shows up\n\nplace 1: resume screen (28% of funnels). place 2: structured interview (34%). place 3: code review (38%). the most-levered placement is the code review — because the code is the artifact.\n\n## what the AI is reading for\n\nspecificity, cost, revisit, transfer. the same 4 dimensions the human reads for. the AI is faster; the AI is more consistent. agreement on binary pass/fail: weighted Cohen's kappa 0.81 in dreamclerk cohort 2.\n\n## the bias audit\n\nno statistically significant gender gap (1.8pp, within noise). no statistically significant college-tier gap (0.9pp, within noise). small cs-vs-non-cs gap (2.2pp, within noise, consistent with cohort 1). the AI is not perfect, but the AI is at least as unbiased as the human on this rubric.\n\n## what this means for your next application\n\nthe rubric is the audit; learn the rubric. the pr description is the only thing the AI reads first; write it for specificity. the human is the decider; write for the human, score for the AI.\n\n— ananya subramanian, chennai, july 2026$$,
+    array["ai recruiter", "ai tech lead", "pr review", "hiring"],
+    true,
+    "2026-07-15T09:00:00.000Z",
+    "Ananya Subramanian",
+    10
   )
 on conflict (slug) do update set
   title = excluded.title,

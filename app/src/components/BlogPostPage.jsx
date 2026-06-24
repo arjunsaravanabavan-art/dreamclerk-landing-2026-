@@ -4,6 +4,7 @@ import NotifyCTA from "./NotifyCTA.jsx";
 import { getPostBySlug } from "../lib/supabase.js";
 import { renderMarkdown } from "../lib/markdown.jsx";
 import { useSEO, SEO } from "../lib/seo.js";
+import { RouterLink } from "../lib/router.jsx";
 
 /**
  * Tiny safe markdown renderer — paragraphs, h2/h3, lists, blockquote, code, hr, links.
@@ -81,8 +82,8 @@ export default function BlogPostPage({ slug }) {
         <div className="wrap bp3__wrap">
           <SectionLabel status="warn">$ cat /blog/{slug}.md</SectionLabel>
           <h1 className="bp3__404">404 · post not found.</h1>
-          <p>no post by the slug <code>{slug}</code>. <a href="/blog">back to the blog index →</a></p>
-          <p className="legal__back"><a href="/">← back to dreamclerk</a></p>
+          <p>no post by the slug <code>{slug}</code>. <RouterLink to="/blog">back to the blog index →</RouterLink></p>
+          <p className="legal__back"><RouterLink to="/">← back to dreamclerk</RouterLink></p>
         </div>
       </section>
     );
@@ -94,9 +95,9 @@ export default function BlogPostPage({ slug }) {
         <SectionLabel status="ok">$ cat /blog/{slug}.md</SectionLabel>
 
         <nav className="bp3__crumb" aria-label="breadcrumbs">
-          <a href="/">home</a>
+          <RouterLink to="/">home</RouterLink>
           <span className="bp3__crumb-sep">/</span>
-          <a href="/blog">blog</a>
+          <RouterLink to="/blog">blog</RouterLink>
           <span className="bp3__crumb-sep">/</span>
           <span aria-current="page">{slug}</span>
         </nav>
@@ -181,8 +182,8 @@ export default function BlogPostPage({ slug }) {
 
             <footer className="bp3__foot">
               <NotifyCTA source={`blog-post-${slug}`} cta="notify me" />
-              <a href="/blog" className="bp3__back">← all posts</a>
-              <p className="legal__back"><a href="/">← back to dreamclerk</a></p>
+              <RouterLink to="/blog" className="bp3__back">← all posts</RouterLink>
+              <p className="legal__back"><RouterLink to="/">← back to dreamclerk</RouterLink></p>
             </footer>
           </div>
         </div>
