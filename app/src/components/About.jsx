@@ -24,31 +24,12 @@ export default function About() {
         <h2>$ team</h2>
         <div className="team">
           <div className="team__person">
-            <div className="team__role">founder / ceo</div>
-            <div className="team__name">ananya menon</div>
-            <div className="team__bio">10y product at nykaa, superapp; ex-product lead at Byju's; b.tech nit trichy.</div>
-            <div className="team__links">
-              <a href="https://linkedin.com/in/ananya-m-1">linkedin</a> · <a href="https://twitter.com/ananya">twitter</a>
-            </div>
-          </div>
-          <div className="team__person">
-            <div className="team__role">founder / cto</div>
-            <div className="team__name">raghav sharma</div>
-            <div className="team__bio">8y tech at zepto, meesho; ex-senior architect at Flipkart; iit madras.</div>
-            <div className="team__links">
-              <a href="https://linkedin.com/in/raghav-sharma">linkedin</a> · <a href="https://github.com/raghav">github</a>
-            </div>
-          </div>
-          <div className="team__person">
-            <div className="team__role">head of platform</div>
-            <div className="team__name">priya krishnan</div>
-            <div className="team__bio">6y devops at amazon, netflix; ex-senior eng at hackerrank; bits pilani.</div>
-            <div className="team__links">
-              <a href="https://linkedin.com/in/priya-k">linkedin</a> · <a href="https://github.com/priya">github</a>
-            </div>
+            <div className="team__role">founder</div>
+            <div className="team__name">arjun sv</div>
+            <div className="team__bio">founded dreamclerk in chennai in 2025.</div>
           </div>
         </div>
-
+      
         <h2>$ mission</h2>
         <p>
           our mission is to make every indian undergraduate employable — not just "degree-holders". we believe that "being hireable" is a skill, not a birthright. you should not need "university connections" or "a known surname" to get a job. if you can ship code, we will prove it.
