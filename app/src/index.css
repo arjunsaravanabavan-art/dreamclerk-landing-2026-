@@ -8323,3 +8323,47 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
 @media (prefers-reduced-motion: reduce) {
   .ct-grid * { animation: none !important; }
 }
+
+
+/* Mobile header collision fix: keep the brand, notify CTA, and menu button
+   in separate, shrink-safe columns on narrow screens. */
+@media (max-width: 880px) {
+  .nav__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: clamp(8px, 2.5vw, 14px);
+    min-width: 0;
+  }
+  .nav__brand {
+    min-width: 0;
+    gap: clamp(5px, 1.5vw, 10px);
+    font-size: clamp(16px, 4.5vw, 22px);
+    white-space: nowrap;
+  }
+  .nav__brand > span:last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .nav__cta {
+    min-width: 0;
+    gap: clamp(5px, 1.5vw, 10px);
+    flex-shrink: 0;
+  }
+  .nav__status { display: none; }
+  .nav__cta .btn {
+    padding: 0.7em clamp(10px, 3vw, 18px);
+    font-size: clamp(11px, 2.9vw, 13px);
+    white-space: nowrap;
+    gap: 6px;
+  }
+  .nav__burger {
+    flex: 0 0 auto;
+  }
+}
+@media (max-width: 380px) {
+  .nav__inner { gap: 6px; }
+  .nav__brand { font-size: 15px; gap: 5px; }
+  .nav__mark { width: 24px; height: 24px; flex: 0 0 24px; }
+  .nav__cta { gap: 5px; }
+  .nav__cta .btn { padding: 0.65em 8px; font-size: 10px; }
+}
