@@ -33,6 +33,22 @@ function setLink(sel, attr, val) {
   el.setAttribute(attr, val);
 }
 
+function metaDescription(post) {
+  const plainText = (value = "") => value
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[#>*_~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const excerpt = plainText(post?.excerpt || "");
+  const firstParagraph = plainText((post?.body || "").split(/\n\s*\n/).find((part) => part.trim() && !/^\s*#/.test(part)) || "");
+  const source = excerpt || firstParagraph || post?.title || DEFAULT_DESC;
+  if (source.length <= 155) return source;
+  const shortened = source.slice(0, 152);
+  const lastSpace = shortened.lastIndexOf(" ");
+  return shortened.slice(0, lastSpace > 100 ? lastSpace : 152).replace(/[.,;:!?-]+$/, "") + "…";
+}
+
 function setJsonLd(json) {
   let el = document.getElementById("dc-jsonld-page");
   if (!el) {
@@ -59,7 +75,11 @@ export function useSEO({
 
     setMeta('meta[name="title"]', "content", fullTitle);
     setMeta('meta[name="description"]', "content", description);
+    setMeta('meta[name="robots"]', "content", "index, follow, max-image-preview:large, max-snippet:-1");
     if (keywords) setMeta('meta[name="keywords"]', "content", keywords);
+    setMeta('meta[property="og:site_name"]', "content", "dreamclerk");
+    setMeta('meta[property="og:locale"]', "content", "en_IN");
+    setMeta('meta[name="twitter:card"]', "content", "summary_large_image");
 
     const url = `${SITE}/${path === "/" ? "" : path}`;
     setLink('link[rel="canonical"]', "href", url);
@@ -153,7 +173,7 @@ export const SEO = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": post.title,
-        "description": post.excerpt,
+        "description": metaDescription(post),
         "author": authorSchema,
         "publisher": {
           "@type": "Organization",
@@ -163,8 +183,9 @@ export const SEO = {
         "datePublished": post.published_at || post.created_at,
         "dateModified": post.updated_at || post.published_at || post.created_at,
         "mainEntityOfPage": { "@type": "WebPage", "@id": `${SITE}/blog/${post.slug}` },
-        "image": post.cover_image || `${SITE}/og.png`,
+        "image": [post.cover_image || SITE + "/og.png"],
         "keywords": (post.tags || []).join(", "),
+        "about": (post.tags || []).map((tag) => ({ "@type": "Thing", "name": tag })),
         "articleSection": "engineering hiring",
         "inLanguage": "en-IN",
         "isAccessibleForFree": true,
@@ -200,7 +221,9 @@ export const SEO = {
     }
     return {
       title: post.title,
-      description: post.excerpt || post.title,
+      description: metaDescription(post),
+      ogImage: post.cover_image || SITE + "/og.png",
+      keywords: (post.tags || []).join(", "),
       path: `/blog/${post.slug}`,
       type: "article",
       jsonLd,
