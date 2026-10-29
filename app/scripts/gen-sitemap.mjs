@@ -43,15 +43,15 @@ const xml = [
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
   ...STATIC_PAGES.map((entry) => [
     "  <url>",
-    \`    <loc>\${xmlEscape(new URL(entry.path, SITE).toString())}</loc>\`,
-    \`    <changefreq>\${entry.changefreq}</changefreq>\`,
-    \`    <priority>\${entry.priority}</priority>\`,
+    "    <loc>" + xmlEscape(new URL(entry.path, SITE).toString()) + "</loc>",
+    "    <changefreq>" + entry.changefreq + "</changefreq>",
+    "    <priority>" + entry.priority + "</priority>",
     "  </url>",
-  ].join("\\n")),
+  ].join("\n")),
   "</urlset>",
   "",
-].join("\\n");
+].join("\n");
 
 const out = join(APP_ROOT, "public", "sitemap.xml");
 writeFileSync(out, xml, "utf8");
-console.log(\`sitemap.xml: wrote \${STATIC_PAGES.length} stable landing URLs; published articles are listed at /blog/sitemap.xml\`);
+console.log("sitemap.xml: wrote " + STATIC_PAGES.length + " stable landing URLs; published articles are listed at /blog/sitemap.xml");
