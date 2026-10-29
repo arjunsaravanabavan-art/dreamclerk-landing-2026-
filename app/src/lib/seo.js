@@ -35,13 +35,13 @@ function setLink(sel, attr, val) {
 
 function metaDescription(post) {
   const plainText = (value = "") => value
-    .replace(/!\\[([^\\]]*)\\]\\([^)]*\\)/g, "$1")
-    .replace(/\\[([^\\]]+)\\]\\([^)]*\\)/g, "$1")
-    .replace(/[#>*_`~]/g, "")
-    .replace(/\\s+/g, " ")
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/[#>*_~]/g, "")
+    .replace(/\s+/g, " ")
     .trim();
   const excerpt = plainText(post?.excerpt || "");
-  const firstParagraph = plainText((post?.body || "").split(/\\n\\s*\\n/).find((part) => part.trim() && !/^\\s*#/.test(part)) || "");
+  const firstParagraph = plainText((post?.body || "").split(/\n\s*\n/).find((part) => part.trim() && !/^\s*#/.test(part)) || "");
   const source = excerpt || firstParagraph || post?.title || DEFAULT_DESC;
   if (source.length <= 155) return source;
   const shortened = source.slice(0, 152);
