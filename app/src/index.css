@@ -8367,3 +8367,186 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
   .nav__cta { gap: 5px; }
   .nav__cta .btn { padding: 0.65em 8px; font-size: 10px; }
 }
+
+
+/* Internship discovery section and featured simulated-company widget. */
+.internship-promo.section {
+  min-height: 0;
+  padding-top: clamp(28px, 3.2vw, 44px);
+  padding-bottom: clamp(28px, 3.2vw, 44px);
+}
+.internship-promo .section-head {
+  grid-template-columns: minmax(190px, .72fr) minmax(0, 1.65fr);
+  column-gap: clamp(28px, 4vw, 64px);
+  row-gap: 16px;
+  align-items: start;
+  margin-bottom: 0;
+}
+.internship-promo .section-head__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  max-width: none;
+}
+.internship-promo .section-head__title {
+  max-width: 20ch;
+  margin-bottom: 12px;
+}
+.internship-promo .section-head__lede {
+  max-width: 62ch;
+  margin-bottom: 0;
+}
+.internship-promo .section-head__body > .btn {
+  align-self: flex-start;
+  margin: 16px 0 0;
+}
+.internship-companies {
+  width: 100%;
+  margin-top: clamp(26px, 3vw, 40px);
+}
+.internship-companies__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.internship-companies__eyebrow { color: var(--ok); }
+.internship-companies__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.internship-company-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 184px;
+  padding: clamp(16px, 1.6vw, 22px);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--ink);
+  background: rgba(255,255,255,.22);
+  text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+.internship-company-card:hover,
+.internship-company-card:focus-visible {
+  border-color: var(--ok);
+  background: rgba(255,255,255,.58);
+  transform: translateY(-2px);
+  outline: none;
+}
+.internship-company-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.internship-company-card__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+.internship-company-card__mark--violet { color: #6851a5; }
+.internship-company-card__mark--green { color: #287451; }
+.internship-company-card__mark--red { color: #a64a4a; }
+.internship-company-card__mark--gold { color: #967000; }
+.internship-company-card__code {
+  color: var(--muted-2);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+.internship-company-card__arrow {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 18px;
+  transition: color 180ms ease, transform 180ms ease;
+}
+.internship-company-card:hover .internship-company-card__arrow {
+  color: var(--ok);
+  transform: translate(2px, -2px);
+}
+.internship-company-card h3 {
+  margin: 18px 0 4px;
+  font-family: var(--display);
+  font-size: clamp(20px, 2vw, 27px);
+  line-height: 1;
+  letter-spacing: -.035em;
+  font-weight: 800;
+  text-transform: lowercase;
+}
+.internship-company-card__field {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.internship-company-card__footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 18px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.45;
+}
+.internship-company-card__link {
+  flex: 0 0 auto;
+  color: var(--ink);
+  white-space: nowrap;
+}
+@media (max-width: 980px) {
+  .internship-companies__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .internship-company-card { min-height: 172px; }
+}
+@media (max-width: 880px) {
+  .internship-promo .section-head {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .internship-promo .section-head__title { max-width: 22ch; }
+  .internship-companies { margin-top: 26px; }
+}
+@media (max-width: 520px) {
+  .internship-promo.section {
+    padding-top: 22px;
+    padding-bottom: 24px;
+  }
+  .internship-companies__topline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .internship-companies__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .internship-company-card {
+    min-height: 0;
+    padding: 16px;
+  }
+  .internship-company-card h3 { margin-top: 14px; font-size: 24px; }
+  .internship-company-card__footer { padding-top: 14px; }
+}
+
