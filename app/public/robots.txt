@@ -4,4 +4,3 @@ Disallow: /api/
 Disallow: /*/admin
 
 Sitemap: https://www.dreamclerk.com/sitemap.xml
-Sitemap: https://www.dreamclerk.com/feed.xml
