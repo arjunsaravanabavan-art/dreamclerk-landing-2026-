@@ -52,10 +52,10 @@ export default function Tracks() {
           </div>
           <div className="section-head__body">
             <h2 className="section-head__title">
-              six tracks. one job, <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>deeply</em>.
+              six tracks. practical work, <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>deeply</em>.
             </h2>
             <p className="section-head__lede">
-              every track is a 2-sprint build of a real company. you don't just "learn" frontend — you build the real frontend of a working startup, and a real recruiter from that startup reviews your work.
+              Each track uses a simulated company scenario and project-based tasks. Practise a realistic workflow, receive structured feedback, and build work samples. DreamClerk does not promise a job or imply that simulated projects are work for a real employer.
             </p>
           </div>
         </header>
