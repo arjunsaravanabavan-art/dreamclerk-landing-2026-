@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 const data = [
-  { code: "V01", name: "vivacity",     type: "b2b saas",       seats: 12, lead: "karthik",  live: true,  focus: "react · typescript" },
-  { code: "N02", name: "nexara",       type: "fintech",        seats: 8,  lead: "priya",    live: true,  focus: "node · postgres · k8s" },
-  { code: "O03", name: "oxygon",       type: "ai infra",       seats: 6,  lead: "aman",     live: true,  focus: "pytorch · embeddings" },
-  { code: "L04", name: "levanto",      type: "data platform",  seats: 5,  lead: "divya",    live: true,  focus: "spark · dbt · airflow" },
-  { code: "K05", name: "kaligo",       type: "edtech",         seats: 4,  lead: "rohan",    live: false, focus: "next · prisma" },
-  { code: "F06", name: "figment",      type: "consumer ai",    seats: 4,  lead: "mira",     live: false, focus: "react · python" },
+  { code: "V01", name: "vivacity",     type: "simulated b2b saas",       seats: 12, lead: "sample lead",  live: true,  focus: "react · typescript" },
+  { code: "N02", name: "nexara",       type: "simulated fintech",        seats: 8,  lead: "sample lead",    live: true,  focus: "node · postgres · k8s" },
+  { code: "O03", name: "oxygon",       type: "simulated AI infrastructure",       seats: 6,  lead: "sample lead",     live: true,  focus: "pytorch · embeddings" },
+  { code: "L04", name: "levanto",      type: "simulated data platform",  seats: 5,  lead: "sample lead",    live: true,  focus: "spark · dbt · airflow" },
+  { code: "K05", name: "kaligo",       type: "simulated edtech",         seats: 4,  lead: "sample lead",    live: false, focus: "next · prisma" },
+  { code: "F06", name: "figment",      type: "simulated consumer AI",    seats: 4,  lead: "sample lead",     live: false, focus: "react · python" },
 ];
 
 export default function Companies() {
@@ -22,14 +22,14 @@ export default function Companies() {
         <header className="section-head reveal">
           <div className="section-head__label">
             <span className="cmd">$ cd partners/ && ls -la</span>
-            <span>where you'll work</span>
+            <span>practice environments</span>
           </div>
           <div className="section-head__body">
             <h2 className="section-head__title">
-              six companies. <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>real</em> recruiters. real reviews.
+              six <em style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontWeight: 400 }}>simulated</em> teams. practical reviews.
             </h2>
             <p className="section-head__lede">
-              we run this with real indian startups who care about hiring junior engineers the right way. every task is one of their actual problems. every reviewer is one of their actual engineers.
+              These are illustrative company scenarios for practising engineering workflows. They are not claims of partnerships with real companies, real vacancies, or reviews by actual employer engineers.
             </p>
           </div>
         </header>
@@ -43,10 +43,10 @@ export default function Companies() {
           <thead>
             <tr>
               <th>code</th>
-              <th>company</th>
+              <th>scenario</th>
               <th>type</th>
-              <th>live seats</th>
-              <th>tech lead</th>
+              <th>sample slots</th>
+              <th>sample role</th>
               <th>stack</th>
               <th>status</th>
             </tr>
@@ -62,18 +62,18 @@ export default function Companies() {
                 tabIndex={0}
                 role="button"
                 aria-pressed={i === active}
-                aria-label={`Select ${c.name} (${c.type}, ${c.seats} seats)`}
+                aria-label={`Select simulated ${c.name} scenario (${c.type}, illustrative ${c.seats} slots)`}
               >
                 <td className="mono" data-th="code">{c.code}</td>
                 <td className="name" data-th="company">{c.name}</td>
                 <td data-th="type">{c.type}</td>
-                <td className="num" data-th="live seats">{c.seats}</td>
-                <td data-th="tech lead">{c.lead}</td>
+                <td className="num" data-th="sample slots">{c.seats}</td>
+                <td data-th="sample role">{c.lead}</td>
                 <td className="muted" data-th="stack">{c.focus}</td>
                 <td data-th="status">
                   <span className={"status-pill " + (c.live ? "on" : "off")}>
                     <span className="dot" />
-                    {c.live ? "open" : "soon"}
+                    {c.live ? "demo" : "preview"}
                   </span>
                 </td>
               </tr>
