@@ -87,6 +87,15 @@ export default function PostEditor({ postId, onClose, onSaved }) {
     const words = (v.match(/\S+/g) || []).length;
     set("reading_time", Math.max(1, Math.round(words / 220)));
   }
+
+  const seoChecks = [
+    { label: "Title is 30–65 characters", ok: form.title.trim().length >= 30 && form.title.trim().length <= 65 },
+    { label: "Excerpt is 120–155 characters", ok: form.excerpt.trim().length >= 120 && form.excerpt.trim().length <= 155 },
+    { label: "At least 2 topic tags", ok: tagsInput.split(",").map((tag) => tag.trim()).filter(Boolean).length >= 2 },
+    { label: "Body has useful section headings", ok: /^##\\s+.+/m.test(form.body) },
+    { label: "Body includes internal links", ok: /\\]\\(\\/?blog\\//i.test(form.body) || /\\]\\(https?:\\/\\/(www\\.)?dreamclerk\\.com\\//i.test(form.body) },
+  ];
+  const seoScore = Math.round((seoChecks.filter((check) => check.ok).length / seoChecks.length) * 100);
   function onPublishedChange(v) {
     // Toggling published updates both `published` and `published_at` in form state
     // so the visual state and the persisted state stay in sync.
@@ -189,8 +198,18 @@ export default function PostEditor({ postId, onClose, onSaved }) {
           </label>
           <label className="adm0__label">
             <span className="adm0__label-h">$ tags (comma-separated)</span>
-            <input className="adm0__input" value={tagsInput} onChange={(e) => setTagsInput(e.target.value)} onBlur={onTagsBlur} placeholder="meta, hiring, design" />
+            <input className="adm0__input" value={tagsInput} onChange={(e) => setTagsInput(e.target.value)} onBlur={onTagsBlur} placeholder="career advice, fresher hiring, interview preparation" />
           </label>
+
+          <section className="adm0__label" aria-label="SEO quality checklist">
+            <span className="adm0__label-h">$ SEO readiness · {seoScore}/100</span>
+            <p className="adm0__sub">Editorial guidance only. A strong checklist improves page metadata, but does not guarantee search rankings.</p>
+            <ul className="adm0__seo-checks">
+              {seoChecks.map((check) => (
+                <li key={check.label}>{check.ok ? "✓" : "○"} {check.label}</li>
+              ))}
+            </ul>
+          </section>
           <label className="adm0__label">
             <span className="adm0__label-h">$ author</span>
             <input className="adm0__input" value={form.author_name || ""} onChange={(e) => set("author_name", e.target.value)} placeholder="dreamclerk team" />
