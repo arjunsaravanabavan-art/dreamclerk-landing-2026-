@@ -43,13 +43,13 @@ export const STATIC_ROUTES = {
   "/tracks": {
     path: "/tracks",
     title: "tracks — frontend, backend, ai/ml, data, platform, security",
-    description: "6 tracks. frontend, ai/ml, backend, data, platform / sre, security. each track has an 8-sprint plan, a capstone, and a hiring partner. 1 sprint = 5–8 tickets. ship to production.",
+    description: "6 tracks. frontend, ai/ml, backend, data, platform / sre, security. each track has a structured sprint plan, practical project work, and a capstone. Explore simulated work scenarios and build a portfolio of demonstrable skills.",
     keywords: "engineering tracks, frontend track, backend track, ai ml track, data engineering, platform sre, application security, internship tracks india, dreamclerk tracks",
   },
   "/companies": {
     path: "/companies",
-    title: "companies — 6 simulated employers, real codebases",
-    description: "6 simulated companies. fintech, b2b saas, ai infra, consumer ai, data warehouse, appsec. each has a real bug to ship, a real tech lead, and a real ticket queue. pick one for sprint 1.",
+    title: "companies — simulated teams and project codebases",
+    description: "Explore illustrative company scenarios across fintech, SaaS, AI, data, and security. Each scenario provides a project brief and sample ticket queue for practice.",
     keywords: "simulated companies, internship employers, fintech, b2b saas, ai infra, consumer ai, warehouse observability, appsec, dreamclerk companies",
   },
   "/faq": {
@@ -67,13 +67,13 @@ export const STATIC_ROUTES = {
   "/about": {
     path: "/about",
     title: "about — the team behind dreamclerk",
-    description: "founded in chennai in 2025 by ananya, raghav, and priya. bootstrapped. never charging students what they can't pay. the team page, the advisors, the press, and the funding story.",
+    description: "Learn about DreamClerk, its mission, product, and approach to project-based career practice.",
     keywords: "dreamclerk team, dreamclerk founders, dreamclerk about, chennai startup, indian startup, career simulation founders",
   },
   "/founder": {
     path: "/founder",
     title: "founder — arjun sv, dreamclerk",
-    description: "arjun sv built dreamclerk because he lived the problem first. age 22, chennai, 1-person team. the founder's note on why dreamclerk exists and what it believes.",
+    description: "Read the founder's perspective on DreamClerk's mission, the career-readiness problem, and the product's approach.",
     keywords: "dreamclerk founder, arjun sv, chennai founder, dreamclerk story, why dreamclerk, indie founder india, undergraduate career platform founder",
   },
   "/privacy": {
@@ -97,8 +97,8 @@ export const STATIC_ROUTES = {
 export const BLOG_POSTS_SEO = {
   "/blog/why-we-built-dreamclerk": {
     path: "/blog/why-we-built-dreamclerk",
-    title: "the 90-second internship interview that changed 14% of outcomes",
-    description: "we ran a 90-second phone screen on 1,200 internship applicants. 14% got a callback. here is what we changed, and what we got wrong.",
+    title: "why we built DreamClerk: lessons from internship interviews",
+    description: "A behind-the-scenes look at the problem DreamClerk aims to solve and the product decisions shaping its project-based career practice.",
     keywords: "interview prep, coding interview, 90 second interview, internship callback, dreamclerk founder notes, indian undergraduate hiring",
     published_at: "2026-04-12T09:00:00.000Z",
     updated_at: "2026-05-04T09:00:00.000Z",
@@ -176,7 +176,7 @@ export const BLOG_POSTS_SEO = {
   "/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network": {
     path: "/blog/how-to-get-hired-as-a-fresher-with-no-internship-and-no-network",
     title: "how to get hired as a fresher with no internship and no network — a 6-week playbook",
-    description: "no internship. no github. no alumni network. no tier-1 college. here is the exact 6-week protocol that 187 dreamclerk applicants used to go from 14% interview rate to 31%, with the calendar, the artifact list, and the rejection log included.",
+    description: "A practical guide to preparing for coding interviews without prior internship experience, including a structured practice plan and portfolio artifacts.",
     keywords: "how to get hired as a fresher, fresher with no internship, fresher with no experience, 6 week interview prep, dreamclerk protocol, shipped code fresher",
     published_at: "2026-06-22T09:00:00.000Z",
     updated_at: "2026-06-22T09:00:00.000Z",
@@ -357,7 +357,7 @@ export const BLOG_POSTS_SEO = {
   "/blog/how-to-negotiate-salary-fresher-india-2026": {
     path: "/blog/how-to-negotiate-salary-fresher-india-2026",
     title: "how to negotiate salary as a fresher in india 2026 — the 4-sentence script and the 3 things you should never say",
-    description: "74% of indian freshers accept the first salary offer. the average lift from a 4-sentence counter is +14% on base. here is the script, the data, and the 3 sentences that will end the conversation.",
+    description: "Learn how to evaluate an entry-level salary offer, prepare a respectful negotiation, and compare compensation beyond base pay.",
     keywords: "how to negotiate salary as a fresher in india, fresher salary negotiation, sde-1 salary india, joining bonus negotiation india, fresher counter offer, dreamclerk fresher, GCC salary survey india",
     published_at: "2026-07-08T09:00:00.000Z",
     updated_at: "2026-07-08T09:00:00.000Z",
