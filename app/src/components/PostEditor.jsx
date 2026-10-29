@@ -92,8 +92,8 @@ export default function PostEditor({ postId, onClose, onSaved }) {
     { label: "Title is 30–65 characters", ok: form.title.trim().length >= 30 && form.title.trim().length <= 65 },
     { label: "Excerpt is 120–155 characters", ok: form.excerpt.trim().length >= 120 && form.excerpt.trim().length <= 155 },
     { label: "At least 2 topic tags", ok: tagsInput.split(",").map((tag) => tag.trim()).filter(Boolean).length >= 2 },
-    { label: "Body has useful section headings", ok: /^##\\s+.+/m.test(form.body) },
-    { label: "Body includes internal links", ok: /\\]\\(\\/?blog\\//i.test(form.body) || /\\]\\(https?:\\/\\/(www\\.)?dreamclerk\\.com\\//i.test(form.body) },
+    { label: "Body has useful section headings", ok: /^##\s+.+/m.test(form.body) },
+    { label: "Body includes internal links", ok: /\]\(\/?blog\//i.test(form.body) || /\]\(https?:\/\/(www\.)?dreamclerk\.com\//i.test(form.body) },
   ];
   const seoScore = Math.round((seoChecks.filter((check) => check.ok).length / seoChecks.length) * 100);
   function onPublishedChange(v) {
