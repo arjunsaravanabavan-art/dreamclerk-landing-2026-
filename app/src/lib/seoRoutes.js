@@ -43,7 +43,7 @@ export const STATIC_ROUTES = {
   "/tracks": {
     path: "/tracks",
     title: "tracks — frontend, backend, ai/ml, data, platform, security",
-    description: "6 tracks. frontend, ai/ml, backend, data, platform / sre, security. each track has an 8-sprint plan, a capstone, and a hiring partner. 1 sprint = 5–8 tickets. ship to production.",
+    description: "6 tracks. frontend, ai/ml, backend, data, platform / sre, security. each track has a structured sprint plan, practical project work, and a capstone. Explore simulated work scenarios and build a portfolio of demonstrable skills.",
     keywords: "engineering tracks, frontend track, backend track, ai ml track, data engineering, platform sre, application security, internship tracks india, dreamclerk tracks",
   },
   "/companies": {
@@ -67,7 +67,7 @@ export const STATIC_ROUTES = {
   "/about": {
     path: "/about",
     title: "about — the team behind dreamclerk",
-    description: "founded in chennai in 2025 by ananya, raghav, and priya. bootstrapped. never charging students what they can't pay. the team page, the advisors, the press, and the funding story.",
+    description: "Learn about DreamClerk, its mission, product, and approach to project-based career practice.",
     keywords: "dreamclerk team, dreamclerk founders, dreamclerk about, chennai startup, indian startup, career simulation founders",
   },
   "/founder": {
@@ -97,8 +97,8 @@ export const STATIC_ROUTES = {
 export const BLOG_POSTS_SEO = {
   "/blog/why-we-built-dreamclerk": {
     path: "/blog/why-we-built-dreamclerk",
-    title: "the 90-second internship interview that changed 14% of outcomes",
-    description: "we ran a 90-second phone screen on 1,200 internship applicants. 14% got a callback. here is what we changed, and what we got wrong.",
+    title: "why we built DreamClerk: lessons from internship interviews",
+    description: "A behind-the-scenes look at the problem DreamClerk aims to solve and the product decisions shaping its project-based career practice.",
     keywords: "interview prep, coding interview, 90 second interview, internship callback, dreamclerk founder notes, indian undergraduate hiring",
     published_at: "2026-04-12T09:00:00.000Z",
     updated_at: "2026-05-04T09:00:00.000Z",
