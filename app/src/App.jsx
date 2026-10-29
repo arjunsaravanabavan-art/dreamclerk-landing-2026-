@@ -11,6 +11,7 @@ import Marquee from "./components/Marquee.jsx";
 import Loop from "./components/Loop.jsx";
 import Workspace from "./components/Workspace.jsx";
 import Tracks from "./components/Tracks.jsx";
+import InternshipPromo from "./components/InternshipPromo.jsx";
 import Companies from "./components/Companies.jsx";
 import CertTeaser from "./components/CertTeaser.jsx";
 import Certificate from "./components/Certificate.jsx";
@@ -67,6 +68,7 @@ function LandingPage() {
       <Loop />
       <Workspace />
       <Tracks />
+      <InternshipPromo />
       <Companies />
       <CertTeaser />
       <Certificate />
