@@ -8550,3 +8550,332 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
   .internship-company-card__footer { padding-top: 14px; }
 }
 
+
+/* Interactive company + role explorer — uses the existing paper / ink / orange palette. */
+.companies-section.section {
+  padding-top: clamp(36px, 4.8vw, 68px);
+  padding-bottom: clamp(44px, 5vw, 72px);
+}
+.companies-explorer-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, .92fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(32px, 5.2vw, 76px);
+  margin-bottom: clamp(32px, 4vw, 54px);
+}
+.company-role-explorer {
+  min-width: 0;
+  padding: clamp(16px, 2vw, 24px);
+  border: 1px solid var(--line);
+  background: var(--paper-2);
+  color: var(--ink);
+}
+.company-role-explorer__top,
+.company-role-explorer__roles-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.company-role-explorer__top {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.company-role-explorer__top .cmd {
+  font-size: 10px;
+  letter-spacing: .07em;
+}
+.company-role-explorer__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font: 10px/1.3 var(--mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.company-role-explorer__live .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ok-fill);
+  box-shadow: 0 0 0 3px var(--ok-12);
+}
+.company-role-explorer__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin-top: 14px;
+  padding: 0 12px;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--muted);
+}
+.company-role-explorer__search > span:not(.sr-only) {
+  font-size: 22px;
+  line-height: 1;
+}
+.company-role-explorer__search input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 12px/1.4 var(--display);
+}
+.company-role-explorer__search input::placeholder { color: var(--muted-2); }
+.company-role-explorer__search input:focus-visible { outline: 0; }
+.company-role-explorer__search:focus-within { border-color: var(--ok); }
+.company-role-explorer__search button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 20px;
+}
+.company-role-explorer__filter {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  color: var(--muted);
+  font: 10px/1.3 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.company-role-explorer__filter select {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 12px/1.4 var(--display);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.company-role-explorer__companies {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.company-role-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.company-role-option:hover,
+.company-role-option:focus-visible { border-color: var(--ok); outline: none; }
+.company-role-option.is-active {
+  border-color: var(--ok);
+  background: var(--ok-12);
+}
+.company-role-option__mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font: 700 14px/1 var(--display);
+  text-transform: uppercase;
+}
+.company-role-option.is-active .company-role-option__mark {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+.company-role-option__copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.company-role-option__copy strong {
+  overflow: hidden;
+  font: 700 12px/1.2 var(--display);
+  text-overflow: ellipsis;
+  text-transform: lowercase;
+}
+.company-role-option__copy small {
+  overflow: hidden;
+  color: var(--muted);
+  font: 10px/1.3 var(--display);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.company-role-option__arrow {
+  color: var(--ok);
+  font-size: 14px;
+}
+.company-role-explorer__empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 18px 12px;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+.company-role-explorer__roles {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.company-role-explorer__roles-head {
+  color: var(--ok);
+  font: 10px/1.4 var(--mono);
+  letter-spacing: .1em;
+}
+.company-role-explorer__roles h3 {
+  margin: 9px 0 12px;
+  font: 800 clamp(20px, 2vw, 26px)/1 var(--display);
+  letter-spacing: -.04em;
+  text-transform: lowercase;
+}
+.company-role-explorer__roles h3 span {
+  color: var(--muted);
+  font: 400 12px/1.2 var(--mono);
+  letter-spacing: 0;
+}
+.company-role-explorer__role-list {
+  display: grid;
+  gap: 6px;
+}
+.company-role-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 38px;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  font: 12px/1.3 var(--display);
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.company-role-chip > span:last-child { color: var(--ok); }
+.company-role-chip:hover,
+.company-role-chip:focus-visible { border-color: var(--ok); outline: none; }
+.company-role-chip.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+.company-role-chip.is-active > span:last-child { color: var(--ok-on-dark); }
+.company-role-explorer__selected {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+  color: var(--muted);
+  font: 10px/1.4 var(--mono);
+}
+.company-role-explorer__selected-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ok-fill);
+}
+.company-role-explorer__selected strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.company-role-explorer__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 14px;
+  gap: 12px;
+}
+.company-role-explorer__note {
+  margin: 10px 0 0;
+  color: var(--muted-2);
+  font-size: 10px;
+  line-height: 1.45;
+}
+.companies-explorer-copy {
+  min-width: 0;
+  padding-top: clamp(10px, 3vw, 36px);
+}
+.companies-explorer-copy .section-head__label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: var(--ok);
+  font: 11px/1.5 var(--mono);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.companies-explorer-copy .section-head__title {
+  max-width: 11ch;
+  margin: 0 0 18px;
+  font-size: clamp(42px, 5vw, 72px);
+  line-height: .96;
+}
+.companies-explorer-copy .section-head__lede {
+  max-width: 52ch;
+  margin: 0;
+}
+.companies-explorer-copy__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 24px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font: 11px/1.5 var(--mono);
+}
+.companies-explorer-copy__stats span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.companies-explorer-copy__stats strong {
+  color: var(--ok);
+  font-size: 18px;
+}
+@media (max-width: 900px) {
+  .companies-explorer-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+  .companies-explorer-copy { padding-top: 0; }
+  .companies-explorer-copy .section-head__title { max-width: 15ch; }
+}
+@media (max-width: 520px) {
+  .companies-section.section {
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+  .company-role-explorer { padding: 14px; }
+  .company-role-explorer__top { align-items: flex-start; flex-direction: column; }
+  .company-role-explorer__companies { grid-template-columns: minmax(0, 1fr); }
+  .company-role-option { padding: 11px; }
+  .companies-explorer-copy .section-head__title { font-size: clamp(36px, 10vw, 48px); }
+  .companies-explorer-copy__stats { gap: 12px 18px; }
+}
+
