@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { RouterLink } from "../lib/router.jsx";
 
 const data = [
@@ -16,18 +16,13 @@ export default function Companies() {
   const [selectedRole, setSelectedRole] = useState(data[0].roles[0]);
   const [industry, setIndustry] = useState("all");
 
-  useEffect(() => {
-    const t = setInterval(() => setActive((i) => (i + 1) % data.length), 4200);
-    return () => clearInterval(t);
-  }, []);
-
   const industries = useMemo(() => ["all", ...new Set(data.map((c) => c.industry))], []);
   const filtered = data.filter((company) => {
     const matchesIndustry = industry === "all" || company.industry === industry;
     const haystack = [company.name, company.industry, company.type, company.focus, ...company.roles].join(" ").toLowerCase();
     return matchesIndustry && haystack.includes(query.trim().toLowerCase());
   });
-  const current = data[active];
+  const current = filtered.find((company) => company.code === data[active].code) || filtered[0] || data[active];
 
   function chooseCompany(company) {
     const index = data.findIndex((item) => item.code === company.code);
