@@ -157,12 +157,8 @@ export default function App() {
   useEffect(() => {
     if (path === "/admin" || path.startsWith("/admin/")) return;
     const timer = window.setTimeout(() => {
-      let submitted = false;
-      try { submitted = window.localStorage.getItem("dc-notify-submitted") === "1"; } catch {}
-      if (!submitted) {
-        setModalSource(path.startsWith("/blog/") ? "blog-post-page-entry" : "global-page-entry");
-        setModalOpen(true);
-      }
+      setModalSource(path.startsWith("/blog/") ? "blog-post-page-entry" : "global-page-entry");
+      setModalOpen(true);
     }, 900);
     return () => window.clearTimeout(timer);
   }, [path]);
