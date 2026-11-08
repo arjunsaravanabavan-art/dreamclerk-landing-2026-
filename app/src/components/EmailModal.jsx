@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { subscribeNotify, getSubscriberCount, bumpSubscriberCount } from "../lib/supabase";
 
-export default function EmailModal({ open, onClose, source = "modal" }) {
+export default function EmailModal({ open, onClose, onSubmitted, source = "modal" }) {
   // Source-aware copy. Blog-post signups should say "we'll ping you when
   // a new post goes live", landing signups say "when a new cohort opens".
   // Computed once per render — source is stable while the modal is open.
@@ -103,6 +103,7 @@ export default function EmailModal({ open, onClose, source = "modal" }) {
     const result = await subscribeNotify({ name: cleanName, email: cleanEmail, source });
     if (result.ok) {
       setStatus("success");
+      onSubmitted?.();
       setSavedToSupabase(!result.mock);
       // Bump the live counter for the next visitor — only if we actually
       // hit Supabase (mock-mode would double-count locally).
