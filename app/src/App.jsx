@@ -84,20 +84,6 @@ export default function App() {
   const { path, navigate } = usePathRoute();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState("modal");
-  const [notifySubmitted, setNotifySubmitted] = useState(() => {
-    try { return window.localStorage.getItem("dc-notify-submitted") === "1"; }
-    catch { return false; }
-  });
-
-  useEffect(() => {
-    const sync = () => setNotifySubmitted(() => {
-      try { return window.localStorage.getItem("dc-notify-submitted") === "1"; }
-      catch { return false; }
-    });
-    window.addEventListener("storage", sync);
-    return () => window.removeEventListener("storage", sync);
-  }, []);
-
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
 
@@ -169,7 +155,7 @@ export default function App() {
   // Show the waitlist prompt shortly after every public page entry. Do not
   // auto-dismiss it: visitors must be able to read and complete the form.
   useEffect(() => {
-    if (notifySubmitted || path === "/admin" || path.startsWith("/admin/")) return;
+    if (path === "/admin" || path.startsWith("/admin/")) return;
     const timer = window.setTimeout(() => {
       let submitted = false;
       try { submitted = window.localStorage.getItem("dc-notify-submitted") === "1"; } catch {}
@@ -179,7 +165,7 @@ export default function App() {
       }
     }, 900);
     return () => window.clearTimeout(timer);
-  }, [path, notifySubmitted]);
+  }, [path]);
 
   // Custom-event listener — components that fire `open-modal` from their
   // own JS (the blog-post NotifyCTA, the Final band) get to attach a
@@ -277,8 +263,8 @@ export default function App() {
           onClose={() => setModalOpen(false)}
           onSubmitted={() => {
             try { window.localStorage.setItem("dc-notify-submitted", "1"); } catch {}
-            setNotifySubmitted(true);
-            setModalOpen(false);
+            // Keep the confirmation visible; a successful waitlist signup
+            // must not unmount the modal before the visitor sees it.
           }}
         />
       )}
