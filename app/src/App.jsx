@@ -135,7 +135,7 @@ export default function App() {
       if (!target) return;
       const control = target.closest("a, button, [role='button'], [data-open-modal]");
       if (control && !control.closest(".modal-back")) {
-        const isNotify = /notify\\s*me/i.test(control.textContent || "");
+        const isNotify = /notify\s*me/i.test(control.textContent || "");
         if (isNotify || control.hasAttribute("data-open-modal")) {
           e.preventDefault();
           setModalSource(control.getAttribute("data-open-source") || "notify-cta");
