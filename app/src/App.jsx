@@ -84,6 +84,19 @@ export default function App() {
   const { path, navigate } = usePathRoute();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState("modal");
+  const [notifySubmitted, setNotifySubmitted] = useState(() => {
+    try { return window.localStorage.getItem("dc-notify-submitted") === "1"; }
+    catch { return false; }
+  });
+
+  useEffect(() => {
+    const sync = () => setNotifySubmitted(() => {
+      try { return window.localStorage.getItem("dc-notify-submitted") === "1"; }
+      catch { return false; }
+    });
+    window.addEventListener("storage", sync);
+    return () => window.removeEventListener("storage", sync);
+  }, []);
 
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
@@ -129,25 +142,44 @@ export default function App() {
   // so the legal pages (which also use .reveal) animate on entry.
   useReveal(path);
 
-  // Modal open/close wiring: any element with [data-open-modal] opens it.
+  // One Notify Me controller for every public route and every CTA.
   useEffect(() => {
     const onClick = (e) => {
-      const t = e.target.closest("[data-open-modal]");
-      if (t) {
-        e.preventDefault();
-        const src = t.getAttribute("data-open-source") || "modal";
-        setModalSource(src);
-        setModalOpen(true);
+      const target = e.target instanceof Element ? e.target : null;
+      if (!target) return;
+      const control = target.closest("a, button, [role='button'], [data-open-modal]");
+      if (control && !control.closest(".modal-back")) {
+        const isNotify = /notify\\s*me/i.test(control.textContent || "");
+        if (isNotify || control.hasAttribute("data-open-modal")) {
+          e.preventDefault();
+          setModalSource(control.getAttribute("data-open-source") || "notify-cta");
+          setModalOpen(true);
+        }
       }
-      const c = e.target.closest("[data-close-modal]");
+      const c = target.closest("[data-close-modal]");
       if (c) {
         e.preventDefault();
         setModalOpen(false);
       }
     };
-    document.addEventListener("click", onClick);
-    return () => document.removeEventListener("click", onClick);
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
   }, []);
+
+  // Show the waitlist prompt shortly after every public page entry. Do not
+  // auto-dismiss it: visitors must be able to read and complete the form.
+  useEffect(() => {
+    if (notifySubmitted || path === "/admin" || path.startsWith("/admin/")) return;
+    const timer = window.setTimeout(() => {
+      let submitted = false;
+      try { submitted = window.localStorage.getItem("dc-notify-submitted") === "1"; } catch {}
+      if (!submitted) {
+        setModalSource(path.startsWith("/blog/") ? "blog-post-page-entry" : "global-page-entry");
+        setModalOpen(true);
+      }
+    }, 900);
+    return () => window.clearTimeout(timer);
+  }, [path, notifySubmitted]);
 
   // Custom-event listener — components that fire `open-modal` from their
   // own JS (the blog-post NotifyCTA, the Final band) get to attach a
@@ -161,69 +193,6 @@ export default function App() {
     document.addEventListener("open-modal", onOpen);
     return () => document.removeEventListener("open-modal", onOpen);
   }, []);
-
-  // Auto-open the waitlist modal on every landing visit.
-  //
-  // Triggers, first one wins:
-  //   1. 2-second timer (reduced to 2s per hardening)
-  //   2. 35% scroll-depth (lowered from 50%)
-  //   3. Hero CTA "get notified" button click (open-modal)
-  //
-  // Safety: 8-second auto-close if user hasn't engaged (clicked / typed).
-  // No localStorage lock — shows every visit. Gated to "/" only.
-  useEffect(() => {
-    if (path !== "/") return;
-    if (typeof window === "undefined") return;
-
-    let opened = false;
-    let engaged = false;
-    let closeSafety = null;
-
-    const openOnce = (why) => {
-      if (opened) return;
-      opened = true;
-      setModalOpen(true);
-      setModalSource(why === "scroll" ? "modal-scroll" : why === "hero" ? "modal-hero" : "modal-timer");
-
-      // 8-second safety: close modal if no user interaction yet
-      closeSafety = setTimeout(() => {
-        if (!engaged) {
-          setModalOpen(false);
-        }
-      }, 8000);
-    };
-
-    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const timerDelay = reducedMotion ? 200 : 2000;
-
-    // Trigger 1: timer
-    const t = setTimeout(() => openOnce("timer"), timerDelay);
-
-    // Trigger 2: 35% scroll depth
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const scrolled = window.scrollY + window.innerHeight;
-      const total = doc.scrollHeight;
-      if (total > 0 && scrolled / total >= 0.35) {
-        openOnce("scroll");
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    // Mark engagement on any keydown or click
-    const onEngage = () => { engaged = true; };
-    window.addEventListener("keydown", onEngage, { passive: true });
-    window.addEventListener("click", onEngage, { passive: true });
-
-    const cleanup = () => {
-      clearTimeout(t);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("keydown", onEngage);
-      window.removeEventListener("click", onEngage);
-      if (closeSafety) clearTimeout(closeSafety);
-    };
-    return cleanup;
-  }, [path]);
 
   // Scroll to top on every real route change.
   // Instant scroll keeps the page-enter animation clean — smooth scroll at
@@ -305,11 +274,11 @@ export default function App() {
         <EmailModal
           open={modalOpen}
           source={modalSource}
-          onClose={() => {
+          onClose={() => setModalOpen(false)}
+          onSubmitted={() => {
+            try { window.localStorage.setItem("dc-notify-submitted", "1"); } catch {}
+            setNotifySubmitted(true);
             setModalOpen(false);
-            // No localStorage lock here — the dual timer/scroll triggers
-            // re-fire on every visit to "/", so a user who dismisses now
-            // will see the pop-up again next time they land.
           }}
         />
       )}
