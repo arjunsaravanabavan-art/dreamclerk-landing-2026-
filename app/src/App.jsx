@@ -51,7 +51,7 @@ import { useSEO, SEO } from "./lib/seo.js";
  *  /blog/:slug        → Blog post
  *  /about             → About page
  *  /privacy           → Privacy policy
- *  /terms             → Terms of service
+ *  /terms             → Terms & Conditions
  *  /admin             → Admin dashboard (blocked in robots.txt)
  *  /beta              → Beta landing (intro)
  *  /beta/:token       → Beta flow (invite gate, onboarding, dashboard, wrap-up)

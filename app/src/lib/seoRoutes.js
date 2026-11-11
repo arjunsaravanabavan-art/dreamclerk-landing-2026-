@@ -84,9 +84,9 @@ export const STATIC_ROUTES = {
   },
   "/terms": {
     path: "/terms",
-    title: "terms — what you agree to when you sign up",
-    description: "the terms of use for dreamclerk. written in plain english, governed by the laws of india, reviewed every quarter. if we change them, we email you.",
-    keywords: "dreamclerk terms, terms of service, indian contract law, dpdpa",
+    title: "terms & conditions — dreamclerk",
+    description: "Read DreamClerk’s Terms & Conditions for accounts, simulated career-practice experiences, user work, pricing, privacy, and service availability.",
+    keywords: "dreamclerk terms and conditions, terms of use, career practice platform terms",
   },
 };
 

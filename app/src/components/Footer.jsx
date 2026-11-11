@@ -193,7 +193,7 @@ export default function Footer() {
             <h5>legal</h5>
             <ul>
               <li><RouterLink to="/privacy">privacy</RouterLink></li>
-              <li><RouterLink to="/terms">terms</RouterLink></li>
+              <li><RouterLink to="/terms">terms &amp; conditions</RouterLink></li>
               <li><a href="mailto:dpo@dreamclerk.com">dpo</a></li>
               <li><a href="mailto:security@dreamclerk.com">security</a></li>
             </ul>
