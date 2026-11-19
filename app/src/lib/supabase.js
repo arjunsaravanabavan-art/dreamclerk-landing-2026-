@@ -158,14 +158,23 @@ export async function subscribeNotify({ email, name, source = "modal" }) {
     return { ok: true, mock: true };
   }
   try {
-    const { error } = await supabase
-      .from("notify_signups")
-      .insert({ email: cleanEmail, name: cleanName || null, source });
-    if (!error) return { ok: true };
-    if (error.code === "23505") {
-      return { ok: false, error: "You're already on the list." };
-    }
-    return { ok: false, error: error.message };
+    // All public Notify Me submissions go through the server-side endpoint.
+    // The Edge Function enforces IP rate limits before inserting with its
+    // server-only key; the browser never writes directly to notify_signups.
+    const response = await fetch(`${URL}/functions/v1/notify-submit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: KEY,
+        Authorization: `Bearer ${KEY}`,
+      },
+      body: JSON.stringify({ email: cleanEmail, name: cleanName || null, source }),
+    });
+    const result = await response.json().catch(() => ({}));
+    if (response.ok && result.ok) return { ok: true };
+    if (response.status === 409) return { ok: false, error: "You're already on the list." };
+    if (response.status === 429) return { ok: false, error: result.error || "Too many attempts. Please wait before trying again." };
+    return { ok: false, error: result.error || "We couldn't submit your details. Please try again." };
   } catch (err) {
     return { ok: false, error: err?.message || "Network error." };
   }
