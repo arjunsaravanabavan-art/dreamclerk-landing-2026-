@@ -20,7 +20,7 @@ import Testimonials from "./components/Testimonials.jsx";
 import FAQ from "./components/FAQ.jsx";
 import Final from "./components/Final.jsx";
 import Footer from "./components/Footer.jsx";
-import EmailModal from "./components/EmailModal.jsx";
+import EmailModal, { InvestorEnquiryModal } from "./components/EmailModal.jsx";
 import About from "./components/About.jsx";
 import Privacy from "./components/Privacy.jsx";
 import Terms from "./components/Terms.jsx";
@@ -90,7 +90,7 @@ function LandingPage() {
 
 export default function App() {
   const { path, navigate } = usePathRoute();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);\n  const [investorOpen, setInvestorOpen] = useState(false);
   const [modalSource, setModalSource] = useState("modal");
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
