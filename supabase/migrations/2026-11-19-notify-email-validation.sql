@@ -10,4 +10,4 @@ alter table public.notify_signups
     length(email) <= 254
     and email ~* '^[A-Z0-9.!#$%&''*+/=?^_`{|}~-]+@[A-Z0-9]([A-Z0-9-]{0,61}[A-Z0-9])?(\\.[A-Z0-9]([A-Z0-9-]{0,61}[A-Z0-9])?)+$'
     and split_part(email, '@', 1) !~* '(asshole|arsehole|bastard|bitch|bullshit|dick|fuck|motherfucker|nigger|piss|shit|slut|whore)'
-  );
+  ) not valid;
