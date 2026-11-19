@@ -136,12 +136,12 @@ const BLOCKED_NOTIFY_TERMS = [
 
 export function isValidNotifyEmail(value) {
   const email = String(value || "").trim();
-  if (email.length > 254 || !/^[A-Z0-9.!#$%&'*+/=?^`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)+$/i.test(email)) return false;
+  if (email.length > 254 || !/^[A-Z0-9.!#$%&'*+/=?^`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)+$/i.test(email)) return false;
   const local = email.split("@")[0].toLowerCase();
   const normalized = local.replace(/[^a-z0-9]+/g, " ");
   return !BLOCKED_NOTIFY_TERMS.some((term) => {
     const clean = term.trim();
-    return clean && (normalized.split(/\\s+/).includes(clean) || local.includes(clean));
+    return clean && (normalized.split(/\s+/).includes(clean) || local.includes(clean));
   });
 }
 
