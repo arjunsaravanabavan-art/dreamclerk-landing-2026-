@@ -38,6 +38,7 @@ import BetaPage from "./components/BetaPage.jsx";
 import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
 import HowBetaPage from "./components/HowBetaPage.jsx";
 import { useSEO, SEO } from "./lib/seo.js";
+import LandingAnnouncement from "./components/LandingAnnouncement.jsx";
 
 const NOTIFY_SUBMITTED_KEY = "dc-notify-submitted-session";
 function hasCompletedNotifySignup() {
@@ -265,6 +266,7 @@ export default function App() {
   return (
     <div className="app">
       {cursorActive && <Cursor />}
+      <LandingAnnouncement />
       <Nav activePath={path} />
       <div key={routeKey} className="page page-enter">
         {routeNode}
