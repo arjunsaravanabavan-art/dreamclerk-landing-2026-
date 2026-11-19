@@ -127,6 +127,24 @@ export async function bumpSubscriberCount() {
 // the user came in from. Lets us know whether the cv-90s form, the hero
 // cta, the closing-terminal, or the press-mention band converted best.
 
+// Shared Notify Me validation. Keep this aligned with the database constraint
+// in supabase/migrations/2026-11-19-notify-email-validation.sql.
+const BLOCKED_NOTIFY_TERMS = [
+  "asshole", "arsehole", "bastard", "bitch", "bullshit", " cunt ",
+  "dick", "fuck", "motherfucker", "nigger", "piss", "shit", "slut", "whore",
+];
+
+export function isValidNotifyEmail(value) {
+  const email = String(value || "").trim();
+  if (email.length > 254 || !/^[A-Z0-9.!#$%&'*+/=?^`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)+$/i.test(email)) return false;
+  const local = email.split("@")[0].toLowerCase();
+  const normalized = local.replace(/[^a-z0-9]+/g, " ");
+  return !BLOCKED_NOTIFY_TERMS.some((term) => {
+    const clean = term.trim();
+    return clean && (normalized.split(/\\s+/).includes(clean) || local.includes(clean));
+  });
+}
+
 export async function subscribeNotify({ email, name, source = "modal" }) {
   const cleanEmail = (email || "").trim();
   const cleanName = (name || "").trim();
