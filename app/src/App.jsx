@@ -39,6 +39,12 @@ import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
 import HowBetaPage from "./components/HowBetaPage.jsx";
 import { useSEO, SEO } from "./lib/seo.js";
 
+const NOTIFY_SUBMITTED_KEY = "dc-notify-submitted";
+function hasCompletedNotifySignup() {
+  try { return window.localStorage.getItem(NOTIFY_SUBMITTED_KEY) === "1"; }
+  catch { return false; }
+}
+
 /**
  * Path router (no react-router). 15 routes:
  *  /                  → landing (the full 13 sections)
@@ -138,6 +144,10 @@ export default function App() {
         const isNotify = /notify\s*me/i.test(control.textContent || "");
         if (isNotify || control.hasAttribute("data-open-modal")) {
           e.preventDefault();
+          if (hasCompletedNotifySignup()) {
+            setModalOpen(false);
+            return;
+          }
           setModalSource(control.getAttribute("data-open-source") || "notify-cta");
           setModalOpen(true);
         }
@@ -156,7 +166,12 @@ export default function App() {
   // auto-dismiss it: visitors must be able to read and complete the form.
   useEffect(() => {
     if (path === "/admin" || path.startsWith("/admin/")) return;
+    if (hasCompletedNotifySignup()) {
+      setModalOpen(false);
+      return;
+    }
     const timer = window.setTimeout(() => {
+      if (hasCompletedNotifySignup()) return;
       setModalSource(path.startsWith("/blog/") ? "blog-post-page-entry" : "global-page-entry");
       setModalOpen(true);
     }, 900);
@@ -168,6 +183,7 @@ export default function App() {
   // source so the EmailModal knows where the signup came from.
   useEffect(() => {
     const onOpen = (e) => {
+      if (hasCompletedNotifySignup()) return;
       const source = e?.detail?.source || "modal";
       setModalSource(source);
       setModalOpen(true);
@@ -258,7 +274,10 @@ export default function App() {
           source={modalSource}
           onClose={() => setModalOpen(false)}
           onSubmitted={() => {
-            try { window.localStorage.setItem("dc-notify-submitted", "1"); } catch {}
+            try {
+              window.localStorage.setItem(NOTIFY_SUBMITTED_KEY, "1");
+              window.localStorage.setItem("dreamclerk_popup_submission_completed_v1", "1");
+            } catch {}
             // Keep the confirmation visible; a successful waitlist signup
             // must not unmount the modal before the visitor sees it.
           }}
