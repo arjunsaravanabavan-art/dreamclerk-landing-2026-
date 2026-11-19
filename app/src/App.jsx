@@ -39,9 +39,11 @@ import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
 import HowBetaPage from "./components/HowBetaPage.jsx";
 import { useSEO, SEO } from "./lib/seo.js";
 
-const NOTIFY_SUBMITTED_KEY = "dc-notify-submitted";
+const NOTIFY_SUBMITTED_KEY = "dc-notify-submitted-session";
 function hasCompletedNotifySignup() {
-  try { return window.localStorage.getItem(NOTIFY_SUBMITTED_KEY) === "1"; }
+  // Suppress repeat prompts only for the current tab session. Older builds
+  // wrote a permanent localStorage flag that could hide Notify Me forever.
+  try { return window.sessionStorage.getItem(NOTIFY_SUBMITTED_KEY) === "1"; }
   catch { return false; }
 }
 
@@ -275,8 +277,7 @@ export default function App() {
           onClose={() => setModalOpen(false)}
           onSubmitted={() => {
             try {
-              window.localStorage.setItem(NOTIFY_SUBMITTED_KEY, "1");
-              window.localStorage.setItem("dreamclerk_popup_submission_completed_v1", "1");
+              window.sessionStorage.setItem(NOTIFY_SUBMITTED_KEY, "1");
             } catch {}
             // Keep the confirmation visible; a successful waitlist signup
             // must not unmount the modal before the visitor sees it.
