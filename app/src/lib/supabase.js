@@ -139,6 +139,8 @@ export function isValidNotifyEmail(value) {
   if (email.length > 254 || !/^[A-Z0-9.!#$%&'*+/=?^`{|}~-]+@[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?(?:\.[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?)+$/i.test(email)) return false;
   const local = email.split("@")[0].toLowerCase();
   const normalized = local.replace(/[^a-z0-9]+/g, " ");
+  // Block disposable-looking plus aliases that append a 10+ digit timestamp/ID.
+  if (/\+[0-9]{10,}$/.test(local)) return false;
   return !BLOCKED_NOTIFY_TERMS.some((term) => {
     const clean = term.trim();
     return clean && (normalized.split(/\s+/).includes(clean) || local.includes(clean));
