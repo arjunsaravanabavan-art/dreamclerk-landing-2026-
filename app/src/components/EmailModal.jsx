@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { subscribeNotify, getSubscriberCount, bumpSubscriberCount } from "../lib/supabase";
+import { subscribeNotify, getSubscriberCount, bumpSubscriberCount, isValidNotifyEmail } from "../lib/supabase";
 
 export default function EmailModal({ open, onClose, onSubmitted, source = "modal" }) {
   // Source-aware copy. Blog-post signups should say "we'll ping you when
@@ -95,7 +95,7 @@ export default function EmailModal({ open, onClose, onSubmitted, source = "modal
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cleanEmail)) {
       setStatus("error");
-      setError("That email looks off — please double-check it.");
+      setError("Please enter a valid email address. This address cannot be used.");
       return;
     }
     setStatus("loading");
