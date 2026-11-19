@@ -8879,3 +8879,44 @@ details[open] .ws__entry-sample-toggle::before { content: '▾ '; }
   .companies-explorer-copy__stats { gap: 12px 18px; }
 }
 
+
+
+/* Investor enquiry: opaque, high-contrast backdrop above every page layer. */
+.modal__investor-link {
+  display:flex; align-items:center; gap:12px; width:100%; margin:0 0 14px;
+  padding:12px 14px; border:1px solid rgba(252,93,21,.55); border-left:3px solid #fc5d15;
+  border-radius:10px; background:#fff7f1; color:#0a0a0a; text-align:left; cursor:pointer;
+}
+.modal__investor-link > span:first-child { display:grid; place-items:center; width:30px; height:30px; border-radius:8px; background:#fc5d15; color:white; }
+.modal__investor-link > span:nth-child(2) { display:flex; flex:1; flex-direction:column; gap:3px; }
+.modal__investor-link strong { font:700 12px var(--mono); }
+.modal__investor-link small { color:rgba(10,10,10,.66); font:10px/1.4 var(--mono); }
+.modal__investor-link > span:last-child { font-size:18px; color:#b8430d; }
+.investor-modal-back {
+  position:fixed; inset:0; z-index:10020; display:grid; place-items:center;
+  padding:20px; overflow-y:auto; background:rgba(0,0,0,.78);
+  -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+  animation:investor-backdrop-in 180ms ease-out both;
+}
+.investor-modal { width:min(100%,520px); max-height:calc(100dvh - 40px); overflow:auto;
+  border:1px solid #171717; border-radius:16px; background:#f4f1ea; color:#0a0a0a;
+  box-shadow:0 28px 100px rgba(0,0,0,.55); }
+.investor-modal__head { display:flex; justify-content:space-between; align-items:center; padding:14px 20px;
+  border-bottom:1px solid rgba(10,10,10,.14); color:rgba(10,10,10,.62); font:10px var(--mono);
+  letter-spacing:.09em; text-transform:uppercase; }
+.investor-modal__head button { border:0; background:transparent; color:#0a0a0a; font-size:24px; cursor:pointer; }
+.investor-modal__body { padding:24px; }
+.investor-modal__eyebrow { color:#b8430d; font:10px var(--mono); letter-spacing:.1em; text-transform:uppercase; }
+.investor-modal__body h3 { margin:9px 0 8px; font-size:clamp(23px,5vw,30px); line-height:1.15; }
+.investor-modal__body p { margin:0 0 18px; color:rgba(10,10,10,.65); font-size:13px; line-height:1.55; }
+.investor-modal__form { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.investor-modal__form input,.investor-modal__form textarea { min-width:0; width:100%; padding:12px;
+  border:1px solid rgba(10,10,10,.18); border-radius:9px; background:#ece8de; color:#0a0a0a; font:12px var(--mono); }
+.investor-modal__form textarea,.investor-modal__form button { grid-column:1/-1; }
+.investor-modal__form button { min-height:46px; border:1px solid #0a0a0a; border-radius:8px;
+  background:#0a0a0a; color:#f4f1ea; font:600 12px var(--mono); cursor:pointer; }
+.investor-modal__contact { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; margin-top:18px; padding-top:14px; border-top:1px solid rgba(10,10,10,.14); }
+.investor-modal__contact a { color:#9d3d0c; font:600 11px var(--mono); text-decoration:underline; text-underline-offset:3px; }
+@keyframes investor-backdrop-in { from { opacity:0; } to { opacity:1; } }
+@media(max-width:520px) { .investor-modal-back { padding:12px; } .investor-modal__form { grid-template-columns:1fr; } .investor-modal__form textarea,.investor-modal__form button { grid-column:1; } }
+@media(prefers-reduced-motion:reduce) { .investor-modal-back { animation:none; } }
