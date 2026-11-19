@@ -35,9 +35,9 @@ export default function EmailModal({ open, onClose, onSubmitted, source = "modal
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
-    getSubscriberCount().then((n) => {
-      if (!cancelled) setCount(n);
-    });
+    getSubscriberCount()
+      .then((n) => { if (!cancelled) setCount(n); })
+      .catch(() => { if (!cancelled) setCount(null); });
     return () => { cancelled = true; };
   }, [open]);
 
@@ -100,20 +100,24 @@ export default function EmailModal({ open, onClose, onSubmitted, source = "modal
     }
     setStatus("loading");
     setError("");
-    const result = await subscribeNotify({ name: cleanName, email: cleanEmail, source });
-    if (result.ok) {
-      setStatus("success");
-      onSubmitted?.();
-      setSavedToSupabase(!result.mock);
-      // Bump the live counter for the next visitor — only if we actually
-      // hit Supabase (mock-mode would double-count locally).
-      if (!result.mock) {
-        try { await bumpSubscriberCount(); } catch {}
+    try {
+      const result = await subscribeNotify({ name: cleanName, email: cleanEmail, source });
+      if (result.ok) {
+        setStatus("success");
+        setSavedToSupabase(!result.mock);
+        onSubmitted?.();
+        // Refresh the count without allowing a count failure to undo signup.
+        if (!result.mock) {
+          try { await bumpSubscriberCount(); } catch {}
+        }
+        // Keep confirmation visible until the visitor closes the modal.
+      } else {
+        setStatus("error");
+        setError(result.error || "Something went wrong. Please try again.");
       }
-      // DO NOT auto-close — user must manually click the close button
-    } else {
+    } catch (err) {
       setStatus("error");
-      setError(result.error || "Something went wrong.");
+      setError(err?.message || "We couldn't submit your details. Please try again.");
     }
   }
 
