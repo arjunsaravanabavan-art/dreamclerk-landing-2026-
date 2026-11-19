@@ -1,7 +1,68 @@
 import { useEffect, useRef, useState } from "react";
 import { subscribeNotify, getSubscriberCount, bumpSubscriberCount, isValidNotifyEmail } from "../lib/supabase";
 
-export default function EmailModal({ open, onClose, onSubmitted, source = "modal" }) {
+function InvestorLink({ onClick }) {
+  return (
+    <button type="button" className="modal__investor-link" onClick={onClick}>
+      <span aria-hidden="true">↗</span>
+      <span><strong>are you an investor?</strong><small>share your details and connect with our founder</small></span>
+      <span aria-hidden="true">→</span>
+    </button>
+  );
+}
+
+export function InvestorEnquiryModal({ open, onClose }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [organisation, setOrganisation] = useState("");
+  const [message, setMessage] = useState("");
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event) => { if (event.key === "Escape") onClose?.(); };
+    document.addEventListener("keydown", onKey);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
+  }, [open, onClose]);
+  if (!open) return null;
+  const sendEnquiry = (event) => {
+    event.preventDefault();
+    const subject = encodeURIComponent("DreamClerk investor enquiry");
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganisation: ${organisation}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:arjun@dreamclerk.com?subject=${subject}&body=${body}`;
+  };
+  return (
+    <div className="investor-modal-back" role="dialog" aria-modal="true" aria-labelledby="investor-title" onClick={(event) => { if (event.target === event.currentTarget) onClose?.(); }}>
+      <section className="investor-modal">
+        <header className="investor-modal__head">
+          <span>dreamclerk · investor relations</span>
+          <button type="button" onClick={onClose} aria-label="Close investor enquiry">×</button>
+        </header>
+        <div className="investor-modal__body">
+          <span className="investor-modal__eyebrow">pre-seed · investor enquiry</span>
+          <h3 id="investor-title">let's talk about dreamclerk.</h3>
+          <p>Tell us a little about yourself. Your enquiry will open as an email addressed to our founder.</p>
+          <form onSubmit={sendEnquiry} className="investor-modal__form">
+            <input value={name} onChange={(event) => setName(event.target.value)} placeholder="your name *" required />
+            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="work email *" required />
+            <input value={organisation} onChange={(event) => setOrganisation(event.target.value)} placeholder="organisation / fund" />
+            <textarea value={message} onChange={(event) => setMessage(event.target.value)} placeholder="your message (optional)" rows={3} />
+            <button type="submit">continue via email ↗</button>
+          </form>
+          <div className="investor-modal__contact">
+            <a href="mailto:arjun@dreamclerk.com?subject=DreamClerk%20Investor%20Enquiry">arjun@dreamclerk.com ↗</a>
+            <a href="https://www.linkedin.com/in/arjun-sv-6bbb8a316/" target="_blank" rel="noreferrer noopener">connect on linkedin ↗</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default function EmailModal({ open, onClose, onSubmitted, onInvestorClick, source = "modal" }) {
   // Source-aware copy. Blog-post signups should say "we'll ping you when
   // a new post goes live", landing signups say "when a new cohort opens".
   // Computed once per render — source is stable while the modal is open.
