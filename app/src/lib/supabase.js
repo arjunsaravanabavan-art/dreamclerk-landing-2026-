@@ -148,8 +148,8 @@ export function isValidNotifyEmail(value) {
 export async function subscribeNotify({ email, name, source = "modal" }) {
   const cleanEmail = (email || "").trim();
   const cleanName = (name || "").trim();
-  if (!cleanEmail || !cleanEmail.includes("@")) {
-    return { ok: false, error: "Please enter a valid email." };
+  if (!isValidNotifyEmail(cleanEmail)) {
+    return { ok: false, error: "Please enter a valid email address." };
   }
   if (!isConfigured || !supabase) {
     console.warn("[dreamclerk] supabase not configured — notify signup dropped locally");
