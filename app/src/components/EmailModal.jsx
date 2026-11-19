@@ -93,9 +93,9 @@ export default function EmailModal({ open, onClose, onSubmitted, source = "modal
       setError("Please enter your name and email.");
       return;
     }
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(cleanEmail)) {
+    if (!isValidNotifyEmail(cleanEmail)) {
       setStatus("error");
-      setError("Please enter a valid email address. This address cannot be used.");
+      setError("Please enter a valid email address.");
       return;
     }
     setStatus("loading");
