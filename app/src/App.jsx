@@ -91,7 +91,8 @@ function LandingPage() {
 
 export default function App() {
   const { path, navigate } = usePathRoute();
-  const [modalOpen, setModalOpen] = useState(false);\n  const [investorOpen, setInvestorOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [investorOpen, setInvestorOpen] = useState(false);
   const [modalSource, setModalSource] = useState("modal");
   // Migrate /#/foo → /foo for visitors landing on legacy hash URLs.
   useEffect(() => { redirectLegacyHashes(); }, []);
@@ -277,6 +278,7 @@ export default function App() {
           open={modalOpen}
           source={modalSource}
           onClose={() => setModalOpen(false)}
+          onInvestorClick={() => { setModalOpen(false); setInvestorOpen(true); }}
           onSubmitted={() => {
             try {
               window.sessionStorage.setItem(NOTIFY_SUBMITTED_KEY, "1");
@@ -286,6 +288,7 @@ export default function App() {
           }}
         />
       )}
+      <InvestorEnquiryModal open={investorOpen} onClose={() => setInvestorOpen(false)} />
     </div>
   );
 }
