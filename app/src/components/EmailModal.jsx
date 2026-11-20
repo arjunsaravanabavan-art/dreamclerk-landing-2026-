@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { subscribeNotify, getSubscriberCount, bumpSubscriberCount, isValidNotifyEmail } from "../lib/supabase";
+import { subscribeNotify, getSubscriberCount, bumpSubscriberCount, isValidNotifyEmail, submitFeedback } from "../lib/supabase";
 
 function InvestorLink({ onClick }) {
   return (
@@ -11,11 +11,13 @@ function InvestorLink({ onClick }) {
   );
 }
 
-export function InvestorEnquiryModal({ open, onClose }) {
+export function InvestorEnquiryModal({ open, onClose, onSubmitted }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [organisation, setOrganisation] = useState("");
   const [message, setMessage] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
   useEffect(() => {
     if (!open) return;
     const onKey = (event) => { if (event.key === "Escape") onClose?.(); };
@@ -28,10 +30,26 @@ export function InvestorEnquiryModal({ open, onClose }) {
     };
   }, [open, onClose]);
   if (!open) return null;
-  const sendEnquiry = (event) => {
+  const sendEnquiry = async (event) => {
     event.preventDefault();
+    if (saving) return;
+    setSaving(true);
+    setSaveError("");
+    const details = `Name: ${name.trim()}\\nOrganisation: ${organisation.trim() || "Not provided"}\\n\\nInvestor message:\\n${message.trim() || "No message provided"}`;
+    const result = await submitFeedback({
+      email: email.trim(),
+      category: "investor-enquiry",
+      message: details,
+      source: "landing-investor-popup",
+    });
+    setSaving(false);
+    if (!result.ok || result.mock) {
+      setSaveError(result.error || "We couldn't save your enquiry. Please try again.");
+      return;
+    }
+    onSubmitted?.();
     const subject = encodeURIComponent("DreamClerk investor enquiry");
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nOrganisation: ${organisation}\n\nMessage:\n${message}`);
+    const body = encodeURIComponent(`Name: ${name.trim()}\\nEmail: ${email.trim()}\\nOrganisation: ${organisation.trim()}\\n\\nMessage:\\n${message.trim()}`);
     window.location.href = `mailto:arjun@dreamclerk.com?subject=${subject}&body=${body}`;
   };
   return (
@@ -44,13 +62,14 @@ export function InvestorEnquiryModal({ open, onClose }) {
         <div className="investor-modal__body">
           <span className="investor-modal__eyebrow">pre-seed · investor enquiry</span>
           <h3 id="investor-title">let's talk about dreamclerk.</h3>
-          <p>Tell us a little about yourself. Your enquiry will open as an email addressed to our founder.</p>
+          <p>Tell us a little about yourself. Your enquiry is saved before your email app opens for direct follow-up.</p>
           <form onSubmit={sendEnquiry} className="investor-modal__form">
             <input value={name} onChange={(event) => setName(event.target.value)} placeholder="your name *" required />
             <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="work email *" required />
             <input value={organisation} onChange={(event) => setOrganisation(event.target.value)} placeholder="organisation / fund" />
             <textarea value={message} onChange={(event) => setMessage(event.target.value)} placeholder="your message (optional)" rows={3} />
-            <button type="submit">continue via email ↗</button>
+            {saveError && <p className="investor-modal__error" role="alert">{saveError}</p>}
+            <button type="submit" disabled={saving}>{saving ? "saving enquiry…" : "save & continue via email ↗"}</button>
           </form>
           <div className="investor-modal__contact">
             <a href="mailto:arjun@dreamclerk.com?subject=DreamClerk%20Investor%20Enquiry">arjun@dreamclerk.com ↗</a>
