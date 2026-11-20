@@ -39,12 +39,18 @@ import BetaVerifyPage from "./components/beta/BetaVerifyPage.jsx";
 import HowBetaPage from "./components/HowBetaPage.jsx";
 import { useSEO, SEO } from "./lib/seo.js";
 
-const NOTIFY_SUBMITTED_KEY = "dc-notify-submitted-session";
-function hasCompletedNotifySignup() {
-  // Suppress repeat prompts only for the current tab session. Older builds
-  // wrote a permanent localStorage flag that could hide Notify Me forever.
-  try { return window.sessionStorage.getItem(NOTIFY_SUBMITTED_KEY) === "1"; }
+const POPUP_CAPTURE_COMPLETED_KEY = "dc-popup-capture-completed-v1";
+const POPUP_RETRY_AT_KEY = "dc-popup-retry-at-v1";
+function hasCompletedPopupCapture() {
+  try { return window.localStorage.getItem(POPUP_CAPTURE_COMPLETED_KEY) === "1"; }
   catch { return false; }
+}
+function markPopupCaptureCompleted(kind) {
+  try {
+    window.localStorage.setItem(POPUP_CAPTURE_COMPLETED_KEY, "1");
+    window.localStorage.setItem("dc-popup-capture-kind-v1", kind);
+    window.sessionStorage.removeItem(POPUP_RETRY_AT_KEY);
+  } catch {}
 }
 
 /**
@@ -147,7 +153,7 @@ export default function App() {
         const isNotify = /notify\s*me/i.test(control.textContent || "");
         if (isNotify || control.hasAttribute("data-open-modal")) {
           e.preventDefault();
-          if (hasCompletedNotifySignup()) {
+          if (hasCompletedPopupCapture()) {
             setModalOpen(false);
             return;
           }
@@ -165,28 +171,43 @@ export default function App() {
     return () => document.removeEventListener("click", onClick, true);
   }, []);
 
-  // Show the waitlist prompt shortly after every public page entry. Do not
-  // auto-dismiss it: visitors must be able to read and complete the form.
+  // Landing-page capture loop: wait until the visitor scrolls into the page.
+  // Dismissal makes Notify Me eligible again after 2 seconds. A successful
+  // save from either form persistently suppresses both popups.
   useEffect(() => {
-    if (path === "/admin" || path.startsWith("/admin/")) return;
-    if (hasCompletedNotifySignup()) {
+    if (path !== "/") return;
+    if (hasCompletedPopupCapture()) {
       setModalOpen(false);
+      setInvestorOpen(false);
       return;
     }
-    const timer = window.setTimeout(() => {
-      if (hasCompletedNotifySignup()) return;
-      setModalSource(path.startsWith("/blog/") ? "blog-post-page-entry" : "global-page-entry");
-      setModalOpen(true);
-    }, 900);
-    return () => window.clearTimeout(timer);
-  }, [path]);
+    let retryTimer = null;
+    const schedulePrompt = () => {
+      if (hasCompletedPopupCapture() || modalOpen || investorOpen || window.scrollY < 120) return;
+      if (retryTimer) window.clearTimeout(retryTimer);
+      let nextAt = 0;
+      try { nextAt = Number(window.sessionStorage.getItem(POPUP_RETRY_AT_KEY) || 0); } catch {}
+      retryTimer = window.setTimeout(() => {
+        if (!hasCompletedPopupCapture() && !modalOpen && !investorOpen && window.scrollY >= 120) {
+          setModalSource("landing-scroll");
+          setModalOpen(true);
+        }
+      }, Math.max(0, nextAt - Date.now()));
+    };
+    window.addEventListener("scroll", schedulePrompt, { passive: true });
+    schedulePrompt();
+    return () => {
+      if (retryTimer) window.clearTimeout(retryTimer);
+      window.removeEventListener("scroll", schedulePrompt);
+    };
+  }, [path, modalOpen, investorOpen]);
 
   // Custom-event listener — components that fire `open-modal` from their
   // own JS (the blog-post NotifyCTA, the Final band) get to attach a
   // source so the EmailModal knows where the signup came from.
   useEffect(() => {
     const onOpen = (e) => {
-      if (hasCompletedNotifySignup()) return;
+      if (hasCompletedPopupCapture()) return;
       const source = e?.detail?.source || "modal";
       setModalSource(source);
       setModalOpen(true);
@@ -275,18 +296,28 @@ export default function App() {
         <EmailModal
           open={modalOpen}
           source={modalSource}
-          onClose={() => setModalOpen(false)}
+          onClose={() => {
+            try { window.sessionStorage.setItem(POPUP_RETRY_AT_KEY, String(Date.now() + 2000)); } catch {}
+            setModalOpen(false);
+          }}
           onInvestorClick={() => { setModalOpen(false); setInvestorOpen(true); }}
           onSubmitted={() => {
             try {
-              window.sessionStorage.setItem(NOTIFY_SUBMITTED_KEY, "1");
+              markPopupCaptureCompleted("notify");
             } catch {}
             // Keep the confirmation visible; a successful waitlist signup
             // must not unmount the modal before the visitor sees it.
           }}
         />
       )}
-      <InvestorEnquiryModal open={investorOpen} onClose={() => setInvestorOpen(false)} />
+      <InvestorEnquiryModal
+        open={investorOpen}
+        onClose={() => {
+          try { window.sessionStorage.setItem(POPUP_RETRY_AT_KEY, String(Date.now() + 2000)); } catch {}
+          setInvestorOpen(false);
+        }}
+        onSubmitted={() => markPopupCaptureCompleted("investor")}
+      />
     </div>
   );
 }
