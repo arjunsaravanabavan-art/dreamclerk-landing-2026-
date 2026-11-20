@@ -164,6 +164,7 @@ export default function App() {
       const c = target.closest("[data-close-modal]");
       if (c) {
         e.preventDefault();
+        try { window.sessionStorage.setItem(POPUP_RETRY_AT_KEY, String(Date.now() + 2000)); } catch {}
         setModalOpen(false);
       }
     };
