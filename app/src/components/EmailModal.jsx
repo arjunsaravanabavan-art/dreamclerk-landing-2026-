@@ -35,7 +35,7 @@ export function InvestorEnquiryModal({ open, onClose, onSubmitted }) {
     if (saving) return;
     setSaving(true);
     setSaveError("");
-    const details = `Name: ${name.trim()}\\nOrganisation: ${organisation.trim() || "Not provided"}\\n\\nInvestor message:\\n${message.trim() || "No message provided"}`;
+    const details = `Name: ${name.trim()}\nOrganisation: ${organisation.trim() || "Not provided"}\n\nInvestor message:\n${message.trim() || "No message provided"}`;
     const result = await submitFeedback({
       email: email.trim(),
       category: "investor-enquiry",
@@ -49,7 +49,7 @@ export function InvestorEnquiryModal({ open, onClose, onSubmitted }) {
     }
     onSubmitted?.();
     const subject = encodeURIComponent("DreamClerk investor enquiry");
-    const body = encodeURIComponent(`Name: ${name.trim()}\\nEmail: ${email.trim()}\\nOrganisation: ${organisation.trim()}\\n\\nMessage:\\n${message.trim()}`);
+    const body = encodeURIComponent(`Name: ${name.trim()}\nEmail: ${email.trim()}\nOrganisation: ${organisation.trim()}\n\nMessage:\n${message.trim()}`);
     window.location.href = `mailto:arjun@dreamclerk.com?subject=${subject}&body=${body}`;
   };
   return (
@@ -185,7 +185,7 @@ export default function EmailModal({ open, onClose, onSubmitted, onInvestorClick
       if (result.ok) {
         setStatus("success");
         setSavedToSupabase(!result.mock);
-        onSubmitted?.();
+        if (!result.mock) onSubmitted?.();
         // Refresh the count without allowing a count failure to undo signup.
         if (!result.mock) {
           try { await bumpSubscriberCount(); } catch {}
